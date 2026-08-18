@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, IBM_Plex_Sans } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import IconSymbols from "@/components/shared/IconSymbols";
 import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -33,6 +34,7 @@ export default function RootLayout({
       className={`${cormorantGaramond.variable} ${ibmPlexSans.variable}`}
     >
       <body>
+        <IconSymbols />
         <Header />
         <main>{children}</main>
         <Footer />

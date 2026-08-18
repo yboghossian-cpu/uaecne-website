@@ -19,6 +19,7 @@
 
   /* Elevation */
   --shadow-soft: 0 10px 30px -22px rgba(67, 49, 31, 0.55); /* from approved mockup */
+  --shadow-elevated: 0 18px 40px -24px rgba(74, 0, 0, 0.45); /* arch/portrait frames, from approved mockup */
 
   /* Typography */
   --font-heading: var(--font-cormorant-garamond), "Cormorant Garamond", serif;

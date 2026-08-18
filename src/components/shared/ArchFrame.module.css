@@ -1,0 +1,64 @@
+.arch {
+  position: relative;
+  border-radius: 150px 150px 10px 10px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(197, 160, 89, 0.1) 0 2px,
+      transparent 2px 16px
+    ),
+    linear-gradient(160deg, #7d3038, var(--color-red-deep) 55%, #3d2a22);
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+}
+
+.arch::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 253, 247, 0.28);
+  border-radius: 140px 140px 6px 6px;
+  pointer-events: none;
+}
+
+.glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(197, 160, 89, 0.42);
+}
+
+.glyph svg {
+  width: 44%;
+  height: 44%;
+}
+
+.phTag {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 9.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 247, 0.9);
+  background: rgba(74, 0, 0, 0.55);
+  padding: 5px 9px;
+  border-radius: 2px;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+}
+
+.phTag::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold-decorative);
+}
