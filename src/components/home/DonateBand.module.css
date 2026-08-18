@@ -1,0 +1,33 @@
+.band {
+  background-color: var(--color-gold);
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.heading {
+  color: var(--color-brown);
+  margin-bottom: 0.75rem;
+}
+
+.subtext {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-brown);
+  max-width: 42ch;
+  margin: 0 auto 1.5rem;
+  line-height: 1.6;
+}
+
+.cta {
+  display: inline-block;
+  background-color: var(--color-red);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.875rem 2rem;
+  cursor: default;
+  opacity: 0.85;
+}

@@ -28,6 +28,9 @@ export default function Header() {
             </span>
           </div>
           <Nav />
+          <span role="button" aria-disabled="true" className={styles.donateButton}>
+            Donate
+          </span>
         </div>
       </div>
     </header>

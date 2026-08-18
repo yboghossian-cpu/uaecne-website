@@ -45,6 +45,26 @@
   cursor: default;
 }
 
+.donateButton {
+  display: none;
+  background-color: var(--color-red);
+  color: var(--color-ivory);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.25rem;
+  cursor: default;
+  opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+  .donateButton {
+    display: inline-block;
+  }
+}
+
 @media (min-width: 768px) {
   .inner {
     padding: 1rem 2rem;

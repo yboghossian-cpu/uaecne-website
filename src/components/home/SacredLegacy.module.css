@@ -1,0 +1,60 @@
+.section {
+  padding: 3rem 1.5rem;
+  background-color: var(--color-ivory-wash);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.content {
+  text-align: left;
+}
+
+.heading {
+  margin-bottom: 1.25rem;
+}
+
+.paragraph {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-brown);
+  margin-bottom: 1.5rem;
+}
+
+.quote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--color-red);
+}
+
+.quoteRef {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
