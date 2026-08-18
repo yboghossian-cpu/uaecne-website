@@ -1,0 +1,56 @@
+.header {
+  background-color: var(--color-ivory);
+  border-bottom: 1px solid var(--color-gold);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+}
+
+.logoLink {
+  display: block;
+  flex-shrink: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.langToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: var(--color-brown);
+}
+
+.langActive {
+  font-weight: 600;
+  color: var(--color-red);
+}
+
+.langInactive {
+  color: var(--color-brown);
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (min-width: 768px) {
+  .inner {
+    padding: 1rem 2rem;
+  }
+
+  .controls {
+    gap: 2rem;
+  }
+}

@@ -1,0 +1,78 @@
+.footer {
+  background-color: var(--color-ivory-wash);
+  color: var(--color-brown);
+  padding: 3rem 1rem 2rem;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.headOffice {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.orgName {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: var(--color-brown);
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+}
+
+.contact a {
+  color: var(--color-brown);
+  text-decoration: none;
+}
+
+.contact a:hover,
+.contact a:focus-visible {
+  text-decoration: underline;
+}
+
+.social {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+.social a {
+  color: var(--color-brown);
+  text-decoration: none;
+}
+
+.social a:hover,
+.social a:focus-visible {
+  text-decoration: underline;
+}
+
+.socialInactive {
+  color: var(--color-brown);
+  opacity: 0.5;
+  cursor: default;
+}
+
+.copyright {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  opacity: 0.8;
+  border-top: 1px solid var(--color-gold);
+  padding-top: 1.5rem;
+}

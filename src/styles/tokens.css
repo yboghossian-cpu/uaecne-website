@@ -1,0 +1,22 @@
+/*
+ * Design tokens — Union of the Armenian Evangelical Churches (UAECNE)
+ * Source: PROJECT_BRIEF.md "Verified brand system" — pulled live from the
+ * current site's DOM/computed styles and the full-resolution logo.
+ * Do not use values from the older Phase 1 style guide doc; it is outdated.
+ */
+
+:root {
+  /* Color */
+  --color-red: #8b0000; /* primary — deep red */
+  --color-ivory: #fffdf7; /* primary background */
+  --color-ivory-wash: #f7f2e9; /* secondary section background */
+  --color-gold: #c5a059; /* primary accent — buttons, dividers, icons */
+  --color-gold-decorative: #d4af37; /* scripture quotes, callouts — used sparingly */
+  --color-brown: #43311f; /* dark brown text, on ivory/gold */
+  --color-text: #1a1a1a; /* body text */
+
+  /* Typography */
+  --font-heading: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
+  --font-body: var(--font-ibm-plex-sans), "IBM Plex Sans", system-ui,
+    -apple-system, "Segoe UI", sans-serif;
+}
