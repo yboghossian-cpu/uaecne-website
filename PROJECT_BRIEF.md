@@ -121,7 +121,7 @@ Mobile-first, this exact section order:
 - **d. Stats row** — three-column, ivory background, gold-divided — years / churches / countries, Cormorant Garamond numerals
 - **e. Ministries grid** — 2-column card grid (Churches, Schools, Outreach, Publications, etc. — full list should match the site's actual ministry categories, not just these four)
 - **f. News section** — latest item(s), pending real content
-- **g. Donate band** — gold background, dark brown text, red CTA button
+- **g. Donate band** — ~~gold background, dark brown text, red CTA button~~ **superseded 2026-08-19: red gradient background, ivory text, gold CTA button** (Yeghia, matching the live site + approved mockup; see OPEN_QUESTIONS.md Resolved)
 - **h. Footer** — brown background, ivory text, HQ contact info (flag if placeholder), social icons, copyright
 
 ### 3. Unified CHURCH page template
