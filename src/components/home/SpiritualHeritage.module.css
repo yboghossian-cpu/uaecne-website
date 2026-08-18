@@ -1,12 +1,54 @@
 .section {
   padding: 3rem 1.5rem;
   background-color: var(--color-ivory);
-  text-align: center;
 }
 
-.inner {
-  max-width: 640px;
+.heritage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.75rem;
+  max-width: 960px;
   margin: 0 auto;
+}
+
+.art {
+  width: 100%;
+}
+
+.quoteRibbon {
+  background-color: var(--color-red);
+  color: var(--color-ivory);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  padding: 0.875rem 1.125rem;
+  margin-top: -1px;
+  border-radius: 0 0 8px 8px;
+}
+
+.quoteCite {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-body);
+  font-size: 0.59375rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-decorative);
+  margin-top: 0.5rem;
+}
+
+.txt {
+  text-align: center;
+  max-width: 520px;
+}
+
+.sealBig {
+  display: block;
+  width: 5.5rem;
+  height: 5.5rem;
+  margin: 0 auto 0.875rem;
 }
 
 .heading {
@@ -19,23 +61,6 @@
   line-height: 1.7;
   color: var(--color-brown);
   margin-bottom: 1.5rem;
-}
-
-.quote {
-  font-family: var(--font-heading);
-  font-style: italic;
-  font-size: 1.25rem;
-  color: var(--color-red);
-  margin-bottom: 1.5rem;
-}
-
-.quoteRef {
-  font-family: var(--font-body);
-  font-style: normal;
-  font-size: 0.8125rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-gold);
 }
 
 .link {
@@ -51,4 +76,25 @@
   padding-bottom: 0.125rem;
   cursor: default;
   opacity: 0.85;
+}
+
+@media (min-width: 768px) {
+  .heritage {
+    flex-direction: row;
+    align-items: center;
+    gap: 3.5rem;
+  }
+
+  .art {
+    width: 44%;
+  }
+
+  .txt {
+    text-align: left;
+    margin: 0;
+  }
+
+  .sealBig {
+    margin: 0 0 1rem;
+  }
 }
