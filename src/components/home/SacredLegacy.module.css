@@ -42,6 +42,8 @@
   font-style: italic;
   font-size: 1.125rem;
   color: var(--color-red);
+  border-left: 3px solid var(--color-gold);
+  padding-left: 20px;
 }
 
 .quoteRef {

@@ -8,12 +8,17 @@
 :root {
   /* Color */
   --color-red: #8b0000; /* primary — deep red */
+  --color-red-deep: #6e0000; /* gradient/hover shade, from approved mockup */
+  --color-red-dark: #4a0000; /* gradient/hover shade, from approved mockup */
   --color-ivory: #fffdf7; /* primary background */
   --color-ivory-wash: #f7f2e9; /* secondary section background */
   --color-gold: #c5a059; /* primary accent — buttons, dividers, icons */
   --color-gold-decorative: #d4af37; /* scripture quotes, callouts — used sparingly */
   --color-brown: #43311f; /* dark brown text, on ivory/gold */
   --color-text: #1a1a1a; /* body text */
+
+  /* Elevation */
+  --shadow-soft: 0 10px 30px -22px rgba(67, 49, 31, 0.55); /* from approved mockup */
 
   /* Typography */
   --font-heading: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
