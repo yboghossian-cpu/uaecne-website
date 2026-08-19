@@ -36,6 +36,37 @@ export default function IconSymbols() {
           </g>
         </symbol>
 
+        <symbol id="seal-light" viewBox="0 0 100 100">
+          <circle
+            cx="50"
+            cy="50"
+            r="48"
+            fill="none"
+            stroke="var(--color-gold-decorative)"
+            strokeWidth="2"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            fill="none"
+            stroke="rgba(255,253,247,.5)"
+            strokeWidth="1"
+          />
+          <path
+            d="M50 32 v26 M40 42 h20"
+            stroke="var(--color-gold-decorative)"
+            strokeWidth="3.4"
+            strokeLinecap="round"
+          />
+          <path
+            d="M34 66 c6 -3 12 -3 16 0 c4 -3 10 -3 16 0"
+            fill="none"
+            stroke="rgba(255,253,247,.7)"
+            strokeWidth="1.6"
+          />
+        </symbol>
+
         <symbol id="ic-church" viewBox="0 0 24 24">
           <g
             fill="none"

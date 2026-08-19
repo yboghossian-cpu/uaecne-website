@@ -18,7 +18,11 @@ const navItems: NavItem[] = [
       { label: "Central Committee", href: "/leadership/central-committee" },
     ],
   },
-  { label: "Ministries", href: "/ministries" },
+  {
+    label: "Ministries",
+    href: "/ministries",
+    children: [{ label: "Churches", href: "/churches" }],
+  },
   { label: "Partnerships", href: "/partnerships" },
   { label: "Memberships", href: "/memberships" },
   { label: "Resource Center", href: "/resource-center" },
