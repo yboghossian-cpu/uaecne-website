@@ -56,6 +56,8 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 19. **Nor Marash church email (`aessa68@gmail.com`) reads like a school/association address, not the church's own — kept verbatim per the sheet; confirm with the church directly.**
 
+20. **Header has both a "Donate" nav link and a separate "Donate" button — confirm with Yeghia whether that duplication is intentional; it also adds nav width.**
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

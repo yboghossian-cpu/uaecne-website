@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  max-width: 960px;
+  max-width: 1180px;
   margin: 0 auto;
   padding: 0.75rem 1rem;
 }
@@ -61,13 +61,13 @@
   opacity: 0.85;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .donateButton {
     display: inline-block;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .inner {
     padding: 1rem 2rem;
   }
