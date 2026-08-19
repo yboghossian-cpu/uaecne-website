@@ -50,6 +50,12 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 16. **Publications & Media — still no photo.** Not checked this pass (Unit scope was Churches, Education, Youth, Cultural & Heritage, Social & Medical Care only). Stays on the `ArchFrame`/placeholder treatment until a real photo is sourced and verified.
 
+17. **Anjar card uses logo as interim image — replace with a good building photo later.**
+
+18. **AEC logo retained for the school page, excluded from churches.**
+
+19. **Nor Marash church email (`aessa68@gmail.com`) reads like a school/association address, not the church's own — kept verbatim per the sheet; confirm with the church directly.**
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.
