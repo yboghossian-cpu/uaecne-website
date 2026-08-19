@@ -22,6 +22,10 @@
   pointer-events: none;
 }
 
+.photo {
+  object-fit: cover;
+}
+
 .glyph {
   position: absolute;
   inset: 0;
