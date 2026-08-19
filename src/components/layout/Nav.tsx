@@ -26,7 +26,6 @@ const navItems: NavItem[] = [
   { label: "Partnerships", href: "/partnerships" },
   { label: "Memberships", href: "/memberships" },
   { label: "Resource Center", href: "/resource-center" },
-  { label: "Donate", href: "/donate" },
 ];
 
 export default function Nav() {
