@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import ArchFrame from "@/components/shared/ArchFrame";
-import Medallion from "@/components/shared/Medallion";
 import { useScrollReveal } from "./useScrollReveal";
 import styles from "./SpiritualHeritage.module.css";
 
@@ -17,9 +16,11 @@ export default function SpiritualHeritage() {
     >
       <div className={styles.heritage}>
         <div className={styles.art}>
-          <ArchFrame aspectRatio="4 / 5" label="Photo pending — Sanctuary">
-            <Medallion />
-          </ArchFrame>
+          <ArchFrame
+            aspectRatio="4 / 5"
+            photoSrc="/spiritual-heritage-sanctuary.jpg"
+            photoAlt="Sanctuary interior during a General Assembly session"
+          />
           <div className={styles.quoteRibbon}>
             &ldquo;For where two or three gather in my name, there am I with
             them.&rdquo;
