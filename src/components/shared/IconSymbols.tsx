@@ -28,6 +28,13 @@ export default function IconSymbols() {
             />
           </g>
         </symbol>
+
+        <symbol id="ic-user" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+            <circle cx="12" cy="8.5" r="3.6" />
+            <path d="M5 20c0-3.7 3.1-6 7-6s7 2.3 7 6" />
+          </g>
+        </symbol>
       </defs>
     </svg>
   );

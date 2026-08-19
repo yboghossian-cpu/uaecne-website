@@ -67,6 +67,29 @@
   outline-offset: 2px;
 }
 
+.sublist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.sublist a {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-brown);
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+.sublist a:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
 .desktopList {
   display: none;
 }
@@ -101,5 +124,48 @@
   .desktopList a:focus-visible {
     outline: 2px solid var(--color-red);
     outline-offset: 4px;
+  }
+
+  .hasChildren {
+    position: relative;
+  }
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    padding-top: 0.75rem;
+  }
+
+  .hasChildren:hover .dropdown,
+  .hasChildren:focus-within .dropdown {
+    display: block;
+  }
+
+  .dropdownInner {
+    min-width: 200px;
+    padding: 0.75rem;
+    background-color: var(--color-ivory);
+    border-radius: 12px;
+    border: 1px solid rgba(197, 160, 89, 0.22);
+    box-shadow: var(--shadow-soft);
+    list-style: none;
+  }
+
+  .dropdown a {
+    display: block;
+    padding: 0.375rem 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    white-space: nowrap;
+    color: var(--color-brown);
+  }
+
+  .dropdown a:hover {
+    color: var(--color-red);
+    text-decoration: underline;
   }
 }

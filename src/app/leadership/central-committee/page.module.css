@@ -1,0 +1,162 @@
+.banner {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(140% 160% at 0% 0%, rgba(197, 160, 89, 0.24), transparent 55%),
+    linear-gradient(120deg, var(--color-red), var(--color-red-dark));
+  color: var(--color-ivory);
+  padding: 1.875rem 1.25rem;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.bannerInner {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.bannerHeading {
+  color: var(--color-ivory);
+  font-size: 2.375rem;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.updated {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold-decorative);
+}
+
+.committee {
+  position: relative;
+  overflow: hidden;
+  padding: 2.75rem 1.25rem 3.75rem;
+  background-color: var(--color-ivory);
+}
+
+.wm {
+  position: absolute;
+  right: -40px;
+  top: 80px;
+  color: var(--color-red);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.wmLeft {
+  position: absolute;
+  left: -60px;
+  bottom: -40px;
+  color: var(--color-red);
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.grid {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.person {
+  background-color: var(--color-ivory);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  text-align: center;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.person:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 44px -26px rgba(74, 0, 0, 0.5);
+}
+
+.pic {
+  aspect-ratio: 1 / 1;
+  position: relative;
+  background: linear-gradient(160deg, #eadfce, #d8c7a8);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.glyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(139, 0, 0, 0.32);
+}
+
+.glyphIcon {
+  width: 34%;
+  height: 34%;
+}
+
+.glyphCaption {
+  font-family: var(--font-body);
+  font-size: 0.53125rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(74, 0, 0, 0.5);
+}
+
+.info {
+  padding: 1rem 0.75rem 1.25rem;
+}
+
+.name {
+  display: block;
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.125rem;
+  line-height: 1.15;
+}
+
+.role {
+  font-family: var(--font-body);
+  font-size: 0.59375rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 0.4375rem;
+  font-weight: 600;
+}
+
+@media (min-width: 720px) {
+  .bannerHeading {
+    font-size: 2.75rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
