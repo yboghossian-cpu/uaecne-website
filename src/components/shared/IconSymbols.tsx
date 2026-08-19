@@ -107,6 +107,17 @@ export default function IconSymbols() {
           </g>
         </symbol>
 
+        <symbol id="ic-arrow" viewBox="0 0 16 16">
+          <path
+            d="M3 8h9M9 4l4 4-4 4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </symbol>
+
         <symbol id="ic-media" viewBox="0 0 24 24">
           <g
             fill="none"

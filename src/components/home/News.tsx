@@ -13,20 +13,20 @@ export default function News() {
       data-visible={visible}
       className={`${styles.section} scroll-reveal`}
     >
-      <h2 className={styles.heading}>Latest Updates</h2>
-      <article className={styles.card}>
-        <div className={styles.logoWrap}>
+      <h2 className={styles.heading}>
+        <span className={styles.latestMark}>Latest</span> Updates
+      </h2>
+      <div className={styles.newsFeat}>
+        <div className={styles.newsArt}>
           <Image
-            src="/general-assembly-180.jpg"
-            alt="180th Anniversary commemorative logo"
-            width={96}
-            height={96}
-            className={styles.logo}
+            src="/news-general-assembly.jpg"
+            alt="Delegates of the 79th General Assembly gathered at the First Armenian Evangelical Church"
+            fill
+            className={styles.photo}
           />
-          <span className={styles.logoCaption}>Anniversary logo</span>
         </div>
-        <div>
-          <p className={styles.date}>June 2026</p>
+        <div className={styles.newsCard}>
+          <span className={styles.date}>June 2026</span>
           <h3 className={styles.headline}>General Assembly</h3>
           <p className={styles.excerpt}>
             Held on June 21–22, 2026, in Beirut, the 79th General Assembly of
@@ -40,9 +40,12 @@ export default function News() {
           </p>
           <span role="link" aria-disabled="true" className={styles.readMore}>
             Read more
+            <svg className={styles.readMoreIcon}>
+              <use href="#ic-arrow" />
+            </svg>
           </span>
         </div>
-      </article>
+      </div>
     </section>
   );
 }
