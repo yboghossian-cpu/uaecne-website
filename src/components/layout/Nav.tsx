@@ -28,7 +28,16 @@ const navItems: NavItem[] = [
   },
   { label: "Partnerships", href: "/partnerships" },
   { label: "Memberships", href: "/memberships" },
-  { label: "Resource Center", href: "/resource-center" },
+  {
+    label: "Resource Center",
+    href: "/resource-center",
+    children: [
+      {
+        label: "79th General Assembly",
+        href: "/resource-center/news/79th-general-assembly",
+      },
+    ],
+  },
 ];
 
 export default function Nav() {
