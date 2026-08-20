@@ -5,6 +5,7 @@ import { churchContent } from "@/data/churchContent";
 import Medallion from "@/components/shared/Medallion";
 import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
 import ChurchTopBlock from "@/components/church/ChurchTopBlock";
+import AnniversaryBand from "@/components/church/AnniversaryBand";
 import ChurchAbout from "@/components/church/ChurchAbout";
 import LeadershipGrid from "@/components/church/LeadershipGrid";
 import ChurchHistory from "@/components/church/ChurchHistory";
@@ -100,6 +101,7 @@ export default async function ChurchDetailPage({
         heroPhoto={content.heroPhoto}
         factsBar={content.factsBar}
       />
+      <AnniversaryBand anniversary={content.anniversary} />
       <ChurchAbout about={content.about} pastorCard={content.pastorCard} />
       <LeadershipGrid leaders={content.leadership} />
       <ChurchHistory history={content.history} />

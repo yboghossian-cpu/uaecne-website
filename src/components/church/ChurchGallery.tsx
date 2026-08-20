@@ -1,32 +1,22 @@
 import Image from "next/image";
+import type { ChurchContent } from "@/data/churchContent";
 import styles from "./ChurchGallery.module.css";
 
-type GalleryPhoto = {
-  src: string;
-  alt: string;
-  caption: string;
-  captionHy: string | null;
-};
-
 type ChurchGalleryProps = {
-  gallery: {
-    eyebrow: string;
-    eyebrowHy: string | null;
-    heading: string;
-    headingHy: string | null;
-    photos: GalleryPhoto[];
-  } | null;
+  gallery: ChurchContent["gallery"];
 };
 
 // Renders `gallery.photos` as a responsive figure grid with captions;
-// renders nothing when null (e.g. FAEC).
+// renders nothing when null (e.g. FAEC). `eyebrow` and each photo's
+// `caption` render conditionally — some references (Ashrafieh) have
+// neither.
 export default function ChurchGallery({ gallery }: ChurchGalleryProps) {
   if (!gallery) return null;
 
   return (
     <section className={styles.gallery}>
       <div className={styles.wrap}>
-        <div className={styles.eyebrow}>{gallery.eyebrow}</div>
+        {gallery.eyebrow && <div className={styles.eyebrow}>{gallery.eyebrow}</div>}
         <h2 className={styles.heading}>{gallery.heading}</h2>
         <div className={styles.grid}>
           {gallery.photos.map((photo, i) => (
@@ -34,7 +24,9 @@ export default function ChurchGallery({ gallery }: ChurchGalleryProps) {
               <div className={styles.picWrap}>
                 <Image src={photo.src} alt={photo.alt} fill className={styles.pic} />
               </div>
-              <figcaption className={styles.caption}>{photo.caption}</figcaption>
+              {photo.caption && (
+                <figcaption className={styles.caption}>{photo.caption}</figcaption>
+              )}
             </figure>
           ))}
         </div>

@@ -56,7 +56,36 @@ export type SuccessionEntry = {
   isCurrent: boolean;
 };
 
-export type GalleryPhoto = Photo & { caption: string; captionHy: string | null };
+// `caption` null when the reference has no per-photo caption text (e.g.
+// Ashrafieh's "The Church Today" gallery — 2 photos, both with the same
+// generic alt text, no individual captions like Syriac's 3-photo gallery
+// has).
+export type GalleryPhoto = Photo & { caption: string | null; captionHy: string | null };
+
+// Verified against uaecne-church-ashrafieh-complete.html's .anniv section —
+// a dedicated badge image, a two-line numeral+word heading, a date range,
+// and a scripture quote with its own citation + editorial label. Does not
+// fit a generic {eyebrow,heading,body} shape; holds exactly what's there.
+export type Anniversary = {
+  // Nullable — Ashrafieh's would-be badge was byte-identical to its own
+  // masthead logo (the church reuses its regular seal, not a distinct
+  // centennial badge), so it's null here and the band renders text-only,
+  // centered. A future anniversary church with a genuinely distinct badge
+  // image would populate this.
+  logo: Photo | null;
+  kicker: string; // "Celebrating Your Past · Investing in Your Future"
+  kickerHy: string | null;
+  numeral: string; // "100" — large numeral line
+  label: string; // "Anniversary" — styled word beneath the numeral
+  labelHy: string | null;
+  years: string; // "1926 — 2026"
+  verse: string; // scripture quote, verbatim — never paraphrased
+  verseHy: string | null;
+  verseRef: string; // "Philippians 1:6" — scripture citation
+  verseRefHy: string | null;
+  verseLabel: string; // "The Church's Golden Verse" — editorial, translatable
+  verseLabelHy: string | null;
+};
 
 export type SpecialProjectObjective = {
   title: string;
@@ -146,19 +175,16 @@ export type ChurchContent = {
     entries: SuccessionEntry[];
   } | null;
 
-  // Shape UNVERIFIED — neither FAEC nor Syriac uses this; not built this
-  // unit (no AnniversaryBand.tsx component exists).
-  anniversary: {
-    eyebrow: string;
-    eyebrowHy: string | null;
-    heading: string;
-    headingHy: string | null;
-    body: string;
-    bodyHy: string | null;
-  } | null;
+  // Verified against Ashrafieh's reference (see the `Anniversary` type above)
+  // — null for every church that doesn't have a centennial/anniversary
+  // module of its own.
+  anniversary: Anniversary | null;
 
+  // `eyebrow` null when the reference has no kicker line above the gallery
+  // heading (e.g. Ashrafieh's "The Church Today" — just a decorative rule +
+  // heading, no eyebrow text, unlike Syriac's "In Pictures" eyebrow).
   gallery: {
-    eyebrow: string;
+    eyebrow: string | null;
     eyebrowHy: string | null;
     heading: string;
     headingHy: string | null;
@@ -859,5 +885,218 @@ export const churchContent: Record<string, ChurchContent> = {
       address: "Nor Amanos, Baouchrieh, Mount Lebanon",
       phone: "(01) 241636 · 81 161 207",
     },
+  },
+
+  "armenian-evangelical-church-ashrafieh": {
+    slug: "armenian-evangelical-church-ashrafieh",
+
+    masthead: {
+      locationLine: "Geitawi, Ashrafieh, Beirut, Lebanon",
+      locationLineHy: null,
+      established: "1926",
+      establishedHy: null,
+    },
+
+    logo: {
+      src: "/church-armenian-evangelical-church-ashrafieh-logo.jpg",
+      alt: "Ashrafieh church logo",
+    },
+    heroPhoto: {
+      src: "/church-armenian-evangelical-church-ashrafieh-hero.jpg",
+      alt: "Armenian Evangelical Church of Ashrafieh",
+    },
+    factsBar: [
+      { label: "Sunday Worship", labelHy: null, sub: "Weekly Service", subHy: null },
+      { label: "Geitawi, Ashrafieh", labelHy: null, sub: "Beirut", subHy: null },
+      { label: "1926", labelHy: null, sub: "Founded", subHy: null },
+    ],
+
+    // Verified against uaecne-church-ashrafieh-complete.html's .anniv
+    // section (2026 centennial). Scripture quote is verbatim, not
+    // paraphrased. logo: null (Yeghia's ruling) — the reference's badge
+    // image was byte-identical to the masthead logo above (same church
+    // seal, not a distinct "100" graphic), so the band renders text-only
+    // rather than showing the same seal twice ~400px apart. The masthead
+    // logo itself is unaffected — still used via ChurchContent.logo above.
+    anniversary: {
+      logo: null,
+      kicker: "Celebrating Your Past · Investing in Your Future",
+      kickerHy: null,
+      numeral: "100",
+      label: "Anniversary",
+      labelHy: null,
+      years: "1926 — 2026",
+      verse:
+        "Being confident of this, that he who began a good work in you will carry it on to completion until the day of Christ Jesus.",
+      verseHy: null,
+      verseRef: "Philippians 1:6",
+      verseRefHy: null,
+      verseLabel: "The Church's Golden Verse",
+      verseLabelHy: null,
+    },
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Ashrafieh traces its beginnings to the Armenian refugee camps established in 1922, each bearing the name of its town in the homeland — Hajin, Aintab, Adana, Marash. In 1926 the church was formally organized, with Rev. Yenovk Hadidian as its founding pastor, who faithfully served the congregation until 1962. According to statistics from 1926, the church counted 1,500 members.",
+        "For its first six years the congregation was known as the “Camp Armenian Evangelical Church.” In the spring of 1932, after moving to its new location in the Geitawi district, it became the Armenian Evangelical Church of Ashrafieh. Today, beyond Sunday worship, the church ministers to diverse needs across children's, youth, couples', women's, and men's ministries, under the leadership of Rev. Hrayr Cholakian.",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Hrayr Cholakian",
+      nameHy: null,
+      role: "Pastor · Since 2021",
+      roleHy: null,
+      photo: {
+        src: "/church-armenian-evangelical-church-ashrafieh-pastor.jpg",
+        alt: "Rev. Hrayr Cholakian",
+      },
+    },
+
+    // Reference's leadership photos all have alt="" — using each person's
+    // own name as alt text, same convention as Nor Marash.
+    leadership: [
+      {
+        name: "Rev. Hrayr Cholakian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-ashrafieh-leader-1.jpg",
+          alt: "Rev. Hrayr Cholakian",
+        },
+      },
+      {
+        name: "Mr. Garbis Deyirmenjian",
+        nameHy: null,
+        role: "Church Council Vice-Chair",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-ashrafieh-leader-2.jpg",
+          alt: "Mr. Garbis Deyirmenjian",
+        },
+      },
+      {
+        name: "Mrs. Nora Ghougasian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-ashrafieh-leader-3.jpg",
+          alt: "Mrs. Nora Ghougasian",
+        },
+      },
+    ],
+
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "A Century of Faith & Education",
+      headingHy: null,
+      sections: [
+        {
+          heading: "Founding and Early Years",
+          headingHy: null,
+          paragraphs: [
+            "Worship services were initially held under very modest circumstances, yet in these humble settings the church took shape and steadily grew into a strong and vibrant community. The church building was erected in 1932 through the generous donation of Rev. Henry Riggs, in memory of his wife and daughter, who had passed away while serving among Armenians in Kharpert (Harpoot), Turkey. In 1936, adjacent land was purchased and a parsonage built; the church bell was donated by the Swiss Friends of Armenia, represented by Mr. Karl Mayer and Mr. Jacob Künzler (“Papa” Künzler).",
+            "The church played a vital role in education, continuing the Armenian Evangelical tradition from the Ottoman Empire. Between 1922 and 1926, Rev. Hadidian founded ten Armenian Evangelical schools, and by 1928 Sunday Schools across the churches enrolled 700 children. The Christian Endeavor Youth Association was founded in 1926 by Dr. Puzant Hadidian and Miss Puzantouhi Yardemian. By 1942 the church had achieved financial independence, no longer relying on aid from the Union. According to 1948–1949 statistics, the church had 312 families (1,156 parishioners), with a Sunday School of 642 students taught by 46 teachers.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "War Years and Destruction",
+          headingHy: null,
+          paragraphs: [
+            "During Lebanon's civil war, the church became a refuge for neighbors seeking shelter in its basement during heavy shelling. In times of relative calm, it served as a safe gathering place for youth. For sixteen years the church endured hardship yet continued its ministries with resilience — worship, Sunday School, youth groups, women's fellowship, and prayer meetings persisted whenever fighting subsided. Despite the losses, these became known as the “Miracle Years,” as God's people witnessed divine intervention and guidance.",
+            "The August 4, 2020 Beirut port explosion caused catastrophic damage to the Ashrafieh church and its Central High School. Both buildings were repaired thanks to generous donations from overseas benefactors, alumni, and the Armenian Missionary Association of America (AMAA). Throughout its history, the church and its pastors have emphasized repentance, new birth in Christ, a life of prayer and service, and the proclamation of God's Word.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: "Life of the Church",
+      eyebrowHy: null,
+      heading: "Ministries",
+      headingHy: null,
+      items: [
+        "Sunday School for children",
+        "Teens Ministry",
+        "Youth Fellowship",
+        "Couples Ministry",
+        "Women's Fellowship",
+        "Support for the Needy",
+        "Bible Study for Men",
+        "Bible Study for Young Women",
+      ],
+      itemsHy: null,
+    },
+
+    specialProject: null,
+
+    succession: {
+      eyebrow: "Those Who Served",
+      eyebrowHy: null,
+      heading: "Pastors of the Church",
+      headingHy: null,
+      note: null,
+      noteHy: null,
+      entries: [
+        { name: "Rev. Yenovk Hadidian", nameHy: null, years: "1926 – 1962", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Vahram Salibian", nameHy: null, years: "1962 – 1966", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hagop Sagherian", nameHy: null, years: "1967 – 1986", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Krikor Youmoushajekian", nameHy: null, years: "1986 – 1989", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Nishan Bakalian", nameHy: null, years: "1992 – 1995", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Soghomon Kilaghbian", nameHy: null, years: "1996 – 2018", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hrayr Cholakian", nameHy: null, years: "2021 – present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
+
+    // "The Church Today" — no eyebrow kicker, no per-photo captions in the
+    // reference. Reference's alt text was a generic repeated "Ashrafieh
+    // church" on both — replaced with distinct, honest descriptions after
+    // actually looking at each photo (per Yeghia's instruction), not copied
+    // from the source.
+    gallery: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: "The Church Today",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-armenian-evangelical-church-ashrafieh-gallery-1.jpg",
+          alt: "Sandstone corner of the church building with arched barred windows, seen from the gated courtyard entrance",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-armenian-evangelical-church-ashrafieh-gallery-2.jpg",
+          alt: "The church's crenellated tower and arcaded colonnade, viewed through trees",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "Join Us in Worship",
+      headingHy: null,
+      body: "All are welcome at the Armenian Evangelical Church of Ashrafieh — celebrating a century of faith, education, and service in the heart of Beirut.",
+      bodyHy: null,
+    },
+
+    // No churches.ts conflicts found for this church — pastor, address,
+    // phone, email, secretary, and founding year all match the reference
+    // exactly. Service time is the usual single-sourced/unverified value
+    // (see OPEN_QUESTIONS #37) — no override mechanism exists for it.
+    contactOverride: null,
   },
 };
