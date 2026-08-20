@@ -31,15 +31,19 @@ export type LeaderEntry = {
 };
 
 export type HistorySection = {
-  heading: string;
+  // Null when the reference has no <h3> for this block (e.g. Emmanuel's
+  // founding narrative sits directly under the top-level history heading,
+  // with no subsection heading of its own) — ChurchHistory.tsx renders no
+  // <h3> in that case, just the paragraphs (and image, if present).
+  heading: string | null;
   headingHy: string | null;
   paragraphs: string[];
   paragraphsHy: string[] | null;
-  // Emmanuel's history will use a side photo when built later (the .hsplit
-  // CSS pattern in the reference files, unused by FAEC/Syriac); carried now
-  // as a nullable field so the type doesn't need to change then. No
-  // rendering logic for this exists yet — ChurchHistory.tsx does not read it
-  // this unit.
+  // When non-null, ChurchHistory.tsx renders this section as a 2-column
+  // .hsplit (paragraphs left, image right at ≥720px, stacked on mobile) —
+  // the reference files' side-photo history treatment (first used by
+  // Emmanuel). Null for a section with no photo — plain paragraph layout,
+  // unchanged from FAEC/Nor Marash.
   image: Photo | null;
 };
 
@@ -661,5 +665,199 @@ export const churchContent: Record<string, ChurchContent> = {
     // entirely rather than falling through to churches.ts's suspect value.
     // No "Our Location" card in the reference at all for this church.
     contactOverride: { email: null, hideLocationCard: true },
+  },
+
+  "armenian-evangelical-emmanuel-church-nor-amanos-dora": {
+    slug: "armenian-evangelical-emmanuel-church-nor-amanos-dora",
+
+    masthead: {
+      locationLine: "Nor Amanos, Baouchrieh, Mount Lebanon",
+      locationLineHy: null,
+      established: "1970",
+      establishedHy: null,
+    },
+
+    logo: null, // confirmed: no church logo, name-only masthead (like Syriac)
+    heroPhoto: {
+      src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-hero.jpg",
+      alt: "Armenian Evangelical Emmanuel Church of Nor Amanos",
+    },
+    factsBar: [
+      { label: "Sunday Worship", labelHy: null, sub: "Weekly Service", subHy: null },
+      { label: "Nor Amanos", labelHy: null, sub: "Baouchrieh, Mount Lebanon", subHy: null },
+      { label: "1970", labelHy: null, sub: "Founded", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Emmanuel Church of Nor Amanos is located east of Beirut, in the Baouchrieh area of Mount Lebanon — a mixed commercial and residential section not far from Dawra, home to many Armenians and Armenian institutions. Founded in 1970 within the campus of the Torossian School, it is the newest of the Armenian Evangelical congregations in Lebanon.",
+        "With God's grace, and alongside its Sunday worship services and Bible studies, the church carries a full range of ministries — for children, junior youth, youth, and young adults, as well as women's and sport ministries — and has become a lighthouse to its neighborhood. Since October 2023, Rev. Hovhannes Svadjian has served as pastor of the church.",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Hovhannes Svadjian",
+      nameHy: null,
+      role: "Pastor",
+      roleHy: null,
+      photo: {
+        src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-pastor.jpg",
+        alt: "Rev. Hovhannes Svadjian",
+      },
+    },
+
+    leadership: [
+      {
+        name: "Rev. Hovhannes Svadjian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-leader-1.jpg",
+          alt: "Rev. Hovhannes Svadjian",
+        },
+      },
+      {
+        name: "Ms. Ani Baboghlanian",
+        nameHy: null,
+        role: "Vice-Chair, Board of Trustees",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-leader-2.jpg",
+          alt: "Ms. Ani Baboghlanian",
+        },
+      },
+      {
+        name: "Mrs. Ani Svadjian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-leader-3.jpg",
+          alt: "Mrs. Ani Svadjian",
+        },
+      },
+    ],
+
+    // Structural note (see OPEN_QUESTIONS-adjacent discussion in this
+    // session, not a numbered item): the reference has no <h3> for the
+    // founding narrative — it sits directly under the top-level "The
+    // Founding of Emmanuel Church" heading. Split into two null-heading
+    // sections to match the reference's actual flow: the first two
+    // paragraphs sit beside the side photo (.hsplit), the third paragraph
+    // (the pulpit-dignitaries account) flows full-width below it, still
+    // part of the same unheaded narrative, before "Through War and Crisis"
+    // begins as a normal headed subsection.
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "The Founding of Emmanuel Church",
+      headingHy: null,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "Starting from the second half of the 1960s — after several years of worship services held in the homes of Armenian Evangelical families in the Nor Amanos area, and after years of dedication and visitation by Rev. & Mrs. Vahram Salibian — the founding worship service of the Armenian Evangelical Emmanuel Church took place on the morning of Sunday, 15 February 1970.",
+            "Since the newly-organized congregation did not yet have its own building, worship services were held in the chapel of the Armenian Evangelical Peter & Elizabeth Torossian School. Representatives from the surrounding Armenian Evangelical churches filled the chapel that morning to show their solidarity with the newborn congregation.",
+          ],
+          paragraphsHy: null,
+          image: {
+            src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-history.jpg",
+            alt: "Armenian Evangelical Emmanuel Church, street view",
+          },
+        },
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "On the pulpit were seated the President of the UAECNE, Rev. Hovhannes Aharonian; the Armenian Evangelical Community Head in Lebanon, Rev. Yenovk Hadidian; and the founding pastor of the Emmanuel Church, Rev. Vahram Salibian. After an inspiring hymn by the choir, a list of 18 communicant members was presented, the President of the Union read the official proclamation organizing the new church, and the congregation read the membership vow in unison.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Through War and Crisis",
+          headingHy: null,
+          paragraphs: [
+            "During the Lebanese Civil War (1975–1990), when bombardments intensified and shells struck the area — and even the church building itself — the Emmanuel Church became a shelter for many families in the neighborhood. Together with the Armenian Evangelical P. & E. Torossian School, the church played a key role in promoting the Gospel and spreading education. With the closing of the Torossian School in September 2019 amid the financial crisis, the church lost its effective partner in mission and ministry.",
+            "After the untimely death of Pastor Sevag Trashian, the church was led by its resilient lay leaders; with the support of the Union, God's guidance, and the prayers of its people, the Emmanuel Church survived the street disturbances, the Beirut Port explosion, and the economic and banking crises of Lebanon. Throughout its history, and by the power of the Holy Spirit, the church has produced many ministers — among them Rev. Dikran Youmoushakian, Rev. Dr. Avedis Boynerian, Rev. Dr. Krikor Youmoushakian, Rev. Hovhannes Svadjian, and Pastor George Sahili — as well as many teachers and community lay leaders.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: "Church Life",
+      eyebrowHy: null,
+      heading: "Ministries & Programs",
+      headingHy: null,
+      items: [
+        "Sunday Worship Services",
+        "Bible Studies",
+        "Children's Ministry",
+        "Junior Youth Ministry",
+        "Youth Ministry",
+        "Young Adult Ministry",
+        "Women's Ministry",
+        "Sport Ministry",
+      ],
+      itemsHy: null,
+    },
+
+    specialProject: null,
+
+    succession: {
+      eyebrow: "Those Who Served",
+      eyebrowHy: null,
+      heading: "Pastors of the Church",
+      headingHy: null,
+      note: null,
+      noteHy: null,
+      // Rev. Hovhannes Svadjian appears twice — 2005–2014, then again
+      // 2023–present after Pastor Sevag Trashian's 2014–2020 tenure and an
+      // interim period. A real return to the post, not a duplicate to
+      // dedupe. Only the 2023–present entry is isCurrent.
+      entries: [
+        { name: "Rev. Vahram Salibian", nameHy: null, years: "1970 – 1973", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Yessayi Sarmazian", nameHy: null, years: "1973 – 1980", note: null, noteHy: null, isCurrent: false },
+        { name: "Visiting & interim pastors", nameHy: null, years: "1980 – 1983", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Mgrdich Karagoezian", nameHy: null, years: "1983 – 1999", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Nerses Balabanian", nameHy: null, years: "1999 – 2005", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hovhannes Svadjian", nameHy: null, years: "2005 – 2014", note: null, noteHy: null, isCurrent: false },
+        { name: "Pastor Sevag Trashian", nameHy: null, years: "2014 – 2020", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hovhannes Svadjian", nameHy: null, years: "2023 – present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
+
+    anniversary: null,
+    gallery: null,
+
+    cta: {
+      heading: "Join Us in Worship",
+      headingHy: null,
+      body: "All are welcome at the Armenian Evangelical Emmanuel Church of Nor Amanos — a lighthouse to its neighborhood in the Baouchrieh area of Mount Lebanon.",
+      bodyHy: null,
+    },
+
+    // OPEN_QUESTIONS.md #21 (pastor/secretary spelling), #36 (address
+    // conflict): churches.ts's address adds a specific street/PO box not in
+    // the reference and says "Beirut" where the reference says "Mount
+    // Lebanon"; churches.ts's phone has only one of the reference's two
+    // numbers; churches.ts's secretary spelling "Sevadjian" conflicts with
+    // the reference's "Svadjian". Email matches churches.ts exactly
+    // (aeecna@gmail.com) — no override needed for that field.
+    contactOverride: {
+      secretary: "Mrs. Ani Svadjian",
+      address: "Nor Amanos, Baouchrieh, Mount Lebanon",
+      phone: "(01) 241636 · 81 161 207",
+    },
   },
 };

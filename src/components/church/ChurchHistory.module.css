@@ -51,6 +51,34 @@
   margin: 0 0 1rem;
 }
 
+/* Side-photo history block (e.g. Emmanuel's founding narrative) — matches
+   the reference files' .hsplit exactly: stacked mobile, 1.15fr/1fr row at
+   >=720px. */
+.hsplit {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.625rem;
+  align-items: center;
+  margin: 1.875rem 0;
+}
+
+.hsplitText > :first-child {
+  margin-top: 0;
+}
+
+.himgFrame {
+  aspect-ratio: 16 / 10;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+}
+
+.himgPhoto {
+  object-fit: cover;
+}
+
 @media (min-width: 720px) {
   .history {
     padding: 3.5rem 2.125rem;
@@ -66,5 +94,10 @@
 
   .paragraph {
     font-size: 1rem;
+  }
+
+  .hsplit {
+    grid-template-columns: 1.15fr 1fr;
+    gap: 2.5rem;
   }
 }

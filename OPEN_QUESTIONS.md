@@ -56,9 +56,9 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 19. **Nor Marash church email (`aessa68@gmail.com`) reads like a school/association address, not the church's own — kept verbatim per the sheet; confirm with the church directly.**
 
-20. **Emmanuel Nor Amanos — no service time given in the source doc.**
+20. **Emmanuel Nor Amanos — no service time given in the source doc.** `churches.ts`'s "Sundays 10:00-11:15" is sourced only from the directory spreadsheet, not corroborated anywhere in the reference file (facts bar stays generic "Sunday Worship / Weekly Service," no invented clock time on the built page) — same single-sourced status as FAEC/Syriac (items 32/33). Yeghia to confirm against the church.
 
-21. **Emmanuel Nor Amanos pastor spelling — "Svadjian" (confirmed correct by Yeghia) vs `churches.ts`'s "Sevadjian"; `churches.ts` needs an eventual update to match.**
+21. **Emmanuel Nor Amanos pastor/secretary spelling — "Svadjian" (confirmed correct by Yeghia) vs `churches.ts`'s "Sevadjian," for both the pastor (Rev. Hovhannes) and the secretary (Mrs. Ani); `churches.ts` needs an eventual update to match. The church-detail page uses "Svadjian" throughout (masthead, pastor card, leadership, and a `contactOverride.secretary` patch for the contact card) — `churches.ts` itself was not edited.**
 
 22. **Syriac Bouchriyeh — org name "Syriac" (doc/project) vs building signage "SYRIAN EVANGELICAL CHURCH."**
 
@@ -87,6 +87,8 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 34. **`design-reference/uaecne-church-nor-marash-complete.html` has a live bug at source, confirmed by Yeghia (author of the file): its own header comment says the email was "blank in source → omitted (NOT the school's aessa68)," but the file's actual contact-card body still renders `aessa68@gmail.com` — the value the comment itself warns against. The ported church-detail page correctly omits the email (per Yeghia's ruling, trusting the comment over the buggy body here — not the same situation as the Syriac pastor-card case). The reference file itself should be corrected at some point so it stops carrying the wrong value in its body.**
 
 35. **Pastor surname romanization conflict across two churches, likely the same person.** The Nor Marash reference (`uaecne-church-nor-marash-complete.html`) spells the current pastor (2014–present) "Rev. Raffi **Messerlian**," used verbatim on the built Nor Marash page. Yeghia's Anjar-era source spells the likely-same man (Anjar pastor, 1998–2013) "Rev. Raffi **Mësrlian**." Nor Marash is NOT being changed — its own reference is authoritative for its own page. Flagged for reconciliation when Anjar is built: the site should not end up showing two spelling variants for what may be one person across two church histories.
+
+36. **Emmanuel Nor Amanos directory data (`churches.ts`) disagrees with the reference file on address and phone.** Address: `churches.ts` has "Maggie el Hajj Street, Bouchrieh, Beirut, Lebanon / P.O.Box 80-092 Bourj Hammoud"; the reference's own "Our Location" card and masthead both say "Nor Amanos, Baouchrieh, Mount Lebanon" — no street name, no P.O. box, "Mount Lebanon" not "Beirut." Phone: `churches.ts` has one number ("01-241 636"); the reference has two ("(01) 241636 · 81 161 207," same first number, an additional line not in `churches.ts` at all). The church-detail page renders the reference's wording for both (`contactOverride.address`/`.phone`) — `churches.ts` itself was not edited. Same pattern as FAEC (item 31).
 
 ## Resolved
 
