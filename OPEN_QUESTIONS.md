@@ -46,15 +46,43 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 14. **Footer Western-Armenian mirror column — structure built (Unit 4), real copy still needed directly from Yeghia.** `Footer.tsx` now has a labelled, clearly-pending Western-Armenian mirror column ("Western Armenian — verified copy pending" tag). No Armenian text has been added — per rule 1/rule 2 it stays empty until Yeghia supplies verified Western (Lebanese) Armenian copy directly (never machine-translated, never Eastern Armenian). This item stays open until that copy is supplied and built in; see Resolved for the structural work.
 
-15. **Unused assets — four superseded photo files.** `public/sacred-legacy-building.jpeg` (superseded by `sacred-legacy-faec.jpg`), `public/ministry-churches.jpeg` (superseded by `ministry-churches-faec.jpg`), `public/ministry-youth.jpg` (superseded by `ministry-youth-camp.jpg`), and `public/general-assembly-180.jpg` (the anniversary logo, superseded by the real photo `news-general-assembly.jpg`) are no longer referenced anywhere in the code. Left in place rather than deleted unprompted; safe to remove in a future cleanup pass once confirmed.
+15. **Unused assets — five superseded/orphaned photo files.** `public/sacred-legacy-building.jpeg` (superseded by `sacred-legacy-faec.jpg`), `public/ministry-churches.jpeg` (superseded by `ministry-churches-faec.jpg`), `public/ministry-youth.jpg` (superseded by `ministry-youth-camp.jpg`), `public/general-assembly-180.jpg` (the anniversary logo, superseded by the real photo `news-general-assembly.jpg`), and `public/aec-college-logo.png` (kept during the Churches build for anticipated school use — see Resolved — but the Schools index ended up sourcing a fresh copy directly from `Schools/Schools Pagge` instead, so this file is now genuinely unused) are no longer referenced anywhere in the code. Left in place rather than deleted unprompted; safe to remove in a future cleanup pass once confirmed.
 
 16. **Publications & Media — still no photo.** Not checked this pass (Unit scope was Churches, Education, Youth, Cultural & Heritage, Social & Medical Care only). Stays on the `ArchFrame`/placeholder treatment until a real photo is sourced and verified.
 
-17. **Anjar card uses logo as interim image — replace with a good building photo later.**
+17. **Anjar school (Armenian Evangelical Secondary School, Anjar) has no real building photo.** Card renders the standard photo-pending placeholder; its logo is used only for the small emblem seal, never in the photo slot.
 
-18. **AEC logo retained for the school page, excluded from churches.**
+18. **RESOLVED — see Resolved section (AEC college logo).** Kept as a numbered placeholder rather than deleted-and-renumbered, so later items don't shift position across separate commits; the substantive note now lives in Resolved and item 15 above.
 
 19. **Nor Marash church email (`aessa68@gmail.com`) reads like a school/association address, not the church's own — kept verbatim per the sheet; confirm with the church directly.**
+
+20. **Emmanuel Nor Amanos — no service time given in the source doc.**
+
+21. **Emmanuel Nor Amanos pastor spelling — "Svadjian" (confirmed correct by Yeghia) vs `churches.ts`'s "Sevadjian"; `churches.ts` needs an eventual update to match.**
+
+22. **Syriac Bouchriyeh — org name "Syriac" (doc/project) vs building signage "SYRIAN EVANGELICAL CHURCH."**
+
+23. **Syriac Bouchriyeh pastor name — "Salim" (doc) vs "Selim" (photo filename).**
+
+24. **Syriac Bouchriyeh founding year 1966 — sourced from a building inscription, not the text doc.**
+
+25. **Nor Marash email — reference file explicitly states it was left blank in the source, "not the church's"; stronger than item 19's loose flag, and `churches.ts`'s filled-in value (`aessa68@gmail.com`) should be treated as suspect, not authoritative.**
+
+26. **FAEC Beirut masthead logo — reused from the Armenian Evangelical College; plausible but not independently confirmed as an intentional/approved reuse.**
+
+27. **FAEC Beirut pastor spelling — normalized to "Jirair Ghazarian" per the file's own note; already matches `churches.ts`, flagged as a normalization decision that happened, not a fresh discrepancy.**
+
+28. **Anjar index card (`churches.ts`) shows its logo as the photo — wrong field mapping; out of scope this unit.**
+
+29. **A real Anjar building photo already sits unused in `public/` that should have been used instead of the logo; out of scope this unit.**
+
+30. **Syriac Bouchriyeh email — reference file's `syriac-evangelical-church@hotmail.com` (church's own supplied doc) conflicts with `churches.ts`'s `syriac.evan.church@gmail.com`. The reference file is authoritative for `ChurchContent`; `churches.ts`'s value is not propagated into the church-detail page and should be treated as suspect, not authoritative — same handling as the Nor Marash email (item 25).**
+
+31. **FAEC Beirut directory data (`churches.ts`) disagrees with the Yeghia-approved reference file on two facts: neighborhood ("Clemenceau, Mexique Street" vs the reference's "Kantari, Beirut, Lebanon") and founding year ("1922-1923" vs the reference's "1922"). The church-detail page's masthead renders the reference's wording (`ChurchContent.masthead`, verbatim from `uaecne-church-faec-beirut-complete.html`), not `churches.ts`'s — `churches.ts` itself was not edited. Flagging for Yeghia to reconcile the directory data later.**
+
+32. **FAEC Beirut service time "Sundays 10:30-11:30" is sourced only from `churches.ts`/`UAECNE_Churches_Directory.xlsx` — not corroborated anywhere in the reference file (its facts bar and contact card have no specific clock time at all). Yeghia to confirm against the church.**
+
+33. **Syriac Bouchriyeh service time "Sundays 10:00-11:00" — same status as item 32: sourced only from `churches.ts`/the directory spreadsheet, no specific clock time anywhere in the Syriac reference file. Yeghia to confirm against the church.**
 
 ## Resolved
 
@@ -93,3 +121,5 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 - **News rebuilt as a two-panel split card matching the mockup's `.news-feat`/`.news-art`/`.news-card`, 2026-08-19.** Previous version was a small logo in an oversized empty card; rebuilt to the mockup's exact structure (stacked mobile, row/stretch desktop, panels join seamlessly at gap:0, matching border-radii/shadows). Added `#ic-arrow` to the shared `IconSymbols` sprite for the "Read more" hover-nudge arrow.
 - **News art panel — real General Assembly photo now used, RESOLVED.** The 180th-anniversary logo (initially kept as a contained/centered treatment on a decorative gradient, since no real photo existed yet) has been replaced with a real photo Yeghia provided directly: `Recourses/General Assembly/drive-download-20260708T050215Z-3-001/UAECNE_GA_2026_0958-2.jpg` — delegates of the 79th General Assembly at the First Armenian Evangelical Church steps. Copied to `public/news-general-assembly.jpg`, MD5-verified byte-identical, filename confirmed clean of the AI-generated pattern (rule 1). Treatment switched from the special "contained logo on gradient" mode to the standard full-bleed `object-fit: cover` treatment used everywhere else real photos appear in this rebuild, since a real photo — unlike a logo — is meant to fill the frame. Also per Yeghia's direct follow-up styling requests, 2026-08-19: the art panel got a 2px red border; the "Latest Updates" heading was enlarged, left-aligned (was centered), and given a red rule above and below sized to the exact width of the word "Latest" (via an inline-block wrapper span, not a fixed/approximated width).
 - **Header Donate duplication — RESOLVED, dropped the nav link, kept the button, 2026-08-19.** Removed "Donate" from `navItems` in `Nav.tsx` (was rendering in both desktop nav and mobile menu); the red `.donateButton` in `Header.tsx` is unchanged and remains the only Donate affordance.
+- **AEC college logo (`public/aec-college-logo.png`) — RESOLVED, correctly excluded from Churches, ended up unused rather than reused on Schools.** The Armenian Evangelical College logo was correctly kept out of `churches.ts` (it's the college's mark, not a church's) and set aside for the eventual Schools build. When the Schools index was actually built, a fresh, differently-named copy was sourced directly from `Schools/Schools Pagge` instead — see item 15 for the now-orphaned file.
+- **Schools index — 4 Lebanon schools, nested under Ministries (desktop + mobile), 2026-08-19.** `src/data/schools.ts` + `src/app/schools/`, mirroring the Churches index. Armenian Evangelical College, Central High School, and Shamlian-Tatikian have real building photos (MD5-verified from `Schools/Schools Pagge`); Anjar has no real building photo and renders the standard photo-pending placeholder (see item 17) — its logo is used only as the emblem. `Nav.tsx`'s Ministries item now has two children: Churches, Schools.

@@ -1,0 +1,50 @@
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  background: var(--color-ivory);
+  max-width: 220px;
+  margin: 0 auto;
+}
+
+.picWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+}
+
+.pic {
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+.info {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  background: linear-gradient(180deg, var(--color-ivory), var(--color-ivory-wash));
+}
+
+.name {
+  display: block;
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.125rem;
+}
+
+.role {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.5625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 720px) {
+  .card {
+    max-width: 280px;
+    margin: 0;
+  }
+}

@@ -161,6 +161,46 @@ export default function IconSymbols() {
             <path d="M12 6v11" />
           </g>
         </symbol>
+
+        {/* Church-template contact-row / programs-list icons — geometry
+            copied verbatim from design-reference/uaecne-church-*.html's
+            #pin/#phone/#mail/#dot symbols. */}
+        <symbol id="ic-pin" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            d="M12 21s7-6.3 7-11a7 7 0 0 0-14 0c0 4.7 7 11 7 11z"
+          />
+          <circle cx="12" cy="10" r="2.4" fill="currentColor" />
+        </symbol>
+
+        <symbol id="ic-phone" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            d="M5 4h4l2 5-3 2c1 2 3 4 5 5l2-3 5 2v4c0 1-1 2-2 2A16 16 0 0 1 3 6c0-1 1-2 2-2z"
+          />
+        </symbol>
+
+        <symbol id="ic-mail" viewBox="0 0 24 24">
+          <rect
+            x="3"
+            y="5"
+            width="18"
+            height="14"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" strokeWidth="1.6" />
+        </symbol>
+
+        <symbol id="ic-dot" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="4" fill="currentColor" />
+        </symbol>
       </defs>
     </svg>
   );

@@ -1,0 +1,54 @@
+import PastorCard from "./PastorCard";
+import styles from "./ChurchAbout.module.css";
+
+type Photo = { src: string; alt: string };
+
+type ChurchAboutProps = {
+  about: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+  };
+  pastorCard: {
+    name: string;
+    nameHy: string | null;
+    role: string;
+    roleHy: string | null;
+    photo: Photo;
+  } | null;
+};
+
+// Eyebrow/heading/drop-cap paragraphs, with an optional PastorCard beside it.
+// Single-column layout when pastorCard is null — not exercised by FAEC or
+// Syriac (both have one), but the component must support the null case for
+// future churches.
+export default function ChurchAbout({ about, pastorCard }: ChurchAboutProps) {
+  return (
+    <section className={styles.about}>
+      <div className={pastorCard ? styles.grid : `${styles.grid} ${styles.solo}`}>
+        {pastorCard && (
+          <PastorCard name={pastorCard.name} role={pastorCard.role} photo={pastorCard.photo} />
+        )}
+        <div>
+          <div className={styles.eyebrow}>{about.eyebrow}</div>
+          <h2 className={styles.heading}>{about.heading}</h2>
+          {about.paragraphs.map((paragraph, i) =>
+            i === 0 ? (
+              <p className={styles.paragraph} key={i}>
+                <span className={styles.dropcap}>{paragraph.charAt(0)}</span>
+                {paragraph.slice(1)}
+              </p>
+            ) : (
+              <p className={styles.paragraph} key={i}>
+                {paragraph}
+              </p>
+            ),
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
