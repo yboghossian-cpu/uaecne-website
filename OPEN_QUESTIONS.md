@@ -102,6 +102,8 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 42. **Anjar reference HTML (`uaecne-church-anjar-complete.html`) misspells the assistant pastor's surname — "Mncherian" (both occurrences: About text, leadership card) — vs the source doc's "Mencherian"** (`Churches/Lebanon/Armenian Evangelical Church , Anjar/The Armenian Evangelical Church of Anjar 2026 (1).docx`, extracted and verified directly: "Pastor Asadour **Mencherian** joined our church as assistant pastor"). Per Yeghia's ruling, the source doc wins — same category as the Nor Marash email bug (item 34): the reference HTML itself should be corrected later. The built Anjar page uses "Mencherian" throughout.
 
+43. **AnniversaryBand uses four ad-hoc hex values (`#fcf8ee`, `#f2e7d0`, `#a8863f`, `#fff`/`#f3e9d2`) for its decorative gradient/inner-disc — no matching design token existed.** Reconcile if the palette is ever refined.
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

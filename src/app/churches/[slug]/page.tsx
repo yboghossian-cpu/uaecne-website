@@ -104,13 +104,13 @@ export default async function ChurchDetailPage({
       />
       <AnniversaryBand anniversary={content.anniversary} />
       <ChurchAbout about={content.about} pastorCard={content.pastorCard} />
+      <ChurchContactSection church={church} contactOverride={content.contactOverride} />
       <LeadershipGrid leaders={content.leadership} />
       <ChurchHistory history={content.history} />
       <ChurchPrograms programs={content.programs} />
       <SpecialProjectBand specialProject={content.specialProject} />
       <SuccessionList succession={content.succession} />
       <ChurchGallery gallery={content.gallery} />
-      <ChurchContactSection church={church} contactOverride={content.contactOverride} />
       <ChurchCTA cta={content.cta} />
     </>
   );

@@ -6,44 +6,91 @@ type AnniversaryBandProps = {
   anniversary: ChurchContent["anniversary"];
 };
 
-// Renders the reference files' "100th Anniversary" banner treatment —
-// dedicated badge image, two-line numeral+word heading, a date range, and a
-// scripture quote with its own citation + editorial label — joined with the
-// reference's own " · " separator to match its rendered line exactly while
-// keeping the two as separate, independently-translatable data fields.
+// Renders the approved Variant D mockup (design-reference/uaecne-ashrafieh-
+// anniversary-final.html): a CONTAINED card (side padding, max-width 1180px,
+// rounded, gold-bordered) with a full-width banner kicker, then a 3-column
+// row — seal in a gold roundel | numeral+word+years | verse+citation —
+// collapsing to a single stacked column with horizontal dividers on mobile.
 // Renders nothing when null (every church except Ashrafieh, currently).
-// When `logo` is null (Ashrafieh — its badge was identical to its masthead
-// seal), renders text-only, centered in a constrained column at desktop
-// instead of left-floating in an empty two-column grid.
+// `years`/`kicker` are split at render time to drive the two-year/dot
+// layout — the Anniversary type itself is unchanged, this is presentation
+// only. `logo` stays optional: if a future church has no seal image, the
+// seal cell just renders empty rather than requiring one.
 export default function AnniversaryBand({ anniversary }: AnniversaryBandProps) {
   if (!anniversary) return null;
 
+  const [yearStart, yearEnd] = anniversary.years
+    .split(/\s*[—–-]\s*/)
+    .map((y) => y.trim());
+  const [kickerStart, kickerEnd] = anniversary.kicker
+    .split(" · ")
+    .map((k) => k.trim());
+
   return (
-    <section className={styles.anniv}>
-      <div className={anniversary.logo ? styles.wrap : `${styles.wrap} ${styles.wrapCentered}`}>
-        {anniversary.logo && (
-          <div className={styles.logoFrame}>
-            <Image
-              src={anniversary.logo.src}
-              alt={anniversary.logo.alt}
-              fill
-              className={styles.logoImg}
-            />
+    <section className={styles.annivSection}>
+      <div className={styles.anniv}>
+        <div className={styles.banner}>
+          <div className={styles.kick}>
+            {kickerEnd ? (
+              <>
+                {kickerStart}
+                <span className={styles.dot}>·</span>
+                {kickerEnd}
+              </>
+            ) : (
+              anniversary.kicker
+            )}
           </div>
-        )}
-        <div className={styles.txt}>
-          <div className={styles.kick}>{anniversary.kicker}</div>
-          <h2 className={styles.heading}>
-            {anniversary.numeral}
-            <em className={styles.label}>{anniversary.label}</em>
-          </h2>
-          <div className={styles.years}>{anniversary.years}</div>
-          <p className={styles.verse}>
-            &ldquo;{anniversary.verse}&rdquo;
-            <span className={styles.ref}>
-              {anniversary.verseRef} · {anniversary.verseLabel}
-            </span>
-          </p>
+        </div>
+
+        <div className={styles.row}>
+          <div className={`${styles.cell} ${styles.cellSeal}`}>
+            {anniversary.logo && (
+              <div className={styles.seal}>
+                <div className={styles.inner}>
+                  <div className={styles.sealImgFrame}>
+                    <Image
+                      src={anniversary.logo.src}
+                      alt={anniversary.logo.alt}
+                      fill
+                      className={styles.sealImg}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className={`${styles.cell} ${styles.cellMark} ${styles.bordered}`}>
+            <div className={styles.num}>{anniversary.numeral}</div>
+            <div className={styles.word}>{anniversary.label}</div>
+            {yearEnd ? (
+              <div className={styles.years}>
+                <span className={styles.rule} />
+                <span className={styles.yr}>{yearStart}</span>
+                <span className={styles.dia} />
+                <span className={styles.yr}>{yearEnd}</span>
+                <span className={`${styles.rule} ${styles.ruleR}`} />
+              </div>
+            ) : (
+              <div className={styles.years}>
+                <span className={styles.yr}>{anniversary.years}</span>
+              </div>
+            )}
+          </div>
+
+          <div className={`${styles.cell} ${styles.cellVerse} ${styles.bordered}`}>
+            <p className={styles.verse}>
+              <span className={styles.q}>&ldquo;</span>
+              {anniversary.verse}
+              <span className={styles.q}>&rdquo;</span>
+            </p>
+            <div className={styles.ref}>
+              {anniversary.verseRef}
+              <span className={styles.sep}>·</span>
+              {anniversary.verseLabel}
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -920,13 +920,19 @@ export const churchContent: Record<string, ChurchContent> = {
 
     // Verified against uaecne-church-ashrafieh-complete.html's .anniv
     // section (2026 centennial). Scripture quote is verbatim, not
-    // paraphrased. logo: null (Yeghia's ruling) — the reference's badge
-    // image was byte-identical to the masthead logo above (same church
-    // seal, not a distinct "100" graphic), so the band renders text-only
-    // rather than showing the same seal twice ~400px apart. The masthead
-    // logo itself is unaffected — still used via ChurchContent.logo above.
+    // paraphrased. logo is the real seal — byte-identical to the masthead
+    // logo above (same church seal, not a distinct "100" graphic), which
+    // originally read as a "double seal ~400px apart" problem under the
+    // first side-by-side layout (logo: null then). Approved Variant D
+    // (design-reference/uaecne-ashrafieh-anniversary-final.html) sets it in
+    // a gold-ring roundel as one cell of a contained 3-column card (seal |
+    // numeral+years | verse) — AnniversaryBand.tsx renders it there, not
+    // beside the masthead.
     anniversary: {
-      logo: null,
+      logo: {
+        src: "/church-armenian-evangelical-church-ashrafieh-logo.jpg",
+        alt: "100th Anniversary — Armenian Evangelical Church of Ashrafieh",
+      },
       kicker: "Celebrating Your Past · Investing in Your Future",
       kickerHy: null,
       numeral: "100",
