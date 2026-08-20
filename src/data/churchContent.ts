@@ -168,16 +168,22 @@ export type ChurchContent = {
   // This field exists only to patch specific contact fields that a
   // reference file's own supplied contact data genuinely conflicts with
   // churches.ts on (a source-data conflict, not a parallel contact system —
-  // see OPEN_QUESTIONS.md #30 for Syriac's email, #31 for FAEC's address).
-  // Render rule: start from churches.ts's contact fields, then spread
-  // contactOverride on top when non-null — undefined/omitted keys fall
-  // through to churches.ts's value; only set the keys that actually need
-  // overriding.
+  // see OPEN_QUESTIONS.md #30 for Syriac's email, #31 for FAEC's address,
+  // #34 for Nor Marash's email). Render rule: start from churches.ts's
+  // contact fields, then spread contactOverride on top when non-null —
+  // undefined/omitted keys fall through to churches.ts's value; only set
+  // the keys that actually need overriding. `email: null` (explicit, not
+  // omitted) suppresses the email row entirely rather than falling through
+  // to churches.ts's value — used when churches.ts's email is known-wrong
+  // (Nor Marash). `hideLocationCard: true` omits the whole "Our Location"
+  // card when the reference has no address/location content at all for
+  // that church (Nor Marash).
   contactOverride: {
-    email?: string;
+    email?: string | null;
     phone?: string;
     secretary?: string;
     address?: string;
+    hideLocationCard?: boolean;
   } | null;
 };
 
@@ -460,5 +466,200 @@ export const churchContent: Record<string, ChurchContent> = {
     // uses this email; churches.ts's syriac.evan.church@gmail.com conflicts
     // and is treated as suspect, not authoritative.
     contactOverride: { email: "syriac-evangelical-church@hotmail.com" },
+  },
+
+  "armenian-evangelical-church-nor-marash": {
+    slug: "armenian-evangelical-church-nor-marash",
+
+    masthead: {
+      locationLine: "Bourj Hammoud, Beirut, Lebanon",
+      locationLineHy: null,
+      established: "1934",
+      establishedHy: null,
+    },
+
+    // Byte-identical to public/church-armenian-evangelical-church-nor-marash
+    // -emblem.png (already tracked, from the Churches-index build) — reused
+    // rather than shipping a duplicate file.
+    logo: {
+      src: "/church-armenian-evangelical-church-nor-marash-emblem.png",
+      alt: "Nor Marash church logo",
+    },
+    heroPhoto: {
+      src: "/church-armenian-evangelical-church-nor-marash-hero.jpg",
+      alt: "Armenian Evangelical Church of Nor Marash",
+    },
+    factsBar: [
+      { label: "Weekly Worship", labelHy: null, sub: "Sunday Service", subHy: null },
+      { label: "Bourj Hammoud", labelHy: null, sub: "East of Beirut River", subHy: null },
+      { label: "1934", labelHy: null, sub: "Founded", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Nor Marash is located in the Bourj Hammoud area east of the Beirut River, in a commercial and residential suburb with many Armenian homes and businesses. Next to the church stands the Armenian Evangelical Secondary School of Bourj Hammoud (also known as “Shamlian-Tatikian”), near a number of churches and agencies serving the Armenian community.",
+        "Founded in 1934, the church holds weekly worship services and sustains children's, juniors', youth, couples', and women's ministries, led by Rev. Raffi Messerlian. The congregation traces its roots to the Marash survivors of the Armenian Genocide who founded the Nor (New) Marash neighborhood in Bourj Hammoud.",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Raffi Messerlian",
+      nameHy: null,
+      role: "Pastor · Since 2014",
+      roleHy: null,
+      photo: {
+        src: "/church-armenian-evangelical-church-nor-marash-pastor.jpg",
+        alt: "Rev. Raffi Messerlian",
+      },
+    },
+
+    // Reference file's leadership photos all have alt="" — using each
+    // person's own name as alt text instead (matches the accessibility
+    // convention used everywhere else in this codebase; not invented
+    // content, just the same name already shown in the visible caption).
+    leadership: [
+      {
+        name: "Rev. Raffi Messerlian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-nor-marash-leader-1.jpg",
+          alt: "Rev. Raffi Messerlian",
+        },
+      },
+      {
+        name: "Mr. Antranig Messerlian",
+        nameHy: null,
+        role: "Board Member",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-nor-marash-leader-2.jpg",
+          alt: "Mr. Antranig Messerlian",
+        },
+      },
+      {
+        name: "Mrs. Takouhi Sarkissian",
+        nameHy: null,
+        role: "Board Member",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-nor-marash-leader-3.jpg",
+          alt: "Mrs. Takouhi Sarkissian",
+        },
+      },
+    ],
+
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "From Marash to Bourj Hammoud",
+      headingHy: null,
+      sections: [
+        {
+          heading: "Origins (1929–1934)",
+          headingHy: null,
+          paragraphs: [
+            "Until the end of the 1920s, Armenians who survived the Genocide lived in refugee camps within the city limits of Beirut. In November 1929, after the Lebanese government's decision to dismantle those camps, Armenian communities were dispersed and began to establish new neighborhoods. The first was built by those from Marash, who, forming a compatriotic union, purchased a large plot of land in Bourj Hammoud on the east bank of the Beirut River and founded Nor (New) Marash. Between 1930 and 1932, over 2,000 Armenian families moved to the new neighborhood.",
+            "Armenian Evangelical work began there in 1930, with a temporary wooden hall built for use as a kindergarten and evening prayer meetings. With the assistance of the Marash Compatriotic Union, the community obtained land and, on 29 June 1931, began construction of a school building; the Rev. Garabed Hassessian led prayers for the laying of its foundation. On 16 December 1934, the church was officially constituted in a solemn ceremony with 105 members and declared a new member of the Union.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Growth and Trials",
+          headingHy: null,
+          paragraphs: [
+            "From January 1934 until the fall of 1942, Rev. Hassessian served as pastor and the church progressed in every way. By 1938 the number of families had grown to 177 (747 individuals), with two women's societies and expanding ministries. Through the repatriation years of 1946–1947, forty-two church families and former pastor Rev. Hassessian departed for Armenia. Rev. Aram Hadidian became pastor in 1947, guiding a period of renewal and building the parsonage in 1947 before retiring in 1962.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Rebuilding (1972–1983)",
+          headingHy: null,
+          paragraphs: [
+            "In 1972 the church building was demolished to construct a new edifice; the ground floor, completed in 1973, was named the Hassessian Hall in honor of Rev. Avedis Hassessian's father. A clinic was opened in 1976. Construction of the new church began in 1980, and the structure was fully completed in 1983, when worship services began in the new sanctuary.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Recent Decades",
+          headingHy: null,
+          paragraphs: [
+            "From 2000 to 2014, Rev. Mgrdich Karagoezian served as pastor through the arrangement of the Central Committee. The number of families, once as high as 500, currently stands at around 200. In September 2014, Rev. Raffi Messerlian began his ministry as church pastor, continuing the congregation's life of worship, education, and service.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: "Life of the Church",
+      eyebrowHy: null,
+      heading: "Church Activities",
+      headingHy: null,
+      items: [
+        "Sunday School",
+        "Vacation Bible School",
+        "Women's Union",
+        "C.E. Youth Group",
+        "C.E. Junior Youth",
+        "Prayer Meetings",
+      ],
+      itemsHy: null,
+    },
+
+    specialProject: null,
+
+    succession: {
+      eyebrow: "Those Who Served",
+      eyebrowHy: null,
+      heading: "Pastors of the Church",
+      headingHy: null,
+      note: null,
+      noteHy: null,
+      entries: [
+        { name: "Rev. Garabed Hassessian", nameHy: null, years: "1933 – 1942", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Sisag Manougian", nameHy: null, years: "1942 – 1943", note: null, noteHy: null, isCurrent: false },
+        { name: "Pastor Assadour Sadakian", nameHy: null, years: "1943 – 1947", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Aram Hadidian", nameHy: null, years: "1947 – 1962", note: null, noteHy: null, isCurrent: false },
+        { name: "Visiting pastors", nameHy: null, years: "1962 – 1964", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Abraham Jizmejian", nameHy: null, years: "1964 – 1969", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hovhannes Agnerian", nameHy: null, years: "1969 – 1974", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Berdj Djambazian", nameHy: null, years: "1974 – 1980", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Apraham Sarkissian", nameHy: null, years: "1981 – 1998", note: null, noteHy: null, isCurrent: false },
+        { name: "UAECNE Central Committee supervision", nameHy: null, years: "1998 – 2000", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Mgrdich Karagoezian", nameHy: null, years: "2000 – 2014", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Raffi Messerlian", nameHy: null, years: "2014 – present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
+
+    anniversary: null,
+    gallery: null,
+
+    cta: {
+      heading: "Join Us in Worship",
+      headingHy: null,
+      body: "All are welcome at the Armenian Evangelical Church of Nor Marash — rooted in the Marash community's story of survival and faith in Bourj Hammoud.",
+      bodyHy: null,
+    },
+
+    // OPEN_QUESTIONS.md #25/#34: churches.ts's email (aessa68@gmail.com) is
+    // the AESSA Anjar SCHOOL's address, not this church's — confirmed by
+    // Yeghia. The reference file's own header comment correctly flags this
+    // ("Email blank in source -> omitted"), but its body still renders the
+    // email (a bug in the reference file itself, not a superseding truth —
+    // see OPEN_QUESTIONS #34). Explicit null suppresses the email row
+    // entirely rather than falling through to churches.ts's suspect value.
+    // No "Our Location" card in the reference at all for this church.
+    contactOverride: { email: null, hideLocationCard: true },
   },
 };

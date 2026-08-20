@@ -125,4 +125,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 1.375rem;
   }
+
+  /* When the reference file has no "Our Location" card content (e.g. Nor
+     Marash), only "Get in Touch" renders — center and constrain it instead
+     of leaving an empty second column. */
+  .gridSingle {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
 }

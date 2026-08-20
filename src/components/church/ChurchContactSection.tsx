@@ -1,9 +1,11 @@
 import type { Church } from "@/data/churches";
+import type { ChurchContent } from "@/data/churchContent";
 import styles from "./ChurchContactSection.module.css";
 
-type ContactOverride =
-  | { email?: string; phone?: string; secretary?: string; address?: string }
-  | null;
+// Derived from ChurchContent so the two never drift apart (see
+// churchContent.ts's own field comment for the full render-rule
+// explanation: string = override, null = suppress, absent = fall through).
+type ContactOverride = ChurchContent["contactOverride"];
 
 type ChurchContactSectionProps = {
   church: Church;
@@ -15,24 +17,34 @@ type ChurchContactSectionProps = {
 // patches specific fields when a reference file's own supplied contact data
 // conflicts with churches.ts (see OPEN_QUESTIONS.md #30 for email, #31 for
 // address) — start from churches.ts, then spread the override on top; only
-// its set keys change.
+// its set keys change. An explicit `email: null` suppresses the email row
+// entirely (see OPEN_QUESTIONS.md #34, Nor Marash).
 export default function ChurchContactSection({
   church,
   contactOverride,
 }: ChurchContactSectionProps) {
   const phone = contactOverride?.phone ?? church.phone;
   const secretary = contactOverride?.secretary ?? church.secretary;
-  const emailField = contactOverride?.email ?? church.email;
-  const emails = emailField
+  const hasEmailOverride = contactOverride
+    ? Object.prototype.hasOwnProperty.call(contactOverride, "email")
+    : false;
+  const emailField = hasEmailOverride ? contactOverride!.email : church.email;
+  const emails = (emailField ?? "")
     .split("\n")
     .map((e) => e.trim())
     .filter(Boolean);
   const addressField = contactOverride?.address ?? church.address;
   const addressLines = addressField.split("\n").filter(Boolean);
+  const showLocationCard = !contactOverride?.hideLocationCard;
 
   return (
     <section className={styles.contact}>
-      <div className={styles.grid}>
+      <div
+        className={
+          showLocationCard ? styles.grid : `${styles.grid} ${styles.gridSingle}`
+        }
+      >
+        {showLocationCard && (
         <div className={styles.card}>
           <div className={styles.cardHead}>
             <span className={styles.icoWrap}>
@@ -71,6 +83,7 @@ export default function ChurchContactSection({
             View on Maps
           </span>
         </div>
+        )}
 
         <div className={styles.card}>
           <div className={styles.cardHead}>
