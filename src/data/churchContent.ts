@@ -48,7 +48,14 @@ export type HistorySection = {
 };
 
 export type SuccessionEntry = {
-  name: string;
+  // Nullable — some references (Anjar) give a pastor's name ONLY in
+  // Armenian script, with no English form anywhere in the document. In
+  // that case `name` is null and `nameHy` carries the verified Armenian
+  // verbatim; SuccessionList.tsx renders `name` when present, else falls
+  // back to `nameHy`. This is a real, verified, source-accurate name shown
+  // in its original script — not a placeholder or a gap. Additive: every
+  // prior church already populates `name` with `nameHy: null`, unaffected.
+  name: string | null;
   nameHy: string | null;
   years: string;
   note: string | null;
@@ -1097,6 +1104,255 @@ export const churchContent: Record<string, ChurchContent> = {
     // phone, email, secretary, and founding year all match the reference
     // exactly. Service time is the usual single-sourced/unverified value
     // (see OPEN_QUESTIONS #37) — no override mechanism exists for it.
+    contactOverride: null,
+  },
+
+  "armenian-evangelical-church-anjar": {
+    slug: "armenian-evangelical-church-anjar",
+
+    masthead: {
+      locationLine: "Anjar, Bekaa, Lebanon",
+      locationLineHy: null,
+      established: "1941",
+      establishedHy: null,
+    },
+
+    logo: {
+      src: "/church-armenian-evangelical-church-anjar-logo.png",
+      alt: "Armenian Evangelical Church of Anjar logo",
+    },
+    heroPhoto: {
+      src: "/church-armenian-evangelical-church-anjar-hero.jpg",
+      alt: "Armenian Evangelical Church of Anjar",
+    },
+    // Only church so far whose facts bar carries an actual clock time —
+    // corroborated by churches.ts's own "Sundays 10:00-11:00" (see
+    // OPEN_QUESTIONS provenance note), not the usual single-sourced value.
+    factsBar: [
+      { label: "Sundays · 10:00–11:00", labelHy: null, sub: "Worship Service", subHy: null },
+      { label: "Anjar, Bekaa", labelHy: null, sub: "Lebanon", subHy: null },
+      { label: "1941", labelHy: null, sub: "Founded", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Anjar, founded in 1941, has been a central hub for worship, education, and community support for Armenian refugees from Musa Dagh in Lebanon. It was established one year after the Armenian Evangelical School of Anjar, to serve the community that had fled Musa Dagh during the French Mandate period.",
+        "Its first pastor, Rev. Aram Hadidian, came with the deported community and helped organize the fledgling congregation. In that same year, the church established the Christian Endeavor (“Chanits”) Society for youth, a Sunday school, and a women’s group — providing religious, educational, and cultural engagement for the community. Today the congregation continues in faithful ministry to the Armenian families of the Bekaa Valley under the leadership of Rev. Hagop Akbasharian. In August 2025, Pastor Asadour Mencherian joined the church as assistant pastor.",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Hagop Akbasharian",
+      nameHy: null,
+      role: "Pastor · Since 2013",
+      roleHy: null,
+      photo: {
+        src: "/church-armenian-evangelical-church-anjar-pastor.jpg",
+        alt: "Rev. Hagop Akbasharian",
+      },
+    },
+
+    // Reference's leadership photos all have alt="" — using each person's
+    // own name as alt text, same convention as Nor Marash/Ashrafieh.
+    leadership: [
+      {
+        name: "Rev. Hagop Akbasharian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-anjar-leader-1.jpg",
+          alt: "Rev. Hagop Akbasharian",
+        },
+      },
+      {
+        name: "Pastor Asadour Mencherian",
+        nameHy: null,
+        role: "Assistant Pastor",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-anjar-leader-2.jpg",
+          alt: "Pastor Asadour Mencherian",
+        },
+      },
+      {
+        name: "Mr. Kevork Kerkezian",
+        nameHy: null,
+        role: "Board Member",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-anjar-leader-3.jpg",
+          alt: "Mr. Kevork Kerkezian",
+        },
+      },
+      {
+        name: "Ms. Sevan Apelian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-anjar-leader-4.jpg",
+          alt: "Ms. Sevan Apelian",
+        },
+      },
+    ],
+
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "A History of Faith & Refuge",
+      headingHy: null,
+      sections: [
+        {
+          heading: "Founding and Early Years",
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical Church of Anjar was established in 1941, one year after the founding of the Armenian Evangelical School of Anjar, to serve the Armenian refugees who had fled Musa Dagh during the French Mandate period. Its first pastor, Rev. Aram Hadidian, came with the deported community and helped organize the fledgling congregation, establishing the Christian Endeavor (“Chanits”) Society, a Sunday school, and a women’s group.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Educational and Social Contributions",
+          headingHy: null,
+          paragraphs: [
+            "The church played a pivotal role in education and social welfare. The Armenian Evangelical School expanded over the years to include kindergarten, elementary, intermediate, and secondary sections. By 1964, the school had 550 students and 29 teachers, growing to 650 students by 1970, and published the “Shiraz” yearbook. In addition to education, the church provided medical and social care to thousands displaced from Musa Dagh — in just ten months of 1950, 8,451 patients received care through church initiatives. Missionaries like Sister Hedwig Äenishänslin contributed significantly to both education and social services.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Community and Cultural Significance",
+          headingHy: null,
+          paragraphs: [
+            "The church has been a spiritual and cultural anchor for the Armenian community in Anjar. It has commemorated heroes of the Musa Dagh resistance, such as Rev. Dikran Antreasian, whose remains were reinterred beside the church in 2002. The campus includes the Janbazian Hall and other facilities named in memory of notable community members. The church also honors the German and Swiss missionaries who served the community, including the re-erection of a historic clock tower on the 80th anniversary of Anjar. Despite challenges — including a fire that damaged the church in recent years — the congregation continues to maintain and restore the building.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Legacy",
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical Church of Anjar remains a central institution in the town, which itself was founded in 1939 to shelter Armenian refugees from Musa Dagh. It continues to provide spiritual guidance, educational opportunities, and social services — symbolizing survival, faith, and cultural preservation for generations of Armenians.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: "Life of the Church",
+      eyebrowHy: null,
+      heading: "Running Programs",
+      headingHy: null,
+      items: [
+        "Weekly Sunday Worship",
+        "Sunday School (4–12 yrs)",
+        "Teenagers Group (13–17 yrs)",
+        "Youth Group (18+)",
+        "Ladies Group",
+        "Retreats & Camps",
+        "Social Ministry",
+        "DVBS — Daily Vacation Bible School",
+        "Medical Ministry",
+      ],
+      itemsHy: null,
+    },
+
+    // Figures verbatim from the reference — not rounded or estimated.
+    specialProject: {
+      eyebrow: "Special Initiative",
+      eyebrowHy: null,
+      heading: "The “Hamegh” Project",
+      headingHy: null,
+      since: "Since 2022 · cultivating organic agricultural delicacies",
+      sinceHy: null,
+      objectives: [
+        {
+          title: "Decent Work & Employment",
+          titleHy: null,
+          description:
+            "25 socially-secured, fair-wage jobs (60% women, 40% men), focusing on vulnerable groups, mothers, refugees, and individuals without formal diplomas.",
+          descriptionHy: null,
+        },
+        {
+          title: "Social Protection & Childcare",
+          titleHy: null,
+          description:
+            "An on-site professional childcare facility integrated into the processing unit, removing employment barriers for working mothers.",
+          descriptionHy: null,
+        },
+        {
+          title: "Education Support",
+          titleHy: null,
+          description:
+            "Net profits fund financial aid for vulnerable students — targeting 45 students by 2029 — at the Armenian Evangelical Secondary School in Anjar.",
+          descriptionHy: null,
+        },
+        {
+          title: "Local Economic Sustainability",
+          titleHy: null,
+          description:
+            "A self-sustaining agricultural processing value chain in Anjar, scaling high-value organic goods while making use of local products.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // Yeghia's ruling on the succession name model (site-wide, see
+    // SuccessionEntry type comment): the reference's succession list is
+    // written ONLY in Armenian script, with no English form anywhere in
+    // the document except the current pastor (independently confirmed
+    // elsewhere in this same file) and Raffi Messerlian, whose English form
+    // was supplied directly by Yeghia (OPEN_QUESTIONS #35, matching the
+    // committed Nor Marash spelling) — not a transliteration invented here.
+    // The other 7 entries render their verified Armenian verbatim via
+    // nameHy, with name: null (not a gap — a deliberate mixed-script
+    // decision; see OPEN_QUESTIONS). All 9 entries appear exactly once in
+    // the reference — no duplicate rows despite the 1-year overlap between
+    // Balabanian's and Messerlian's tenures (flagged separately).
+    succession: {
+      eyebrow: "Those Who Served",
+      eyebrowHy: null,
+      heading: "Pastors of the Church",
+      headingHy: null,
+      note: null,
+      noteHy: "Այնճարի հայ Աւետարանական եկեղեցւոյ ծառայած են՝",
+      entries: [
+        { name: null, nameHy: "Վերապատուելի Արամ Հատիտեան", years: "1939 – 1947", note: null, noteHy: null, isCurrent: false },
+        { name: null, nameHy: "Քարոզիչ Մովսէս Մանուշակեան", years: "1947 – 1950", note: null, noteHy: null, isCurrent: false },
+        { name: null, nameHy: "Վեր. Պեռնար Կէօքօզեան", years: "1950 – 1953", note: null, noteHy: null, isCurrent: false },
+        { name: null, nameHy: "Վեր. Մարտիրոս Մարկանեան", years: "1953 – 1959", note: null, noteHy: null, isCurrent: false },
+        { name: null, nameHy: "Պատ. Յովհաննէս Մելքոնեան", years: "1959 – 1966", note: null, noteHy: null, isCurrent: false },
+        { name: null, nameHy: "Վեր. Յովհաննէս Սարմազեան", years: "1968 – 1990", note: null, noteHy: null, isCurrent: false },
+        { name: null, nameHy: "Վեր. Ներսէս Պալապանեան", years: "1990 – 1999", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Raffi Messerlian", nameHy: "Վեր. Րաֆֆի Մըսրլեան", years: "1998 – 2013", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hagop Akbasharian", nameHy: "Վեր. Յակոբ Աքպաշարեան", years: "2013 – present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
+
+    anniversary: null,
+    gallery: null,
+
+    cta: {
+      heading: "Join Us in Worship",
+      headingHy: null,
+      body: "All are welcome at the Armenian Evangelical Church of Anjar. Come worship with us in the heart of the Bekaa Valley.",
+      bodyHy: null,
+    },
+
+    // Address is a superset, not a conflict — reference's "Anjar, Bekaa
+    // Valley, Lebanon" is a trivial paraphrase of churches.ts's "Anjar,
+    // Bekaa, Lebanon", which additionally carries a real P.O. box the
+    // reference omits. Kept from churches.ts as-is, no override — same
+    // precedent as Ashrafieh. Phone/email/secretary all agree exactly.
     contactOverride: null,
   },
 };

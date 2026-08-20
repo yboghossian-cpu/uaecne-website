@@ -1,28 +1,15 @@
+import type { ChurchContent } from "@/data/churchContent";
 import styles from "./SuccessionList.module.css";
 
-type SuccessionEntry = {
-  name: string;
-  nameHy: string | null;
-  years: string;
-  note: string | null;
-  noteHy: string | null;
-  isCurrent: boolean;
-};
-
 type SuccessionListProps = {
-  succession: {
-    eyebrow: string;
-    eyebrowHy: string | null;
-    heading: string;
-    headingHy: string | null;
-    note: string | null;
-    noteHy: string | null;
-    entries: SuccessionEntry[];
-  } | null;
+  succession: ChurchContent["succession"];
 };
 
 // Renders `succession.entries`, highlighting the `isCurrent` entry; renders
-// nothing when null (e.g. Syriac).
+// nothing when null (e.g. Syriac). When an entry's `name` (English) is
+// null, falls back to `nameHy` (verified Armenian, rendered in the Armenian
+// typeface) — a real, source-accurate name shown in its original script,
+// not a placeholder.
 export default function SuccessionList({ succession }: SuccessionListProps) {
   if (!succession) return null;
 
@@ -31,7 +18,15 @@ export default function SuccessionList({ succession }: SuccessionListProps) {
       <div className={styles.wrap}>
         <div className={styles.eyebrow}>{succession.eyebrow}</div>
         <h2 className={styles.heading}>{succession.heading}</h2>
-        {succession.note && <p className={styles.note}>{succession.note}</p>}
+        {(succession.note || succession.noteHy) && (
+          <p
+            className={
+              succession.note ? styles.note : `${styles.note} ${styles.noteHy}`
+            }
+          >
+            {succession.note ?? succession.noteHy}
+          </p>
+        )}
         {succession.entries.map((entry, i) => (
           <div
             className={
@@ -39,8 +34,10 @@ export default function SuccessionList({ succession }: SuccessionListProps) {
             }
             key={i}
           >
-            <span className={styles.name}>
-              {entry.name}
+            <span
+              className={entry.name ? styles.name : `${styles.name} ${styles.nameHy}`}
+            >
+              {entry.name ?? entry.nameHy}
               {entry.note && <em className={styles.entryNote}> {entry.note}</em>}
             </span>
             <span className={styles.years}>{entry.years}</span>

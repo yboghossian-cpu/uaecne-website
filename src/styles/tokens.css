@@ -26,4 +26,8 @@
   --font-heading: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
   --font-body: var(--font-ibm-plex-sans), "IBM Plex Sans", system-ui,
     -apple-system, "Segoe UI", sans-serif;
+  /* For verified Armenian-script content (e.g. Anjar's succession list) —
+     matches the reference files' own Noto Serif Armenian loading. */
+  --font-armenian: var(--font-noto-serif-armenian), "Noto Serif Armenian",
+    serif;
 }

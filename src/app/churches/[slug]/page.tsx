@@ -10,6 +10,7 @@ import ChurchAbout from "@/components/church/ChurchAbout";
 import LeadershipGrid from "@/components/church/LeadershipGrid";
 import ChurchHistory from "@/components/church/ChurchHistory";
 import ChurchPrograms from "@/components/church/ChurchPrograms";
+import SpecialProjectBand from "@/components/church/SpecialProjectBand";
 import SuccessionList from "@/components/church/SuccessionList";
 import ChurchGallery from "@/components/church/ChurchGallery";
 import ChurchContactSection from "@/components/church/ChurchContactSection";
@@ -106,6 +107,7 @@ export default async function ChurchDetailPage({
       <LeadershipGrid leaders={content.leadership} />
       <ChurchHistory history={content.history} />
       <ChurchPrograms programs={content.programs} />
+      <SpecialProjectBand specialProject={content.specialProject} />
       <SuccessionList succession={content.succession} />
       <ChurchGallery gallery={content.gallery} />
       <ChurchContactSection church={church} contactOverride={content.contactOverride} />
