@@ -140,6 +140,14 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 61. **RESOLVED — "Boarding Home" confirmed by Yeghia (2026-08-21), matches the real logo.** The card was renamed based on the school's own real logo file, which prints "ARMENIAN EVANGELICAL BOARDING HOME – ANJAR, LEBANON" — this now stands as the confirmed institution name over the older mockup/docx wording ("Boarding Shelter").
 
+62. **Higher Education index live (2026-08-21).** New `/higher-education` section under Ministries — index + 3 detail pages (Education Council, Haigazian University, Near East School of Theology), route + nav wired. See items 63–65 for the specific gaps carried over from this unit.
+
+63. **Education Council has no logo/seal file anywhere in its source folder.** The hero and index card both use a generic graduation-cap seal/icon treatment instead — never invented. If a real Council seal exists and is supplied later, swap it into `educationCouncilContent` (currently `logo`-less by design, not a nullable field left unset).
+
+64. **Haigazian enrollment figure omitted — conflicting sources, not resolved.** No single verified enrollment number is used anywhere on the Haigazian page; the approved mockup itself carries none, and no other verified figure was supplied this unit. Omitted rather than guessed. Confirm a real figure with Yeghia before adding one.
+
+65. **NEST leadership photo tone — Dr. Rima Nasrallah van Saane's photo reads noticeably darker/more dramatic than Dr. Martin Accad's in the small circular "Office of the President" card.** Not a cropping bug — the source photo (`Rima Nasrallah.jpg`) is a conference-stage shot against a black backdrop, while Accad's is a bright candid photo; both are real, respectful, unedited photos of each person, just different in original lighting/setting. Flagging for Yeghia's review in case a different (brighter) photo of her is preferred for this slot.
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

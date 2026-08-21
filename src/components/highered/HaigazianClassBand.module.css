@@ -1,0 +1,45 @@
+.band {
+  background: var(--color-ivory);
+}
+
+.cap {
+  text-align: center;
+  padding: 2.25rem 1.25rem 0;
+}
+
+.kicker {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.75rem;
+  margin-top: 0.5rem;
+}
+
+.photoWrap {
+  position: relative;
+  margin-top: 1.125rem;
+  aspect-ratio: 1200 / 420;
+  overflow: hidden;
+}
+
+.photo {
+  object-fit: cover;
+}
+
+@media (min-width: 720px) {
+  .cap {
+    padding: 3rem 2.125rem 0;
+  }
+
+  .heading {
+    font-size: 2.25rem;
+  }
+}

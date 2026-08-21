@@ -1,0 +1,22 @@
+.crumb {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.sep {
+  margin: 0 0.5em;
+  color: rgba(197, 160, 89, 0.55);
+}
+
+@media (min-width: 720px) {
+  .crumb {
+    padding: 1.5rem 2.125rem 0;
+  }
+}

@@ -24,6 +24,7 @@ const navItems: NavItem[] = [
     children: [
       { label: "Churches", href: "/churches" },
       { label: "Schools", href: "/schools" },
+      { label: "Higher Education", href: "/higher-education" },
     ],
   },
   { label: "Partnerships", href: "/partnerships" },

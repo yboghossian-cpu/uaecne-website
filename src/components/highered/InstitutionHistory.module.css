@@ -1,0 +1,92 @@
+.history {
+  background: var(--color-ivory-wash);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+  padding: 2.5rem 1.25rem;
+}
+
+.centerHead {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.75rem;
+  margin: 0;
+}
+
+.list {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.year {
+  flex: none;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-red);
+  font-size: 1.125rem;
+}
+
+.desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .history {
+    padding: 3.25rem 2.125rem;
+  }
+
+  .heading {
+    font-size: 2.25rem;
+  }
+
+  .row {
+    flex-direction: row;
+    gap: 1.25rem;
+  }
+
+  .year {
+    width: 110px;
+  }
+}

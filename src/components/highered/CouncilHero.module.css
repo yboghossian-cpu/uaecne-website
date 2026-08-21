@@ -1,0 +1,104 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
+  color: var(--color-ivory);
+  text-align: center;
+  padding: 3rem 1.25rem 3.25rem;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.crumb {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-decorative);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.seal {
+  position: relative;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  margin: 0 auto 1.125rem;
+  background: radial-gradient(circle at 50% 40%, #fff, #f3e9d2);
+  border: 2px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-red);
+}
+
+.sealIcon {
+  width: 34px;
+  height: 34px;
+}
+
+.heading {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  line-height: 1.08;
+  font-weight: 700;
+  color: var(--color-ivory);
+  margin: 0;
+}
+
+.sub {
+  position: relative;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--color-gold-decorative);
+  margin-top: 0.625rem;
+}
+
+.flourish {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.ln {
+  height: 1px;
+  width: 40px;
+  background: var(--color-gold);
+  opacity: 0.6;
+}
+
+.dia {
+  width: 6px;
+  height: 6px;
+  background: var(--color-gold);
+  transform: rotate(45deg);
+}
+
+@media (min-width: 720px) {
+  .hero {
+    padding: 3.75rem 2.125rem 4.125rem;
+  }
+
+  .heading {
+    font-size: 2.75rem;
+  }
+
+  .sub {
+    font-size: 1.1875rem;
+  }
+}
