@@ -38,6 +38,48 @@
   margin: 0 auto;
 }
 
+/* sideArt variant only (AESSA) — AEC never renders any of these classes,
+   since the wrapping .wrap/.art elements are conditionally omitted from
+   the DOM entirely when sideArt is unset, not just hidden via CSS. */
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.625rem;
+}
+
+.art {
+  flex: none;
+  /* Hidden below 720px per uaecne-school-anjar-FULL.html's own
+     `@media(max-width:719px){.academic .art{display:none;}}` rule — a
+     decorative sidebar isn't worth the vertical space on narrow screens. */
+  display: none;
+}
+
+.crestSide {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  background: linear-gradient(160deg, #fffdf6, #f2eadd);
+  overflow: hidden;
+}
+
+.crestSideSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+}
+
+.wrap .list {
+  flex: 1;
+  max-width: none;
+  margin: 0;
+}
+
 .row {
   display: flex;
   flex-direction: column;
@@ -94,5 +136,16 @@
 
   .rowBody {
     padding-top: 0.3125rem;
+  }
+
+  .wrap {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 2.75rem;
+  }
+
+  .art {
+    display: block;
+    width: 30%;
   }
 }

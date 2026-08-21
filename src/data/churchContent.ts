@@ -1315,15 +1315,19 @@ export const churchContent: Record<string, ChurchContent> = {
     // Yeghia's ruling on the succession name model (site-wide, see
     // SuccessionEntry type comment): the reference's succession list is
     // written ONLY in Armenian script, with no English form anywhere in
-    // the document except the current pastor (independently confirmed
-    // elsewhere in this same file) and Raffi Messerlian, whose English form
-    // was supplied directly by Yeghia (OPEN_QUESTIONS #35, matching the
-    // committed Nor Marash spelling) — not a transliteration invented here.
-    // The other 7 entries render their verified Armenian verbatim via
-    // nameHy, with name: null (not a gap — a deliberate mixed-script
-    // decision; see OPEN_QUESTIONS). All 9 entries appear exactly once in
-    // the reference — no duplicate rows despite the 1-year overlap between
-    // Balabanian's and Messerlian's tenures (flagged separately).
+    // the document itself. English spellings were supplied directly by
+    // Yeghia entry-by-entry as each was independently confirmed — not
+    // transliterated or guessed here: the current pastor and Raffi
+    // Messerlian (OPEN_QUESTIONS #35) first; Sarmazian and Balabanian
+    // confirmed later (2026-08-21) and reconciled with the same spellings
+    // used on the AESSA school page's Directors Archive, where both people
+    // also appear (see schoolContent.ts). The remaining 5 entries still
+    // render their verified Armenian verbatim via nameHy, with name: null
+    // (not a gap — a deliberate mixed-script decision; see OPEN_QUESTIONS)
+    // until an English form is confirmed for them too. All 9 entries appear
+    // exactly once in the reference — no duplicate rows despite the 1-year
+    // overlap between Balabanian's and Messerlian's tenures (flagged
+    // separately).
     succession: {
       eyebrow: "Those Who Served",
       eyebrowHy: null,
@@ -1337,8 +1341,8 @@ export const churchContent: Record<string, ChurchContent> = {
         { name: null, nameHy: "Վեր. Պեռնար Կէօքօզեան", years: "1950 – 1953", note: null, noteHy: null, isCurrent: false },
         { name: null, nameHy: "Վեր. Մարտիրոս Մարկանեան", years: "1953 – 1959", note: null, noteHy: null, isCurrent: false },
         { name: null, nameHy: "Պատ. Յովհաննէս Մելքոնեան", years: "1959 – 1966", note: null, noteHy: null, isCurrent: false },
-        { name: null, nameHy: "Վեր. Յովհաննէս Սարմազեան", years: "1968 – 1990", note: null, noteHy: null, isCurrent: false },
-        { name: null, nameHy: "Վեր. Ներսէս Պալապանեան", years: "1990 – 1999", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hovhannes Sarmazian", nameHy: "Վեր. Յովհաննէս Սարմազեան", years: "1968 – 1990", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Nerses Balabanian", nameHy: "Վեր. Ներսէս Պալապանեան", years: "1990 – 1999", note: null, noteHy: null, isCurrent: false },
         { name: "Rev. Raffi Messerlian", nameHy: "Վեր. Րաֆֆի Մըսրլեան", years: "1998 – 2013", note: null, noteHy: null, isCurrent: false },
         { name: "Rev. Hagop Akbasharian", nameHy: "Վեր. Յակոբ Աքպաշարեան", years: "2013 – present", note: null, noteHy: null, isCurrent: true },
       ],

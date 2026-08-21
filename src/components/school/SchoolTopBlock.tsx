@@ -16,7 +16,7 @@ type SchoolTopBlockProps = {
   school: School;
   masthead: Masthead;
   logo: Photo | null;
-  heroPhoto: Photo;
+  heroPhoto: Photo | null;
   factsBar: Fact[];
 };
 
@@ -24,6 +24,12 @@ type SchoolTopBlockProps = {
 // year, verbatim from SchoolContent.masthead — schools.ts carries no
 // address/estYear fields to fall back to), the wide hero photo, and the
 // red facts strip. Structurally identical to ChurchTopBlock.
+//
+// heroPhoto is nullable (template amendment A, for AESSA and future
+// photo-less schools): with no verified building photo, the hero keeps its
+// normal rounded-rect shape but renders the same "photo pending" language
+// as the schools index card's placeholder (diagonal-stripe wash + icon +
+// caption) instead of a decorative crest graphic — never a bare gray box.
 export default function SchoolTopBlock({
   school,
   masthead,
@@ -53,8 +59,17 @@ export default function SchoolTopBlock({
         </div>
       </div>
 
-      <div className={styles.hero}>
-        <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} />
+      <div className={heroPhoto ? styles.hero : `${styles.hero} ${styles.heroPending}`}>
+        {heroPhoto ? (
+          <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} />
+        ) : (
+          <span className={styles.heroGlyph}>
+            <svg className={styles.heroGlyphIcon} aria-hidden="true">
+              <use href="#ic-edu" />
+            </svg>
+            <span className={styles.heroGlyphCaption}>Photo pending</span>
+          </span>
+        )}
       </div>
 
       <SchoolFactsBar facts={factsBar} />

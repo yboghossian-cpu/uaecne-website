@@ -1,0 +1,107 @@
+.support {
+  background: var(--color-ivory-wash);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+  padding: 2.5rem 1.25rem;
+}
+
+.centerHead {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-red);
+  font-size: 1.75rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ln {
+  width: 44px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.med {
+  width: 20px;
+  height: 20px;
+  color: var(--color-gold);
+}
+
+.grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.625rem;
+}
+
+.item {
+  text-align: center;
+  padding: 0 0.5rem;
+}
+
+.badge {
+  position: relative;
+  width: 92px;
+  height: 92px;
+  border-radius: 50%;
+  margin: 0 auto 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #fbf3e2, #efe2c8);
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: var(--color-red);
+  overflow: hidden;
+}
+
+.badgeIcon {
+  width: 42px;
+  height: 42px;
+}
+
+.badgeLogo {
+  object-fit: cover;
+}
+
+.itemTitle {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-gold-decorative);
+  font-size: 1.25rem;
+  margin: 0 0 0.5rem;
+}
+
+.itemBody {
+  margin: 0;
+  color: var(--color-brown);
+  font-size: 0.8125rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 720px) {
+  .support {
+    padding: 3.25rem 2.125rem;
+  }
+
+  .heading {
+    font-size: 2.25rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}

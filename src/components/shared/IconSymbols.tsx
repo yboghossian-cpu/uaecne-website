@@ -221,6 +221,34 @@ export default function IconSymbols() {
           />
         </symbol>
 
+        {/* AESSA Inclusive Support Services / Signature Programs generic
+            badge icons — geometry copied verbatim from
+            design-reference/uaecne-school-anjar-template.html's own
+            <symbol> defs. Used only where no real program logo file
+            exists (Boarding Shelter, PEP); Healing Harbour and WeNEEDle use
+            their real logo images instead. */}
+        <symbol id="ic-home" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M4 11l8-6 8 6" />
+            <path d="M6 11v9h12v-9" />
+            <path d="M10 20v-5h4v5" />
+          </g>
+        </symbol>
+
+        <symbol id="ic-book" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round">
+            <path d="M4 6c3-1 5.5-1 8 0 2.5-1 5-1 8 0v11c-3-1-5.5-1-8 0-2.5-1-5-1-8 0z" />
+            <path d="M12 6v11" />
+          </g>
+        </symbol>
+
+        <symbol id="ic-leaf" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 19c0-8 6-13 14-13 0 8-5 14-13 14-1 0-1-1-1-1z" />
+            <path d="M6 18C10 14 13 12 17 11" />
+          </g>
+        </symbol>
+
         <symbol id="ic-mission-cross" viewBox="0 0 24 24">
           <path
             fill="none"

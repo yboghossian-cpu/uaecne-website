@@ -1,0 +1,143 @@
+.faith {
+  background: var(--color-ivory-wash);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+  padding: 2.5rem 1.25rem;
+}
+
+.centerHead {
+  text-align: center;
+  margin: 0 auto 1.5rem;
+}
+
+.heading {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-red);
+  font-size: 1.75rem;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ln {
+  width: 44px;
+  height: 1px;
+  background: var(--color-gold);
+}
+
+.med {
+  width: 20px;
+  height: 20px;
+  color: var(--color-gold);
+}
+
+.closingNote {
+  max-width: 640px;
+  margin: 1.375rem auto 0;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: var(--color-brown);
+}
+
+.grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.125rem;
+}
+
+.card {
+  background: var(--color-ivory);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  padding: 1.125rem 1.125rem 0.5rem;
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--color-red);
+  font-size: 1.125rem;
+  margin: 0 0 0.5rem;
+}
+
+.cardBody {
+  margin: 0;
+  color: var(--color-brown);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.pic {
+  margin: 0.75rem 0.875rem 0.875rem;
+  margin-top: auto;
+  aspect-ratio: 16 / 10;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(135deg, rgba(197, 160, 89, 0.1) 0 2px, transparent 2px 14px),
+    linear-gradient(160deg, #8a3a40, var(--color-red-deep));
+}
+
+.picPhoto {
+  object-fit: cover;
+}
+
+.phTag {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 0.53125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 253, 247, 0.9);
+  background: rgba(74, 0, 0, 0.55);
+  padding: 4px 7px;
+  border-radius: 2px;
+}
+
+.phTag::before {
+  content: "";
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-gold-decorative);
+}
+
+@media (min-width: 720px) {
+  .faith {
+    padding: 3.25rem 2.125rem;
+  }
+
+  .heading {
+    font-size: 2.25rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+}

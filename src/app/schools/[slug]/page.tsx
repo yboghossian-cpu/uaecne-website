@@ -10,8 +10,13 @@ import SchoolAbout from "@/components/school/SchoolAbout";
 import SchoolContactSection from "@/components/school/SchoolContactSection";
 import SchoolLeadershipGrid from "@/components/school/SchoolLeadershipGrid";
 import SchoolMission from "@/components/school/SchoolMission";
+import SchoolMissionValues from "@/components/school/SchoolMissionValues";
 import SchoolAcademics from "@/components/school/SchoolAcademics";
+import SchoolSupportServices from "@/components/school/SchoolSupportServices";
+import SchoolSignaturePrograms from "@/components/school/SchoolSignaturePrograms";
+import SchoolFaithCommunity from "@/components/school/SchoolFaithCommunity";
 import SchoolInquiry from "@/components/school/SchoolInquiry";
+import SuccessionList from "@/components/church/SuccessionList";
 import styles from "./page.module.css";
 
 type PageParams = { slug: string };
@@ -45,9 +50,9 @@ export default async function SchoolDetailPage({
   const content = schoolContent[slug] ?? null;
 
   if (!content) {
-    // 2 of 4 schools don't have a SchoolContent entry yet (Central High,
-    // AESSA/Anjar). schools.ts carries no contact/address fields at all —
-    // render the school name only, never invented prose, never a 404.
+    // 1 of 4 schools doesn't have a SchoolContent entry yet (Central High).
+    // schools.ts carries no contact/address fields at all — render the
+    // school name only, never invented prose, never a 404.
     return (
       <>
         <ChurchBreadcrumb country={school.country} section="Schools" />
@@ -79,9 +84,17 @@ export default async function SchoolDetailPage({
       />
       <SchoolAbout about={content.about} principalCard={content.principalCard} />
       <SchoolContactSection location={content.location} contactRows={content.contactRows} />
+      <SchoolMissionValues missionValues={content.missionValues} />
       <SchoolLeadershipGrid leaders={content.leadership} />
       <SchoolMission mission={content.mission} />
-      <SchoolAcademics academicHeritage={content.academicHeritage} />
+      <SchoolAcademics
+        academicHeritage={content.academicHeritage}
+        sideArt={slug === "armenian-evangelical-secondary-school-anjar"}
+      />
+      <SchoolSupportServices supportServices={content.supportServices} />
+      <SchoolSignaturePrograms signaturePrograms={content.signaturePrograms} />
+      <SchoolFaithCommunity faithCommunity={content.faithCommunity} />
+      <SuccessionList succession={content.directorsArchive} variant="panel" />
       <SchoolInquiry
         inquiry={content.inquiry}
         heroPhoto={content.heroPhoto}

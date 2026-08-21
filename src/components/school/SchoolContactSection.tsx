@@ -6,6 +6,14 @@ type SchoolContactSectionProps = {
   contactRows: SchoolContactRow[] | null;
 };
 
+// Icon keyed by row label, not just presence of an href — a pending Phone
+// row still shows the phone icon, not a fallback person icon.
+const ROW_ICON: Record<string, string> = {
+  Phone: "#ic-phone",
+  Email: "#ic-mail",
+  Secretary: "#ic-user",
+};
+
 // "Our Location" / "Get in Touch" — same card shape as
 // ChurchContactSection, but schools.ts carries no directory contact fields
 // at all, so both cards are wholly sourced from SchoolContent and each
@@ -20,7 +28,7 @@ export default function SchoolContactSection({
   const showBoth = location && contactRows;
 
   return (
-    <section className={styles.contact}>
+    <section className={`${styles.contact} wash-band`}>
       <div className={showBoth ? styles.grid : `${styles.grid} ${styles.gridSingle}`}>
         {location && (
           <div className={styles.card}>
@@ -65,7 +73,7 @@ export default function SchoolContactSection({
             {contactRows.map((row, i) => (
               <div className={styles.row} key={i}>
                 <svg className={styles.rowIco}>
-                  <use href={row.href ? "#ic-mail" : "#ic-user"} />
+                  <use href={ROW_ICON[row.key] ?? (row.href ? "#ic-mail" : "#ic-user")} />
                 </svg>
                 <span>
                   <span className={styles.key}>{row.key}</span>
@@ -73,6 +81,8 @@ export default function SchoolContactSection({
                     <a href={row.href} className={styles.link}>
                       {row.value}
                     </a>
+                  ) : row.pending ? (
+                    <em className={styles.pending}>{row.value}</em>
                   ) : (
                     row.value
                   )}

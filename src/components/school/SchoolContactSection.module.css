@@ -101,6 +101,11 @@
   text-decoration: none;
 }
 
+.pending {
+  color: var(--color-brown);
+  font-style: italic;
+}
+
 .spacer {
   flex: 1;
 }

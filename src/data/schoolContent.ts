@@ -17,10 +17,13 @@
  * (Lebanese) Armenian copy directly — never machine-translated or guessed
  * (PROJECT_BRIEF.md rule 2). None are populated in this unit.
  *
- * Only two entries exist so far: Armenian Evangelical College (AEC) and
- * Shamlian-Tatikian. The route falls back to a directory-only "content
- * pending" render for any other slug (Central High, AESSA/Anjar).
+ * Three entries exist so far: Armenian Evangelical College (AEC),
+ * Shamlian-Tatikian, and AESSA (Anjar). The route falls back to a
+ * directory-only "content pending" render for any other slug (Central
+ * High, the only one left unbuilt).
  */
+
+import type { ChurchContent } from "./churchContent";
 
 type Photo = { src: string; alt: string };
 
@@ -47,6 +50,11 @@ export type SchoolContactRow = {
   value: string;
   valueHy: string | null;
   href: string | null; // "mailto:..." link, or null for a plain-text row
+  // True renders `value` in the reference's italic "pending" style (e.g.
+  // phone/email genuinely not yet known) instead of the normal value
+  // style — an honest "we don't have this yet," never an invented number
+  // or address. Default false/undefined for a normal, real value.
+  pending?: boolean;
 };
 
 export type SchoolContent = {
@@ -60,7 +68,11 @@ export type SchoolContent = {
   };
 
   logo: Photo | null;
-  heroPhoto: Photo;
+  // Nullable — a school with no verified building photo (AESSA) falls back
+  // to an arched "photo pending" treatment in SchoolTopBlock, the same
+  // visual language as the index card's placeholder and the leadership
+  // grid's photo-pending frame, rather than a decorative crest graphic.
+  heroPhoto: Photo | null;
   factsBar: { label: string; labelHy: string | null; sub: string; subHy: string | null }[]; // 4 cells, per uaecne-school-aec-reference.html's .facts
 
   about: {
@@ -115,6 +127,93 @@ export type SchoolContent = {
       descriptionHy: string | null;
     }[];
   } | null;
+
+  // "Our Mission & Philosophy" — AESSA-shaped variant: a centered intro
+  // quote + 4 icon-less value cards, per uaecne-school-anjar-template.html's
+  // .mission/.val-grid. Deliberately NOT the same field as `mission` above
+  // (AEC's 3 icon-arch principle cards) — the two designs differ in ways
+  // (quote present, no icons, variable card count) that don't fit one
+  // shape without hacking around the icon-arch component. Null for AEC and
+  // Shamlian-Tatikian, which use `mission` (or nothing) instead.
+  missionValues: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    quote: string;
+    quoteHy: string | null;
+    values: {
+      title: string;
+      titleHy: string | null;
+      description: string;
+      descriptionHy: string | null;
+    }[];
+  } | null;
+
+  // "Inclusive Support Services" — 3 icon-badge cards, no church/AEC
+  // equivalent. `logo` non-null uses the school's own real program logo
+  // image (Healing Harbour, Boarding Home); when null, `icon` names a
+  // generic IconSymbols id instead (PEP — no real logo file exists for it).
+  // Never invented: no logo file -> generic icon, never a fabricated mark.
+  supportServices: {
+    heading: string;
+    headingHy: string | null;
+    items: {
+      title: string;
+      titleHy: string | null;
+      description: string;
+      descriptionHy: string | null;
+      logo: Photo | null;
+      icon: string | null;
+    }[];
+  } | null;
+
+  // "Signature Programs" — name + optional gold suffix note + description
+  // rows, no pill (unlike academicHeritage's date-range pills). Same
+  // logo-or-generic-icon rule as supportServices.
+  signaturePrograms: {
+    heading: string;
+    headingHy: string | null;
+    items: {
+      name: string;
+      nameHy: string | null;
+      note: string | null;
+      noteHy: string | null;
+      description: string;
+      descriptionHy: string | null;
+      logo: Photo | null;
+      icon: string | null;
+    }[];
+  } | null;
+
+  // "Faith & Community" — 4 cards, each with an independently nullable
+  // photo (none exist yet for any of the 4 scenes) falling back to the
+  // same "photo pending" language used by the hero/index-card placeholder.
+  // `closingNote` is the reference's italic "Partnership & Gratitude" line
+  // beneath the card grid — nullable since not every school will have one.
+  faithCommunity: {
+    heading: string;
+    headingHy: string | null;
+    items: {
+      title: string;
+      titleHy: string | null;
+      description: string;
+      descriptionHy: string | null;
+      photo: Photo | null;
+    }[];
+    closingNote: string | null;
+    closingNoteHy: string | null;
+  } | null;
+
+  // Reuses ChurchContent's `succession` shape verbatim (not retyped) — it
+  // already handles mixed English/verified-Armenian names (SuccessionList
+  // falls back to `nameHy` when `name` is null), the exact requirement for
+  // AESSA's Directors Archive, whose source doc gives most names only in
+  // Armenian script. Rendered via the church SuccessionList component
+  // directly, cross-imported rather than duplicated. Null for schools with
+  // no directors-list content (AEC, Shamlian-Tatikian — both use the fixed
+  // `leadership` 3-card grid only).
+  directorsArchive: ChurchContent["succession"];
 
   academicHeritage: {
     eyebrow: string;
@@ -260,6 +359,12 @@ export const schoolContent: Record<string, SchoolContent> = {
         },
       },
     ],
+
+    directorsArchive: null,
+    missionValues: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
 
     mission: {
       eyebrow: "Our Mission",
@@ -415,8 +520,13 @@ export const schoolContent: Record<string, SchoolContent> = {
       { name: null, nameHy: null, role: "Secretary", roleHy: null, photo: null },
     ],
 
+    directorsArchive: null,
     mission: null,
     academicHeritage: null,
+    missionValues: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
 
     // No verified email exists for this school — Inquiry section omitted
     // entirely rather than guessing an address.
@@ -431,6 +541,456 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "A Legacy of Faith & Learning",
       headingHy: null,
       body: "The Armenian Evangelical Shamlian-Tatikian Secondary School continues nine decades of Christian education and Armenian identity for the students of Bourj Hammoud.",
+      bodyHy: null,
+    },
+  },
+
+  "armenian-evangelical-secondary-school-anjar": {
+    slug: "armenian-evangelical-secondary-school-anjar",
+
+    // Founding-year conflict, not resolved here (see OPEN_QUESTIONS): AESSA's
+    // own source doc and its own approved design mockup both say 1942
+    // ("Established: 1942"). The already-committed Anjar CHURCH page states
+    // the church was "founded in 1941, one year after the Armenian
+    // Evangelical School of Anjar" — implying ~1940. Using AESSA's own
+    // stated year here since it's this school's own primary source; the
+    // church page is untouched.
+    masthead: {
+      locationLine: "Anjar, Bekaa Valley, Lebanon",
+      locationLineHy: null,
+      established: "1942",
+      establishedHy: null,
+    },
+
+    // Already tracked in public/ (schools index build), MD5-confirmed
+    // byte-identical to "Arm Evan Sec School Anjar Logo.jpg" — reused, not
+    // duplicated.
+    logo: {
+      src: "/school-anjar-emblem.jpg",
+      alt: "Armenian Evangelical Secondary School of Anjar seal",
+    },
+    // No building photo exists anywhere in the source folder (confirmed:
+    // logo + 3 program-logo images + 2 staff headshots only) — renders the
+    // arched photo-pending fallback in SchoolTopBlock (template amendment A).
+    heroPhoto: null,
+
+    factsBar: [
+      { label: "1942", labelHy: null, sub: "Founded", subHy: null },
+      { label: "KG – Secondary", labelHy: null, sub: "Ages 3–18", subHy: null },
+      { label: "Anjar, Bekaa", labelHy: null, sub: "Location", subHy: null },
+      { label: "Armenian Evangelical", labelHy: null, sub: "Tradition", subHy: null },
+    ],
+
+    // Verbatim from design-reference/uaecne-school-anjar-FULL.html's About
+    // section (the full-page reference, supersedes the earlier partial
+    // build) — two paragraphs: opening quote + tagline sentence, then the
+    // four-fold mission statement.
+    about: {
+      eyebrow: "The Institution",
+      eyebrowHy: null,
+      heading: "About the School",
+      headingHy: null,
+      paragraphs: [
+        "“Accepted and Appreciated, Valued and Respected” — the Armenian Evangelical Secondary School of Anjar (AESSA) provides a nurturing environment where children are supported in their growth and loved. The school where education meets innovation and inclusion, AESSA serves the children of Anjar and the Bekaa Valley.",
+        "Its mission is four-fold: to provide a safe environment for children in need of social, psychological, and medical support; to deliver educational care through an inclusive and high-quality academic program; to engage children in the Armenian and Lebanese community; and to instill Christian values and a personal relationship with God.",
+      ],
+      paragraphsHy: null,
+      pullQuote: "We plant seeds, but harvest responsibility, identity, and hope.",
+      pullQuoteHy: null,
+    },
+
+    // Role label is "School Director" (his real title everywhere in the
+    // source), not the generic "Principal" — the field was already
+    // per-school free text, no type change needed (template amendment B
+    // turned out to require no code change; see report). Photo reused
+    // verbatim from the Anjar CHURCH's own tracked file (MD5-identical) —
+    // not re-imported.
+    principalCard: {
+      name: "Rev. Hagop Akbasharian",
+      nameHy: null,
+      role: "School Director",
+      roleHy: null,
+      photo: {
+        src: "/church-armenian-evangelical-church-anjar-leader-1.jpg",
+        alt: "Rev. Hagop Akbasharian",
+      },
+    },
+
+    // Verbatim from uaecne-school-anjar-FULL.html's Contact section. Real
+    // values: location, Secretary (Ms. Sevan Apelian, matching the church's
+    // own board secretary). Phone and email are honestly unverified — the
+    // reference itself shows them as "Pending," not a fabricated number or
+    // address — rendered in the italic pending style, never invented.
+    location: {
+      addressLines: ["Anjar, Bekaa Valley, Lebanon"],
+      addressLinesHy: null,
+    },
+    contactRows: [
+      { key: "Phone", keyHy: null, value: "Pending", valueHy: null, href: null, pending: true },
+      { key: "Email", keyHy: null, value: "Pending", valueHy: null, href: null, pending: true },
+      {
+        key: "Secretary",
+        keyHy: null,
+        value: "Ms. Sevan Apelian",
+        valueHy: null,
+        href: null,
+      },
+    ],
+
+    leadership: [
+      {
+        name: "Rev. Hagop Akbasharian",
+        nameHy: null,
+        role: "School Director",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-anjar-leader-1.jpg",
+          alt: "Rev. Hagop Akbasharian",
+        },
+      },
+      { name: null, nameHy: null, role: "Vice-Chair of the Council", roleHy: null, photo: null },
+      {
+        name: "Ms. Sevan Apelian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/church-armenian-evangelical-church-anjar-leader-4.jpg",
+          alt: "Ms. Sevan Apelian",
+        },
+      },
+    ],
+
+    // Directors Archive — reuses the church SuccessionList component
+    // directly (rendered from src/app/schools/[slug]/page.tsx), since it
+    // already handles exactly this mix of verified-English and
+    // verified-Armenian-only names. Source: "Armenian Evangelical Secondary
+    // School Anjar (1).docx" (Armenian text, verbatim) cross-checked against
+    // the school's own approved mockup. All 7 English spellings are now
+    // Yeghia-verified (2026-08-21) — names 2-5 were initially withheld
+    // pending confirmation (the mockup itself flagged them "to be
+    // confirmed"), now supplied directly and reconciled with the Anjar
+    // church's own succession list (see churchContent.ts's Sarmazian/
+    // Balabanian entries, updated alongside this one). nameHy kept for all
+    // 7 from the docx's own verbatim Armenian.
+    directorsArchive: {
+      eyebrow: "Archive",
+      eyebrowHy: null,
+      heading: "Directors of the Armenian Evangelical School of Anjar",
+      headingHy: null,
+      note: "Directors of the school since 1947.",
+      noteHy: null,
+      entries: [
+        {
+          name: "Sister Hedwig Äenishänslin",
+          nameHy: "Քոյր Հետուիկ Էնիսհէնսլին",
+          years: "1947 – 1971",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          name: "Rev. Hagop Janbazian",
+          nameHy: "Վեր. Յակոբ Ճանպազեան",
+          years: "1971 – 1975",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          name: "Rev. Manasé Shnorhokian",
+          nameHy: "Վեր. Մանասէ Շնորհոքեան",
+          years: "1975 – 1976",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          // Matches the Anjar church's own succession entry for this
+          // person, updated to the same confirmed English spelling — see
+          // churchContent.ts.
+          name: "Rev. Hovhannes Sarmazian",
+          nameHy: "Վեր. Յովհաննէս Սարմազեան",
+          years: "1976 – 1990",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          // Matches the Anjar church's own succession entry for this
+          // person, updated to the same confirmed English spelling — see
+          // churchContent.ts.
+          name: "Rev. Nerses Balabanian",
+          nameHy: "Վեր. Ներսէս Պալապանեան",
+          years: "1990 – 1998",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          name: "Rev. Raffi Messerlian",
+          nameHy: "Վեր. Րաֆֆի Մըսրլեան",
+          years: "1998 – 2014",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          name: "Rev. Hagop Akbasharian",
+          nameHy: "Վեր. Յակոբ Աքպաշարեան",
+          years: "2014 – present",
+          note: null,
+          noteHy: null,
+          isCurrent: true,
+        },
+      ],
+    },
+
+    // AEC-style icon-arch mission not used for this school — see
+    // `missionValues` below (AESSA's own shape: quote + icon-less cards).
+    mission: null,
+
+    // Verbatim from the docx's "Academic Excellence & Innovation" section.
+    // Reuses the same SchoolAcademics component as AEC — the pill just
+    // holds a theme label here instead of a date range, a content
+    // difference the component doesn't care about. The reference's
+    // decorative side-crest SVG is intentionally not reproduced (no
+    // informational value); the standard eyebrow+heading header is kept
+    // instead of the reference's bare `<h3>`, for site-wide consistency.
+    academicHeritage: {
+      eyebrow: "Academic Excellence",
+      eyebrowHy: null,
+      heading: "Academic Excellence & Innovation",
+      headingHy: null,
+      eras: [
+        {
+          period: "Four Cycles of Education",
+          description:
+            "We offer a complete educational journey from Kindergarten through Secondary levels for students aged three to eighteen.",
+          descriptionHy: null,
+        },
+        {
+          period: "Trilingual Environment",
+          description:
+            "Our curriculum is delivered in a trilingual format to prepare students for a global future.",
+          descriptionHy: null,
+        },
+        {
+          period: "VEX Robotics",
+          description:
+            "AESSA is a leader in innovation, with our elementary division recently ranking second in the national VEX Robotics competition.",
+          descriptionHy: null,
+        },
+        {
+          period: "School of Peace Education",
+          description:
+            "We integrate peace education into our classes, encouraging students to say “no to war, yes to life” through hands-on activities and symbolic displays.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // "Our Mission & Philosophy" — verbatim from the docx/reference. Intro
+    // quote + 4 icon-less value cards (new shape, see `missionValues` type
+    // comment — does not reuse the icon-arch `mission` field above).
+    missionValues: {
+      eyebrow: "Purpose",
+      eyebrowHy: null,
+      heading: "Our Mission & Philosophy",
+      headingHy: null,
+      quote:
+        "“Accepted and Appreciated, Valued and Respected” — AESSA provides a nurturing environment where children are supported in their growth and loved.",
+      quoteHy: null,
+      values: [
+        {
+          title: "Safe Environment",
+          titleHy: null,
+          description:
+            "Provide a safe environment for children in need of social, psychological, and medical support.",
+          descriptionHy: null,
+        },
+        {
+          title: "Educational Care",
+          titleHy: null,
+          description:
+            "Deliver educational care through an inclusive and high-quality academic program.",
+          descriptionHy: null,
+        },
+        {
+          title: "Engage Children",
+          titleHy: null,
+          description:
+            "Engage children in the Armenian and Lebanese community by empowering them and teaching cultural values and heritage.",
+          descriptionHy: null,
+        },
+        {
+          title: "Christian Values",
+          titleHy: null,
+          description:
+            "Instill Christian values and a personal relationship with God through sharing His love and grace.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // "Inclusive Support Services" — verbatim. Healing Harbour and Boarding
+    // Home both use their real logo files (MD5-confirmed, copied to
+    // public/); PEP has no real logo file anywhere in the source folder,
+    // so it uses a generic IconSymbols icon instead — never invented.
+    supportServices: {
+      heading: "Inclusive Support Services",
+      headingHy: null,
+      items: [
+        {
+          // Renamed from "Boarding Shelter" — the school's own real logo
+          // file ("Armenian Evangelical boarding Home Logo.jpeg") confirms
+          // "Boarding Home" is the institution's actual name. Kept as
+          // "Boarding Home" even though uaecne-school-anjar-FULL.html
+          // (2026-08-21) still labels this card "Boarding Shelter" — a
+          // printed logo is a stronger source than a mockup label written
+          // before the real logo file was located; flagged in
+          // OPEN_QUESTIONS in case this reading is wrong.
+          title: "Boarding Home",
+          titleHy: null,
+          description:
+            "A sanctuary (est. 1947) for orphans and children from unsafe environments or victims of violence, ensuring they receive proper care and education regardless of their financial status.",
+          descriptionHy: null,
+          logo: {
+            src: "/school-aessa-boarding-home-logo.jpeg",
+            alt: "Armenian Evangelical Boarding Home logo",
+          },
+          icon: null,
+        },
+        {
+          title: "Personalized Educational Program (PEP)",
+          titleHy: null,
+          description:
+            "A specialized curriculum tailored to the needs of students with special needs, supported by dedicated resource centers.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-book",
+        },
+        {
+          title: "Healing Harbour",
+          titleHy: null,
+          description:
+            "A dedicated mental health center focusing on the psychological well-being of our community.",
+          descriptionHy: null,
+          logo: {
+            src: "/school-aessa-healing-harbour-logo.jpeg",
+            alt: "Healing Harbour logo",
+          },
+          icon: null,
+        },
+      ],
+    },
+
+    // "Signature Programs" — verbatim. WeNEEDle uses its real logo file
+    // (MD5-confirmed); Seeds of Hope and Student Life & Clubs have no real
+    // logo file, so they use a generic mark instead.
+    signaturePrograms: {
+      heading: "Signature Programs",
+      headingHy: null,
+      items: [
+        {
+          name: "Seeds of Hope",
+          nameHy: null,
+          note: "(Agroecology)",
+          noteHy: null,
+          description:
+            "This unique program transforms theoretical education into practice. Students spend one period a week in the classroom and another with “hands-on” experience in our functional greenhouses. The program uses interactive e-curricula and e-books to teach sustainable farming, composting, and environmental responsibility in Western Armenian.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-leaf",
+        },
+        {
+          name: "WeNEEDle",
+          nameHy: null,
+          note: "& Creative Arts",
+          noteHy: null,
+          description:
+            "Our students engage in traditional needling, embroidery, mosaic-making, and cooking, preserving our cultural identity while developing practical skills.",
+          descriptionHy: null,
+          logo: {
+            src: "/school-aessa-weneedle-logo.jpg",
+            alt: "WeNEEDle logo",
+          },
+          icon: null,
+        },
+        {
+          name: "Student Life",
+          nameHy: null,
+          note: "& Clubs",
+          noteHy: null,
+          description:
+            "We foster talent through our student band, sound group, and various clubs, including sports, environment, and chess.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-leaf",
+        },
+      ],
+    },
+
+    // "Faith & Community" — verbatim, including "Our Team" (the "staff of
+    // 38" detail isn't shown anywhere else on the page). None of the 4
+    // scenes have a real photo anywhere in the source — all four render
+    // the "photo pending" fallback.
+    faithCommunity: {
+      heading: "Faith & Community",
+      headingHy: null,
+      items: [
+        {
+          title: "Daily Devotion",
+          titleHy: null,
+          description:
+            "Every day begins with prayer in our morning chapels, where we worship through singing hymns and listening to the Word.",
+          descriptionHy: null,
+          photo: null,
+        },
+        {
+          title: "Traditions & Celebrations",
+          titleHy: null,
+          description:
+            "Our calendar is filled with meaningful events, including Christmas programs, Easter celebrations, and Mother's Day tributes.",
+          descriptionHy: null,
+          photo: null,
+        },
+        {
+          title: "Community Impact",
+          titleHy: null,
+          description:
+            "AESSA benefits over 200 families annually, promoting healthy eating habits and social responsibility.",
+          descriptionHy: null,
+          photo: null,
+        },
+        {
+          title: "Our Team",
+          titleHy: null,
+          description:
+            "Led by School Director and Pastor Rev. Hagop Akbasharian, our staff of 38 dedicated professionals equips tomorrow's leaders.",
+          descriptionHy: null,
+          photo: null,
+        },
+      ],
+      closingNote:
+        "Partnership & Gratitude — together with our global partners, we share blessings and experience God's grace in action.",
+      closingNoteHy: null,
+    },
+
+    // The reference (uaecne-school-anjar-FULL.html) shows a "Make an
+    // Inquiry" section, but its own button has no real destination
+    // (href="#") — the SAME file's own Contact card admits "Email:
+    // Pending." Building a working mailto button would mean inventing an
+    // address that doesn't exist. Kept omitted, same as Shamlian-Tatikian
+    // (project rule 7) — flagged in OPEN_QUESTIONS for Yeghia's ruling once
+    // a real school email exists.
+    inquiry: null,
+
+    // Verbatim from uaecne-school-anjar-FULL.html's CTA section.
+    cta: {
+      heading: "A Legacy of Learning in Anjar",
+      headingHy: null,
+      body: "Since 1942, the Armenian Evangelical Secondary School of Anjar has planted seeds of faith, knowledge, and hope — equipping generations of children under the Union of the Armenian Evangelical Churches in the Near East.",
       bodyHy: null,
     },
   },

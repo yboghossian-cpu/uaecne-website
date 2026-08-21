@@ -15,7 +15,7 @@ export default function SchoolMission({ mission }: SchoolMissionProps) {
   if (!mission) return null;
 
   return (
-    <section className={styles.mission}>
+    <section className={`${styles.mission} wash-band`}>
       <div className={styles.eyebrow}>{mission.eyebrow}</div>
       <h2 className={styles.heading}>{mission.heading}</h2>
       <div className={styles.grid}>

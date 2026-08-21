@@ -55,3 +55,11 @@ img {
     transition: none;
   }
 }
+
+/* Site-wide burgundy top+bottom band border, opt-in marker for wash
+   sections on the school detail template. When two wash-bordered sections
+   render back-to-back (no ivory section between them), collapse the
+   shared seam to a single line instead of doubling it. */
+.wash-band + .wash-band {
+  border-top: none;
+}

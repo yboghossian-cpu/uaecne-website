@@ -20,7 +20,7 @@ export default function SchoolInquiry({ inquiry, heroPhoto, schoolName }: School
   const mailHref = `mailto:${inquiry.email}?subject=${encodeURIComponent(`Inquiry — ${schoolName}`)}`;
 
   return (
-    <section className={styles.inquiry}>
+    <section className={`${styles.inquiry} wash-band`}>
       {heroPhoto && (
         <Image
           src={heroPhoto.src}

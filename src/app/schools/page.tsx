@@ -14,12 +14,20 @@ export const metadata: Metadata = {
 // entry, the index card derives its photo/emblem from that same content
 // (heroPhoto/logo) rather than schools.ts's own fields — so the index and
 // detail page can never show different images. Falls back to schools.ts
-// for the 2 schools without a SchoolContent entry yet.
+// only for schools with no SchoolContent entry at all. Checks entry
+// existence directly (not `??`) so an entry's own explicit `heroPhoto:
+// null` (AESSA — verified no building photo exists) renders the
+// photo-pending placeholder instead of incorrectly falling through to
+// schools.ts's fallback field.
 function cardPhoto(slug: string, fallback: string | null) {
-  return schoolContent[slug]?.heroPhoto ?? (fallback ? { src: fallback, alt: "" } : null);
+  const entry = schoolContent[slug];
+  if (entry) return entry.heroPhoto;
+  return fallback ? { src: fallback, alt: "" } : null;
 }
 function cardEmblem(slug: string, fallback: string | null) {
-  return schoolContent[slug]?.logo ?? (fallback ? { src: fallback, alt: "" } : null);
+  const entry = schoolContent[slug];
+  if (entry) return entry.logo;
+  return fallback ? { src: fallback, alt: "" } : null;
 }
 
 function groupByCountry() {
