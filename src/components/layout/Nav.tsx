@@ -25,6 +25,7 @@ const navItems: NavItem[] = [
       { label: "Churches", href: "/churches" },
       { label: "Schools", href: "/schools" },
       { label: "Higher Education", href: "/higher-education" },
+      { label: "Outreach", href: "/outreach" },
     ],
   },
   { label: "Partnerships", href: "/partnerships" },

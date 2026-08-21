@@ -148,6 +148,16 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 65. **NEST leadership photo tone — Dr. Rima Nasrallah van Saane's photo reads noticeably darker/more dramatic than Dr. Martin Accad's in the small circular "Office of the President" card.** Not a cropping bug — the source photo (`Rima Nasrallah.jpg`) is a conference-stage shot against a black backdrop, while Accad's is a bright candid photo; both are real, respectful, unedited photos of each person, just different in original lighting/setting. Flagging for Yeghia's review in case a different (brighter) photo of her is preferred for this slot.
 
+66. **Outreach section live (2026-08-21).** New `/outreach` section — index + 3 detail pages (Camps/KCHAG, Youth Work/CE Union, Social Action Committee), nested under Ministries in the nav (initially built as a top-level item per the original instruction, corrected mid-build to sit under Ministries alongside Churches/Schools/Higher Education). See items 67–70 for gaps carried over from this unit.
+
+67. **Social Action Committee naming — deliberate standardization, not a content error.** The source doc ("SAC.docx") says "The Social Work Center of the Union..."; a second source doc ("SAC 2- Lena.docx") uses "AESAC" in its own heading. Yeghia ruled to standardize on "Social Action Committee" throughout the page, including correcting the About paragraph's own wording to match the page's title — approved 2026-08-21.
+
+68. **Camps gallery, Youth Work group hero, and all Social Action Committee photos (hero + 2 program-pillar rows + 3 children's-program cards) are photo-pending.** No real files exist for any of these yet — every slot renders the shared "photo pending" language, never invented. Real photos to be supplied by Yeghia later.
+
+69. **No logo/seal exists for KCHAG, the CE Union, or the Social Action Committee.** Confirmed by a full listing of the Outreach source folder — none of the three has a logo file anywhere. The masthead on each detail page has no seal graphic (unlike Higher Education's institutions, all of which have real seals); revisit if a logo is supplied later.
+
+70. **Basmajian photo reused, not duplicated.** `Outreach/Youth work/Pastor Datev Basmajian-Member ot large - Lebanon .JPG` is MD5-identical to the already-tracked `public/central-committee-datev-basmajian.jpg` (from the earlier Central Committee build) — the Youth Work director card points at that existing path rather than a new copy.
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

@@ -202,6 +202,39 @@ export default function IconSymbols() {
           <circle cx="12" cy="12" r="4" fill="currentColor" />
         </symbol>
 
+        {/* Outreach photo-pending hero icons — geometry copied verbatim
+            from design-reference/uaecne-youth-work.html and
+            uaecne-social-action-committee.html's own .hero .pend svg. */}
+        <symbol id="ic-people" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="9" cy="8" r="3" />
+            <circle cx="17" cy="9" r="2.3" />
+            <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5M15.5 18c0-2 1.4-3.6 3.5-3.6s3 1 3.5 2.6" />
+          </g>
+        </symbol>
+
+        <symbol id="ic-heart" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            d="M12 21C7 17 3 13.5 3 9.5A4.5 4.5 0 0112 7a4.5 4.5 0 019 2.5c0 4-4 7.5-9 11.5z"
+          />
+        </symbol>
+
+        {/* Gallery/photo-frame icon — geometry copied verbatim from
+            design-reference/uaecne-camps-kchag.html's .gal-item .ph svg,
+            reused for every generic "photo pending" content-photo slot
+            (gallery items, program-pillar rows, children's-program cards)
+            across the Outreach section. */}
+        <symbol id="ic-photo" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.5">
+            <rect x="3" y="5" width="18" height="14" rx="2" />
+            <circle cx="9" cy="11" r="2" />
+            <path d="M3 17l5-4 4 3 3-2 6 5" />
+          </g>
+        </symbol>
+
         {/* School Mission principle icons — geometry copied verbatim from
             design-reference/uaecne-school-aec-reference.html's
             .mission-grid .principle .arch svg paths. */}

@@ -1,0 +1,88 @@
+.about {
+  background: var(--color-ivory);
+  padding: 2.5rem 1.25rem;
+}
+
+.inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.625rem;
+  margin: 0 0 1.125rem;
+}
+
+.paragraph {
+  color: var(--color-brown);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+}
+
+.dropcap {
+  float: left;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-gold-decorative);
+  font-size: 2.75rem;
+  line-height: 0.78;
+  margin: 0.25rem 0.5rem 0 0;
+  padding: 0.25rem 0.5rem;
+  background: linear-gradient(160deg, rgba(212, 175, 55, 0.14), rgba(197, 160, 89, 0.05));
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  border-radius: 3px;
+}
+
+.pullquote {
+  margin-top: 0.375rem;
+  border-left: 3px solid var(--color-gold);
+  padding: 0.375rem 0 0.375rem 1.25rem;
+}
+
+.pullquoteText {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-red);
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .about {
+    padding: 3.25rem 2.125rem;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .pullquoteText {
+    font-size: 1.375rem;
+  }
+}

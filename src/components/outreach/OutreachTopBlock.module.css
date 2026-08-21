@@ -1,0 +1,111 @@
+.top {
+  padding: 1.375rem 1.25rem 0;
+  background: var(--color-ivory);
+}
+
+.inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.crumb {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.title {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 0.75rem;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-brown);
+  margin-top: 0.25rem;
+}
+
+.subtitleBold {
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.hero {
+  max-width: 1080px;
+  margin: 1.25rem auto 0;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated);
+}
+
+.heroWide {
+  aspect-ratio: 2 / 1;
+}
+
+.heroTall {
+  aspect-ratio: 21 / 9;
+}
+
+@media (max-width: 640px) {
+  .heroWide,
+  .heroTall {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+.heroImg {
+  object-fit: cover;
+}
+
+.heroPending {
+  background:
+    repeating-linear-gradient(135deg, rgba(197, 160, 89, 0.1) 0 2px, transparent 2px 16px),
+    linear-gradient(160deg, #fbf3e2, #efe2c8);
+}
+
+.heroGlyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  color: rgba(139, 0, 0, 0.26);
+}
+
+.heroGlyphIcon {
+  width: 15%;
+  height: 15%;
+}
+
+.heroGlyphCaption {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(74, 0, 0, 0.42);
+}
+
+@media (min-width: 720px) {
+  .top {
+    padding: 1.875rem 2.125rem 0;
+  }
+
+  .title {
+    font-size: 2.75rem;
+  }
+
+  .hero {
+    border-radius: 18px;
+    margin-top: 1.5rem;
+  }
+}
