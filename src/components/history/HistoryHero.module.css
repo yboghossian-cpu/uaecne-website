@@ -1,0 +1,102 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, var(--color-red-deep), var(--color-red-dark) 60%, #3a0000);
+  color: #fff;
+  text-align: center;
+  padding: 76px 34px 88px;
+}
+
+/* radiant quatrefoil watermark, from the mockup's .hero::before */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.09;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, var(--color-gold-decorative) 0 1.4px, transparent 1.6px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(circle at 50% 42%, #000 32%, transparent 66%);
+  mask-image: radial-gradient(circle at 50% 42%, #000 32%, transparent 66%);
+}
+
+.crumb {
+  position: relative;
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold-decorative);
+  font-weight: 600;
+  margin-bottom: 26px;
+}
+
+.seal {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  background: #fff;
+  border: 2px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 0 8px rgba(197, 160, 89, 0.14), 0 20px 40px -18px rgba(0, 0, 0, 0.5);
+}
+
+.kicker {
+  position: relative;
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--color-gold-decorative);
+  margin-bottom: 8px;
+}
+
+.title {
+  position: relative;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: #fff;
+  font-size: 58px;
+  line-height: 1.04;
+  max-width: 15ch;
+  margin: 0 auto;
+  letter-spacing: 0.005em;
+}
+
+.estab {
+  position: relative;
+  margin-top: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-family: var(--font-heading);
+  color: rgba(255, 253, 247, 0.92);
+  font-size: 15px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ln {
+  width: 44px;
+  height: 1px;
+  background: var(--color-gold);
+  opacity: 0.6;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 54px 22px 62px;
+  }
+
+  .title {
+    font-size: 37px;
+  }
+
+  .seal {
+    width: 78px;
+    height: 78px;
+  }
+}

@@ -290,6 +290,36 @@ export default function IconSymbols() {
             d="M12 3v18M6 9h12"
           />
         </symbol>
+
+        {/* History page thematic-pillar placeholder icons — geometry
+            copied verbatim from design-reference/uaecne-history.html's own
+            .prow .pic .ph svg paths (stroke-width 1.4, distinct from the
+            sprite's usual 1.5). Compassion reuses the existing #ic-heart
+            symbol above (identical path in the mockup). */}
+        <symbol id="ic-history-edu" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+            d="M12 3L3 8l9 5 9-5-9-5zM6 11v5c0 1.2 2.7 3 6 3s6-1.8 6-3v-5"
+          />
+        </symbol>
+
+        <symbol id="ic-history-outreach" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.4">
+            <path d="M20 8.5a4 4 0 00-7-2.6A4 4 0 006 8.5c0 3 3.5 5.5 7 8.5 3.5-3 7-5.5 7-8.5z" />
+            <path d="M3 20h18" strokeLinecap="round" />
+          </g>
+        </symbol>
+
+        <symbol id="ic-history-youth" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.4">
+            <circle cx="9" cy="8" r="3" />
+            <circle cx="17" cy="9" r="2.3" />
+            <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" />
+          </g>
+        </symbol>
       </defs>
     </svg>
   );

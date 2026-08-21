@@ -34,6 +34,7 @@ const navItems: NavItem[] = [
     label: "Resource Center",
     href: "/resource-center",
     children: [
+      { label: "History of the UAECNE", href: "/resource-center/history" },
       {
         label: "79th General Assembly",
         href: "/resource-center/news/79th-general-assembly",
