@@ -1,0 +1,138 @@
+.contact {
+  background: var(--color-ivory-wash);
+  padding: 2.5rem 1.25rem;
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+}
+
+.grid {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.gridSingle {
+  max-width: 520px;
+}
+
+.card {
+  background: var(--color-ivory);
+  border-radius: 16px;
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  box-shadow: var(--shadow-soft);
+  padding: 1.5rem 1.375rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1.125rem;
+  border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+}
+
+.icoWrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-ivory-wash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.ico {
+  width: 19px;
+  height: 19px;
+  color: var(--color-red);
+}
+
+.cardTitle {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6875rem 0;
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.row + .row {
+  border-top: 1px solid var(--color-line);
+}
+
+.rowIco {
+  width: 17px;
+  height: 17px;
+  color: var(--color-gold);
+  flex: none;
+  margin-top: 2px;
+}
+
+.key {
+  font-size: 0.5625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 0.125rem;
+}
+
+.addressLine {
+  display: block;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.mapBtn {
+  display: inline-block;
+  margin-top: 1.125rem;
+  align-self: flex-start;
+  background: var(--color-red);
+  color: var(--color-ivory);
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.6875rem 1.25rem;
+  border-radius: 8px;
+  cursor: default;
+  opacity: 0.75;
+}
+
+@media (min-width: 720px) {
+  .contact {
+    padding: 3rem 2.125rem;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.375rem;
+  }
+
+  .gridSingle {
+    grid-template-columns: 1fr;
+  }
+}

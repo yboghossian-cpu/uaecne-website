@@ -1,0 +1,76 @@
+/* ===== Minimal top block — schools without a SchoolContent entry yet
+   (Central High, AESSA/Anjar). Built directly from schools.ts's directory
+   row; no invented content, no contact fields (schools.ts has none). ===== */
+.minimalTop {
+  background: var(--color-ivory);
+  padding: 1.875rem 1.25rem 2.25rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.minimalHeading {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-red);
+  font-size: 1.75rem;
+  margin: 0 0 0.5rem;
+  line-height: 1.1;
+}
+
+.minimalMeta {
+  color: var(--color-brown);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+/* ===== "Coming soon" band — styled placeholder, never invented prose,
+   never an error page. ===== */
+.pending {
+  background:
+    radial-gradient(140% 130% at 50% -10%, rgba(197, 160, 89, 0.14), transparent 55%),
+    linear-gradient(160deg, var(--color-red), var(--color-red-dark));
+  color: var(--color-ivory);
+  text-align: center;
+  padding: 2.75rem 1.25rem 3rem;
+}
+
+.pendingGlyph {
+  display: block;
+  margin: 0 auto 1rem;
+  color: rgba(255, 253, 247, 0.5);
+}
+
+.pendingHeading {
+  font-family: var(--font-heading);
+  color: var(--color-ivory);
+  font-size: 1.375rem;
+  margin: 0 0 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.pendingBody {
+  max-width: 480px;
+  margin: 0 auto;
+  color: rgba(255, 253, 247, 0.85);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 720px) {
+  .minimalTop {
+    padding: 2.5rem 2.125rem 2.75rem;
+  }
+
+  .minimalHeading {
+    font-size: 2.5rem;
+  }
+
+  .pending {
+    padding: 3.5rem 2.125rem;
+  }
+
+  .pendingHeading {
+    font-size: 1.625rem;
+  }
+}

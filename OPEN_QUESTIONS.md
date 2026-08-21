@@ -106,6 +106,22 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 44. **`churches.ts`'s Anjar `photo` field (`/church-armenian-evangelical-church-anjar-logo.png`, the logo, not a building photo — see items 28/29) is now genuinely redundant.** The churches-index card no longer reads it (Wave 1 fix: cards derive photo/emblem from `churchContent[slug]` when a detail page exists, falling back to `churches.ts` only for the 19 churches without one yet) — Anjar has a `ChurchContent` entry, so its card now shows the real hero photo regardless of this field's value. `churches.ts` itself was not edited this pass (out of scope); this field could be corrected or left alone in a later data-cleanup unit, since nothing in the live site reads it anymore for Anjar specifically.
 
+45. **AEC "Vice-Chair of the Council" — no name found anywhere in the source `.odt`.** Renders "Name pending" (arched placeholder, no photo) in both the About-adjacent Leadership grid slot per the template rule — never guessed. Confirm with the College directly.
+
+46. **AEC's `OPEN_QUESTIONS` item 10 is now stale.** Item 10 (see AI-generated-images list) implied no real local building photo existed for AEC at the time it was written; a real one does (`Schools/Armenian Evangelical College/Armenian Evangelical College.jpeg`, MD5-confirmed identical to the already-tracked `public/school-armenian-evangelical-college.jpeg` used on both the index and the new detail page). Superseded, not deleted — kept for history.
+
+47. **AEC has no independently-verified enrollment/student-count figure.** The source `.odt` gives founding/reorganization dates and named leadership but no total student number — the facts bar uses "Secondary / Grade Levels" instead of a count, to avoid inventing one.
+
+48. **Shamlian-Tatikian principal name/photo mismatch — not resolved, rendered as a real, flagged gap.** The source doc (`Arm. Evang. Sgamlian School - History.docx`) names the current principal as "Mrs. Kayane Tunberian." The only two current-day staff photos on file are labeled "Mrs. Tamar — Secretary" and "Mrs. Kayane Messerian" — neither matches "Tunberian." The built page shows the verified name with an arched photo-pending placeholder (both in the About principal card and the Leadership grid); the two candidate photos were NOT used anywhere. Confirm with the school directly.
+
+49. **Shamlian-Tatikian has no verified contact email, phone, or address anywhere in its source doc.** The "Our Location + Get in Touch" section and the "Make an Inquiry" section are both omitted entirely from its page (conditional omission, not a placeholder) — a real gap, not an oversight. Needs real contact info sourced before either section can be added.
+
+50. **Shamlian-Tatikian has no Mission-statement or Academic-Heritage-style era content in its source doc.** Its "About the School" section carries the real historical narrative instead (the doc's own "Our History"/"A Brief History" text, verbatim); the Mission and Academic Heritage sections are omitted, not filled with invented text.
+
+51. **Shamlian-Tatikian's closing CTA band has no source text at all (no design mockup exists for this school specifically).** Written in the same house-style editorial convention already used for every church CTA in `churchContent.ts` — anchored only to verified facts (1934 founding, Bourj Hammoud, the Union) — not a verbatim quote from any reference document. Flagging so it can be revised or replaced once real closing copy is supplied.
+
+52. **An AI-generated file exists in the Shamlian-Tatikian source folder** (`Gemini_Generated_Image_qq07qvqq07qvqq07.jpeg`) — identified by filename pattern per item 10's standing rule, not used anywhere.
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

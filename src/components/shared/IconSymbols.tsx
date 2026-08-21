@@ -201,6 +201,34 @@ export default function IconSymbols() {
         <symbol id="ic-dot" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="4" fill="currentColor" />
         </symbol>
+
+        {/* School Mission principle icons — geometry copied verbatim from
+            design-reference/uaecne-school-aec-reference.html's
+            .mission-grid .principle .arch svg paths. */}
+        <symbol id="ic-mission-person" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.6">
+            <circle cx="12" cy="8" r="3" />
+            <path d="M5 20c0-4 3-6 7-6s7 2 7 6" />
+          </g>
+        </symbol>
+
+        <symbol id="ic-mission-star" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            d="M12 3l2.5 5 5.5.8-4 3.9 1 5.5-5-2.6-5 2.6 1-5.5-4-3.9 5.5-.8z"
+          />
+        </symbol>
+
+        <symbol id="ic-mission-cross" viewBox="0 0 24 24">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            d="M12 3v18M6 9h12"
+          />
+        </symbol>
       </defs>
     </svg>
   );
