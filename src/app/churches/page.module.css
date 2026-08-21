@@ -195,13 +195,14 @@
 
 .labelSeal,
 .labelEmblem {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   flex: none;
+  border-radius: 50%;
 }
 
 .labelEmblem {
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .churchName {

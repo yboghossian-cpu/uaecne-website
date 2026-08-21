@@ -104,6 +104,8 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 43. **AnniversaryBand uses four ad-hoc hex values (`#fcf8ee`, `#f2e7d0`, `#a8863f`, `#fff`/`#f3e9d2`) for its decorative gradient/inner-disc — no matching design token existed.** Reconcile if the palette is ever refined.
 
+44. **`churches.ts`'s Anjar `photo` field (`/church-armenian-evangelical-church-anjar-logo.png`, the logo, not a building photo — see items 28/29) is now genuinely redundant.** The churches-index card no longer reads it (Wave 1 fix: cards derive photo/emblem from `churchContent[slug]` when a detail page exists, falling back to `churches.ts` only for the 19 churches without one yet) — Anjar has a `ChurchContent` entry, so its card now shows the real hero photo regardless of this field's value. `churches.ts` itself was not edited this pass (out of scope); this field could be corrected or left alone in a later data-cleanup unit, since nothing in the live site reads it anymore for Anjar specifically.
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

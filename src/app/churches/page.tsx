@@ -3,7 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
 import { churches } from "@/data/churches";
+import { churchContent } from "@/data/churchContent";
 import styles from "./page.module.css";
+
+// Card photo/emblem derive from the detail page's own content when one
+// exists — single source of truth, so the index card and the detail-page
+// hero/logo can never diverge (this is what fixed Anjar showing its logo
+// as the card photo). churches.ts stays the fallback for the 19 churches
+// without a ChurchContent entry yet.
+function cardPhoto(slug: string, fallback: string | null) {
+  return churchContent[slug]?.heroPhoto ?? (fallback ? { src: fallback, alt: "" } : null);
+}
+
+function cardEmblem(slug: string, fallback: string | null) {
+  return churchContent[slug]?.logo ?? (fallback ? { src: fallback, alt: "" } : null);
+}
 
 export const metadata: Metadata = {
   title: "Churches — UAECNE",
@@ -69,7 +83,10 @@ export default function ChurchesIndexPage() {
             <span className={`${styles.ln} ${styles.lnR}`} />
           </div>
           <div className={styles.grid}>
-            {list.map((church) => (
+            {list.map((church) => {
+              const photo = cardPhoto(church.slug, church.photo);
+              const emblem = cardEmblem(church.slug, church.emblem);
+              return (
               <Link
                 key={church.id}
                 href={`/churches/${church.slug}`}
@@ -80,15 +97,15 @@ export default function ChurchesIndexPage() {
                 )}
                 <div
                   className={
-                    church.photo
+                    photo
                       ? styles.pic
                       : `${styles.pic} ${styles.picPending}`
                   }
                 >
-                  {church.photo ? (
+                  {photo ? (
                     <Image
-                      src={church.photo}
-                      alt={church.name}
+                      src={photo.src}
+                      alt={photo.alt || church.name}
                       fill
                       className={styles.photo}
                     />
@@ -104,12 +121,12 @@ export default function ChurchesIndexPage() {
                   )}
                 </div>
                 <div className={styles.label}>
-                  {church.emblem ? (
+                  {emblem ? (
                     <Image
-                      src={church.emblem}
+                      src={emblem.src}
                       alt=""
-                      width={34}
-                      height={34}
+                      width={42}
+                      height={42}
                       className={styles.labelEmblem}
                     />
                   ) : (
@@ -120,7 +137,8 @@ export default function ChurchesIndexPage() {
                   <b className={styles.churchName}>{church.name}</b>
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
         </section>
       ))}
