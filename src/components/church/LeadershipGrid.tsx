@@ -20,6 +20,10 @@ type LeadershipGridProps = {
   // for both — see OPEN_QUESTIONS).
   eyebrow?: string;
   heading?: string;
+  // Optional italic centered note below the grid (e.g. Syriac Aleppo's
+  // "English spelling pending your confirmation. The church's pulpit is
+  // currently vacant."). Null/omitted for every other church.
+  note?: string | null;
 };
 
 // Renders `leadership` when non-null; renders nothing when null (e.g.
@@ -30,6 +34,7 @@ export default function LeadershipGrid({
   leaders,
   eyebrow = "The Ministry",
   heading = "Leadership",
+  note,
 }: LeadershipGridProps) {
   if (!leaders) return null;
 
@@ -64,6 +69,7 @@ export default function LeadershipGrid({
           </div>
         ))}
       </div>
+      {note && <p className={styles.note}>{note}</p>}
     </section>
   );
 }

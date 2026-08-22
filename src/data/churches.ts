@@ -201,7 +201,7 @@ export const churches: Church[] = [
     secretary: "",
     isNew: false,
     slug: "syriac-evangelical-church-aleppo",
-    photo: null,
+    photo: "/church-syriac-aleppo-hero.jpg",
     emblem: null,
   },
   {

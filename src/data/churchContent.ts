@@ -67,7 +67,15 @@ export type SuccessionEntry = {
 // Ashrafieh's "The Church Today" gallery — 2 photos, both with the same
 // generic alt text, no individual captions like Syriac's 3-photo gallery
 // has).
-export type GalleryPhoto = Photo & { caption: string | null; captionHy: string | null };
+export type GalleryPhoto = Photo & {
+  caption: string | null;
+  captionHy: string | null;
+  // Small on-image provenance badge (e.g. "Church-approved render") for a
+  // church-supplied AI-generated image — additive, null/omitted for every
+  // real photograph. First used by Syriac Aleppo's 2 AI-render gallery
+  // images.
+  aiLabel?: string | null;
+};
 
 // Verified against uaecne-church-ashrafieh-complete.html's .anniv section —
 // a dedicated badge image, a two-line numeral+word heading, a date range,
@@ -126,6 +134,12 @@ export type ChurchContent = {
     // "Present church 1925", alongside "Founded 1852") — null/omitted for
     // every church with only one date.
     secondDate?: { label: string; value: string } | null;
+    // Optional plain (non-bold) trailing text right after the bold
+    // established year — e.g. Syriac's " (Urfa) · re-established in
+    // Aleppo". Distinct from `secondDate` (a second labeled/bolded value);
+    // this is unstructured trailing prose. Null/omitted for every church
+    // without one.
+    establishedSuffix?: string;
   };
 
   logo: Photo | null; // independently optional
@@ -150,6 +164,7 @@ export type ChurchContent = {
     dropcap?: boolean;
     pullQuote?: string | null;
     pullQuoteHy?: string | null;
+    vacancyNote?: string | null;
   };
 
   pastorCard: {
@@ -166,6 +181,10 @@ export type ChurchContent = {
   // Ministry" when omitted (every church before the Syria unit relies on
   // that default). Bethel and Emmanuel's mockups both say "The Team."
   leadershipEyebrow?: string;
+  // Optional italic note below the leadership grid (e.g. Syriac Aleppo's
+  // "English spelling pending your confirmation..."). Null/omitted for
+  // every other church.
+  leadershipNote?: string | null;
 
   history: {
     eyebrow: string;
@@ -265,6 +284,11 @@ export type ChurchContent = {
     email?: string | null;
     phone?: string;
     secretary?: string;
+    // Relabels the secretary row's key — default "Secretary" (every church
+    // before the Syria unit relies on that default). Syriac Aleppo's
+    // mockup calls the same row "Vice-Chair" instead (the named person
+    // holds that office, not the secretary role).
+    secretaryLabel?: string;
     address?: string;
     hideLocationCard?: boolean;
     // Real Facebook page link (label + full URL) — additive, only set
@@ -2097,6 +2121,184 @@ export const churchContent: Record<string, ChurchContent> = {
         url: "https://www.facebook.com/nahadagats.Church",
       },
       note: "Phone, email and street address pending verification.",
+    },
+  },
+
+  // Syria — Aleppo, church 4 of 9 (closes Aleppo). Built verbatim from
+  // design-reference/uaecne-church-syriac-aleppo.html. This whole page was
+  // translated from an Armenian-only source — every name (Pastor Jirjis
+  // Shemes, Father Youhanna Toro, Pastor Youssef Osta Jabbour, Miss Mary
+  // Hakko) is an English-spelling placeholder pending Union confirmation,
+  // flagged in OPEN_QUESTIONS. Pulpit is vacant — no pastorCard, and the
+  // single leadership card is Miss Mary Hakko, Vice-Chairwoman. No
+  // programs module (none in the source) and no milestone band (this
+  // mockup has neither). Uses `ChurchGalleryLightbox` — 2 real photos +
+  // 2 church-approved AI-render photos (kept, labeled, provenance logged).
+  "syriac-evangelical-church-aleppo": {
+    slug: "syriac-evangelical-church-aleppo",
+
+    masthead: {
+      locationLine: "Aleppo, Syria",
+      locationLineHy: null,
+      established: "1885",
+      establishedHy: null,
+      establishedLabel: "Founded",
+      establishedSuffix: " (Urfa) · re-established in Aleppo",
+    },
+
+    // No distinct logo/seal file exists — mockup's own masthead circle is
+    // a generic cross icon, not a real institutional emblem.
+    logo: null,
+    heroPhoto: {
+      src: "/church-syriac-aleppo-hero.jpg",
+      alt: "Syriac Evangelical Church of Aleppo",
+    },
+    factsBar: [
+      { label: "1885", labelHy: null, sub: "Founded (Urfa)", subHy: null },
+      { label: "Aleppo", labelHy: null, sub: "Location, Syria", subHy: null },
+      { label: "Sunday · pending", labelHy: null, sub: "Worship Service", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About the Syriac Evangelical Church",
+      headingHy: null,
+      paragraphs: [
+        "Founded in 1885 in Urfa — by the grace of Jesus Christ and with the help of Armenian Evangelicals — the Syriac Evangelical Church was later re-established in Aleppo after its people were forced to flee the massacres against Christians. For well over a century it has borne faithful Christian witness within the community of Aleppo.",
+        "Across its history the church has been served by devoted pastors, and its life continues through worship and fellowship.",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      vacancyNote: "The church's pulpit is currently vacant.",
+      pullQuote: "A church re-founded in exile, keeping faith alive across generations in Aleppo.",
+      pullQuoteHy: null,
+    },
+
+    // Pulpit vacant — no pastor.
+    pastorCard: null,
+
+    leadership: [
+      {
+        name: "Miss Mary Hakko",
+        nameHy: null,
+        role: "Vice-Chairwoman",
+        roleHy: null,
+        photo: { src: "/church-syriac-aleppo-vicechair-hakko.jpg", alt: "Vice-Chairwoman" },
+      },
+    ],
+    leadershipEyebrow: "The Team",
+    leadershipNote:
+      "English spelling pending your confirmation. The church's pulpit is currently vacant.",
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From Urfa to Aleppo",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The Syriac Evangelical Church was founded in 1885 in Urfa, by the grace of Jesus Christ and with the help of Armenian Evangelicals. Its first pastor was Pastor Jirjis Shemes, through whose efforts a primary school was also built.",
+            "The massacres committed against Christians forced the people to flee; reaching Aleppo, they re-established their church there.",
+            "The first pastor of the church in Aleppo was Father Youhanna Toro, who served until 1974. In 1975 he was succeeded by Pastor Youssef Osta Jabbour, whose service continued until 2017. The church's pulpit is currently vacant.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: null,
+    milestone: null,
+    specialProject: null,
+    anniversary: null,
+
+    // Historic pastors archive — 3 named, not a full succession table.
+    succession: {
+      eyebrow: "Archive",
+      eyebrowHy: null,
+      heading: "Pastors of the Church",
+      headingHy: null,
+      note: "Those who have served the Syriac Evangelical Church. English name spellings pending confirmation.",
+      noteHy: null,
+      entries: [
+        { name: "Pastor Jirjis Shemes", nameHy: null, years: "First pastor · Urfa", note: null, noteHy: null, isCurrent: false },
+        { name: "Father Youhanna Toro", nameHy: null, years: "Served until 1974", note: null, noteHy: null, isCurrent: false },
+        { name: "Pastor Youssef Osta Jabbour", nameHy: null, years: "1975 – 2017", note: null, noteHy: null, isCurrent: false },
+      ],
+    },
+
+    gallery: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-syriac-aleppo-gallery-building.jpg",
+          alt: "Syriac Evangelical Church building",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-syriac-aleppo-gallery-womens.jpg",
+          alt: "Women's meeting",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-syriac-aleppo-gallery-worship-ai.jpg",
+          alt: "Congregation at worship",
+          caption: null,
+          captionHy: null,
+          aiLabel: "Church-approved render",
+        },
+        {
+          src: "/church-syriac-aleppo-gallery-children-ai.jpg",
+          alt: "Children's gathering",
+          caption: null,
+          captionHy: null,
+          aiLabel: "Church-approved render",
+        },
+      ],
+    },
+
+    cta: {
+      heading: "Faith Kept Alive in Aleppo",
+      headingHy: null,
+      body: "Re-founded in exile and sustained across generations, the Syriac Evangelical Church continues its Christian witness within the community of Aleppo.",
+      bodyHy: null,
+    },
+
+    // Facebook is real; phone/email/district/street all pending per the
+    // mockup's own placeholder language — even though churches.ts has
+    // values for phone/email, the mockup explicitly marks both pending
+    // (same precedent as Bethel, rule 1). churches.ts's address
+    // ("Assyrian Quarter, Aleppo, Syria") is more specific than the
+    // mockup's plain "Aleppo, Syria" — kept matching the approved mockup
+    // rather than silently substituting the directory's district name;
+    // flagged in OPEN_QUESTIONS in case that's the missing district. The
+    // contact row is relabeled "Vice-Chair" (not "Secretary") since Mary
+    // Hakko holds that office, not the secretary role.
+    contactOverride: {
+      phonePending: true,
+      emailPending: true,
+      // Matches the approved mockup's own plain "Aleppo, Syria" — kept
+      // consistent with the note below (which still says district/street
+      // are pending) rather than showing churches.ts's more specific
+      // "Assyrian Quarter, Aleppo, Syria" and contradicting that note.
+      address: "Aleppo, Syria",
+      secretary: "Miss Mary Hakko",
+      secretaryLabel: "Vice-Chair",
+      facebook: {
+        label: "Syriac Evangelical Church",
+        url: "https://www.facebook.com/share/1AQaGyyQnQ/",
+      },
+      note: "Phone, email, district and street pending verification.",
     },
   },
 };

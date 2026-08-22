@@ -90,6 +90,7 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
               onClick={() => setLightboxIndex(i)}
             >
               <Image src={photo.src} alt={photo.alt} fill className={styles.itemPhoto} />
+              {photo.aiLabel && <span className={styles.aiLabel}>{photo.aiLabel}</span>}
             </figure>
           ))}
         </div>

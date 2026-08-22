@@ -25,6 +25,7 @@ import styles from "./page.module.css";
 const LIGHTBOX_GALLERY_SLUGS = new Set([
   "armenian-evangelical-bethel-church-aleppo",
   "armenian-protestant-emmanuel-church-aleppo",
+  "syriac-evangelical-church-aleppo",
 ]);
 
 type PageParams = { slug: string };
@@ -113,9 +114,19 @@ export default async function ChurchDetailPage({
         factsBar={content.factsBar}
       />
       <AnniversaryBand anniversary={content.anniversary} />
-      <ChurchAbout about={content.about} pastorCard={content.pastorCard} />
+      <ChurchAbout
+        about={content.about}
+        pastorCard={content.pastorCard}
+        dropcap={content.about.dropcap}
+        pullQuote={content.about.pullQuote}
+        vacancyNote={content.about.vacancyNote}
+      />
       <ChurchContactSection church={church} contactOverride={content.contactOverride} />
-      <LeadershipGrid leaders={content.leadership} eyebrow={content.leadershipEyebrow} />
+      <LeadershipGrid
+        leaders={content.leadership}
+        eyebrow={content.leadershipEyebrow}
+        note={content.leadershipNote}
+      />
       <ChurchHistory history={content.history} />
       <ChurchPrograms programs={content.programs} />
       <SpecialProjectBand specialProject={content.specialProject} />

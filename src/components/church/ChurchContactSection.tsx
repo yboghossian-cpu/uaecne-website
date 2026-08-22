@@ -27,6 +27,7 @@ export default function ChurchContactSection({
   const emailPending = contactOverride?.emailPending ?? false;
   const phone = contactOverride?.phone ?? church.phone;
   const secretary = contactOverride?.secretary ?? church.secretary;
+  const secretaryLabel = contactOverride?.secretaryLabel ?? "Secretary";
   const hasEmailOverride = contactOverride
     ? Object.prototype.hasOwnProperty.call(contactOverride, "email")
     : false;
@@ -171,7 +172,7 @@ export default function ChurchContactSection({
                 <use href="#ic-user" />
               </svg>
               <span>
-                <span className={styles.key}>Secretary</span>
+                <span className={styles.key}>{secretaryLabel}</span>
                 {secretary}
               </span>
             </div>

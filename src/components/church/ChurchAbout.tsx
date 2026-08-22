@@ -24,6 +24,11 @@ type ChurchAboutProps = {
   // existing behavior unaffected.
   dropcap?: boolean; // default true, matching FAEC/Syriac's own reference
   pullQuote?: string | null; // default null — an italic gold-rule pull-line beneath the prose (Bethel's mockup .pullquote)
+  // Optional small solid-border italic pill (e.g. "The church's pulpit is
+  // currently vacant.") rendered after the paragraphs, before pullQuote —
+  // Syriac Aleppo's mockup .vacancy badge. Null/omitted for every church
+  // without one.
+  vacancyNote?: string | null;
 };
 
 // Eyebrow/heading/drop-cap paragraphs, with an optional PastorCard beside it.
@@ -35,6 +40,7 @@ export default function ChurchAbout({
   pastorCard,
   dropcap = true,
   pullQuote,
+  vacancyNote,
 }: ChurchAboutProps) {
   return (
     <section className={styles.about}>
@@ -57,6 +63,7 @@ export default function ChurchAbout({
               </p>
             ),
           )}
+          {vacancyNote && <span className={styles.vacancy}>{vacancyNote}</span>}
           {pullQuote && (
             <div className={styles.pullQuote}>
               <p>{pullQuote}</p>

@@ -12,6 +12,7 @@ type Masthead = {
   establishedHy: string | null;
   establishedLabel?: string;
   secondDate?: { label: string; value: string } | null;
+  establishedSuffix?: string;
 };
 
 type ChurchTopBlockProps = {
@@ -57,6 +58,7 @@ export default function ChurchTopBlock({
             {masthead.locationLine}
             {` · ${masthead.establishedLabel ?? "Established"} `}
             <b className={styles.estYear}>{masthead.established}</b>
+            {masthead.establishedSuffix}
             {masthead.secondDate && (
               <>
                 {` · ${masthead.secondDate.label} `}

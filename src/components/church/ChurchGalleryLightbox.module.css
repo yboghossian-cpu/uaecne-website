@@ -67,6 +67,20 @@
   margin: 0;
 }
 
+.aiLabel {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(74, 0, 0, 0.6);
+  padding: 3px 7px;
+  border-radius: 5px;
+}
+
 .itemPhoto {
   object-fit: cover;
 }
