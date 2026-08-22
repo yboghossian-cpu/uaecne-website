@@ -23,6 +23,8 @@ export default function ChurchContactSection({
   church,
   contactOverride,
 }: ChurchContactSectionProps) {
+  const phonePending = contactOverride?.phonePending ?? false;
+  const emailPending = contactOverride?.emailPending ?? false;
   const phone = contactOverride?.phone ?? church.phone;
   const secretary = contactOverride?.secretary ?? church.secretary;
   const hasEmailOverride = contactOverride
@@ -36,6 +38,7 @@ export default function ChurchContactSection({
   const addressField = contactOverride?.address ?? church.address;
   const addressLines = addressField.split("\n").filter(Boolean);
   const showLocationCard = !contactOverride?.hideLocationCard;
+  const note = contactOverride?.note;
 
   return (
     <section className={styles.contact}>
@@ -94,32 +97,56 @@ export default function ChurchContactSection({
             </span>
             <h3 className={styles.cardTitle}>Get in Touch</h3>
           </div>
-          {phone && (
+          {phonePending ? (
             <div className={styles.row}>
               <svg className={styles.rowIco}>
                 <use href="#ic-phone" />
               </svg>
               <span>
                 <span className={styles.key}>Phone</span>
-                {phone}
+                <span className={styles.pending}>Pending</span>
               </span>
             </div>
+          ) : (
+            phone && (
+              <div className={styles.row}>
+                <svg className={styles.rowIco}>
+                  <use href="#ic-phone" />
+                </svg>
+                <span>
+                  <span className={styles.key}>Phone</span>
+                  {phone}
+                </span>
+              </div>
+            )
           )}
-          {emails.map((email, i) => (
-            <div className={styles.row} key={email}>
+          {emailPending ? (
+            <div className={styles.row}>
               <svg className={styles.rowIco}>
                 <use href="#ic-mail" />
               </svg>
               <span>
-                <span className={styles.key}>
-                  {emails.length > 1 ? `Email ${i + 1}` : "Email"}
-                </span>
-                <a href={`mailto:${email}`} className={styles.link}>
-                  {email}
-                </a>
+                <span className={styles.key}>Email</span>
+                <span className={styles.pending}>Pending</span>
               </span>
             </div>
-          ))}
+          ) : (
+            emails.map((email, i) => (
+              <div className={styles.row} key={email}>
+                <svg className={styles.rowIco}>
+                  <use href="#ic-mail" />
+                </svg>
+                <span>
+                  <span className={styles.key}>
+                    {emails.length > 1 ? `Email ${i + 1}` : "Email"}
+                  </span>
+                  <a href={`mailto:${email}`} className={styles.link}>
+                    {email}
+                  </a>
+                </span>
+              </div>
+            ))
+          )}
           {secretary && (
             <div className={styles.row}>
               <svg className={styles.rowIco}>
@@ -131,6 +158,7 @@ export default function ChurchContactSection({
               </span>
             </div>
           )}
+          {note && <div className={styles.note}>{note}</div>}
         </div>
       </div>
     </section>

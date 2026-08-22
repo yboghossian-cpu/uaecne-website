@@ -16,7 +16,10 @@ type ChurchTopBlockProps = {
   church: Church;
   masthead: Masthead;
   logo: Photo | null;
-  heroPhoto: Photo;
+  // Nullable — a church with no confirmed hero photo falls back to the
+  // same arched "photo pending" treatment used elsewhere (Schools/
+  // Outreach), rather than requiring every church to have a real photo.
+  heroPhoto: Photo | null;
   factsBar: Fact[];
 };
 
@@ -56,8 +59,17 @@ export default function ChurchTopBlock({
         </div>
       </div>
 
-      <div className={styles.hero}>
-        <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} />
+      <div className={heroPhoto ? styles.hero : `${styles.hero} ${styles.heroPending}`}>
+        {heroPhoto ? (
+          <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} />
+        ) : (
+          <span className={styles.heroGlyph}>
+            <svg className={styles.heroGlyphIcon} viewBox="0 0 24 24" aria-hidden="true">
+              <use href="#ic-church" />
+            </svg>
+            <span className={styles.heroGlyphCaption}>Photo pending</span>
+          </span>
+        )}
       </div>
 
       <ChurchFactsBar facts={factsBar} />

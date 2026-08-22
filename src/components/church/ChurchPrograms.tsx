@@ -2,7 +2,7 @@ import styles from "./ChurchPrograms.module.css";
 
 type ChurchProgramsProps = {
   programs: {
-    eyebrow: string;
+    eyebrow: string | null;
     eyebrowHy: string | null;
     heading: string;
     headingHy: string | null;
@@ -18,7 +18,7 @@ export default function ChurchPrograms({ programs }: ChurchProgramsProps) {
   return (
     <section className={styles.programs}>
       <div className={styles.wrap}>
-        <div className={styles.eyebrow}>{programs.eyebrow}</div>
+        {programs.eyebrow && <div className={styles.eyebrow}>{programs.eyebrow}</div>}
         <h2 className={styles.heading}>{programs.heading}</h2>
         <div className={styles.grid}>
           {programs.items.map((item, i) => (

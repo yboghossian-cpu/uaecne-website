@@ -13,9 +13,16 @@ import ChurchPrograms from "@/components/church/ChurchPrograms";
 import SpecialProjectBand from "@/components/church/SpecialProjectBand";
 import SuccessionList from "@/components/church/SuccessionList";
 import ChurchGallery from "@/components/church/ChurchGallery";
+import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
 import ChurchContactSection from "@/components/church/ChurchContactSection";
 import ChurchCTA from "@/components/church/ChurchCTA";
+import MilestoneBand from "@/components/church/MilestoneBand";
 import styles from "./page.module.css";
+
+// Slugs whose approved mockup has a real click-to-enlarge lightbox (see
+// ChurchGalleryLightbox's own comment) — every other church keeps the
+// plain, non-lightbox ChurchGallery.
+const LIGHTBOX_GALLERY_SLUGS = new Set(["armenian-evangelical-bethel-church-aleppo"]);
 
 type PageParams = { slug: string };
 
@@ -110,7 +117,12 @@ export default async function ChurchDetailPage({
       <ChurchPrograms programs={content.programs} />
       <SpecialProjectBand specialProject={content.specialProject} />
       <SuccessionList succession={content.succession} />
-      <ChurchGallery gallery={content.gallery} />
+      <MilestoneBand milestone={content.milestone} />
+      {LIGHTBOX_GALLERY_SLUGS.has(slug) ? (
+        <ChurchGalleryLightbox gallery={content.gallery} />
+      ) : (
+        <ChurchGallery gallery={content.gallery} />
+      )}
       <ChurchCTA cta={content.cta} />
     </>
   );

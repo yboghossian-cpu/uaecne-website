@@ -95,6 +95,21 @@
   text-decoration: none;
 }
 
+.pending {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.note {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.75rem;
+  color: var(--color-brown);
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .spacer {
   flex: 1;
 }

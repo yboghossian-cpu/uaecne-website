@@ -1,0 +1,35 @@
+.milestone {
+  background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
+  color: #fff;
+  text-align: center;
+  padding: 3rem 1.25rem;
+}
+
+.year {
+  font-family: var(--font-heading);
+  color: var(--color-gold-decorative);
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.heading {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.6875rem;
+  margin-bottom: 0.75rem;
+}
+
+.body {
+  color: rgba(255, 253, 247, 0.85);
+  max-width: 37.5rem;
+  margin: 0 auto;
+  font-size: 0.90625rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 720px) {
+  .milestone {
+    padding: 3.5rem 2.125rem;
+  }
+}

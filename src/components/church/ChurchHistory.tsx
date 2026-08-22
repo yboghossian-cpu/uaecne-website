@@ -51,7 +51,14 @@ export default function ChurchHistory({ history }: ChurchHistoryProps) {
                 <h3 className={styles.subheading}>{section.heading}</h3>
               )}
               {section.paragraphs.map((paragraph, j) => (
-                <p className={styles.paragraph} key={j}>
+                <p
+                  className={
+                    history.dropcapFirstParagraph && i === 0 && j === 0
+                      ? `${styles.paragraph} ${styles.dropcap}`
+                      : styles.paragraph
+                  }
+                  key={j}
+                >
                   {paragraph}
                 </p>
               ))}

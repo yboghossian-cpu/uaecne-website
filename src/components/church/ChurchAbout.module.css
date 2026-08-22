@@ -66,6 +66,21 @@
   border-radius: 3px;
 }
 
+.pullQuote {
+  margin-top: 1.25rem;
+  border-left: 3px solid var(--color-gold);
+  padding: 0.25rem 0 0.25rem 1.25rem;
+}
+
+.pullQuote p {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-red);
+  margin: 0;
+}
+
 @media (min-width: 720px) {
   .about {
     padding: 3.25rem 2.125rem;

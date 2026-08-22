@@ -120,7 +120,12 @@ export type ChurchContent = {
   };
 
   logo: Photo | null; // independently optional
-  heroPhoto: Photo; // always present
+  // Nullable — a church with no confirmed hero photo falls back to the
+  // arched "photo pending" treatment in ChurchTopBlock, matching Schools/
+  // Outreach's existing pattern. Every church built before the Syria unit
+  // has a confirmed real photo, so this was `Photo` (always present)
+  // until now.
+  heroPhoto: Photo | null;
   factsBar: { label: string; labelHy: string | null; sub: string; subHy: string | null }[];
 
   about: {
@@ -130,6 +135,12 @@ export type ChurchContent = {
     headingHy: string | null;
     paragraphs: string[];
     paragraphsHy: string[] | null;
+    // Both additive/optional — every church before the Syria unit omits
+    // both, keeping ChurchAbout's existing default behavior (drop-cap on,
+    // no pull-quote).
+    dropcap?: boolean;
+    pullQuote?: string | null;
+    pullQuoteHy?: string | null;
   };
 
   pastorCard: {
@@ -149,15 +160,37 @@ export type ChurchContent = {
     heading: string;
     headingHy: string | null;
     sections: HistorySection[];
+    // Additive/optional — every church before the Syria unit omits this,
+    // unaffected. When true, the very first paragraph of the very first
+    // section gets a first-letter drop cap (Bethel's mockup .dropcap).
+    dropcapFirstParagraph?: boolean;
   } | null;
 
   programs: {
-    eyebrow: string;
+    // Nullable — Bethel's mockup has no eyebrow above "Ministries &
+    // Activities" (just the heading), unlike every prior church's programs
+    // section.
+    eyebrow: string | null;
     eyebrowHy: string | null;
     heading: string;
     headingHy: string | null;
     items: string[];
     itemsHy: string[] | null;
+  } | null;
+
+  // Red-gradient band marking a single milestone moment (a year + heading
+  // + one paragraph) — e.g. Bethel's 2021 renovation/rededication. Distinct
+  // from `anniversary` (a numbered-years-of-service badge + scripture
+  // verse) and `specialProject` (an eyebrow/heading/objectives-grid
+  // initiative) — neither fits a single dated event. Null for churches
+  // with no milestone content of this shape.
+  milestone: {
+    year: string;
+    yearHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    body: string;
+    bodyHy: string | null;
   } | null;
 
   // Shape UNVERIFIED — neither FAEC nor Syriac uses this; not built this
@@ -221,6 +254,19 @@ export type ChurchContent = {
     secretary?: string;
     address?: string;
     hideLocationCard?: boolean;
+    // Renders "Pending" in place of a real phone/email value — for a
+    // church whose reference explicitly marks contact details as
+    // placeholders (e.g. the Syria churches), rather than showing
+    // churches.ts's directory value as if it were confirmed. Distinct from
+    // `email: null` (suppresses the row entirely) — this keeps the row
+    // visible with an honest "not yet verified" state, matching
+    // SchoolContactRow's existing `pending` treatment.
+    phonePending?: boolean;
+    emailPending?: boolean;
+    // Optional italic disclaimer line at the bottom of the "Get in Touch"
+    // card (e.g. "Contact details are placeholders until verified copy is
+    // supplied."). Null/omitted renders nothing extra.
+    note?: string;
   } | null;
 };
 
@@ -380,6 +426,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
     },
 
+    milestone: null,
     anniversary: null,
     gallery: null,
 
@@ -463,6 +510,7 @@ export const churchContent: Record<string, ChurchContent> = {
 
     specialProject: null,
     succession: null,
+    milestone: null,
     anniversary: null,
 
     gallery: {
@@ -679,6 +727,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
     },
 
+    milestone: null,
     anniversary: null,
     gallery: null,
 
@@ -870,6 +919,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
     },
 
+    milestone: null,
     anniversary: null,
     gallery: null,
 
@@ -928,6 +978,7 @@ export const churchContent: Record<string, ChurchContent> = {
     // a gold-ring roundel as one cell of a contained 3-column card (seal |
     // numeral+years | verse) — AnniversaryBand.tsx renders it there, not
     // beside the masthead.
+    milestone: null,
     anniversary: {
       logo: {
         src: "/church-armenian-evangelical-church-ashrafieh-logo.jpg",
@@ -1348,6 +1399,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
     },
 
+    milestone: null,
     anniversary: null,
     gallery: null,
 
@@ -1364,5 +1416,281 @@ export const churchContent: Record<string, ChurchContent> = {
     // reference omits. Kept from churches.ts as-is, no override — same
     // precedent as Ashrafieh. Phone/email/secretary all agree exactly.
     contactOverride: null,
+  },
+
+  // Syria — Aleppo. Built verbatim from
+  // design-reference/uaecne-church-bethel-aleppo.html. ENGLISH-ONLY per
+  // Yeghia's instruction: the mockup's Armenian masthead subtitle line
+  // (".hy") is dropped entirely, and the Armenian pastors-succession list
+  // is rendered in best-effort English transliteration (see the
+  // succession `note` below) rather than Armenian script. Phone/email are
+  // rendered as "Pending" (contactOverride) even though churches.ts has
+  // values for them — the mockup itself explicitly marks them
+  // placeholder/pending, which wins per rule 1 (verified reference over
+  // directory guess). See OPEN_QUESTIONS for the full list of
+  // pending-confirmation items.
+  "armenian-evangelical-bethel-church-aleppo": {
+    slug: "armenian-evangelical-bethel-church-aleppo",
+
+    masthead: {
+      locationLine: "Jabriye District, Aleppo, Syria",
+      locationLineHy: null,
+      established: "1923",
+      establishedHy: null,
+    },
+
+    // No distinct logo/seal file exists in the source folder — the
+    // mockup's own masthead circle is itself a photo (not a graphic
+    // emblem), and no comparable file exists to use honestly in its place.
+    // Rendered without a masthead logo, same as any other church with none
+    // (e.g. Nor Marash).
+    logo: null,
+    heroPhoto: {
+      src: "/church-bethel-aleppo-hero.jpg",
+      alt: "Armenian Evangelical Bethel Church of Aleppo",
+    },
+    factsBar: [
+      { label: "1923", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Jabriye, Aleppo", labelHy: null, sub: "Location", subHy: null },
+      { label: "Sunday · pending", labelHy: null, sub: "Worship Service", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About Bethel Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Bethel Church of Aleppo is a living witness to faith, perseverance, service, and hope. From a humble wooden structure established for refugees in the aftermath of the Armenian Genocide, it has grown into a spiritual home and a symbol of resilience for generations of Armenians in Aleppo.",
+        "Through times of peace, displacement, war, reconstruction, and renewal, Bethel has continued to open its doors to its people — proclaiming faith, nurturing generations, serving the community, and bearing witness to the enduring power of hope. It stands within the family of the Union of the Armenian Evangelical Churches in the Near East (UAECNE).",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote:
+        "For more than a century, Bethel has remained a living witness to faith, perseverance, service, and hope.",
+      pullQuoteHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Dr. Haroutune Selimian",
+      nameHy: null,
+      role: "Pastor",
+      roleHy: null,
+      photo: {
+        src: "/church-bethel-aleppo-pastor-selimian.jpg",
+        alt: "Rev. Dr. Haroutune Selimian",
+      },
+    },
+
+    leadership: [
+      {
+        name: "Rev. Dr. Haroutune Selimian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: { src: "/church-bethel-aleppo-pastor-selimian.jpg", alt: "Rev. Dr. Haroutune Selimian" },
+      },
+      {
+        name: "Mr. Harout Khachadourian",
+        nameHy: null,
+        role: "Vice-Chairman, Joint Assembly",
+        roleHy: null,
+        photo: {
+          src: "/church-bethel-aleppo-leader-khachadourian.jpg",
+          alt: "Mr. Harout Khachadourian",
+        },
+      },
+      {
+        name: "Mrs. Araz Mansourian-Shahinian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/church-bethel-aleppo-secretary-shahinian.jpg",
+          alt: "Mrs. Araz Mansourian-Shahinian",
+        },
+      },
+    ],
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "A Century of Faith in Aleppo",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The history of the Armenian Evangelical Church movement formally began in 1846, when a number of godly people with a reform vision decided the time had come for Armenians to experience the Christian faith based on the direct teaching and preaching of the Bible as the sole reference of the church. This torch of faith is exemplified by the founding of the Armenian Evangelical Bethel Church in Aleppo.",
+            "Most Armenian Evangelicals arrived in Syria as a result of the Genocide. The survivors who reached Aleppo settled in the Jabriye and Suleymaniye areas of the city under more than tragic conditions — but the need to survive made them regroup and start churches and schools. In this context, the Bethel Church was founded, its first members the surviving members of the Marash Armenian Evangelical churches: laborers, elderly, widows, and orphans.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "From Camp Bethel to a Church of Stone",
+          headingHy: null,
+          paragraphs: [
+            "Today's Bethel Church was once called the Camp Bethel Church, built in a refugee camp in a hacienda called al-Hamidiye. The American Missionary Board initiated the construction of a wooden hall for educational and religious purposes; some elderly still remember when the classrooms were separated by mere curtains. In 1922, Rev. Garabed Ketenjian was asked to be the pastor. By around 1932 the number of church attendants reached 1,600, and the leaders resolved to build a stone church.",
+            "During 1932–1934, under Rev. Nerses Sarian, land was bought on the hill in the Jabriye area, upon which the Bethel Church stands to this day. In 1934 the foundation of the building was celebrated — a replica of the First Armenian Evangelical Church in Marash, twenty metres long and fifteen wide — finalized during Rev. Yeghia Kassouni's period (1935–1937), who also built the parsonage.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Service Through War and Renewal",
+          headingHy: null,
+          paragraphs: [
+            "Rev. Aharon Shirajian played a major role in the building of Bethel and was also a founder of the Red Cross in Syria and of the Aleppo Armenian Home for the Elderly, and ran a center of refuge and healing for Armenian women who had suffered during the Genocide. Across the following decades, a steady succession of faithful pastors carried the church through the Second World War, waves of emigration, and the nationalization of Christian schools in the late 1960s.",
+            "In 1992, Bethel welcomed a young pastor, Rev. Dr. Haroutune Selimian, who continues to serve to this day. During the Syrian war — with Aleppo a main battlefield from 2012 to 2017 — Bethel kept its doors open, and in his capacity as Head of the Armenian Evangelical Community in Syria, Rev. Selimian established humanitarian response structures for families whose homes had been struck, and for children, adults, and the vulnerable struggling to survive.",
+            "On March 21, 2021, the Armenian Evangelical Bethel Church was renovated and rededicated — a new chapter of hope and renewed vitality for the Armenian faithful of Aleppo.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: "Ministries & Activities",
+      headingHy: null,
+      items: [
+        "Sunday Worship Services",
+        "Christian Education",
+        "Women's Ministry",
+        "“Young Knights”",
+        "Christian Endeavor",
+        "Community Activities",
+        "Summer Bible School",
+      ],
+      itemsHy: null,
+    },
+
+    milestone: {
+      year: "2021",
+      yearHy: null,
+      heading: "Renovated & Rededicated",
+      headingHy: null,
+      body: "On March 21, 2021, the Armenian Evangelical Bethel Church was renovated and rededicated — marking a new chapter of hope and renewed vitality in the life of the Armenian faithful of Aleppo. With renewed spirit, the church continues its mission under the pastoral leadership of Rev. Dr. Haroutune Selimian.",
+      bodyHy: null,
+    },
+
+    specialProject: null,
+
+    // Pastors' succession — best-effort English transliteration from the
+    // mockup's own Western Armenian names (its own note reads "Names are
+    // rendered in Western Armenian as supplied; English forms pending").
+    // 5 of 17 names already have a confirmed English spelling directly
+    // from the mockup's own History prose (Garabed Ketenjian, Nerses
+    // Sarian, Yeghia Kassouni, Aharon Shirajian, Haroutune Selimian); the
+    // rest are transliterated here for the first time, pending Union
+    // confirmation — see OPEN_QUESTIONS. "Sarmazian"/"Khachadourian"
+    // spellings reused from this page's own leadership grid / the
+    // Anjar/AESSA succession precedent for consistency.
+    succession: {
+      eyebrow: "Archive",
+      eyebrowHy: null,
+      heading: "Pastors of Bethel Church",
+      headingHy: null,
+      note: "Those who have served the Armenian Evangelical Bethel Church since its founding. Names are shown in English (best-effort transliteration from the source Western Armenian); spellings not already confirmed elsewhere on the site are pending Union confirmation.",
+      noteHy: null,
+      entries: [
+        { name: "Rev. Garabed Ketenjian", nameHy: null, years: "1922", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Nerses Sarian", nameHy: null, years: "1932 – 1934", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Yeghia Kassouni", nameHy: null, years: "1935 – 1937", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Misak Manoukian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Aharon Shirajian", nameHy: null, years: "1923 – 1938", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hovhannes Abkarian", nameHy: null, years: "1939 – 1947", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Nerses Khachadourian", nameHy: null, years: "1947 – 1949", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Dikran Andreasian", nameHy: null, years: "1949 – 1957", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Vahan Bedikian", nameHy: null, years: "1957 – 1963", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Yesayi Sarmazian", nameHy: null, years: "1963 –", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Bargev Abardian", nameHy: null, years: "1969 – 1972", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Manase Shnorhokian", nameHy: null, years: "1973 – 1975", note: null, noteHy: null, isCurrent: false },
+        {
+          name: "Rev. Hovhannes Sarmazian · Rev. Ardashes Kerpabian",
+          nameHy: null,
+          years: "1975 – 1978",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        { name: "Rev. Bargev Orjanian", nameHy: null, years: "1978 – 1981", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hanna Sarmazian", nameHy: null, years: "1982 – 1988", note: null, noteHy: null, isCurrent: false },
+        {
+          name: "Mr. Melkon Melkonian (lay preacher)",
+          nameHy: null,
+          years: "1990 – 1992",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          name: "Rev. Dr. Haroutune Selimian",
+          nameHy: null,
+          years: "1992 – present",
+          note: null,
+          noteHy: null,
+          isCurrent: true,
+        },
+      ],
+    },
+
+    anniversary: null,
+
+    gallery: {
+      eyebrow: "Life at Bethel",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-bethel-aleppo-gallery-worship.jpg",
+          alt: "Worship inside Bethel Church",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-bethel-aleppo-gallery-night.jpg",
+          alt: "Bethel Church at night",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-bethel-aleppo-gallery-dvbs.jpg",
+          alt: "Summer Bible School at Bethel",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-bethel-aleppo-gallery-courtyard.jpg",
+          alt: "Bethel Church courtyard gathering",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "A Living Witness in Aleppo",
+      headingHy: null,
+      body: "For more than a century, Bethel Armenian Evangelical Church has opened its doors to its people — proclaiming faith, nurturing generations, and bearing witness to the enduring power of hope, under the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // Phone/email rendered as "Pending" even though churches.ts has
+    // values — the approved mockup explicitly marks both placeholder
+    // ("Placeholder — pending"), which wins per rule 1. Secretary's real
+    // name is confirmed (matches the mockup's own leadership grid).
+    contactOverride: {
+      phonePending: true,
+      emailPending: true,
+      secretary: "Mrs. Araz Mansourian-Shahinian",
+      note: "Contact details are placeholders until verified copy is supplied.",
+    },
   },
 };

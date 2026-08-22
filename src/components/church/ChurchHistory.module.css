@@ -51,6 +51,16 @@
   margin: 0 0 1rem;
 }
 
+.dropcap::first-letter {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  line-height: 0.78;
+  float: left;
+  color: var(--color-red);
+  padding: 0.375rem 0.75rem 0 0;
+  font-weight: 600;
+}
+
 /* Side-photo history block (e.g. Emmanuel's founding narrative) — matches
    the reference files' .hsplit exactly: stacked mobile, 1.15fr/1fr row at
    >=720px. */

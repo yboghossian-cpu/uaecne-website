@@ -58,6 +58,35 @@
   object-position: center 38%;
 }
 
+.heroPending {
+  background:
+    repeating-linear-gradient(135deg, rgba(197, 160, 89, 0.09) 0 2px, transparent 2px 15px),
+    linear-gradient(160deg, #fbf3e2, #efe2c8);
+}
+
+.heroGlyph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(139, 0, 0, 0.3);
+}
+
+.heroGlyphIcon {
+  width: 44px;
+  height: 44px;
+}
+
+.heroGlyphCaption {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(74, 0, 0, 0.42);
+}
+
 @media (min-width: 720px) {
   .top {
     padding: 1.875rem 2.125rem 0;
