@@ -320,6 +320,17 @@ export default function IconSymbols() {
             <path d="M3 19c0-3 2.7-5 6-5s6 2 6 5" />
           </g>
         </symbol>
+
+        {/* Facebook contact-row icon — geometry copied verbatim from
+            design-reference/uaecne-church-emmanuel-aleppo.html's own #fb
+            symbol (needed for a real Facebook link in ChurchContactSection,
+            first used by Emmanuel Church of Aleppo). */}
+        <symbol id="ic-fb" viewBox="0 0 24 24">
+          <path
+            d="M14 9h3V5h-3c-2.2 0-4 1.8-4 4v2H7v4h3v6h4v-6h3l1-4h-4V9c0-.6.4-1 1-1z"
+            fill="currentColor"
+          />
+        </symbol>
       </defs>
     </svg>
   );

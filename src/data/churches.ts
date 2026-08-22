@@ -137,7 +137,7 @@ export const churches: Church[] = [
     secretary: "",
     isNew: false,
     slug: "armenian-protestant-emmanuel-church-aleppo",
-    photo: null,
+    photo: "/church-emmanuel-aleppo-hero.jpg",
     emblem: null,
   },
   {

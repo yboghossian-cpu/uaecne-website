@@ -115,8 +115,17 @@ export type ChurchContent = {
   masthead: {
     locationLine: string;
     locationLineHy: string | null;
-    established: string; // just the year/value, e.g. "1922" — component prepends "Established "
+    established: string; // just the year/value, e.g. "1922" — component prepends "Established " by default
     establishedHy: string | null;
+    // Optional override for the prefix word — defaults to "Established"
+    // (every church before the Syria unit relies on that default; FAEC's
+    // own reference literally says "Established 1922"). Bethel/Emmanuel's
+    // mockups both say "Founded" instead.
+    establishedLabel?: string;
+    // Optional second dated value in the meta line (e.g. Emmanuel's
+    // "Present church 1925", alongside "Founded 1852") — null/omitted for
+    // every church with only one date.
+    secondDate?: { label: string; value: string } | null;
   };
 
   logo: Photo | null; // independently optional
@@ -153,6 +162,10 @@ export type ChurchContent = {
   } | null;
 
   leadership: LeaderEntry[] | null;
+  // Optional override for LeadershipGrid's eyebrow — defaults to "The
+  // Ministry" when omitted (every church before the Syria unit relies on
+  // that default). Bethel and Emmanuel's mockups both say "The Team."
+  leadershipEyebrow?: string;
 
   history: {
     eyebrow: string;
@@ -254,6 +267,11 @@ export type ChurchContent = {
     secretary?: string;
     address?: string;
     hideLocationCard?: boolean;
+    // Real Facebook page link (label + full URL) — additive, only set
+    // when the reference actually names one (Emmanuel's mockup, corrected
+    // from the source doc's typo'd "facebo-ok"). Renders a real link, not
+    // a dead href.
+    facebook?: { label: string; url: string };
     // Renders "Pending" in place of a real phone/email value — for a
     // church whose reference explicitly marks contact details as
     // placeholders (e.g. the Syria churches), rather than showing
@@ -1437,6 +1455,7 @@ export const churchContent: Record<string, ChurchContent> = {
       locationLineHy: null,
       established: "1923",
       establishedHy: null,
+      establishedLabel: "Founded",
     },
 
     // No distinct logo/seal file exists in the source folder — the
@@ -1511,6 +1530,7 @@ export const churchContent: Record<string, ChurchContent> = {
         },
       },
     ],
+    leadershipEyebrow: "The Team",
 
     history: {
       eyebrow: "Our History",
@@ -1691,6 +1711,213 @@ export const churchContent: Record<string, ChurchContent> = {
       emailPending: true,
       secretary: "Mrs. Araz Mansourian-Shahinian",
       note: "Contact details are placeholders until verified copy is supplied.",
+    },
+  },
+
+  // Syria — Aleppo, church 2 of 9. Built verbatim from
+  // design-reference/uaecne-church-emmanuel-aleppo.html. ENGLISH-ONLY per
+  // Yeghia's instruction — the mockup's Armenian masthead subtitle line is
+  // dropped entirely (no other Armenian content exists on this page).
+  // Rev. Dr. Haroutune Selimian is Emmanuel's HONORARY pastor, not
+  // resident — the About copy states plainly the church has no resident
+  // pastor, and his role reads "Honorary Pastor" everywhere, never
+  // "Pastor." His real photo is reused from Bethel (same real person,
+  // same site) rather than duplicated. No pastors'-succession module
+  // exists in this mockup at all — `succession: null`.
+  "armenian-protestant-emmanuel-church-aleppo": {
+    slug: "armenian-protestant-emmanuel-church-aleppo",
+
+    masthead: {
+      locationLine: "Azizieh District, Aleppo, Syria",
+      locationLineHy: null,
+      established: "1852",
+      establishedHy: null,
+      establishedLabel: "Founded",
+      secondDate: { label: "Present church", value: "1925" },
+    },
+
+    // No distinct logo/seal file exists — the mockup's own masthead circle
+    // is a generic cross icon, not a real institutional emblem. Rendered
+    // without a masthead logo, same treatment as Bethel.
+    logo: null,
+    heroPhoto: {
+      src: "/church-emmanuel-aleppo-hero.jpg",
+      alt: "Armenian Evangelical Emmanuel Church of Aleppo",
+    },
+    factsBar: [
+      { label: "1852", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Azizieh, Aleppo", labelHy: null, sub: "Location", subHy: null },
+      { label: "Sunday · pending", labelHy: null, sub: "Worship Service", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About Emmanuel Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Aleppo was established in 1852, on the second Sunday of June, in the Mugharbalieh district, with six founding members. From those modest beginnings it grew into a stable congregation, and in 1925 the church welcomed its people into its newly constructed building in the Azizieh district, where Emmanuel Church stands today.",
+        "Emmanuel Church continues its longstanding ministry of worship, Christian education, fellowship, and service. Although the church currently does not have a resident pastor, Rev. Dr. Haroutune Selimian — Head of the Armenian Protestant Community in Syria and Honorary Pastor of Emmanuel Church — regularly ministers the Word of God to the congregation during Sunday worship. It stands within the family of the Union of the Armenian Evangelical Churches in the Near East (UAECNE).",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote:
+        "Faithful to its historic calling: to proclaim the Gospel, nurture Christian faith, strengthen fellowship, and serve the wider community.",
+      pullQuoteHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Dr. Haroutune Selimian",
+      nameHy: null,
+      role: "Honorary Pastor",
+      roleHy: null,
+      photo: {
+        src: "/church-bethel-aleppo-pastor-selimian.jpg",
+        alt: "Rev. Dr. Haroutune Selimian",
+      },
+    },
+
+    leadership: [
+      {
+        name: "Rev. Dr. Haroutune Selimian",
+        nameHy: null,
+        role: "Honorary Pastor",
+        roleHy: null,
+        photo: { src: "/church-bethel-aleppo-pastor-selimian.jpg", alt: "Rev. Dr. Haroutune Selimian" },
+      },
+      {
+        name: "Mrs. Betty Hatem",
+        nameHy: null,
+        role: "Vice-Chairwoman",
+        roleHy: null,
+        photo: null,
+      },
+      {
+        name: "Mrs. Tamar Kazanjian-Keoshgerian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: null,
+      },
+    ],
+    leadershipEyebrow: "The Team",
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From Mugharbalieh to Azizieh",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical Church of Aleppo was established in 1852, on the second Sunday of June, in the Mugharbalieh district, with six founding members. In 1855 the church was reorganized with nine members, and during its early years worship services were held in a rented house in Mugharbalieh.",
+            "Alongside the church, a small boys' primary school was established, operating at first with a single teacher. Despite these modest beginnings, the church gradually grew into a stable congregation of approximately fifty members.",
+            "By the early 1920s, one of the principal concerns of the congregation was the construction of a permanent church building. On June 28, 1923, the foundation stone of the new church was laid during a special worship service. While construction was still underway, former members and those wishing to join were invited to register officially — and on that occasion 85 men and 115 women formally declared their membership.",
+            "In 1925, Emmanuel Armenian Evangelical Church welcomed its congregation into its newly constructed building in the Azizieh district of Aleppo, beginning the year with a solemn New Year worship service attended by a large gathering of the faithful. In 1927, for the first time, the Administrative Council conducted a systematic census, recording 363 families — approximately 1,500 individuals from 20 different localities.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: "Ministries & Activities",
+      headingHy: null,
+      items: [
+        "Sunday Worship Services",
+        "Women's Ministry",
+        "Youth Ministry",
+        "Christian Endeavor",
+        "Couples' Committee",
+        "Christian Education",
+      ],
+      itemsHy: null,
+    },
+
+    milestone: {
+      year: "1925",
+      yearHy: null,
+      heading: "A New Home in Azizieh",
+      headingHy: null,
+      body: "After decades in Mugharbalieh, the congregation entered its newly constructed church in the Azizieh district of Aleppo — the building where Emmanuel Church continues to worship and serve to this day.",
+      bodyHy: null,
+    },
+
+    specialProject: null,
+    succession: null,
+    anniversary: null,
+
+    gallery: {
+      eyebrow: "Life at Emmanuel",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-emmanuel-aleppo-gallery-interior.jpg",
+          alt: "Emmanuel Church interior",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-emmanuel-aleppo-gallery-worship.jpg",
+          alt: "Sunday worship at Emmanuel",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-emmanuel-aleppo-gallery-altar.jpg",
+          alt: "Youth gathering at the altar",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-emmanuel-aleppo-gallery-womens.jpg",
+          alt: "Women's ministry meeting",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-emmanuel-aleppo-gallery-vbs.jpg",
+          alt: "Summer Bible School",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-emmanuel-aleppo-gallery-outing.jpg",
+          alt: "Youth outing",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "Faith in Aleppo Since 1852",
+      headingHy: null,
+      body: "By the grace of God, Emmanuel Armenian Evangelical Church continues its mission — proclaiming the Gospel, nurturing Christian faith, strengthening fellowship, and serving its community, under the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // Facebook is real (corrected from the source doc's typo'd
+    // "facebo-ok"); phone/email/street address all pending per the
+    // mockup's own placeholder language.
+    contactOverride: {
+      phonePending: true,
+      emailPending: true,
+      address: "Azizieh District, Aleppo, Syria",
+      secretary: "Mrs. Tamar Kazanjian-Keoshgerian",
+      facebook: {
+        label: "emmanuel.church.official",
+        url: "https://www.facebook.com/emmanuel.church.official/",
+      },
+      note: "Phone, email and street address pending verification.",
     },
   },
 };

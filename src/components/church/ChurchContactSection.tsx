@@ -97,6 +97,24 @@ export default function ChurchContactSection({
             </span>
             <h3 className={styles.cardTitle}>Get in Touch</h3>
           </div>
+          {contactOverride?.facebook && (
+            <div className={styles.row}>
+              <svg className={styles.rowIco}>
+                <use href="#ic-fb" />
+              </svg>
+              <span>
+                <span className={styles.key}>Facebook</span>
+                <a
+                  href={contactOverride.facebook.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  {contactOverride.facebook.label}
+                </a>
+              </span>
+            </div>
+          )}
           {phonePending ? (
             <div className={styles.row}>
               <svg className={styles.rowIco}>

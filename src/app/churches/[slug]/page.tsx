@@ -22,7 +22,10 @@ import styles from "./page.module.css";
 // Slugs whose approved mockup has a real click-to-enlarge lightbox (see
 // ChurchGalleryLightbox's own comment) — every other church keeps the
 // plain, non-lightbox ChurchGallery.
-const LIGHTBOX_GALLERY_SLUGS = new Set(["armenian-evangelical-bethel-church-aleppo"]);
+const LIGHTBOX_GALLERY_SLUGS = new Set([
+  "armenian-evangelical-bethel-church-aleppo",
+  "armenian-protestant-emmanuel-church-aleppo",
+]);
 
 type PageParams = { slug: string };
 
@@ -112,7 +115,7 @@ export default async function ChurchDetailPage({
       <AnniversaryBand anniversary={content.anniversary} />
       <ChurchAbout about={content.about} pastorCard={content.pastorCard} />
       <ChurchContactSection church={church} contactOverride={content.contactOverride} />
-      <LeadershipGrid leaders={content.leadership} />
+      <LeadershipGrid leaders={content.leadership} eyebrow={content.leadershipEyebrow} />
       <ChurchHistory history={content.history} />
       <ChurchPrograms programs={content.programs} />
       <SpecialProjectBand specialProject={content.specialProject} />

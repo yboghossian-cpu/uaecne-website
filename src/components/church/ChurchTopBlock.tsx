@@ -10,6 +10,8 @@ type Masthead = {
   locationLineHy: string | null;
   established: string;
   establishedHy: string | null;
+  establishedLabel?: string;
+  secondDate?: { label: string; value: string } | null;
 };
 
 type ChurchTopBlockProps = {
@@ -53,8 +55,14 @@ export default function ChurchTopBlock({
           <h1 className={styles.heading}>{church.name}</h1>
           <div className={styles.meta}>
             {masthead.locationLine}
-            {" · Established "}
+            {` · ${masthead.establishedLabel ?? "Established"} `}
             <b className={styles.estYear}>{masthead.established}</b>
+            {masthead.secondDate && (
+              <>
+                {` · ${masthead.secondDate.label} `}
+                <b className={styles.estYear}>{masthead.secondDate.value}</b>
+              </>
+            )}
           </div>
         </div>
       </div>

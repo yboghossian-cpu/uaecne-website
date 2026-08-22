@@ -13,19 +13,30 @@ type LeaderEntry = {
 
 type LeadershipGridProps = {
   leaders: LeaderEntry[] | null;
+  // Both additive/optional, defaulting to the original hardcoded text —
+  // every church before the Syria unit relied on those defaults
+  // unaffected. Bethel/Emmanuel's mockups both say "The Team," not "The
+  // Ministry" (a mismatch missed during Bethel's own build, corrected here
+  // for both — see OPEN_QUESTIONS).
+  eyebrow?: string;
+  heading?: string;
 };
 
 // Renders `leadership` when non-null; renders nothing when null (e.g.
 // Syriac). Any entry with no photo gets the medallion "photo pending"
 // treatment, matching src/app/churches/page.module.css's .picPending/.glyph
 // pattern (icon + caption on a warm gradient) rather than a bare rectangle.
-export default function LeadershipGrid({ leaders }: LeadershipGridProps) {
+export default function LeadershipGrid({
+  leaders,
+  eyebrow = "The Ministry",
+  heading = "Leadership",
+}: LeadershipGridProps) {
   if (!leaders) return null;
 
   return (
     <section className={styles.lead}>
-      <div className={styles.eyebrow}>The Ministry</div>
-      <h2 className={styles.heading}>Leadership</h2>
+      <div className={styles.eyebrow}>{eyebrow}</div>
+      <h2 className={styles.heading}>{heading}</h2>
       <div className={styles.grid}>
         {leaders.map((leader, i) => (
           <div className={styles.person} key={i}>
