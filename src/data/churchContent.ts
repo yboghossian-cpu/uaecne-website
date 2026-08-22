@@ -1920,4 +1920,183 @@ export const churchContent: Record<string, ChurchContent> = {
       note: "Phone, email and street address pending verification.",
     },
   },
+
+  // Syria — Aleppo, church 3 of 9. Built verbatim from
+  // design-reference/uaecne-church-martyrs-aleppo.html. ENGLISH-ONLY per
+  // Yeghia's instruction — the mockup's Armenian masthead subtitle line is
+  // dropped entirely (no other Armenian content exists here; no succession
+  // module either). Pastor Simon Der Sahagian's role reads "Pastor," never
+  // "Rev." — the Armenian source itself says Պատ. (Pastor), and churches.ts
+  // already agrees. Only 2 leadership cards (Pastor + Secretary) — the
+  // source doc names no Vice-Chair, so none is fabricated. Both leaders
+  // have real photos (no photo-pending here). Gallery is a plain 2-up grid
+  // via the existing `ChurchGallery` (not the scroll+arrows
+  // `ChurchGalleryLightbox`) per Yeghia's explicit instruction — note the
+  // mockup's own script does implement click-to-zoom on its 2 photos, just
+  // without scroll arrows (only 2 images); flagged, not silently resolved,
+  // in OPEN_QUESTIONS.
+  "armenian-evangelical-martyrs-church-aleppo": {
+    slug: "armenian-evangelical-martyrs-church-aleppo",
+
+    masthead: {
+      locationLine: "Suleimaniyeh District, Aleppo, Syria",
+      locationLineHy: null,
+      established: "1931",
+      establishedHy: null,
+      establishedLabel: "Founded",
+      secondDate: { label: "Present church", value: "1965" },
+    },
+
+    // No distinct logo/seal file exists — the mockup's own masthead circle
+    // is a generic cross icon, not a real institutional emblem. Rendered
+    // without a masthead logo, same treatment as Bethel/Emmanuel.
+    logo: null,
+    heroPhoto: {
+      src: "/church-martyrs-aleppo-hero.jpg",
+      alt: "Martyrs' Armenian Evangelical Church of Aleppo",
+    },
+    factsBar: [
+      { label: "1931", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Suleimaniyeh, Aleppo", labelHy: null, sub: "Location", subHy: null },
+      { label: "Sunday · pending", labelHy: null, sub: "Worship Service", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About Martyrs' Church",
+      headingHy: null,
+      paragraphs: [
+        "The roots of the Armenian Evangelical Martyrs Church reach back to 1865 and the Hayig district of Aintab. After the displacement of Aintab's Armenians in 1921, its people relocated to Aleppo — and in 1931, thirty-three families founded a congregation of their own, received that same year into the Union of the Armenian Evangelical Churches in the Near East (UAECNE).",
+        "Throughout its history, the church has played an important role in the spiritual, moral, and cultural formation of generations. Through worship, Christian education, and its various ministries, it nurtures Christian faith and character, encourages a life of service, and preserves Armenian identity and heritage. Since 2011, its pastoral ministry has been entrusted to Pastor Simon Der Sahagian.",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote: "Named for the martyrs, the church has borne faithful witness in Aleppo for nearly a century.",
+      pullQuoteHy: null,
+    },
+
+    pastorCard: {
+      name: "Pastor Simon Der Sahagian",
+      nameHy: null,
+      role: "Pastor",
+      roleHy: null,
+      photo: {
+        src: "/church-martyrs-aleppo-pastor.jpg",
+        alt: "Pastor Simon Der Sahagian",
+      },
+    },
+
+    leadership: [
+      {
+        name: "Pastor Simon Der Sahagian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: { src: "/church-martyrs-aleppo-pastor.jpg", alt: "Pastor Simon Der Sahagian" },
+      },
+      {
+        name: "Mrs. Sarin Seraydarian-Aghayegian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: { src: "/church-martyrs-aleppo-secretary.jpg", alt: "Mrs. Sarin Seraydarian-Aghayegian" },
+      },
+    ],
+    leadershipEyebrow: "The Team",
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From Aintab to Aleppo",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The roots of the Armenian Evangelical Martyrs Church date back to 1865, when an Armenian Evangelical church was established in the Hayig district of Aintab, in present-day Turkey. In 1921, following the displacement of Aintab's Armenian population, members of the Hayig district church relocated to Aleppo, where they joined the Emmanuel Armenian Evangelical Church and worshipped until 1930.",
+            "In 1931, thirty-three families expressed their desire to establish a congregation of their own and founded the Armenian Evangelical Martyrs Church of Aleppo. That same year, the church was officially received as a member of the UAECNE. During its early years, the congregation held worship in a courtyard building in the Christian district of Salibeh, moving in 1936 to the Armenian Red Cross building in the Suleimaniyeh district.",
+            "In 1960, the church families resolved to establish a permanent place of worship and purchased a plot of land on Telephone Hawái Avenue in Suleimaniyeh. After several years of dedicated effort, the newly constructed church building was officially inaugurated on March 14, 1965.",
+            "Among the devoted members who contributed significantly to the life and ministry of the church was Dr. Haroutune Nazarian (1907–2002), whose faithful service remains an important part of the congregation's history. Despite the emigration of many families during the 1980s, the Martyrs Church remained committed to its mission and continued its Christian witness and service within the Armenian community of Aleppo.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: "Ministries & Activities",
+      headingHy: null,
+      items: [
+        "Sunday Worship & Sunday School",
+        "Youth Ministry",
+        "Summer Bible School (DVBS)",
+        "Women's Ministry",
+      ],
+      itemsHy: null,
+    },
+
+    milestone: {
+      year: "1965",
+      yearHy: null,
+      heading: "A Church of Their Own",
+      headingHy: null,
+      body: "On March 14, 1965, after years of dedicated effort, the newly constructed Martyrs' Church building on Telephone Hawái Avenue in Suleimaniyeh was officially inaugurated — the home where the congregation continues to worship today.",
+      bodyHy: null,
+    },
+
+    specialProject: null,
+    succession: null,
+    anniversary: null,
+
+    gallery: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-martyrs-aleppo-gallery-interior.jpg",
+          alt: "Martyrs' Church sanctuary interior",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-martyrs-aleppo-gallery-building.jpg",
+          alt: "Martyrs' Church building, Suleimaniyeh",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "A Faithful Witness in Aleppo",
+      headingHy: null,
+      body: "Named in memory of the martyrs, the Armenian Evangelical Martyrs Church continues its ministry of worship, education, and service within the Armenian community of Aleppo, under the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // Facebook is real; phone/email/street address all pending per the
+    // mockup's own placeholder language. Secretary honorific: the English
+    // source doc says "Mrs." (matching Տիկ.); an Armenian office-list gloss
+    // elsewhere said "Miss" — using "Mrs." per the doc, flagged pending in
+    // OPEN_QUESTIONS.
+    contactOverride: {
+      phonePending: true,
+      emailPending: true,
+      address: "Suleimaniyeh District, Aleppo, Syria",
+      secretary: "Mrs. Sarin Seraydarian-Aghayegian",
+      facebook: {
+        label: "nahadagats.Church",
+        url: "https://www.facebook.com/nahadagats.Church",
+      },
+      note: "Phone, email and street address pending verification.",
+    },
+  },
 };
