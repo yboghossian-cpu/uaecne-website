@@ -272,6 +272,22 @@ export type ChurchContent = {
     bodyHy: string | null;
   } | null;
 
+  // Additive — a bordered "Worship Today" notice card (distinct from every
+  // other module: not a pull-quote, not a vacancy pill, not a full section
+  // with an eyebrow/heading pair) for an inactive church whose congregation
+  // now worships elsewhere. `boldPhrase`, when non-null, is a verbatim
+  // substring of `body` (e.g. a redirect church's name) rendered in bold —
+  // matching the reference's own inline `<b>` emphasis — rather than
+  // reformatting the paragraph into separate fields. First used by
+  // Karaduran/Kaladouran. Optional/omitted for every church without one.
+  worshipToday?: {
+    heading: string;
+    headingHy: string | null;
+    body: string;
+    bodyHy: string | null;
+    boldPhrase: string | null;
+  } | null;
+
   // `eyebrow` null when the reference has no kicker line above the gallery
   // heading (e.g. Ashrafieh's "The Church Today" — just a decorative rule +
   // heading, no eyebrow text, unlike Syriac's "In Pictures" eyebrow).
@@ -2481,6 +2497,161 @@ export const churchContent: Record<string, ChurchContent> = {
       phonePending: true,
       emailPending: true,
       note: "District, street address, phone, and email pending verification.",
+    },
+  },
+
+  // Syria (Kessab) — Karaduran, church 6 of 9. Built verbatim from
+  // design-reference/uaecne-church-karaduran-kessab.html. Keyed to
+  // churches.ts's EXISTING `armenian-evangelical-church-of-kaladouran` row
+  // (B-SY-09) — this is the same village the mockup calls "Karaduran," not
+  // a new church; the directory's own spelling ("Kaladouran") is what
+  // ChurchTopBlock's <h1> renders (from `church.name`, never this file),
+  // same precedent as Bethel's directory/mockup name mismatch. Flagging the
+  // spelling discrepancy rather than silently editing either source.
+  // INACTIVE CHURCH: no resident pastor, worship moved to Holy Trinity in
+  // 2014 — no `pastorCard`, no `leadership`, no `programs`, regardless of
+  // churches.ts's own `pastor` field (which lists the shared visiting
+  // pastor for all 4 Kessab churches; that field is only ever read by the
+  // route's directory-only fallback branch, never by this full-content
+  // render path, so it cannot leak a pastor onto this page). English doc,
+  // no translation/pending-name issue. 2 real photos copied to
+  // `public/church-karaduran-kessab-*`, matched to the mockup's own
+  // embedded (recompressed) images by visual inspection, not MD5 (same
+  // lesson as Damascus) — both are exact-content matches (same building
+  // exterior, same sanctuary interior), no fabricated hero. New additive
+  // `worshipToday` field + `WorshipTodayNotice` component built for the
+  // mockup's bordered "Worship Today" callout — no existing primitive fits
+  // a heading+paragraph notice card. Gallery: plain `ChurchGallery` (not
+  // `ChurchGalleryLightbox`) — same call Yeghia made for Martyrs' Aleppo
+  // despite that mockup's own click-to-zoom (item 77), and here
+  // `ChurchGalleryLightbox` would additionally drop the mockup's real
+  // photo caption entirely (it has no caption rendering) and show an
+  // always-on "← Scroll for more →" hint that doesn't apply to a single
+  // photo — `ChurchGallery` preserves the real caption text faithfully.
+  "armenian-evangelical-church-of-kaladouran": {
+    slug: "armenian-evangelical-church-of-kaladouran",
+
+    masthead: {
+      locationLine: "Karaduran, Kessab, Syria",
+      locationLineHy: null,
+      established: "1873",
+      establishedHy: null,
+      establishedLabel: "Founded",
+      secondDate: { label: "Evangelical witness since", value: "1860" },
+    },
+
+    // No distinct logo/seal file exists — mockup's own masthead circle is
+    // a generic cross icon, not a real institutional emblem.
+    logo: null,
+    heroPhoto: {
+      src: "/church-karaduran-kessab-hero.jpg",
+      alt: "Armenian Evangelical Church of Karaduran, Kessab",
+    },
+    factsBar: [
+      { label: "1873", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Karaduran, Kessab", labelHy: null, sub: "Location", subHy: null },
+      {
+        label: "Holy Trinity, Kessab",
+        labelHy: null,
+        sub: "Worship Now Held At",
+        subHy: null,
+      },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About the Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Karaduran, Kessab, stands as a testimony to more than a century and a half of Armenian Evangelical presence, Christian witness, education, and service in the region. Its witness began as early as 1860, when Evangelical preachers from Kessab were sent to Karaduran to proclaim the Word of God — and in 1873 the church, together with a three-room school, was formally established.",
+        "In its early years the community numbered about fifty-five families. Over time that number gradually declined, and the congregation was never able to sustain a permanent resident pastor; instead, various visiting pastors and preachers faithfully served it through the years.",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote:
+        "A century and a half of faith, witness, and learning on the hills of Kessab.",
+      pullQuoteHy: null,
+    },
+
+    // Inactive church — no resident pastor, no leadership, no programs.
+    pastorCard: null,
+    leadership: null,
+    programs: null,
+
+    worshipToday: {
+      heading: "Worship Today",
+      headingHy: null,
+      body: "Since 2014, regular worship services are no longer held at the Church of Karaduran. The few remaining Armenian Evangelical families now worship with the Armenian Evangelical Holy Trinity Church in Kessab, where they continue to share in the spiritual life and fellowship of the church.",
+      bodyHy: null,
+      boldPhrase: "Armenian Evangelical Holy Trinity Church in Kessab",
+    },
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "A Witness Since 1860",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical witness in Karaduran began even before it had a church of its own. As early as 1860, Armenian Evangelical preachers from Kessab were sent to Karaduran to proclaim the Word of God and minister to the local population. These early missionary efforts laid the foundation for the formal establishment of the church thirteen years later.",
+            "Following the establishment of the Armenian Evangelical Church in Kessab, the Armenian Evangelical Church of Karaduran — together with a school of three rooms — was established in 1873, serving the educational needs of the local community and reflecting the church's early commitment to both Christian ministry and education.",
+            "In its early years the community comprised approximately 55 families. Over time, however, their number gradually declined, making it increasingly difficult to sustain an independent church ministry. As a result, the church did not have a permanent resident pastor; throughout its history, various visiting pastors and preachers served the congregation, providing preaching, pastoral care, and spiritual guidance.",
+            "Since 2014, regular worship services have no longer been held at Karaduran, and the remaining families have joined the worship of the Armenian Evangelical Holy Trinity Church in Kessab — yet the church endures as a lasting testimony to generations of Armenian Evangelical faith and service in the region.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    milestone: null,
+    specialProject: null,
+    anniversary: null,
+    succession: null,
+
+    gallery: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "Inside the Church",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-karaduran-kessab-interior.jpg",
+          alt: "Interior of the Church of Karaduran",
+          caption: "The sanctuary of the Armenian Evangelical Church of Karaduran, Kessab.",
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "A Lasting Testimony in Kessab",
+      headingHy: null,
+      body: "More than a century and a half of Armenian Evangelical presence, Christian witness, education, and service — the Church of Karaduran remains part of the enduring story of the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // Facebook is real (a public group link, not a page); email suppressed
+    // entirely — the mockup's own Get in Touch card has no email row at
+    // all, and churches.ts's email is the shared visiting pastor's address,
+    // not specific to this inactive church. Phone/street pending per the
+    // mockup's own note; churches.ts's existing address (a village-level
+    // descriptor, not a precise street address) is kept as-is, consistent
+    // with Emmanuel Aleppo's precedent of showing a real regional address
+    // alongside a still-pending-street note.
+    contactOverride: {
+      email: null,
+      phonePending: true,
+      facebook: {
+        label: "Facebook group",
+        url: "https://www.facebook.com/groups/255047687880778/",
+      },
+      note: "Phone and street pending verification.",
     },
   },
 };

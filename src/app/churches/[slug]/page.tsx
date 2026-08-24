@@ -18,6 +18,7 @@ import ChurchContactSection from "@/components/church/ChurchContactSection";
 import ChurchCTA from "@/components/church/ChurchCTA";
 import MilestoneBand from "@/components/church/MilestoneBand";
 import VisionBand from "@/components/church/VisionBand";
+import WorshipTodayNotice from "@/components/church/WorshipTodayNotice";
 import styles from "./page.module.css";
 
 // Slugs whose approved mockup has a real click-to-enlarge lightbox (see
@@ -59,13 +60,20 @@ export default async function ChurchDetailPage({
 
   const content = churchContent[slug] ?? null;
 
+  // "Syria (Kessab)" is a display-grouping value, not real crumb text (see
+  // churches/page.tsx's own `countryDisplayLabel` for the same split) — the
+  // Kessab churches' own mockups show a 4th crumb segment ("Ministries ›
+  // Churches › Syria › Kessab"), not a combined 3rd segment.
+  const breadcrumbCountry = church.country === "Syria (Kessab)" ? "Syria" : church.country;
+  const breadcrumbSubregion = church.country === "Syria (Kessab)" ? "Kessab" : null;
+
   if (!content) {
     // 23 of 25 churches don't have a ChurchContent entry yet. Render the
     // real, already-verified directory data only — never invented prose,
     // never a 404.
     return (
       <>
-        <ChurchBreadcrumb country={church.country} />
+        <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} />
         <section className={styles.minimalTop}>
           <h1 className={styles.minimalHeading}>{church.name}</h1>
           <div className={styles.minimalMeta}>
@@ -106,7 +114,7 @@ export default async function ChurchDetailPage({
 
   return (
     <>
-      <ChurchBreadcrumb country={church.country} />
+      <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} />
       <ChurchTopBlock
         church={church}
         masthead={content.masthead}
@@ -122,6 +130,7 @@ export default async function ChurchDetailPage({
         pullQuote={content.about.pullQuote}
         vacancyNote={content.about.vacancyNote}
       />
+      <WorshipTodayNotice notice={content.worshipToday} />
       <ChurchContactSection church={church} contactOverride={content.contactOverride} />
       <LeadershipGrid
         leaders={content.leadership}
