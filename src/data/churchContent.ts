@@ -2802,4 +2802,148 @@ export const churchContent: Record<string, ChurchContent> = {
       note: "Phone and street pending verification.",
     },
   },
+
+  // Syria (Kessab) — Korkune/Keorkuneh, church 8 of 9. Built verbatim from
+  // design-reference/uaecne-church-korkune-kessab.html. Fills the EXISTING
+  // churches.ts row (B-SY-08, `armenian-evangelical-church-of-keorkuneh`) —
+  // the mockup's "Korkune" is the directory's "Keorkuneh," same
+  // spelling-conflict pattern as Karaduran/Kaladouran and Ekizolouk/
+  // Ekizolukh (items 81–82). Unlike those two, `churches.ts`'s `estYear`
+  // ("1898") actually MATCHES the mockup's "Founded 1898" — no conflict to
+  // flag here. INACTIVE CHURCH per Yeghia's instruction: no `pastorCard`,
+  // `leadership`, or `programs` — same as Karaduran/Ekizolukh. This mockup
+  // shares Karaduran's exact shape, not Ekizolukh's: it DOES name a
+  // specific redirect church ("Armenian Evangelical Holy Trinity Church of
+  // Kessab"), so `worshipToday.boldPhrase` is set (matching Karaduran) and
+  // the facts bar's 3rd cell is "Holy Trinity, Kessab" / "Worship Now Held
+  // At" (matching Karaduran, not Ekizolukh's plain "Location" cell) — the
+  // mockup's own content decided this, not an assumption carried over from
+  // either sibling. No Facebook link — the mockup has no `#fb` symbol and
+  // no Facebook row at all in its Get in Touch card (unlike both
+  // Karaduran and Ekizolukh, which share the same Kessab-region group
+  // link); none invented. `subregion="Kessab"` on the breadcrumb comes for
+  // free, same as Ekizolukh — no code changes needed. 2 real photos
+  // copied to `public/church-korkune-kessab-*`, matched to the mockup's
+  // own embedded (recompressed) images by visual inspection (exterior
+  // building with twin roof crosses; sanctuary with arched reredos and
+  // hanging chandelier) — no MD5 match, same as every Syria church so far.
+  "armenian-evangelical-church-of-keorkuneh": {
+    slug: "armenian-evangelical-church-of-keorkuneh",
+
+    masthead: {
+      locationLine: "Korkune, Kessab, Syria",
+      locationLineHy: null,
+      established: "1898",
+      establishedHy: null,
+      establishedLabel: "Founded",
+    },
+
+    // No distinct logo/seal file exists — mockup's own masthead circle is
+    // a generic cross icon, not a real institutional emblem.
+    logo: null,
+    heroPhoto: {
+      src: "/church-korkune-kessab-hero.jpg",
+      alt: "Armenian Evangelical Church of Korkune, Kessab",
+    },
+    factsBar: [
+      { label: "1898", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Korkune, Kessab", labelHy: null, sub: "Location", subHy: null },
+      {
+        label: "Holy Trinity, Kessab",
+        labelHy: null,
+        sub: "Worship Now Held At",
+        subHy: null,
+      },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About the Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Korkune, Kessab, was established in 1898, together with the formation of an organized Armenian Protestant community in the village. Over the years, the Armenian Evangelical presence became an integral part of the life and identity of Korkune — whose Armenian population has traditionally belonged predominantly to the Armenian Protestant community.",
+        "For many years the community also maintained a school that educated generations of the village's children while supporting the preservation of Christian faith and Armenian heritage. Through much of their history, the churches of Korkune and Ekizolukh shared the same pastors and pastoral leadership, strengthening the fellowship between the two neighbouring congregations.",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote:
+        "A whole village gathered in faith — a witness woven into the identity of Korkune.",
+      pullQuoteHy: null,
+    },
+
+    // Inactive church — no resident pastor since February 2020, no
+    // leadership, no programs.
+    pastorCard: null,
+    leadership: null,
+    programs: null,
+
+    worshipToday: {
+      heading: "Worship Today",
+      headingHy: null,
+      body: "Since February 2020, the Armenian Evangelical Church of Korkune has been without a resident pastor. The remaining members of the congregation now participate in worship at the Armenian Evangelical Holy Trinity Church of Kessab, where they continue to nurture their Christian faith and maintain their spiritual fellowship.",
+      bodyHy: null,
+      boldPhrase: "Armenian Evangelical Holy Trinity Church of Kessab",
+    },
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "A Village of Faith Since 1898",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical Church of Korkune, Kessab, was established in 1898, together with the formation of an organized Armenian Protestant community in the village. From that time, the Armenian Evangelical presence became an integral part of the life and identity of Korkune, whose Armenian population has traditionally belonged, in large part, to the Armenian Protestant community.",
+            "For many years the community maintained a school that served the educational needs of the village's children, contributing to the education of generations while supporting the preservation of Christian faith and Armenian heritage. Due to continued emigration and migration, however, the number of students gradually declined, and the school eventually ceased its operations.",
+            "Throughout much of their history, the Armenian Evangelical churches of Korkune and Ekizolukh shared the same pastors and pastoral leadership — a close relationship that strengthened the spiritual fellowship and cooperation between the two neighbouring congregations.",
+            "Since February 2020, the church has been without a resident pastor, and the remaining members now worship at the Armenian Evangelical Holy Trinity Church of Kessab. Yet the Church of Korkune endures as an important part of the historic Armenian Evangelical presence in the region, and a testimony to generations of faith, Christian education, fellowship, and service.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    milestone: null,
+    specialProject: null,
+    anniversary: null,
+    succession: null,
+
+    gallery: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "Inside the Church",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-korkune-kessab-interior.jpg",
+          alt: "Interior of the Armenian Evangelical Church of Korkune",
+          caption: "The sanctuary of the Armenian Evangelical Church of Korkune, Kessab.",
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "A Testimony of Generations",
+      headingHy: null,
+      body: "An important part of the historic Armenian Evangelical presence in Kessab, the Church of Korkune remains a testimony to generations of faith, Christian education, fellowship, and service — under the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // No Facebook link — the mockup has none, unlike Karaduran/Ekizolukh.
+    // Email suppressed entirely — no email row in the mockup's Get in
+    // Touch card; churches.ts's email is the shared visiting pastor's
+    // address, not specific to this inactive church.
+    contactOverride: {
+      email: null,
+      phonePending: true,
+      note:
+        "Contact details pending verification. For worship, the congregation gathers at Holy Trinity Church, Kessab.",
+    },
+  },
 };
