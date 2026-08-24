@@ -288,6 +288,55 @@ export type ChurchContent = {
     boldPhrase: string | null;
   } | null;
 
+  // Reuses `worshipToday`'s exact shape for a second, visually distinct
+  // bordered note (gold left-border on plain ivory, rendered via
+  // `WorshipTodayNotice`'s additive `variant="gold"` prop, vs. the red-on-
+  // wash default) — e.g. Holy Trinity's "A Legacy Beyond Its Walls — KCHAG"
+  // land-donation note. A second field rather than reusing `worshipToday`
+  // itself because a church could plausibly need both at once (an inactive-
+  // church redirect notice AND a KCHAG note) without one overwriting the
+  // other. First used by Holy Trinity, Kessab.
+  kchag?: {
+    heading: string;
+    headingHy: string | null;
+    body: string;
+    bodyHy: string | null;
+    boldPhrase: string | null;
+  } | null;
+
+  // Additive — a multi-entry milestone timeline (year + one short
+  // paragraph per era), distinct from `milestone` (a single dated event,
+  // red-gradient band) and `succession` (named people in sequence). First
+  // used by Holy Trinity's "A Timeline of Faith" (1846–2003, 7 entries).
+  timeline?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    eras: { year: string; yearHy: string | null; body: string; bodyHy: string | null }[];
+  } | null;
+
+  // Additive — a standalone 2-column "then and now" feature: its own
+  // eyebrow + full h2 heading + paragraphs + one real photo, in a plain
+  // (non-wash) section distinct from the History section above it. Not
+  // represented as another `history.sections[]` entry — those share
+  // History's own top-level eyebrow/heading and wash background, and can't
+  // carry a section of their own. First used by Holy Trinity's "The White
+  // Church" story (the then-and-now completion photo). Renders as a plain
+  // static image, not wired into the shared lightbox the mockup's own
+  // script combines it with — a deliberate interaction simplification
+  // (the photo, caption, and text are all still real and unabridged), not
+  // a content loss.
+  feature?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+    photo: { src: string; alt: string };
+  } | null;
+
   // `eyebrow` null when the reference has no kicker line above the gallery
   // heading (e.g. Ashrafieh's "The Church Today" — just a decorative rule +
   // heading, no eyebrow text, unlike Syriac's "In Pictures" eyebrow).
@@ -2944,6 +2993,327 @@ export const churchContent: Record<string, ChurchContent> = {
       phonePending: true,
       note:
         "Contact details pending verification. For worship, the congregation gathers at Holy Trinity Church, Kessab.",
+    },
+  },
+
+  // Syria (Kessab) — Holy Trinity, church 9 of 9, the flagship of the Syria
+  // unit. Built verbatim from
+  // design-reference/uaecne-church-holy-trinity-kessab.html. Fills the
+  // EXISTING churches.ts row (B-SY-06); estYear "1853" and the directory
+  // name both match the mockup exactly — no spelling/year conflict, unlike
+  // every other Kessab church. ACTIVE church, full treatment: pastorCard,
+  // 2-person leadership grid, programs, and — two structurally new pieces
+  // this unit — a multi-entry milestone `timeline` (year+paragraph eras,
+  // distinct from the single-event `milestone` field) rendered by a new
+  // `MilestoneTimeline` component, and a standalone 2-column `feature`
+  // (own eyebrow/heading/paragraphs/photo, distinct from a
+  // `history.sections[].image` split which shares History's own
+  // eyebrow/heading) rendered by a new `WhiteChurchFeature` component —
+  // neither existing primitive fit without losing structure. The KCHAG
+  // note, by contrast, reuses `worshipToday`'s exact shape via
+  // `WorshipTodayNotice`'s new additive `variant="gold"` prop (gold left
+  // border, plain section, matching the mockup's own separate `.kchag`
+  // class) — no new component needed there. This church's slug is added
+  // to `LIGHTBOX_GALLERY_SLUGS`
+  // (the only Kessab church with a real scrollable multi-photo gallery);
+  // the White Church feature photo is deliberately NOT wired into that
+  // same lightbox, even though the mockup's own script combines them —
+  // a scoped interaction simplification, not a content loss (see the
+  // `feature` field's own comment).
+  //
+  // Rev. Shant Agishian — the ONLY page his photo appears on among all 9
+  // Syria churches. Name "Rev." + role label "Pastor," per Yeghia's
+  // explicit English-doc ruling (the Armenian source calls him Պատուելի;
+  // the English documentation calls him "Rev.," and this is an English
+  // page, so the English source wins). His mockup photo (a suited desk
+  // portrait) has NO matching file anywhere in the source folder or the
+  // wider UNION tree (searched); rather than use an unverifiable image,
+  // this instead uses a different REAL, confirmed photo of him
+  // (`20260524_113441.jpg`, alone at the pulpit) for both the About
+  // pastor card and the Leadership grid entry — the same real person,
+  // a different genuine photo than the mockup's own choice, not a
+  // fabricated substitute. A second, distinct real photo of him
+  // (`Պատուելի Շանթ Ակիշեան-.jpg`, frontal at the pulpit with the hymn
+  // board) is used separately for the gallery's "Sunday worship" slot,
+  // matching the mockup's own alt text for that image exactly. VC Mr.
+  // Cesar Der Sahagian's photo is filename-confirmed
+  // (`Սեզար Տէր Սահակեան.jpg`) and visually matches the mockup's embed.
+  // The White Church "then and now" feature photo is a real, verified
+  // composite file (`Outside.jpg`) — not an invented split-image, a
+  // single photo already assembled this way in the source folder,
+  // confirmed byte-for-byte identical in composition (old damaged
+  // building over the completed white church, "Studio ALSHALLAL"
+  // watermark) to the mockup's own embedded image. All 8 distinct photos
+  // this unit needed were matched to real source files by visual
+  // inspection (filename or pixel/composition match), not MD5 — same
+  // lesson as every Syria church so far; the 9th source-folder file
+  // (a duplicate "SHAREit(2)" copy of the KCHAG-youth photo) was
+  // correctly left unused.
+  "armenian-evangelical-holy-trinity-church-kessab": {
+    slug: "armenian-evangelical-holy-trinity-church-kessab",
+
+    masthead: {
+      locationLine: "Kessab, Syria",
+      locationLineHy: null,
+      established: "1853",
+      establishedHy: null,
+      establishedLabel: "Founded",
+      secondDate: { label: "the “White Church,” completed", value: "1970" },
+    },
+
+    // No distinct logo/seal file exists — mockup's own masthead circle is
+    // a generic cross icon, not a real institutional emblem.
+    logo: null,
+    heroPhoto: {
+      src: "/church-holy-trinity-kessab-hero.jpg",
+      alt: "Worship at the Armenian Evangelical Holy Trinity Church of Kessab",
+    },
+    factsBar: [
+      { label: "1853", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Kessab, Syria", labelHy: null, sub: "Location", subHy: null },
+      { label: "Sunday · pending", labelHy: null, sub: "Worship Service", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About Holy Trinity Church",
+      headingHy: null,
+      paragraphs: [
+        "The history of the Armenian Evangelical Holy Trinity Church of Kessab is a testimony to faith, perseverance, and service. Formally organized on May 23, 1853, it grew out of the Armenian Evangelical awakening that reached Kessab in the 1840s — and through persecution, displacement, genocide, migration, and hardship, it has never ceased to proclaim the Gospel and serve its community.",
+        "Its iconic “White Church,” begun before the Genocide and completed in 1970, stands today as a symbol of that endurance. Now the church at the heart of the Kessab region — joined by the faithful of neighbouring villages — Holy Trinity continues a living ministry of worship, education, and fellowship under the Union of the Armenian Evangelical Churches in the Near East (UAECNE).",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote:
+        "Through genocide, displacement, and rebuilding — a witness that would not be extinguished.",
+      pullQuoteHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Shant Agishian",
+      nameHy: null,
+      role: "Pastor",
+      roleHy: null,
+      photo: {
+        src: "/church-holy-trinity-kessab-pastor.jpg",
+        alt: "Rev. Shant Agishian",
+      },
+    },
+
+    leadership: [
+      {
+        name: "Rev. Shant Agishian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: {
+          src: "/church-holy-trinity-kessab-pastor.jpg",
+          alt: "Rev. Shant Agishian",
+        },
+      },
+      {
+        name: "Mr. Cesar Der Sahagian",
+        nameHy: null,
+        role: "Vice-Chairman",
+        roleHy: null,
+        photo: {
+          src: "/church-holy-trinity-kessab-vc.jpg",
+          alt: "Mr. Cesar Der Sahagian",
+        },
+      },
+    ],
+    leadershipEyebrow: "The Team",
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "The Cradle of Evangelical Kessab",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical movement emerged within the Armenian Apostolic Church as a movement of spiritual awakening and biblical renewal. Following the establishment of the Armenian Evangelical Church in Constantinople in 1846, the movement took root in Kessab. In 1844–1845, the missionary Van Lennep left several Armenian-script Turkish New Testaments in Kessab, drawing young people to gather and study the Scriptures — meetings that became one of the foundations of the community. In 1848, Hagop Varjabed assumed leadership of the Bible-study group, whose gatherings grew into organized spiritual meetings.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "The Establishment of the Church",
+          headingHy: null,
+          paragraphs: [
+            "The years 1850–1862 were among the most turbulent yet fruitful in the community's history. In March 1853 the Ottoman authorities recognized the Evangelicals as a distinct community, and on May 23, 1853, the Armenian Evangelical Church of Kessab was formally organized with 12 members, with some 200 registered as Evangelicals. Following an 1859 imperial decree, the community built its own place of worship; the first service was held in 1860, and the building was dedicated before roughly 1,000 people. The Evangelical communities of Gayajik, Chinarjik, Korkune, Ekizolukh, and Karaduran gathered in Kessab for worship, especially on the first Sunday of each month.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Growth, Genocide & Rebuilding",
+          headingHy: null,
+          paragraphs: [
+            "In 1874, Rev. Stepan Mahshikian, the first ordained pastor from Kessab, began his ministry, and the congregation grew in numbers, organization, and education. In 1909, Rev. T. Kuntakjian obtained a decree to build a new, modern church; construction began in 1912–1913 but was interrupted by the Armenian Genocide of 1915, leaving the unfinished structure known ever after as the “White Church.” By 1915 the church counted some 320 communicant members within a wider community of about 1,500.",
+            "After the 1918 Armistice, the people of Kessab returned to a devastated homeland and began to rebuild. Rev. Yeghia Kassouni served from 1930 to 1932; the 1947 repatriation to Soviet Armenia further reduced the community. Yet the church endured, faithful to its Christian and Armenian heritage.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    feature: {
+      eyebrow: "The White Church",
+      eyebrowHy: null,
+      heading: "Completed at Last, in 1970",
+      headingHy: null,
+      paragraphs: [
+        "Begun before the Genocide and left standing unfinished for over half a century, the “White Church” became a symbol of Kessab's endurance. In 1966 serious efforts to complete it began; construction resumed in 1967–1968 and the church was finally completed in 1970, thanks in large part to the efforts of Rev. A. Kerbabian together with benefactors and the congregation's own hands.",
+        "From July 7–12, 1970, the 38th Union Conference was held in Kessab, and the newly completed White Church was formally dedicated — more than a century after the community first gathered to study the Scriptures.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/church-holy-trinity-kessab-white-church-feature.jpg",
+        alt: "The White Church of Kessab",
+      },
+    },
+
+    timeline: {
+      eyebrow: "Milestones",
+      eyebrowHy: null,
+      heading: "A Timeline of Faith",
+      headingHy: null,
+      eras: [
+        {
+          year: "1846",
+          yearHy: null,
+          body: "The Armenian Evangelical Church is established in Constantinople; the movement takes root in Kessab.",
+          bodyHy: null,
+        },
+        {
+          year: "1853",
+          yearHy: null,
+          body: "On May 23, the Armenian Evangelical Church of Kessab is formally organized with 12 members.",
+          bodyHy: null,
+        },
+        {
+          year: "1860",
+          yearHy: null,
+          body: "The first church building opens; its dedication is attended by roughly 1,000 people.",
+          bodyHy: null,
+        },
+        {
+          year: "1874",
+          yearHy: null,
+          body: "Rev. Stepan Mahshikian, the first ordained pastor from Kessab, begins his ministry.",
+          bodyHy: null,
+        },
+        {
+          year: "1912–15",
+          yearHy: null,
+          body: "The “White Church” is begun, then interrupted by the Armenian Genocide.",
+          bodyHy: null,
+        },
+        {
+          year: "1970",
+          yearHy: null,
+          body: "The White Church is completed and dedicated during the 38th Union Conference in Kessab.",
+          bodyHy: null,
+        },
+        {
+          year: "2003",
+          yearHy: null,
+          body: "The church celebrates its 150th anniversary with commemorative worship and thanksgiving.",
+          bodyHy: null,
+        },
+      ],
+    },
+
+    kchag: {
+      heading: "A Legacy Beyond Its Walls — KCHAG",
+      headingHy: null,
+      body: "Between 1967 and 1969, the church donated a plot of its own land to the Christian Endeavour organization for its summer gatherings. The site became known as KCHAG, and has continued ever since to serve as an important centre for Christian gatherings and youth activities in the Kessab region.",
+      bodyHy: null,
+      boldPhrase: "KCHAG",
+    },
+
+    programs: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: "Ministries & Activities",
+      headingHy: null,
+      items: [
+        "Sunday Worship",
+        "Sunday School",
+        "Youth Ministry",
+        "Christian Endeavour",
+        "Women’s Ministry",
+        "Bible Studies",
+        "Evangelistic Gatherings",
+      ],
+      itemsHy: null,
+    },
+
+    milestone: null,
+    specialProject: null,
+    anniversary: null,
+    succession: null,
+
+    gallery: {
+      eyebrow: "Life at Holy Trinity",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-holy-trinity-kessab-gallery-worship.jpg",
+          alt: "Sunday worship at Holy Trinity",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-holy-trinity-kessab-gallery-white-church.jpg",
+          alt: "The historic White Church of Kessab",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-holy-trinity-kessab-gallery-kchag-centre.jpg",
+          alt: "KCHAG centre",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-holy-trinity-kessab-gallery-kchag-youth.jpg",
+          alt: "Youth gathering at KCHAG",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "A Living Witness in Kessab",
+      headingHy: null,
+      body: "Rooted in more than a century and a half of Evangelical witness and looking to the future with faith and hope, the Armenian Evangelical Holy Trinity Church of Kessab continues to proclaim the Gospel, nurture discipleship, and serve present and future generations — under the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // Facebook is the same Kessab-region group link the other Kessab
+    // churches use. Vice-Chair relabels the secretary row, same precedent
+    // as Syriac Aleppo. Phone/email/district/street all pending per the
+    // mockup's own note.
+    contactOverride: {
+      phonePending: true,
+      emailPending: true,
+      secretary: "Mr. Cesar Der Sahagian",
+      secretaryLabel: "Vice-Chair",
+      facebook: {
+        label: "Facebook group",
+        url: "https://www.facebook.com/groups/255047687880778/",
+      },
+      note: "Phone, email, district and street pending verification.",
     },
   },
 };

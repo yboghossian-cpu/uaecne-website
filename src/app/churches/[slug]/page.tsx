@@ -19,6 +19,8 @@ import ChurchCTA from "@/components/church/ChurchCTA";
 import MilestoneBand from "@/components/church/MilestoneBand";
 import VisionBand from "@/components/church/VisionBand";
 import WorshipTodayNotice from "@/components/church/WorshipTodayNotice";
+import WhiteChurchFeature from "@/components/church/WhiteChurchFeature";
+import MilestoneTimeline from "@/components/church/MilestoneTimeline";
 import styles from "./page.module.css";
 
 // Slugs whose approved mockup has a real click-to-enlarge lightbox (see
@@ -28,6 +30,7 @@ const LIGHTBOX_GALLERY_SLUGS = new Set([
   "armenian-evangelical-bethel-church-aleppo",
   "armenian-protestant-emmanuel-church-aleppo",
   "syriac-evangelical-church-aleppo",
+  "armenian-evangelical-holy-trinity-church-kessab",
 ]);
 
 type PageParams = { slug: string };
@@ -138,6 +141,9 @@ export default async function ChurchDetailPage({
         note={content.leadershipNote}
       />
       <ChurchHistory history={content.history} />
+      <WhiteChurchFeature feature={content.feature} />
+      <MilestoneTimeline timeline={content.timeline} />
+      <WorshipTodayNotice notice={content.kchag} variant="gold" />
       <ChurchPrograms programs={content.programs} />
       <SpecialProjectBand specialProject={content.specialProject} />
       <SuccessionList succession={content.succession} />
