@@ -245,12 +245,32 @@ export type ChurchContent = {
     note: string | null;
     noteHy: string | null;
     entries: SuccessionEntry[];
+    // Additive — an unnamed summary line rendered after the entries (e.g.
+    // Damascus's "Between 1930 and 2010, the church was served by thirteen
+    // resident pastors." — a real, source-verified count with no names to
+    // attach it to). Distinct from `note`, which renders above the entries.
+    // Null/omitted for every church without one.
+    footNote?: string | null;
+    footNoteHy?: string | null;
   } | null;
 
   // Verified against Ashrafieh's reference (see the `Anniversary` type above)
   // — null for every church that doesn't have a centennial/anniversary
   // module of its own.
   anniversary: Anniversary | null;
+
+  // Additive — a closing "Our Vision" statement band (red-gradient, eyebrow
+  // + a single italic paragraph), distinct from the always-present `cta`
+  // below. Neither MilestoneBand (year+heading+body) nor ChurchCTA
+  // (heading+body, no eyebrow) fit this shape without inventing content the
+  // reference doesn't have. First used by Damascus. Optional/omitted for
+  // every church without one.
+  vision?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    body: string;
+    bodyHy: string | null;
+  } | null;
 
   // `eyebrow` null when the reference has no kicker line above the gallery
   // heading (e.g. Ashrafieh's "The Church Today" — just a decorative rule +
@@ -2299,6 +2319,168 @@ export const churchContent: Record<string, ChurchContent> = {
         url: "https://www.facebook.com/share/1AQaGyyQnQ/",
       },
       note: "Phone, email, district and street pending verification.",
+    },
+  },
+
+  // Syria — Damascus, church 5 of 9. Built verbatim from
+  // design-reference/uaecne-church-damascus.html. Thin/sensitive page per
+  // Yeghia's instruction: no pastor card, no leadership grid, no programs
+  // module — the mockup has none of the three, and none is fabricated here.
+  // English-only (the mockup itself is English-only; no Armenian content
+  // exists to drop). The mockup's 3 embedded images are resized/recompressed
+  // copies, not byte-identical to the source folder's full-res originals
+  // (MD5s don't match) — each was matched to its real source file by visual
+  // inspection instead: hero → "49209857_...n.jpg" (single pastor at
+  // pulpit, numbered hymn board), gallery "Interior" → "20260128_131356.jpg"
+  // (elevated two-pastor view, stained-glass cross windows), gallery
+  // "Church gathering" → "49599555_...n.jpg" (congregation group photo,
+  // exact match). Real full-res files copied into public/, never the
+  // mockup's own lower-res embeds.
+  "damascus-armenian-evangelical-church": {
+    slug: "damascus-armenian-evangelical-church",
+
+    masthead: {
+      locationLine: "Damascus, Syria",
+      locationLineHy: null,
+      established: "1921",
+      establishedHy: null,
+      establishedLabel: "Founded",
+    },
+
+    // No distinct logo/seal file exists — mockup's own masthead circle is
+    // a generic cross icon, not a real institutional emblem.
+    logo: null,
+    heroPhoto: {
+      src: "/church-damascus-hero.jpg",
+      alt: "Worship at the Damascus Armenian Evangelical Church",
+    },
+    factsBar: [
+      { label: "1921", labelHy: null, sub: "Founded", subHy: null },
+      { label: "Damascus, Syria", labelHy: null, sub: "Location", subHy: null },
+      { label: "Sunday · pending", labelHy: null, sub: "Worship Service", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About the Church",
+      headingHy: null,
+      paragraphs: [
+        "The city of Damascus has long been a museum of historical events — and its Evangelical community, too, has known its own trials, its own faithful figures, and its own honors. Founded in the years of Armenian migration, the Damascus Armenian Evangelical Church has borne witness through a century of upheaval, endurance, and hope.",
+        "Through war and emigration the congregation grew small, and for a time the church’s doors were closed; yet today it gathers again as a community of about fifteen Evangelical families, holding fast to its calling.",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote: "A small congregation keeping faith alive in the heart of Damascus.",
+      pullQuoteHy: null,
+    },
+
+    // No pastor named anywhere in the mockup — none of the three modules
+    // (pastor card, leadership grid, programs) is fabricated.
+    pastorCard: null,
+    leadership: null,
+    programs: null,
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "A Century in Damascus",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The city of Damascus has been a museum of historical events, and so its Evangelical community, too, has had its own events, figures, and honors. In those years of migration it was not easy to keep records; but according to the information gathered, on August 26, 1922, Rev. Garabed Hasessian took up the pulpit of the Damascus Armenian Evangelical Church and served until November 1, 1923, after which Rev. Nerses Sarian took the pulpit.",
+            "On Sundays, worship was held in the Arab Evangelical Church; there were also Sunday school, women’s worship services, and Bible studies. In the summer of 1925, more than half of the community emigrated to Beirut and America.",
+            "Between 1930 and 2010, the church had thirteen resident pastors, along with periodic workers. In 2011 the war against Syria began, and much of the Armenian population emigrated to other countries; many families of the Damascus church left as well, and because of the country’s insecurity the church remained closed until 2020. Today the church has about fifteen Evangelical families.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    milestone: null,
+    specialProject: null,
+    anniversary: null,
+
+    // Early-pastors archive — 2 named entries plus an unnamed footer count,
+    // both verbatim from the mockup. English name spellings pending
+    // confirmation per the mockup's own note.
+    succession: {
+      eyebrow: "Archive",
+      eyebrowHy: null,
+      heading: "Early Pastors",
+      headingHy: null,
+      note: "The earliest recorded pastors of the Damascus Armenian Evangelical Church. English name spellings pending confirmation.",
+      noteHy: null,
+      entries: [
+        {
+          name: "Rev. Garabed Hasessian",
+          nameHy: null,
+          years: "Aug 1922 – Nov 1923",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+        {
+          name: "Rev. Nerses Sarian",
+          nameHy: null,
+          years: "from Nov 1923",
+          note: null,
+          noteHy: null,
+          isCurrent: false,
+        },
+      ],
+      footNote:
+        "Between 1930 and 2010, the church was served by thirteen resident pastors.",
+      footNoteHy: null,
+    },
+
+    vision: {
+      eyebrow: "Our Vision",
+      eyebrowHy: null,
+      body: "To restore the Armenian Evangelical Church to its vitality, so that the Lord Jesus Christ may be proclaimed and the number of the saved may increase.",
+      bodyHy: null,
+    },
+
+    gallery: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-damascus-gallery-interior.jpg",
+          alt: "Interior of the Damascus Armenian Evangelical Church",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/church-damascus-gallery-gathering.jpg",
+          alt: "Church gathering",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "Join Us in Worship",
+      headingHy: null,
+      body: "All are welcome at the Damascus Armenian Evangelical Church — a small congregation keeping faith alive in the heart of Damascus.",
+      bodyHy: null,
+    },
+
+    // Phone/email/district/street all pending per the mockup's own
+    // placeholder language — nothing in churches.ts to conflict with, since
+    // this is a new directory row with those same fields left blank.
+    contactOverride: {
+      phonePending: true,
+      emailPending: true,
+      note: "District, street address, phone, and email pending verification.",
     },
   },
 };

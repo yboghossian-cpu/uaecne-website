@@ -98,6 +98,14 @@
   font-weight: 600;
 }
 
+.footNote {
+  margin-top: 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--color-brown);
+  font-style: italic;
+  text-align: center;
+}
+
 @media (min-width: 720px) {
   .succession {
     padding: 3.25rem 2.125rem;

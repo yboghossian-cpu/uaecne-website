@@ -54,6 +54,17 @@ export default function SuccessionList({ succession, variant }: SuccessionListPr
             <span className={styles.years}>{entry.years}</span>
           </div>
         ))}
+        {(succession.footNote || succession.footNoteHy) && (
+          <p
+            className={
+              succession.footNote
+                ? styles.footNote
+                : `${styles.footNote} ${styles.noteHy}`
+            }
+          >
+            {succession.footNote ?? succession.footNoteHy}
+          </p>
+        )}
       </div>
     </section>
   );

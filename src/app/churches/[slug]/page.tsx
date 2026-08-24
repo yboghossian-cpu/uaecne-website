@@ -17,6 +17,7 @@ import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
 import ChurchContactSection from "@/components/church/ChurchContactSection";
 import ChurchCTA from "@/components/church/ChurchCTA";
 import MilestoneBand from "@/components/church/MilestoneBand";
+import VisionBand from "@/components/church/VisionBand";
 import styles from "./page.module.css";
 
 // Slugs whose approved mockup has a real click-to-enlarge lightbox (see
@@ -132,6 +133,7 @@ export default async function ChurchDetailPage({
       <SpecialProjectBand specialProject={content.specialProject} />
       <SuccessionList succession={content.succession} />
       <MilestoneBand milestone={content.milestone} />
+      <VisionBand vision={content.vision} />
       {LIGHTBOX_GALLERY_SLUGS.has(slug) ? (
         <ChurchGalleryLightbox gallery={content.gallery} />
       ) : (
