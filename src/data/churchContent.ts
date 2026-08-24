@@ -2654,4 +2654,152 @@ export const churchContent: Record<string, ChurchContent> = {
       note: "Phone and street pending verification.",
     },
   },
+
+  // Syria (Kessab) — Ekizolouk/Ekizolukh, church 7 of 9. Built verbatim from
+  // design-reference/uaecne-church-ekizolukh-kessab.html. Fills the EXISTING
+  // churches.ts row (B-SY-07, `armenian-evangelical-church-of-ekizolouk`) —
+  // the mockup's "Ekizolukh" is the directory's "Ekizolouk," same village,
+  // same spelling-conflict pattern as Karaduran/Kaladouran (item 81). The
+  // mockup's own name also adds "Emmanuel" ("Armenian Evangelical Emmanuel
+  // Church of Ekizolukh") that the directory's name omits entirely — a
+  // second, larger naming gap beyond spelling; `church.name` (the
+  // directory's shorter form) still wins for the <h1>, never overridden
+  // here, same precedent as Bethel. INACTIVE CHURCH per Yeghia's
+  // instruction: no `pastorCard`, `leadership`, or `programs` — the mockup
+  // itself has none of the three (no resident pastor since Feb 2020), and
+  // unlike Karaduran, this mockup never names a specific redirect church to
+  // worship at, so no "Worship Now Held At" facts-bar cell is invented
+  // (the facts bar's 3rd cell is "Location" here, not a redirect). Reuses
+  // `worshipToday`/`WorshipTodayNotice` (heading is "The Church Today," not
+  // "Worship Today" — the field takes any heading, no component change
+  // needed) with `boldPhrase: null` (the callout's paragraph has no inline
+  // `<b>` emphasis to preserve, unlike Karaduran's). `subregion="Kessab"`
+  // on the breadcrumb comes for free — `[slug]/page.tsx` already derives it
+  // from `church.country`, no per-church wiring needed. 2 real photos
+  // copied to `public/church-ekizolukh-kessab-*`; the source folder has a
+  // 3rd file with the same base filename ("IMG-20200530-WA0014 (1).jpg")
+  // that is in fact a misfiled duplicate of Karaduran's interior photo
+  // (MD5-identical to `church-karaduran-kessab-interior.jpg`) — not used.
+  // The other two candidates were matched to the mockup's own embedded
+  // (recompressed) images by exact pixel dimensions (1008×756 landscape /
+  // 756×1008 portrait) plus visual inspection, not MD5.
+  "armenian-evangelical-church-of-ekizolouk": {
+    slug: "armenian-evangelical-church-of-ekizolouk",
+
+    masthead: {
+      locationLine: "Ekizolukh, Kessab, Syria",
+      locationLineHy: null,
+      established: "1911",
+      establishedHy: null,
+      establishedLabel: "Construction begun",
+      secondDate: { label: "completed", value: "1955" },
+    },
+
+    // No distinct logo/seal file exists — mockup's own masthead circle is
+    // a generic cross icon, not a real institutional emblem.
+    logo: null,
+    heroPhoto: {
+      src: "/church-ekizolukh-kessab-hero.jpg",
+      alt: "Armenian Evangelical Emmanuel Church of Ekizolukh, Kessab",
+    },
+    factsBar: [
+      { label: "1911", labelHy: null, sub: "Construction Begun", subHy: null },
+      { label: "1955", labelHy: null, sub: "Building Completed", subHy: null },
+      { label: "Ekizolukh, Kessab", labelHy: null, sub: "Location", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "About the Church",
+      headingHy: null,
+      paragraphs: [
+        "The history of the Armenian Evangelical Emmanuel Church of Ekizolukh, Kessab, dates back to 1911, when construction of the church building began. The work was interrupted and left unfinished by the Armenian Genocide and the displacement and suffering that followed. Decades later, the building was finally completed in 1955 — an important milestone in the life of the Armenian Evangelical community of Ekizolukh.",
+        "For many years the community also maintained a school that served the children of the village, combining education with the preservation of Christian faith and Armenian heritage; the school is no longer operational today. Throughout its history the church was served by various pastors who faithfully ministered to the congregation.",
+      ],
+      paragraphsHy: null,
+      dropcap: false,
+      pullQuote:
+        "Begun in 1911, interrupted by the Genocide, and completed in faith — a witness that endured.",
+      pullQuoteHy: null,
+    },
+
+    // Inactive church — no resident pastor since February 2020, no
+    // leadership, no programs.
+    pastorCard: null,
+    leadership: null,
+    programs: null,
+
+    worshipToday: {
+      heading: "The Church Today",
+      headingHy: null,
+      body: "Since February 2020, the church has not had a permanent resident pastor. Nevertheless, the Armenian Evangelical Emmanuel Church of Ekizolukh continues to represent the longstanding Armenian Evangelical presence and witness in the village, and remains an important part of the spiritual and historical heritage of the Kessab region.",
+      bodyHy: null,
+      boldPhrase: null,
+    },
+
+    history: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "Interrupted, Then Completed in Faith",
+      headingHy: null,
+      dropcapFirstParagraph: true,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "The history of the Armenian Evangelical Emmanuel Church of Ekizolukh, Kessab, dates back to 1911, when construction of the church building began. The work, however, was interrupted and remained unfinished as a result of the Armenian Genocide and the displacement and suffering that followed.",
+            "Decades later, the church building was finally completed in 1955, marking an important milestone in the life of the Armenian Evangelical community of Ekizolukh — a testament to the perseverance of a people who returned to finish what had been begun in faith.",
+            "For many years the Armenian Protestant community of Ekizolukh also maintained a school that served the educational needs of the children of the village. The school played an important role in the life of the community, combining education with the preservation of Christian faith and Armenian heritage. The school is no longer operational today.",
+            "Throughout its history, the church was served by various pastors who faithfully ministered to the congregation and provided spiritual leadership and pastoral care. Since February 2020, the church has not had a permanent resident pastor — yet it endures, rooted in a history shaped by faith, perseverance, and service.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    milestone: null,
+    specialProject: null,
+    anniversary: null,
+    succession: null,
+
+    gallery: {
+      eyebrow: "The Church",
+      eyebrowHy: null,
+      heading: "The Church Building",
+      headingHy: null,
+      photos: [
+        {
+          src: "/church-ekizolukh-kessab-exterior.jpg",
+          alt: "Armenian Evangelical Emmanuel Church of Ekizolukh",
+          caption:
+            "The Armenian Evangelical Emmanuel Church of Ekizolukh, Kessab — completed in 1955.",
+          captionHy: null,
+        },
+      ],
+    },
+
+    cta: {
+      heading: "A Witness That Endured",
+      headingHy: null,
+      body: "Begun in 1911 and completed in 1955 through faith and perseverance, the Emmanuel Church of Ekizolukh remains part of the enduring story of the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // Facebook is the same Kessab-region group link Karaduran uses; email
+    // suppressed entirely — the mockup's own Get in Touch card has no email
+    // row, and churches.ts's email is the shared visiting pastor's address,
+    // not specific to this inactive church.
+    contactOverride: {
+      email: null,
+      phonePending: true,
+      facebook: {
+        label: "Facebook group",
+        url: "https://www.facebook.com/groups/255047687880778/",
+      },
+      note: "Phone and street pending verification.",
+    },
+  },
 };
