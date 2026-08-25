@@ -82,7 +82,11 @@ export type SchoolContent = {
   masthead: {
     locationLine: string;
     locationLineHy: string | null;
-    established: string; // just the year, e.g. "1923"
+    // Nullable — null when no founding year is confirmed enough to show
+    // in the masthead line at all (Emmanuel al-Ressaleh's own mockup has
+    // none here, carrying "Pending" in its facts bar instead); skips the
+    // " · Founded X" clause entirely rather than rendering "Founded Pending."
+    established: string | null; // just the year, e.g. "1923"
     establishedHy: string | null;
   };
 
@@ -2187,6 +2191,421 @@ export const schoolContent: Record<string, SchoolContent> = {
         {
           src: "/school-bethel-secondary-school-gallery-celebration-prep.jpg",
           alt: "Students preparing a school celebration",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+  },
+
+  // Armenian Evangelical Emmanuel School, known today by its licensed name
+  // "Al Ressaleh School" (Aleppo, Syria) — 3rd Syria school, verbatim from
+  // design-reference/emmanuel-al-ressaleh-school.html, cross-checked against
+  // "Հայ-Աւետարանական-Էմմանուէլ-Վարժարան.docx". Unusually well
+  // cross-checked already: the mockup's own footer note independently
+  // flags both real discrepancies the docx itself contains (founding year
+  // 1925 vs. "(1926)"; principal spelling "Malatyos" vs. "Malateous") —
+  // see the founding-year/spelling OPEN_QUESTIONS item for this school.
+  "emmanuel-al-ressaleh-school": {
+    slug: "emmanuel-al-ressaleh-school",
+
+    // No founding year in the masthead meta line at all — see
+    // `masthead.established`'s own type comment (new this unit). The facts
+    // bar below carries "Pending" for Founding Year instead, matching the
+    // mockup exactly.
+    masthead: {
+      locationLine: "Aleppo College Compound, Aleppo, Syria",
+      locationLineHy: null,
+      established: null,
+      establishedHy: null,
+    },
+
+    // "9.png" — an AI-generated-style shield crest (glossy 3D render,
+    // same tell-tale style as ACG's own logo), used as-supplied per
+    // Yeghia's standing "use the emblems as is" ruling — flagged here for
+    // the record, not withheld.
+    logo: {
+      src: "/school-emmanuel-al-ressaleh-emblem.png",
+      alt: "Al Ressaleh School crest",
+    },
+    heroPhoto: {
+      src: "/school-emmanuel-al-ressaleh-hero.jpg",
+      alt: "The Emmanuel (Al Ressaleh) School building in Aleppo",
+    },
+
+    factsBar: [
+      { label: "Pending", labelHy: null, sub: "Founding Year", subHy: null },
+      { label: "1976", labelHy: null, sub: "Established in Aleppo", subHy: null },
+      { label: "KG – Grade 6", labelHy: null, sub: "Kindergarten & Elementary", subHy: null },
+      { label: "Aleppo, Syria", labelHy: null, sub: "Location", subHy: null },
+    ],
+
+    // Required field, kept populated (same real text as `introFeature`,
+    // verbatim) for type parity even though `<SchoolAbout>` isn't rendered
+    // for this school — same reasoning as ACG/Bethel's own `about` field.
+    about: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "Emmanuel, Known Today as Al Ressaleh",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Emmanuel School — known today by its licensed name, Al Ressaleh School — has served the Armenian community of Aleppo for close to a century. It began its work in Jabal al-Nahr and, in 1976, moved to the Aleppo College compound, where it has remained ever since.",
+        "Today the school teaches children from kindergarten through the sixth grade — a small, close school giving its pupils a grounded and caring start to their education.",
+      ],
+      paragraphsHy: null,
+      pullQuote: null,
+      pullQuoteHy: null,
+    },
+
+    principalCard: null,
+
+    // Docx confirms: "Mailing Address: P.O Box 3833" — a THIRD school
+    // (after ACG and Bethel) sharing this exact box, strengthening the
+    // "shared regional Union box" reading over a copy-paste artifact.
+    location: {
+      addressLines: ["Aleppo College Compound, Aleppo, Syria", "P.O. Box 3833"],
+      addressLinesHy: null,
+    },
+
+    // All verified, real (not pending). No Fax row — the docx's own info
+    // sheet leaves Fax blank, and the mockup correctly omits the row
+    // entirely rather than inventing a value.
+    contactRows: [
+      {
+        key: "Phone",
+        keyHy: null,
+        value: "+963 21 2 687 701 · +963 21 2 687 290",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Email",
+        keyHy: null,
+        value: "alressaleh@gmail.com",
+        valueHy: null,
+        href: "mailto:alressaleh@gmail.com",
+      },
+      {
+        key: "Facebook",
+        keyHy: null,
+        value: "Al Ressaleh School",
+        valueHy: null,
+        href: "https://www.facebook.com/alressaleh.eschool/",
+      },
+      {
+        key: "Instagram",
+        keyHy: null,
+        value: "alressaleh",
+        valueHy: null,
+        href: "https://instagram.com/alressaleh",
+      },
+    ],
+
+    // 3 cards, matching the mockup's own `.lead-grid` exactly (Principal,
+    // License-Holder's Representative, Secretary). "License-Holder's
+    // Representative" is this school's own free-text role — Miss Mary
+    // Hakko, the same person named on Syriac Evangelical Church of
+    // Aleppo's own page as Vice-Chairwoman (a plausible shared-leadership
+    // case across Aleppo's Armenian Evangelical institutions, not
+    // independently investigated further). Both name spellings shown as
+    // supplied, pending Union confirmation per the mockup's own footer note.
+    leadership: [
+      {
+        name: "Mrs. Sadiqa Malatyos",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-principal.jpg",
+          alt: "Mrs. Sadiqa Malatyos",
+        },
+      },
+      {
+        name: "Miss Mary Hakko",
+        nameHy: null,
+        role: "License-Holder's Representative",
+        roleHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-owner-rep.jpg",
+          alt: "Miss Mary Hakko",
+        },
+      },
+      {
+        name: "Mrs. Sina Abaze",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-secretary.jpg",
+          alt: "Mrs. Sina Abaze",
+        },
+      },
+    ],
+
+    directorsArchive: null,
+    mission: null,
+    missionValues: null,
+    academicHeritage: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
+
+    // No "Make an Inquiry" section in this mockup (same as ACG/Bethel) —
+    // the Contact card's real mailto already covers enquiries.
+    inquiry: null,
+
+    cta: {
+      heading: "A Caring Start for Aleppo's Children",
+      headingHy: null,
+      body: "The Armenian Evangelical Emmanuel School — Al Ressaleh — continues its quiet, faithful work in Aleppo, an institution of the Armenian Evangelical Educational Council of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // About/Intro woven row — rendered via `WhiteChurchFeature` with
+    // `reverse` in place of `<SchoolAbout>`, same pattern as ACG/Bethel
+    // (this mockup's About row is also authored text-first, no `.rev`
+    // class, so it renders text-left/photo-right — the genuine reversal
+    // relative to WhiteChurchFeature's photo-left default).
+    introFeature: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "Emmanuel, Known Today as Al Ressaleh",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Emmanuel School — known today by its licensed name, Al Ressaleh School — has served the Armenian community of Aleppo for close to a century. It began its work in Jabal al-Nahr and, in 1976, moved to the Aleppo College compound, where it has remained ever since.",
+        "Today the school teaches children from kindergarten through the sixth grade — a small, close school giving its pupils a grounded and caring start to their education.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/school-emmanuel-al-ressaleh-classroom.jpg",
+        alt: "A welcome to Al Ressaleh School classroom",
+        width: 5472,
+        height: 3648,
+      },
+    },
+
+    pullQuoteBand: {
+      quote:
+        "From its founding to this day, the school works to give its children a high standard of learning — preparing them to step into the wider arena of life more capable and more ready.",
+      quoteHy: null,
+      attribution: "Armenian Evangelical Emmanuel School",
+      attributionHy: null,
+    },
+
+    // No sepia filter in this mockup's own vintage-band CSS (same as
+    // Bethel, unlike ACG) — `sepia={false}` at the call site.
+    vintageBand: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From Jabal al-Nahr to Aleppo",
+      headingHy: null,
+      leadParagraph:
+        "Emmanuel School began its mission in Jabal al-Nahr, under its first principal, Mr. Matteos Matteosian. In 1976 it moved to the Aleppo College compound in Aleppo and settled there; its principal in those years was Hermine Abajian, followed by four more principals in the decades that came after.",
+      leadParagraphHy: null,
+      photo: {
+        src: "/school-emmanuel-al-ressaleh-grounds.jpg",
+        alt: "The school grounds in Aleppo",
+        width: 5472,
+        height: 3648,
+      },
+      photoCaption: "The school grounds in Aleppo.",
+      photoCaptionHy: null,
+      paragraphs: [
+        "The school opened with two sections — a kindergarten and the first four elementary grades. At the end of the 1990s it expanded to include the fifth and sixth grades, the shape it keeps today.",
+        "Through every change, Emmanuel has carried its founding purpose forward: a small, close school giving Aleppo's Armenian children a steady and caring start.",
+      ],
+      paragraphsHy: null,
+    },
+
+    // 4 woven rows (Kindergarten, Play, Grades 1-6, Computer Room). All use
+    // `reverse: false` — Play's and Computer's `.split.rev` markup renders
+    // photo-left the same as Kindergarten's/Grades-1-6's non-`.rev` rows,
+    // same CSS-order-override math already confirmed on ACG and Bethel
+    // (`.split.rev .txt{order:2}.split.rev .ph{order:1}` neutralizes the
+    // DOM reversal rather than producing one).
+    splitRows: [
+      {
+        eyebrow: "Kindergarten",
+        eyebrowHy: null,
+        heading: "In the Kindergarten",
+        headingHy: null,
+        paragraphs: [
+          "The youngest children begin here, in bright classrooms full of colour, story, and song. It is where the school's smallest pupils take their first steps — learning to read, to count, and to belong.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-kindergarten.jpg",
+          alt: "Children in the kindergarten",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Play",
+        eyebrowHy: null,
+        heading: "Room to Play and Grow",
+        headingHy: null,
+        paragraphs: [
+          "A garden playground of slides, swings, and climbing frames — framed by the school's own bright pencil fence — gives the children space to run, play, and simply be children between their lessons.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-playground.jpg",
+          alt: "Children in the playground",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Grades 1–6",
+        eyebrowHy: null,
+        heading: "Building the Foundations",
+        headingHy: null,
+        paragraphs: [
+          "Through the elementary grades, lessons build the foundations of reading, writing, and number — the school working, in its own words, to prepare each child for the wider arena of life ahead.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-elementary.jpg",
+          alt: "An elementary class in progress",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Technology",
+        eyebrowHy: null,
+        heading: "In the Computer Room",
+        headingHy: null,
+        paragraphs: [
+          "Even the younger classes step into the computer room, gathering in small groups around the laptops to learn their first digital skills — one more way the school keeps pace with a changing world.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-emmanuel-al-ressaleh-computer-room.jpg",
+          alt: "Students in the computer room",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    // Icons: #ic-compass is new this unit; #ic-flask (ACG) and #ic-trophy
+    // (Bethel) both reused as-is.
+    events: {
+      eyebrow: "Beyond the Classroom",
+      eyebrowHy: null,
+      heading: "Through the Year",
+      headingHy: null,
+      items: [
+        {
+          icon: "#ic-flask",
+          title: "Science Exhibitions",
+          titleHy: null,
+          description: "Students present their work and discoveries to the wider school community.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-trophy",
+          title: "Competitions",
+          titleHy: null,
+          description: "Friendly contests that encourage the pupils to stretch and shine.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-compass",
+          title: "Cultural & Historical Trips",
+          titleHy: null,
+          description: "Excursions that connect the children to their history and heritage.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // 11 photos, verbatim alt text from the mockup's own gallery figures.
+    // 5 reuse the exact same source files already used above (school
+    // building, school grounds, kindergarten, elementary lesson, computer
+    // room) — the mockup's own gallery duplicates them too, same pattern
+    // confirmed on ACG/Bethel. The other 4 (plus the About/Intro photo,
+    // reused once more here as "Young pupils reading") are gallery-only or
+    // cross-reused photos, all real, matched by visual inspection.
+    gallery: {
+      eyebrow: "Gallery",
+      eyebrowHy: null,
+      heading: "Life at Emmanuel School",
+      headingHy: null,
+      photos: [
+        {
+          src: "/school-emmanuel-al-ressaleh-hero.jpg",
+          alt: "The school building",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-grounds.jpg",
+          alt: "The school grounds",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-gallery-kg-reading.jpg",
+          alt: "Kindergarten reading",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-kindergarten.jpg",
+          alt: "A kindergarten class",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-classroom.jpg",
+          alt: "Young pupils reading",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-playground.jpg",
+          alt: "The playground",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-gallery-play.jpg",
+          alt: "Children at play",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-gallery-indoor-play.jpg",
+          alt: "Indoor play area",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-gallery-classroom-2.jpg",
+          alt: "An elementary classroom",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-elementary.jpg",
+          alt: "Elementary lesson",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-emmanuel-al-ressaleh-computer-room.jpg",
+          alt: "The computer room",
           caption: null,
           captionHy: null,
         },

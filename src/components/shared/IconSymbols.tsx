@@ -394,6 +394,20 @@ export default function IconSymbols() {
             strokeWidth="1.6"
           />
         </symbol>
+
+        {/* Cultural & Historical Trips event icon — geometry copied
+            verbatim from design-reference/emmanuel-al-ressaleh-school.html's
+            own #compass symbol. First used by Emmanuel al-Ressaleh
+            School's "Through the Year" events section. */}
+        <symbol id="ic-compass" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          <path
+            d="M15.5 8.5l-2 5-5 2 2-5z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </symbol>
       </defs>
     </svg>
   );

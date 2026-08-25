@@ -93,10 +93,11 @@ export default async function SchoolDetailPage({
   // branching.
   const hasMagazineSections = Boolean(content.splitRows) || Boolean(content.academicsRows);
 
-  // Bethel Secondary School's vintage-band photo has no sepia treatment in
-  // its own mockup CSS, unlike ACG's (see `SchoolVintageBand`'s own
-  // comment) — a real per-mockup difference, not an oversight.
-  const vintageSepia = slug !== "bethel-secondary-school";
+  // Bethel Secondary School's and Emmanuel al-Ressaleh's vintage-band
+  // photos have no sepia treatment in their own mockup CSS, unlike ACG's
+  // (see `SchoolVintageBand`'s own comment) — a real per-mockup
+  // difference, not an oversight.
+  const vintageSepia = slug !== "bethel-secondary-school" && slug !== "emmanuel-al-ressaleh-school";
 
   return (
     <>

@@ -67,4 +67,12 @@ export const schools: School[] = [
     photo: "/school-bethel-secondary-school-hero.jpg",
     emblem: "/school-bethel-secondary-school-emblem.png",
   },
+  {
+    id: "school-emmanuel-al-ressaleh",
+    country: "Syria",
+    name: "Armenian Evangelical Emmanuel School (Al Ressaleh)",
+    slug: "emmanuel-al-ressaleh-school",
+    photo: "/school-emmanuel-al-ressaleh-hero.jpg",
+    emblem: "/school-emmanuel-al-ressaleh-emblem.png",
+  },
 ];

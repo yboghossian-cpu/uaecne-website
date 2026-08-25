@@ -8,7 +8,11 @@ type Fact = { label: string; labelHy: string | null; sub: string; subHy: string 
 type Masthead = {
   locationLine: string;
   locationLineHy: string | null;
-  established: string;
+  // Nullable — Emmanuel al-Ressaleh's mockup has no founding year in the
+  // masthead meta line at all (its own facts bar carries "Pending" for
+  // Founding Year instead); null skips the " · Founded X" clause entirely
+  // rather than rendering an odd "Founded Pending."
+  established: string | null;
   establishedHy: string | null;
 };
 
@@ -53,8 +57,12 @@ export default function SchoolTopBlock({
           <h1 className={styles.heading}>{school.name}</h1>
           <div className={styles.meta}>
             {masthead.locationLine}
-            {" · Founded "}
-            <b className={styles.estYear}>{masthead.established}</b>
+            {masthead.established && (
+              <>
+                {" · Founded "}
+                <b className={styles.estYear}>{masthead.established}</b>
+              </>
+            )}
           </div>
         </div>
       </div>
