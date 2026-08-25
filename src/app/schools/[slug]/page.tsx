@@ -91,13 +91,26 @@ export default async function SchoolDetailPage({
   // no-op for the other 3 schools since those fields are unset for them,
   // so it's safe to insert them at fixed positions without any per-school
   // branching.
-  const hasMagazineSections = Boolean(content.splitRows) || Boolean(content.academicsRows);
+  // Every magazine-style Syria school (ACG, Bethel, Emmanuel al-Ressaleh,
+  // Damascus Kenats/Al-Hayat) sets `introFeature` in place of `about`
+  // (see the conditional just above) — using that single field as the
+  // late-Contact trigger, rather than checking `splitRows`/`academicsRows`
+  // specifically, means a school with NO other split rows besides
+  // About/Intro (Damascus has none — no Events/Gallery either) still gets
+  // the correct late Contact position, matching its own mockup's order
+  // (About → Pull-quote → History → Leadership → Contact → CTA).
+  const hasMagazineSections = Boolean(content.introFeature);
 
-  // Bethel Secondary School's and Emmanuel al-Ressaleh's vintage-band
-  // photos have no sepia treatment in their own mockup CSS, unlike ACG's
-  // (see `SchoolVintageBand`'s own comment) — a real per-mockup
-  // difference, not an oversight.
-  const vintageSepia = slug !== "bethel-secondary-school" && slug !== "emmanuel-al-ressaleh-school";
+  // Bethel Secondary School's, Emmanuel al-Ressaleh's, and Damascus
+  // Kenats/Al-Hayat's vintage-band photos have no sepia treatment in
+  // their own mockup CSS, unlike ACG's (see `SchoolVintageBand`'s own
+  // comment) — a real per-mockup difference, not an oversight.
+  const NO_SEPIA_SLUGS = [
+    "bethel-secondary-school",
+    "emmanuel-al-ressaleh-school",
+    "damascus-kenats-al-hayat-school",
+  ];
+  const vintageSepia = !NO_SEPIA_SLUGS.includes(slug);
 
   return (
     <>

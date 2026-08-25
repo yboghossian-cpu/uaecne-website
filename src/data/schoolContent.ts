@@ -2612,4 +2612,197 @@ export const schoolContent: Record<string, SchoolContent> = {
       ],
     },
   },
+
+  // Damascus Armenian Evangelical "Kenats" (Life) School, licensed today as
+  // Al-Hayat Private School — 4th Syria school, verbatim from
+  // design-reference/damascus-kenats-al-hayat-school.html, cross-checked
+  // against "Դամասկոսի Հայ Աւետարանական Վարժարան.docx". Like Emmanuel
+  // al-Ressaleh, the mockup's own footer note already flags both real
+  // discrepancies its docx contains (see items below) — this build
+  // independently confirmed both, plus one the docx alone couldn't:
+  // Principal Mrs. Talab's own desk nameplate (visible in her own photo)
+  // reads "ميساء وجيهة طلب" (Maysaa Wajiha Talab), directly confirming the
+  // mockup's third name variant as real, not invented. No gallery and no
+  // events section exist in this mockup (confirmed: its own lightbox
+  // script only wires up `.split`/`.vintage-band` photos, no `.gal`
+  // selector at all) — both stay null/omitted, not built.
+  "damascus-kenats-al-hayat-school": {
+    slug: "damascus-kenats-al-hayat-school",
+
+    masthead: {
+      locationLine: "Old Damascus, Syria",
+      locationLineHy: null,
+      established: "1923",
+      establishedHy: null,
+    },
+
+    // "logo.png" — an AI-generated-style crest (same illustrated-book/quill
+    // tell as other Syria schools' logos), used as-supplied per Yeghia's
+    // standing "use the emblems as is" ruling — flagged, not withheld.
+    logo: {
+      src: "/school-damascus-kenats-al-hayat-emblem.png",
+      alt: "Kenats / Al-Hayat School crest",
+    },
+    heroPhoto: {
+      src: "/school-damascus-kenats-al-hayat-hero.jpg",
+      alt: "Pupils gathered in the school's old-Damascus courtyard",
+    },
+
+    factsBar: [
+      { label: "1923", labelHy: null, sub: "Founded", subHy: null },
+      { label: "1950", labelHy: null, sub: "Present Building", subHy: null },
+      { label: "KG & Elementary", labelHy: null, sub: "Kindergarten & Primary", subHy: null },
+      { label: "Damascus, Syria", labelHy: null, sub: "Location", subHy: null },
+    ],
+
+    // Required field, kept populated (same real text as `introFeature`,
+    // verbatim) for type parity even though `<SchoolAbout>` isn't rendered
+    // for this school — same reasoning as ACG/Bethel/Emmanuel's own `about`.
+    about: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "The School of Life in Damascus",
+      headingHy: null,
+      paragraphs: [
+        "The Damascus Armenian Evangelical School — known in Armenian as the Kenats, or “Life,” School, and licensed today as Al-Hayat Private School — has taught the children of Damascus for close to a century. It grew from a single crowded room in 1923 into a settled home for learning in the old city, and has been part of the life of the Armenian Evangelical community of Damascus ever since.",
+        "Today, under Principal Mrs. Maysa Talab, it teaches children through the kindergarten and elementary years, in the same spirit of faith and learning on which it was founded.",
+      ],
+      paragraphsHy: null,
+      pullQuote: null,
+      pullQuoteHy: null,
+    },
+
+    principalCard: null,
+
+    location: {
+      addressLines: ["Old Damascus, Syria", "P.O. Box 718"],
+      addressLinesHy: null,
+    },
+
+    // All verified, real (not pending). No Instagram, no Fax — neither
+    // exists anywhere in the docx, and the mockup correctly has neither row.
+    contactRows: [
+      {
+        key: "Phone",
+        keyHy: null,
+        value: "+963 11 5 442 401",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Email",
+        keyHy: null,
+        value: "mayssaatalab@gmail.com",
+        valueHy: null,
+        href: "mailto:mayssaatalab@gmail.com",
+      },
+      {
+        key: "Facebook",
+        keyHy: null,
+        value: "Al-Hayat / Kenats School",
+        valueHy: null,
+        href: "https://m.facebook.com/340286466160005",
+      },
+    ],
+
+    // Only 1 card — the mockup's own `.lead-grid` has just one person, no
+    // Vice-Chair/Secretary equivalent named anywhere in the source.
+    leadership: [
+      {
+        name: "Mrs. Maysa Talab",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-damascus-kenats-al-hayat-principal.jpg",
+          alt: "Mrs. Maysa Talab",
+        },
+      },
+    ],
+
+    directorsArchive: null,
+    mission: null,
+    missionValues: null,
+    academicHeritage: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
+
+    // No "Make an Inquiry" section in this mockup — the Contact card's
+    // real mailto already covers enquiries.
+    inquiry: null,
+
+    cta: {
+      heading: "Teaching the Children of Damascus Since 1923",
+      headingHy: null,
+      body: "The Damascus Armenian Evangelical — Kenats — School continues its unbroken work in the old city, under the care of the Armenian Evangelical Community of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // About/Intro woven row — rendered via `WhiteChurchFeature` with
+    // `reverse` in place of `<SchoolAbout>`, same pattern as every other
+    // magazine-style Syria school (text-first DOM, no `.rev` class, so it
+    // renders text-left/photo-right — the genuine reversal relative to
+    // WhiteChurchFeature's photo-left default).
+    introFeature: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "The School of Life in Damascus",
+      headingHy: null,
+      paragraphs: [
+        "The Damascus Armenian Evangelical School — known in Armenian as the Kenats, or “Life,” School, and licensed today as Al-Hayat Private School — has taught the children of Damascus for close to a century. It grew from a single crowded room in 1923 into a settled home for learning in the old city, and has been part of the life of the Armenian Evangelical community of Damascus ever since.",
+        "Today, under Principal Mrs. Maysa Talab, it teaches children through the kindergarten and elementary years, in the same spirit of faith and learning on which it was founded.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/school-damascus-kenats-al-hayat-community.jpg",
+        alt: "The school community in the courtyard",
+        width: 1017,
+        height: 588,
+      },
+    },
+
+    pullQuoteBand: {
+      quote:
+        "Built on Christian principles — and on the conviction that every child should be raised in faith, in learning, and in conscience.",
+      quoteHy: null,
+      attribution: "The Kenats School, Damascus",
+      attributionHy: null,
+    },
+
+    // No sepia filter in this mockup's own vintage-band CSS (same as
+    // Bethel/Emmanuel, unlike ACG) — `sepia={false}` at the call site.
+    vintageBand: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From One Room, in 1923",
+      headingHy: null,
+      leadParagraph:
+        "The school opened in 1923 under Rev. Karapet Hasessian — a single large room where forty or fifty children crowded onto a few benches, some sitting, some kneeling to use them as desks. A year later, in 1924, the Evangelical community rented a large house in the Abbara quarter of the old city, and the school moved there with two hundred and fifty pupils; Rev. Sarian taught the Bible, and Mr. Dikran Mesropian served as its director.",
+      leadParagraphHy: null,
+      photo: {
+        src: "/school-damascus-kenats-al-hayat-lesson.jpg",
+        alt: "A lesson at the Kenats School",
+        width: 1080,
+        height: 648,
+      },
+      photoCaption: "A lesson at the Kenats School.",
+      photoCaptionHy: null,
+      paragraphs: [
+        "In 1950, with the help of the Armenian Evangelical Community of Syria, the community built the school's own present building — under the leadership of Rev. Harutiun Baleozian and the initiative of Rev. Yenovk Haditian, with some fifty Evangelical families gathered around it.",
+        "For decades Mrs. Anoush Serobian carried the school forward, until 1992, grounding it in Christian principle and a strong sense of Armenian identity — and earning the Union's medal of honour and the title of veteran principal. Through every year since 1923, the school has never ceased its work.",
+      ],
+      paragraphsHy: null,
+    },
+
+    // No other split rows, no languages/chips/events/gallery — this
+    // mockup has none of those sections at all (confirmed: no `.gal` or
+    // `.events` markup anywhere in the source file).
+    splitRows: null,
+    languages: null,
+    programChips: null,
+    visionMission: null,
+    events: null,
+    gallery: null,
+  },
 };
