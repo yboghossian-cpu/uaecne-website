@@ -1,0 +1,39 @@
+.wrap {
+  background: var(--color-ivory-wash);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+  padding: 2.75rem 1.25rem 2.25rem;
+}
+
+.inner {
+  max-width: 51.25rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.quote {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: var(--color-red);
+}
+
+.by {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 720px) {
+  .wrap {
+    padding: 3.25rem 2.125rem 2.75rem;
+  }
+
+  .quote {
+    font-size: 1.75rem;
+  }
+}

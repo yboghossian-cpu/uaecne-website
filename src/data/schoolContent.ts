@@ -237,6 +237,117 @@ export type SchoolContent = {
   } | null;
 
   cta: { heading: string; headingHy: string | null; body: string; bodyHy: string | null }; // always present
+
+  // Additive fields below — all null/omitted for AEC, Shamlian-Tatikian,
+  // and AESSA, unaffected. First used by Aleppo College for Girls.
+
+  // Magazine-style woven photo/text row for the About/Intro section itself
+  // (ACG's mockup renders About as a photo+text split, not `SchoolAbout`'s
+  // single-column-plus-optional-principal-card shape — see this field's
+  // sibling `splitRows` below for the fuller reuse-decision comment).
+  // Rendered in place of `SchoolAbout` when set — `about`/`principalCard`
+  // above are still populated for data parity (principalCard stays null
+  // here; the real principal card lives in `leadership` instead, matching
+  // the mockup) but go unrendered, since ACG's mockup has no principal
+  // card inline with About at all.
+  introFeature?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+    photo: { src: string; alt: string; width: number; height: number };
+  } | null;
+
+  // Magazine-style woven photo/text rows for the "Student Life" vignettes
+  // (Science, Technology, Library, Beyond the Classroom) — rendered later
+  // than `introFeature`, after Leadership, matching the mockup's own
+  // section order (About → Pull-quote → History → Leadership → these 4).
+  // Reuses `WhiteChurchFeature` (cross-imported from `components/church`,
+  // same established pattern as `ChurchCTA`/`SuccessionList`/
+  // `ChurchBreadcrumb`) rather than a new component — its shape
+  // (eyebrow+heading+paragraphs+photo, 2-col) already matched; it only
+  // needed two new optional props (`reverse`, `dropcapFirst`), added this
+  // unit. `photo.width`/`.height` are the real source photo's own pixel
+  // dimensions (never invented) — `WhiteChurchFeature` needs them because
+  // it renders the photo at its natural, uncropped aspect ratio rather
+  // than a fixed box.
+  splitRows?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+    photo: { src: string; alt: string; width: number; height: number };
+    reverse: boolean;
+    dropcapFirst: boolean;
+  }[] | null;
+
+  // Standalone centered wash-band quote + attribution line — see
+  // `SchoolPullQuoteBand`'s own comment for why this isn't `about.pullQuote`.
+  pullQuoteBand?: {
+    quote: string;
+    quoteHy: string | null;
+    attribution: string;
+    attributionHy: string | null;
+  } | null;
+
+  // "Our History" with a real archival photo — drop-cap lead paragraph,
+  // then a sepia-toned photo (with its own caption) beside further
+  // paragraphs. See `SchoolVintageBand`'s own comment for why this is a
+  // distinct shape from `splitRows`/`WhiteChurchFeature`.
+  vintageBand?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    leadParagraph: string;
+    leadParagraphHy: string | null;
+    photo: { src: string; alt: string; width: number; height: number };
+    photoCaption: string | null;
+    photoCaptionHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+  } | null;
+
+  // Three-language academic-programme row (red-gradient boxes) with a
+  // one-line intro above it. See `SchoolLanguages`'s own comment — no
+  // existing chip/pill primitive matched this color-block treatment.
+  languages?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    intro: string;
+    introHy: string | null;
+    items: { label: string; labelHy: string | null }[];
+  } | null;
+
+  // Icon-badge event cards ("Science Exhibition," "Kermesse," etc.). `icon`
+  // is a shared `IconSymbols` sprite id (e.g. "#ic-flask") — never an
+  // uploaded image, since none of these events has a real photo/logo.
+  events?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    items: {
+      icon: string;
+      title: string;
+      titleHy: string | null;
+      description: string;
+      descriptionHy: string | null;
+    }[];
+  } | null;
+
+  // Full scrollable gallery + click-to-enlarge lightbox. Reuses
+  // `ChurchGalleryLightbox` verbatim (cross-imported, same shape as
+  // `ChurchContent["gallery"]`) — no school has ever needed a real
+  // multi-photo gallery before this unit, so there was no school-side
+  // primitive to check first; the church one already does exactly this.
+  gallery?: ChurchContent["gallery"];
 };
 
 export const schoolContent: Record<string, SchoolContent> = {
@@ -992,6 +1103,463 @@ export const schoolContent: Record<string, SchoolContent> = {
       headingHy: null,
       body: "Since 1942, the Armenian Evangelical Secondary School of Anjar has planted seeds of faith, knowledge, and hope — equipping generations of children under the Union of the Armenian Evangelical Churches in the Near East.",
       bodyHy: null,
+    },
+  },
+
+  // Aleppo College for Girls (Syria) — the first non-Lebanon school built,
+  // and the first to use the additive "magazine" fields below. Verbatim
+  // from design-reference/uaecne-school-aleppo-college-girls.html
+  // throughout, including all contact details.
+  "aleppo-college-for-girls": {
+    slug: "aleppo-college-for-girls",
+
+    // The mockup's own masthead line carries two founding facts ("Girls'
+    // Section founded 1923 · roots in Aintab, 1876"), more than the fixed
+    // "{locationLine} · Founded {established}" template can hold in one
+    // field — kept simple here (1923, the Girls' Section's own founding,
+    // matching the facts-bar cell below) since the Aintab/1876 lineage is
+    // fully carried, verbatim, by the facts bar's own first cell and the
+    // About/History prose. No 1923-vs-1924 conflict exists anywhere in the
+    // verified source — every mention (masthead, facts bar, footer) says
+    // 1923; flagged in OPEN_QUESTIONS in case a different source was meant.
+    masthead: {
+      locationLine: "Taha Hussein Street, Aleppo, Syria",
+      locationLineHy: null,
+      established: "1923",
+      establishedHy: null,
+    },
+
+    // Real ACG seal, used as approved by Yeghia directly ("use the emblems
+    // as is, they are all approved") despite its AI-generated-style
+    // appearance (flagged transparently in OPEN_QUESTIONS for the record,
+    // not withheld).
+    logo: {
+      src: "/school-aleppo-college-for-girls-emblem.png",
+      alt: "Aleppo College for Girls logo",
+    },
+    heroPhoto: {
+      src: "/school-aleppo-college-for-girls-hero.jpg",
+      alt: "Aleppo College for Girls campus",
+    },
+
+    factsBar: [
+      { label: "1876", labelHy: null, sub: "Founded (Aintab)", subHy: null },
+      { label: "1923", labelHy: null, sub: "Girls' Section, Aleppo", subHy: null },
+      { label: "Grades 7–12", labelHy: null, sub: "Today", subHy: null },
+      { label: "3 Languages", labelHy: null, sub: "EN · AR · FR", subHy: null },
+    ],
+
+    // Required field, kept populated (same real text as `introFeature`
+    // below, verbatim) for data parity even though `<SchoolAbout>` is not
+    // rendered for this school — see `introFeature`'s own comment on the
+    // type for why. `pullQuote` stays null here: the mockup's real pull
+    // quote is a separate standalone wash-band (`pullQuoteBand` below),
+    // not this field's inline-after-paragraphs rendering.
+    about: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "A School with a Living Heritage",
+      headingHy: null,
+      paragraphs: [
+        "The Aleppo College for Girls carries one of the oldest and proudest names in Armenian Evangelical education. Its story begins not in Aleppo but in Aintab, where in 1876 the American Board of Commissioners for Foreign Missions founded the Central Turkey College to serve the region's large Christian Armenian population.",
+        "In 1923, the Girls' Section was established in Aleppo, continuing that mission on new soil. Today it stands on Taha Hussein Street — girls' and boys' sections divided by a stone wall — under the sponsorship of the Armenian Evangelical Educational Council of Syria, and continues its unbroken work with devotion.",
+      ],
+      paragraphsHy: null,
+      pullQuote: null,
+      pullQuoteHy: null,
+    },
+
+    // No principal card beside About in this mockup — the Principal
+    // appears once, in the Leadership grid below.
+    principalCard: null,
+
+    // "Our Location" card. The mockup's P.O. Box appears as a second line
+    // within the same card (its own separate `.crow` row, not a second
+    // address block) — folded into `addressLines` here since
+    // SchoolContactSection's location card renders one address block, not
+    // a distinct P.O.-Box row type; both lines are real, verbatim facts.
+    location: {
+      addressLines: ["Taha Hussein Street, Aleppo, Syria", "P.O. Box 3833"],
+      addressLinesHy: null,
+    },
+
+    // All verified, real (not pending) — P.O. Box, phones, fax, email,
+    // Facebook, and Instagram straight from the mockup's own Contact
+    // section. Facebook/Instagram reuse the shared `ic-fb`/new `ic-ig`
+    // IconSymbols ids via SchoolContactSection's ROW_ICON map, extended
+    // this unit (Fax/Facebook/Instagram added) — the first school contact
+    // card to need them.
+    contactRows: [
+      {
+        key: "Phone",
+        keyHy: null,
+        value: "+963 21 2 687 502 · +963 21 2 687 520",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Fax",
+        keyHy: null,
+        value: "+963 21 2 641 145",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Email",
+        keyHy: null,
+        value: "acg.aleppo.college@gmail.com",
+        valueHy: null,
+        href: "mailto:acg.aleppo.college@gmail.com",
+      },
+      {
+        key: "Facebook",
+        keyHy: null,
+        value: "ACG — Aleppo College for Girls",
+        valueHy: null,
+        href: "https://m.facebook.com/406116339489727",
+      },
+      {
+        key: "Instagram",
+        keyHy: null,
+        value: "acg.aleppo",
+        valueHy: null,
+        href: "https://instagram.com/acg.aleppo",
+      },
+    ],
+
+    // Exactly 2 cards, matching the mockup's own `.lead-grid` (Principal,
+    // Secretary) — no third "Vice-Chair of the Council" card invented; the
+    // other 3 schools' fixed-3-card pattern isn't a hard requirement of
+    // `SchoolLeadershipGrid`, which simply maps whatever array it's given.
+    // Both spellings (Tamar Soghoyan, Elma Khachadurian) are shown as
+    // supplied, pending Union confirmation per the mockup's own footer
+    // note — flagged again in OPEN_QUESTIONS.
+    leadership: [
+      {
+        name: "Miss Tamar Soghoyan",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-aleppo-college-for-girls-principal.jpg",
+          alt: "Miss Tamar Soghoyan",
+        },
+      },
+      {
+        name: "Mrs. Elma Khachadurian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/school-aleppo-college-for-girls-secretary.jpg",
+          alt: "Mrs. Elma Khachadurian",
+        },
+      },
+    ],
+
+    directorsArchive: null,
+    mission: null,
+    missionValues: null,
+    academicHeritage: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
+
+    // No "Make an Inquiry" section exists in this mockup (unlike AEC) —
+    // the Contact card's real mailto already covers enquiries; omitted
+    // rather than invented.
+    inquiry: null,
+
+    cta: {
+      heading: "Educating Generations Since 1876",
+      headingHy: null,
+      body: "From its founding in Aintab to its enduring work in Aleppo, the Aleppo College for Girls continues to nurture minds and character — a proud institution of the Armenian Evangelical Educational Council of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // About/Intro woven row — rendered via `WhiteChurchFeature` with
+    // `reverse` (text-left/photo-right) in place of `<SchoolAbout>` for
+    // this school; see page.tsx's own comment for why. Photo is the
+    // classroom scene the mockup itself uses for this row (not the hero
+    // photo, which is reused only in the Gallery).
+    introFeature: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "A School with a Living Heritage",
+      headingHy: null,
+      paragraphs: [
+        "The Aleppo College for Girls carries one of the oldest and proudest names in Armenian Evangelical education. Its story begins not in Aleppo but in Aintab, where in 1876 the American Board of Commissioners for Foreign Missions founded the Central Turkey College to serve the region's large Christian Armenian population.",
+        "In 1923, the Girls' Section was established in Aleppo, continuing that mission on new soil. Today it stands on Taha Hussein Street — girls' and boys' sections divided by a stone wall — under the sponsorship of the Armenian Evangelical Educational Council of Syria, and continues its unbroken work with devotion.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/school-aleppo-college-for-girls-classroom.jpg",
+        alt: "A lesson in progress at Aleppo College for Girls",
+        width: 5472,
+        height: 3648,
+      },
+    },
+
+    // The 4 "Student Life" woven rows (Science, Technology, Library,
+    // Beyond the Classroom). All 4 use `reverse: false` — including
+    // Technology and Beyond the Classroom, whose mockup markup uses a
+    // `.split.rev` class. Verified from the mockup's own CSS
+    // (`.split.rev .txt{order:2}.split.rev .ph{order:1}`): that override
+    // forces photo-left/text-right for `.rev` rows too, identical to the
+    // non-`.rev` rows' natural DOM order — so all 4 rows render the SAME
+    // visual layout (photo left, text right) in the source, and
+    // `reverse: false` (WhiteChurchFeature's own photo-left default) is
+    // the correct match for every one of them, not an inconsistency.
+    splitRows: [
+      {
+        eyebrow: "Science",
+        eyebrowHy: null,
+        heading: "In the Laboratory",
+        headingHy: null,
+        paragraphs: [
+          "In the science laboratories, students move from the page to the microscope — examining specimens, exploring anatomy, and testing what they learn with their own hands. Discovery is treated not as a subject to memorize, but as a habit to practise.",
+          "The school's annual student science exhibition gives that curiosity a stage, where the girls present their own investigations to the wider community.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-aleppo-college-for-girls-microscope.jpg",
+          alt: "A student at the microscope",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Technology",
+        eyebrowHy: null,
+        heading: "In the Computer Lab",
+        headingHy: null,
+        paragraphs: [
+          "Alongside the sciences, students build the digital skills a modern education demands — working through the computer lab in small, focused groups, learning together as they go.",
+          "It is one more way the school keeps pace with a changing world while holding to its founding standards.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-aleppo-college-for-girls-computer-lab.jpg",
+          alt: "Students working in the computer lab",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "The Library",
+        eyebrowHy: null,
+        heading: "A Room Full of Years",
+        headingHy: null,
+        paragraphs: [
+          "The school's library is among its quiet treasures — wooden shelves lined with decades of volumes, including English and American literature collections gathered across the college's long history.",
+          "Here students read, research, and sit with books that have passed through many hands before theirs — a tangible link to the generations who studied in these same rooms.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-aleppo-college-for-girls-library.jpg",
+          alt: "The school library",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Beyond the Classroom",
+        eyebrowHy: null,
+        heading: "Field, Garden & Community",
+        headingHy: null,
+        paragraphs: [
+          "Learning at Aleppo College reaches well past the classroom walls. On the school's wide green sports field, students play and compete; in the grounds, they gather each season to harvest the campus olive trees — a small tradition that ties them to the land and to one another.",
+          "Together with the assembly hall's events, these moments build the fellowship and character the school has always valued.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-aleppo-college-for-girls-sports.jpg",
+          alt: "Students on the sports field",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    pullQuoteBand: {
+      quote:
+        "From Aintab to Aleppo, the school has never ceased its work — preserving a high standard of learning, and improving year after year.",
+      quoteHy: null,
+      attribution: "The Aleppo College for Girls",
+      attributionHy: null,
+    },
+
+    vintageBand: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From the Central Turkey College",
+      headingHy: null,
+      leadParagraph:
+        "Founded in Aintab between 1874 and 1876 as the Central Turkey College, the institution was established within the Ottoman Empire by the American Board of Commissioners for Foreign Missions (ABCFM). Aleppo College granted tenth-grade high-school diplomas, and until 1964 offered eleventh- and twelfth-grade freshman and sophomore courses in the arts, engineering, and medicine — a remarkable breadth for its time.",
+      leadParagraphHy: null,
+      photo: {
+        src: "/school-aleppo-college-for-girls-vintage.jpg",
+        alt: "Students of Aleppo College for Girls, earlier generations",
+        width: 1080,
+        height: 719,
+      },
+      photoCaption: "Earlier generations of students — from the school's archives.",
+      photoCaptionHy: null,
+      paragraphs: [
+        "Through revolutions of history and generations of change, the Girls' Section carried its founders' vision forward in Aleppo. What began as a mission college became a cornerstone of Armenian learning and identity in Syria.",
+        "The school sustains that inheritance today through a specialist teaching staff and a tireless team — maintaining a high standard of education and improving its quality year after year, a bridge between a proud past and a hopeful future.",
+      ],
+      paragraphsHy: null,
+    },
+
+    languages: {
+      eyebrow: "Academics",
+      eyebrowHy: null,
+      heading: "Three Languages, One Curriculum",
+      headingHy: null,
+      intro:
+        "Grades 7 through 12 follow the Syrian Ministry of Education's national programme, taught across three languages:",
+      introHy: null,
+      items: [
+        { label: "English", labelHy: null },
+        { label: "Arabic", labelHy: null },
+        { label: "French", labelHy: null },
+      ],
+    },
+
+    // Icons: #ic-flask and #ic-cart are new this unit; #ic-heart already
+    // existed in the shared IconSymbols sprite.
+    events: {
+      eyebrow: "Through the Year",
+      eyebrowHy: null,
+      heading: "Life at the College",
+      headingHy: null,
+      items: [
+        {
+          icon: "#ic-flask",
+          title: "Science Exhibition",
+          titleHy: null,
+          description: "An annual student showcase of investigations and experiments.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-cart",
+          title: "Kermesse",
+          titleHy: null,
+          description: "The school's traditional fair, bringing the community together.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-heart",
+          title: "Charity Bazaar",
+          titleHy: null,
+          description: "A charitable sale-and-exhibition in the spirit of service.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // 13 photos, verbatim alt text from the mockup's own gallery figures.
+    // 7 of these (Campus building, Classroom lesson, Microscope work,
+    // Computer lab, Library, Sports field, Vintage class photo) reuse the
+    // exact same source files already used above (About/Science/Technology/
+    // Library/Beyond-the-Classroom/History) — the mockup's own gallery
+    // duplicates them too (confirmed by MD5-matching the mockup's 23
+    // embedded images down to 16 distinct files). The other 6 are gallery-
+    // only photos with no other home on the page.
+    gallery: {
+      eyebrow: "Gallery",
+      eyebrowHy: null,
+      heading: "Life at Aleppo College for Girls",
+      headingHy: null,
+      photos: [
+        {
+          src: "/school-aleppo-college-for-girls-hero.jpg",
+          alt: "Campus building",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-classroom.jpg",
+          alt: "Classroom lesson",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-microscope.jpg",
+          alt: "Microscope work",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-gallery-anatomy.jpg",
+          alt: "Anatomy lesson",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-computer-lab.jpg",
+          alt: "Computer lab",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-gallery-group-computer.jpg",
+          alt: "Group computer work",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-library.jpg",
+          alt: "Library",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-gallery-reading.jpg",
+          alt: "Reading in the library",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-sports.jpg",
+          alt: "Sports field",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-gallery-olive-harvest.jpg",
+          alt: "Olive harvest",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-gallery-heritage-classroom.jpg",
+          alt: "Heritage classroom",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-gallery-gate.jpg",
+          alt: "School gate and signage",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-aleppo-college-for-girls-vintage.jpg",
+          alt: "Vintage class photo",
+          caption: null,
+          captionHy: null,
+        },
+      ],
     },
   },
 };

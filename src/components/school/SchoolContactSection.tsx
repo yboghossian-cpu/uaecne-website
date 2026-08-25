@@ -4,6 +4,9 @@ import styles from "./SchoolContactSection.module.css";
 type SchoolContactSectionProps = {
   location: SchoolContent["location"];
   contactRows: SchoolContactRow[] | null;
+  // Required only to build the real Maps address-search link below — not
+  // rendered anywhere in this component otherwise.
+  schoolName: string;
 };
 
 // Icon keyed by row label, not just presence of an href — a pending Phone
@@ -12,6 +15,9 @@ const ROW_ICON: Record<string, string> = {
   Phone: "#ic-phone",
   Email: "#ic-mail",
   Secretary: "#ic-user",
+  Fax: "#ic-phone",
+  Facebook: "#ic-fb",
+  Instagram: "#ic-ig",
 };
 
 // "Our Location" / "Get in Touch" — same card shape as
@@ -22,10 +28,22 @@ const ROW_ICON: Record<string, string> = {
 export default function SchoolContactSection({
   location,
   contactRows,
+  schoolName,
 }: SchoolContactSectionProps) {
   if (!location && !contactRows) return null;
 
   const showBoth = location && contactRows;
+  // Real, functional address-search link — not a pin/coordinate (never
+  // invented). Query is the school's own real name + its first address
+  // line, exactly the pattern the Aleppo College for Girls mockup already
+  // uses for its own Google Maps button. Exact per-unit Maps links (a
+  // curated place link, not a generic address search) are pending from
+  // Yeghia in a single later sweep — see OPEN_QUESTIONS.
+  const mapsUrl = location
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+        `${schoolName} ${location.addressLines[0] ?? ""}`,
+      )}`
+    : null;
 
   return (
     <section className={`${styles.contact} wash-band`}>
@@ -54,9 +72,19 @@ export default function SchoolContactSection({
               </span>
             </div>
             <div className={styles.spacer} />
-            <span className={styles.mapBtn} role="link" aria-disabled="true">
-              View on Maps
-            </span>
+            {mapsUrl && (
+              <a
+                href={mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.mapBtn}
+              >
+                <svg className={styles.mapBtnIcon}>
+                  <use href="#ic-pin" />
+                </svg>
+                View on Maps
+              </a>
+            )}
           </div>
         )}
 

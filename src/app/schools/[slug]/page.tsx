@@ -16,7 +16,13 @@ import SchoolSupportServices from "@/components/school/SchoolSupportServices";
 import SchoolSignaturePrograms from "@/components/school/SchoolSignaturePrograms";
 import SchoolFaithCommunity from "@/components/school/SchoolFaithCommunity";
 import SchoolInquiry from "@/components/school/SchoolInquiry";
+import SchoolPullQuoteBand from "@/components/school/SchoolPullQuoteBand";
+import SchoolVintageBand from "@/components/school/SchoolVintageBand";
+import SchoolLanguages from "@/components/school/SchoolLanguages";
+import SchoolEvents from "@/components/school/SchoolEvents";
 import SuccessionList from "@/components/church/SuccessionList";
+import WhiteChurchFeature from "@/components/church/WhiteChurchFeature";
+import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
 import styles from "./page.module.css";
 
 type PageParams = { slug: string };
@@ -72,6 +78,19 @@ export default async function SchoolDetailPage({
     );
   }
 
+  // ACG's mockup weaves photo/text "magazine" rows and moves Contact down
+  // near the Gallery rather than right after About — a different section
+  // order than the other 3 schools' own designs use. Rather than reorder
+  // the shared JSX below (which would move Contact for every school),
+  // `hasMagazineSections` renders Contact in one of two fixed slots: its
+  // original spot (existing schools) or the later spot (ACG-style
+  // schools). Every other new call below (`introFeature`, `pullQuoteBand`,
+  // `vintageBand`, `splitRows`, `languages`, `events`, `gallery`) is a
+  // no-op for the other 3 schools since those fields are unset for them,
+  // so it's safe to insert them at fixed positions without any per-school
+  // branching.
+  const hasMagazineSections = Boolean(content.splitRows);
+
   return (
     <>
       <ChurchBreadcrumb country={school.country} section="Schools" />
@@ -82,8 +101,32 @@ export default async function SchoolDetailPage({
         heroPhoto={content.heroPhoto}
         factsBar={content.factsBar}
       />
-      <SchoolAbout about={content.about} principalCard={content.principalCard} />
-      <SchoolContactSection location={content.location} contactRows={content.contactRows} />
+      {content.introFeature ? (
+        // reverse: the mockup's own About/Intro row is authored text-first,
+        // photo-second in the DOM with no `.rev` class — unlike the 4
+        // Student Life rows below (which use `.rev` to CSS-reorder back to
+        // photo-left, see `splitRows`' own comment), so this row alone
+        // renders text-left/photo-right, opposite WhiteChurchFeature's
+        // photo-left default.
+        <WhiteChurchFeature
+          feature={content.introFeature}
+          photoWidth={content.introFeature.photo.width}
+          photoHeight={content.introFeature.photo.height}
+          reverse
+          dropcapFirst
+        />
+      ) : (
+        <SchoolAbout about={content.about} principalCard={content.principalCard} />
+      )}
+      {!hasMagazineSections && (
+        <SchoolContactSection
+          location={content.location}
+          contactRows={content.contactRows}
+          schoolName={school.name}
+        />
+      )}
+      <SchoolPullQuoteBand pullQuoteBand={content.pullQuoteBand} />
+      <SchoolVintageBand vintageBand={content.vintageBand} />
       <SchoolMissionValues missionValues={content.missionValues} />
       <SchoolLeadershipGrid leaders={content.leadership} />
       <SchoolMission mission={content.mission} />
@@ -94,12 +137,32 @@ export default async function SchoolDetailPage({
       <SchoolSupportServices supportServices={content.supportServices} />
       <SchoolSignaturePrograms signaturePrograms={content.signaturePrograms} />
       <SchoolFaithCommunity faithCommunity={content.faithCommunity} />
+      {content.splitRows?.map((row, i) => (
+        <WhiteChurchFeature
+          key={i}
+          feature={row}
+          photoWidth={row.photo.width}
+          photoHeight={row.photo.height}
+          reverse={row.reverse}
+          dropcapFirst={row.dropcapFirst}
+        />
+      ))}
+      <SchoolLanguages languages={content.languages} />
+      <SchoolEvents events={content.events} />
+      {hasMagazineSections && (
+        <SchoolContactSection
+          location={content.location}
+          contactRows={content.contactRows}
+          schoolName={school.name}
+        />
+      )}
       <SuccessionList succession={content.directorsArchive} variant="panel" />
       <SchoolInquiry
         inquiry={content.inquiry}
         heroPhoto={content.heroPhoto}
         schoolName={school.name}
       />
+      <ChurchGalleryLightbox gallery={content.gallery ?? null} />
       <ChurchCTA cta={content.cta} />
     </>
   );

@@ -331,6 +331,50 @@ export default function IconSymbols() {
             fill="currentColor"
           />
         </symbol>
+
+        {/* Instagram contact-row icon — geometry copied verbatim from
+            design-reference/uaecne-school-aleppo-college-girls.html's own
+            #ig symbol (needed for a real Instagram link in
+            SchoolContactSection, first used by Aleppo College for Girls —
+            no church or school has had a verified Instagram link before
+            this unit). */}
+        <symbol id="ic-ig" viewBox="0 0 24 24">
+          <rect
+            x="3"
+            y="3"
+            width="18"
+            height="18"
+            rx="5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+        </symbol>
+
+        {/* Events-card icons — geometry copied verbatim from
+            uaecne-school-aleppo-college-girls.html's own #flask/#cart
+            symbols (ic-heart already existed, reused as-is). First used by
+            SchoolEvents (Science Exhibition / Kermesse / Charity Bazaar). */}
+        <symbol id="ic-flask" viewBox="0 0 24 24">
+          <path
+            d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </symbol>
+        <symbol id="ic-cart" viewBox="0 0 24 24">
+          <circle cx="9" cy="20" r="1.6" />
+          <circle cx="18" cy="20" r="1.6" />
+          <path
+            d="M2 3h3l2.4 12h11l2-8H6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </symbol>
       </defs>
     </svg>
   );
