@@ -83,4 +83,12 @@ export const schools: School[] = [
     photo: "/school-damascus-kenats-al-hayat-hero.jpg",
     emblem: "/school-damascus-kenats-al-hayat-emblem.png",
   },
+  {
+    id: "school-syriac-evangelical",
+    country: "Syria",
+    name: "Syriac Evangelical School",
+    slug: "syriac-evangelical-school",
+    photo: "/school-syriac-evangelical-hero.jpg",
+    emblem: "/school-syriac-evangelical-emblem.png",
+  },
 ];

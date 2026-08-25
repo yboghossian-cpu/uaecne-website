@@ -101,14 +101,16 @@ export default async function SchoolDetailPage({
   // (About → Pull-quote → History → Leadership → Contact → CTA).
   const hasMagazineSections = Boolean(content.introFeature);
 
-  // Bethel Secondary School's, Emmanuel al-Ressaleh's, and Damascus
-  // Kenats/Al-Hayat's vintage-band photos have no sepia treatment in
-  // their own mockup CSS, unlike ACG's (see `SchoolVintageBand`'s own
-  // comment) — a real per-mockup difference, not an oversight.
+  // Bethel Secondary School's, Emmanuel al-Ressaleh's, Damascus
+  // Kenats/Al-Hayat's, and Syriac Evangelical School's vintage-band photos
+  // have no sepia treatment in their own mockup CSS, unlike ACG's (see
+  // `SchoolVintageBand`'s own comment) — a real per-mockup difference,
+  // not an oversight.
   const NO_SEPIA_SLUGS = [
     "bethel-secondary-school",
     "emmanuel-al-ressaleh-school",
     "damascus-kenats-al-hayat-school",
+    "syriac-evangelical-school",
   ];
   const vintageSepia = !NO_SEPIA_SLUGS.includes(slug);
 

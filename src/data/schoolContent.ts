@@ -2805,4 +2805,396 @@ export const schoolContent: Record<string, SchoolContent> = {
     events: null,
     gallery: null,
   },
+
+  // Syriac Evangelical School (Aleppo, Syria) — licensed today as the
+  // "New Testament Private School" (مدرسة العهد الجديد الخاصة, confirmed
+  // directly on the school's own entrance signage, matching the docx's
+  // English info sheet) — 5th Syria school, verbatim from
+  // design-reference/syriac-evangelical-school.html, cross-checked against
+  // "Սուրիանի-Աւետարանական-Վարժարան (1).docx". Same pattern as Emmanuel/
+  // Damascus: the mockup's own footer note pre-flags its real
+  // discrepancies (name-spelling variants; no email/address supplied) —
+  // independently confirmed against the docx, plus the entrance-sign photo
+  // corroborates the phone number and Arabic name exactly.
+  "syriac-evangelical-school": {
+    slug: "syriac-evangelical-school",
+
+    masthead: {
+      locationLine: "Aleppo, Syria",
+      locationLineHy: null,
+      established: "1932",
+      establishedHy: null,
+    },
+
+    // "logo.png" — an AI-generated-style crest (same illustrated-book/
+    // glossy-3D tell as other Syria schools' logos, same 5625×5625 canvas
+    // as ACG's and Damascus's), used as-supplied per Yeghia's standing
+    // "use the emblems as is" ruling — flagged, not withheld.
+    logo: {
+      src: "/school-syriac-evangelical-emblem.png",
+      alt: "Syriac Evangelical School crest",
+    },
+    heroPhoto: {
+      src: "/school-syriac-evangelical-hero.jpg",
+      alt: "Students gathered in the school courtyard",
+    },
+
+    factsBar: [
+      { label: "1932", labelHy: null, sub: "Founded", subHy: null },
+      { label: "1981", labelHy: null, sub: "Rebuilt in Stone", subHy: null },
+      { label: "KG – Grade 6", labelHy: null, sub: "Kindergarten & Elementary", subHy: null },
+      { label: "Aleppo, Syria", labelHy: null, sub: "Location", subHy: null },
+    ],
+
+    // Required field, kept populated (same real text as `introFeature`,
+    // verbatim) for type parity even though `<SchoolAbout>` isn't rendered
+    // for this school — same reasoning as every other magazine-style
+    // Syria school.
+    about: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "A Home for Learning in Aleppo",
+      headingHy: null,
+      paragraphs: [
+        "The Syriac Evangelical School has taught the children of Aleppo since 1932. It opened in the simplest of conditions — a kindergarten and an elementary school — and in 1981 was rebuilt in stone. Under the sponsorship of the Educational Council of the Armenian Evangelical Community of Syria, it has carried on its work without interruption from its founding day to this one.",
+        "Today it teaches children from kindergarten through the sixth grade, with a single, steady aim: to give them a high standard of learning.",
+      ],
+      paragraphsHy: null,
+      pullQuote: null,
+      pullQuoteHy: null,
+    },
+
+    principalCard: null,
+
+    // No P.O. Box/mailing address exists anywhere in the docx — the
+    // mockup's own footer note says so explicitly ("No email or mailing
+    // address was supplied"), and the location card correctly has no
+    // P.O. Box row at all (contrast ACG/Bethel/Emmanuel/Damascus, all of
+    // which have one).
+    location: {
+      addressLines: ["Aleppo, Syria"],
+      addressLinesHy: null,
+    },
+
+    // All verified, real (not pending). No email at all in the source
+    // (docx and mockup agree). Instagram is name-only, no link — the
+    // mockup's own markup is a plain `<span>`, not an `<a href>` (its
+    // footer note: "Instagram link pending") — matching the plain-value
+    // render already established for Bethel's Facebook row (item 93).
+    contactRows: [
+      {
+        key: "Phone",
+        keyHy: null,
+        value: "+963 21 2 211 782",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Facebook",
+        keyHy: null,
+        value: "Syriac Evangelical School",
+        valueHy: null,
+        href: "https://m.facebook.com/174255656048829",
+      },
+      {
+        key: "Instagram",
+        keyHy: null,
+        value: "Syriac Evangelical School",
+        valueHy: null,
+        href: null,
+      },
+    ],
+
+    // 2 cards, matching the mockup's own `.lead-grid` exactly (Principal,
+    // Secretary — no Chair/Vice-Chair equivalent named anywhere). Both
+    // names shown as supplied, pending Union confirmation per the
+    // mockup's own footer note (Der Artinian-Hallajian also written
+    // "DerArtinian Halladjian" in the school's own records).
+    leadership: [
+      {
+        name: "Mrs. Arousiag Der Artinian-Hallajian",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-syriac-evangelical-principal.jpg",
+          alt: "Mrs. Arousiag Der Artinian-Hallajian",
+        },
+      },
+      {
+        name: "Mrs. Badriye Nshan",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/school-syriac-evangelical-secretary.jpg",
+          alt: "Mrs. Badriye Nshan",
+        },
+      },
+    ],
+
+    directorsArchive: null,
+    mission: null,
+    missionValues: null,
+    academicHeritage: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
+
+    // No "Make an Inquiry" section in this mockup, and no email to build
+    // one from anyway.
+    inquiry: null,
+
+    cta: {
+      heading: "Teaching the Children of Aleppo Since 1932",
+      headingHy: null,
+      body: "The Syriac Evangelical School continues its unbroken work in Aleppo, under the sponsorship of the Educational Council of the Armenian Evangelical Community of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // About/Intro woven row — rendered via `WhiteChurchFeature` with
+    // `reverse` in place of `<SchoolAbout>`, same pattern as every other
+    // magazine-style Syria school.
+    introFeature: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "A Home for Learning in Aleppo",
+      headingHy: null,
+      paragraphs: [
+        "The Syriac Evangelical School has taught the children of Aleppo since 1932. It opened in the simplest of conditions — a kindergarten and an elementary school — and in 1981 was rebuilt in stone. Under the sponsorship of the Educational Council of the Armenian Evangelical Community of Syria, it has carried on its work without interruption from its founding day to this one.",
+        "Today it teaches children from kindergarten through the sixth grade, with a single, steady aim: to give them a high standard of learning.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/school-syriac-evangelical-classroom.jpg",
+        alt: "An elementary class in progress",
+        width: 1280,
+        height: 719,
+      },
+    },
+
+    pullQuoteBand: {
+      quote: "Walk as children of light.",
+      quoteHy: null,
+      attribution: "Ephesians 5:8 · the school's motto",
+      attributionHy: null,
+    },
+
+    // No sepia filter in this mockup's own vintage-band CSS (same as
+    // Bethel/Emmanuel/Damascus, unlike ACG) — `sepia={false}` at the call
+    // site.
+    vintageBand: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "Unbroken Since 1932",
+      headingHy: null,
+      leadParagraph:
+        "From its beginnings in 1932, the school has been shaped by a succession of dedicated directors — Bier Arslan, then Andranik Injejikian, then Mrs. Sonali Ghazal, and today Mrs. Arousiag Der Artinian-Hallajian, with Mrs. Badriye Nshan as secretary.",
+      leadParagraphHy: null,
+      photo: {
+        src: "/school-syriac-evangelical-staff.jpg",
+        alt: "The staff of the Syriac Evangelical School",
+        width: 1280,
+        height: 719,
+      },
+      photoCaption: "The staff of the Syriac Evangelical School.",
+      photoCaptionHy: null,
+      paragraphs: [
+        "Rebuilt in stone in 1981, the school grew from very modest beginnings into a settled home for learning in Aleppo — and through every year since 1932 it has never once closed its doors.",
+        "It remains a small, close school under the care of the Armenian Evangelical Community of Syria, giving each new generation a grounded and caring start.",
+      ],
+      paragraphsHy: null,
+    },
+
+    // 4 woven rows (Kindergarten, Play, Grades 1-6, Computer Room). All use
+    // `reverse: false` — Play's and Computer's `.split.rev` markup renders
+    // photo-left the same as the non-`.rev` rows, same confirmed
+    // CSS-order-override math as every other Syria school.
+    splitRows: [
+      {
+        eyebrow: "Kindergarten",
+        eyebrowHy: null,
+        heading: "A Room of Small Discoveries",
+        headingHy: null,
+        paragraphs: [
+          "The youngest children begin in a bright room of hands-on materials, puzzles, and a wall map of the world — where learning is something to touch, build, and explore before it is ever written down.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-syriac-evangelical-kindergarten.jpg",
+          alt: "A kindergarten activity room",
+          width: 1280,
+          height: 719,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Play",
+        eyebrowHy: null,
+        heading: "Room to Play",
+        headingHy: null,
+        paragraphs: [
+          "Just outside the classrooms, a bright play corridor — slides, alphabet walls, and low benches — gives the little ones space to move and play between their lessons.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-syriac-evangelical-play-corridor.jpg",
+          alt: "The kindergarten play corridor",
+          width: 1280,
+          height: 719,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Grades 1–6",
+        eyebrowHy: null,
+        heading: "Steady Foundations",
+        headingHy: null,
+        paragraphs: [
+          "Through the elementary grades, lessons build the foundations of reading, writing, number, and language — the school holding, year after year, to its single aim of a high standard of learning.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-syriac-evangelical-elementary.jpg",
+          alt: "An elementary classroom",
+          width: 1280,
+          height: 960,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Technology",
+        eyebrowHy: null,
+        heading: "In the Computer Room",
+        headingHy: null,
+        paragraphs: [
+          "In the computer room, the children gather around the screens to take their first steps in coding and digital skills — one of the ways the school reaches beyond the ordinary lesson.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-syriac-evangelical-computer-room.jpg",
+          alt: "Students in the computer room",
+          width: 1280,
+          height: 718,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    languages: null,
+    programChips: null,
+    visionMission: null,
+
+    // Icons: #ic-news is new this unit; #ic-flask (ACG) and #ic-book
+    // (AESSA/Bethel) both reused as-is.
+    events: {
+      eyebrow: "Beyond the Classroom",
+      eyebrowHy: null,
+      heading: "Through the Year",
+      headingHy: null,
+      items: [
+        {
+          icon: "#ic-flask",
+          title: "Science Exhibitions",
+          titleHy: null,
+          description: "Students present their experiments and discoveries to the school community.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-book",
+          title: "Spelling Bee",
+          titleHy: null,
+          description: "A lively English spelling competition among the pupils.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-news",
+          title: "Student Newspaper",
+          titleHy: null,
+          description: "The children produce and publish their own electronic newspaper.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // 10 photos, verbatim alt text from the mockup's own gallery figures.
+    // 7 reuse the exact same source files already used above (assembly,
+    // classroom, staff, kindergarten, play corridor, elementary, computer
+    // room) — the mockup's own gallery duplicates them too, same pattern
+    // confirmed on every prior Syria school. The other 3 (entrance,
+    // courtyard, geography board) are gallery-only photos with no other
+    // home on the page.
+    gallery: {
+      eyebrow: "Gallery",
+      eyebrowHy: null,
+      heading: "Life at the Syriac Evangelical School",
+      headingHy: null,
+      photos: [
+        {
+          src: "/school-syriac-evangelical-gallery-entrance.jpg",
+          alt: "The school entrance",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-hero.jpg",
+          alt: "Morning assembly in the courtyard",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-gallery-courtyard.jpg",
+          alt: "Students in the courtyard",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-classroom.jpg",
+          alt: "An elementary class",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-elementary.jpg",
+          alt: "A younger class",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-computer-room.jpg",
+          alt: "The computer room",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-play-corridor.jpg",
+          alt: "The play corridor",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-kindergarten.jpg",
+          alt: "The kindergarten activity room",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-staff.jpg",
+          alt: "The school staff",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-syriac-evangelical-gallery-geography.jpg",
+          alt: "A geography lesson at the board",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+  },
 };

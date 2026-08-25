@@ -408,6 +408,24 @@ export default function IconSymbols() {
             strokeWidth="1.6"
           />
         </symbol>
+
+        {/* Student Newspaper event icon — geometry copied verbatim from
+            design-reference/syriac-evangelical-school.html's own #news
+            symbol. First used by Syriac Evangelical School's "Through the
+            Year" events section. */}
+        <symbol id="ic-news" viewBox="0 0 24 24">
+          <rect
+            x="3"
+            y="4"
+            width="18"
+            height="16"
+            rx="2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <path d="M7 8h7M7 12h10M7 16h6" stroke="currentColor" strokeWidth="1.6" />
+        </symbol>
       </defs>
     </svg>
   );
