@@ -128,6 +128,13 @@ export type SchoolContent = {
   location: {
     addressLines: string[];
     addressLinesHy: string[] | null;
+    // Optional descriptive landmark row (own row, own `ic-church` icon,
+    // distinct from the address block) — e.g. "Beside the Holy Trinity
+    // Armenian Evangelical Church." First needed by Kessab Martyrs School,
+    // whose mockup has exactly this as a separate `.crow` in its Location
+    // card, not folded into the address lines. Null/omitted for every
+    // other school.
+    landmark?: string | null;
   } | null;
 
   // "Get in Touch" card rows — null when no verified contact route exists
@@ -3191,6 +3198,301 @@ export const schoolContent: Record<string, SchoolContent> = {
         {
           src: "/school-syriac-evangelical-gallery-geography.jpg",
           alt: "A geography lesson at the board",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+  },
+
+  // Armenian Evangelical Martyrs' School, Kessab — 6th Syria school, and
+  // the first with `country: "Syria (Kessab)"` (mirrors the church
+  // pattern exactly — see schools.ts, schools/page.tsx, and
+  // schools/[slug]/page.tsx's own comments for the subregion mechanism).
+  // Built verbatim from design-reference/kessab-martyrs-school.html,
+  // cross-checked against
+  // "Քեսապի-Հայ-Աւետարանական-Նահատակաց-Վարժարան.docx" — the mockup's own
+  // footer note again pre-flags its real discrepancies (name spelling;
+  // no email/address supplied). One historical fact ties directly to
+  // already-committed church data: the docx and mockup both state that
+  // Karaduran, Ekizolukh, and Korkune once had their own schools beside
+  // their churches — the same three villages whose CHURCHES are already
+  // built as inactive, worship redirected to Holy Trinity (items 81-83).
+  // The Martyrs' School is now the only Armenian Evangelical school still
+  // operating anywhere in Kessab, having in effect absorbed that role —
+  // see the OPEN_QUESTIONS cross-reference item for this school.
+  "kessab-martyrs-school": {
+    slug: "kessab-martyrs-school",
+
+    masthead: {
+      locationLine: "Kessab, Syria",
+      locationLineHy: null,
+      established: "1852",
+      establishedHy: null,
+    },
+
+    // "logo.png" — an AI-generated-style crest (same 5625×5625-canvas,
+    // glossy-3D tell as every other Syria school logo this unit), used
+    // as-supplied per Yeghia's standing "use the emblems as is" ruling —
+    // flagged, not withheld.
+    logo: {
+      src: "/school-kessab-martyrs-emblem.png",
+      alt: "Kessab Martyrs' School crest",
+    },
+    heroPhoto: {
+      src: "/school-kessab-martyrs-hero.jpg",
+      alt: "A lesson at the Martyrs' School in Kessab",
+    },
+
+    factsBar: [
+      { label: "1852", labelHy: null, sub: "Founded", subHy: null },
+      { label: "1980", labelHy: null, sub: "Unified", subHy: null },
+      { label: "KG & Elementary", labelHy: null, sub: "Kindergarten & Primary", subHy: null },
+      { label: "Kessab, Syria", labelHy: null, sub: "Location", subHy: null },
+    ],
+
+    // Required field, kept populated (same real text as `introFeature`,
+    // verbatim) for type parity even though `<SchoolAbout>` isn't rendered
+    // for this school — same reasoning as every other magazine-style
+    // Syria school.
+    about: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "A School in the Heart of Kessab",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Martyrs' School has stood in Kessab since 1852, teaching beside the Armenian Evangelical Holy Trinity Church. For more than a century and a half it has been one of the living symbols of Kessab's Armenian community — and today it is the only Armenian Evangelical school still operating in the town.",
+        "It teaches children through the kindergarten and elementary years, carrying forward a mission that many of the surrounding villages once shared — and holding to a single conviction: that an Armenian school is a cornerstone of Armenian identity, language, and Christian faith.",
+      ],
+      paragraphsHy: null,
+      pullQuote: null,
+      pullQuoteHy: null,
+    },
+
+    principalCard: null,
+
+    // No P.O. Box/mailing address exists anywhere in the docx — the
+    // mockup's own footer note says so explicitly ("No email or mailing
+    // address was supplied"). `landmark` (new this unit) carries the
+    // school's real physical relationship to Holy Trinity Church, exactly
+    // as the mockup's own separate `.crow` row states it — not folded
+    // into `addressLines`.
+    location: {
+      addressLines: ["Kessab, Syria"],
+      addressLinesHy: null,
+      landmark: "Beside the Holy Trinity Armenian Evangelical Church",
+    },
+
+    // All verified, real (not pending). No email, no Instagram — neither
+    // exists anywhere in the docx, and the mockup correctly has neither row.
+    contactRows: [
+      {
+        key: "Phone",
+        keyHy: null,
+        value: "+963 17 7 710 603",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Facebook",
+        keyHy: null,
+        value: "Armenian Evangelical Martyrs' School, Kessab",
+        valueHy: null,
+        href: "https://m.facebook.com/431277543565887",
+      },
+    ],
+
+    // Only 1 card — the mockup's own `.lead-grid` has just one person, no
+    // Vice-Chair/Secretary equivalent named anywhere in the source. Name
+    // shown as supplied ("Jnev Boujikian"), pending Union confirmation —
+    // the docx's own separate info-sheet table spells it "Jnev Boujekian,"
+    // per the mockup's own footer note.
+    leadership: [
+      {
+        name: "Miss Jnev Boujikian",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-kessab-martyrs-principal.jpg",
+          alt: "Miss Jnev Boujikian",
+        },
+      },
+    ],
+
+    directorsArchive: null,
+    mission: null,
+    missionValues: null,
+    academicHeritage: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
+
+    // No "Make an Inquiry" section in this mockup, and no email to build
+    // one from anyway.
+    inquiry: null,
+
+    cta: {
+      heading: "A Living Symbol of Kessab's Armenians",
+      headingHy: null,
+      body: "Through displacement and return, the Martyrs' School has taught the children of Kessab since 1852 — that each may grow a conscious, dignified Armenian and a faithful Christian, keeping language, faith, and identity. It stands beside the Holy Trinity Armenian Evangelical Church, within the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // About/Intro woven row — rendered via `WhiteChurchFeature` with
+    // `reverse` in place of `<SchoolAbout>`, same pattern as every other
+    // magazine-style Syria school.
+    introFeature: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "A School in the Heart of Kessab",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Martyrs' School has stood in Kessab since 1852, teaching beside the Armenian Evangelical Holy Trinity Church. For more than a century and a half it has been one of the living symbols of Kessab's Armenian community — and today it is the only Armenian Evangelical school still operating in the town.",
+        "It teaches children through the kindergarten and elementary years, carrying forward a mission that many of the surrounding villages once shared — and holding to a single conviction: that an Armenian school is a cornerstone of Armenian identity, language, and Christian faith.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/school-kessab-martyrs-kindergarten.jpg",
+        alt: "A kindergarten class, with the town of Kessab beyond the window",
+        width: 2560,
+        height: 1920,
+      },
+    },
+
+    pullQuoteBand: {
+      quote: "All Scripture is God-breathed.",
+      quoteHy: null,
+      attribution: "2 Timothy 3:16",
+      attributionHy: null,
+    },
+
+    // No sepia filter in this mockup's own vintage-band CSS (same as
+    // Bethel/Emmanuel/Damascus/Syriac, unlike ACG) — `sepia={false}` at
+    // the call site.
+    vintageBand: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "Since 1852 — and Still Standing",
+      headingHy: null,
+      leadParagraph:
+        "Founded in 1852 in the heart of Kessab, the Martyrs' School soon grew beyond a single village. From 1908 it kept a boarding section, giving shelter and schooling to children who came from distant villages and districts; for years it also ran a secondary section, becoming one of the most important centres of learning in Kessab and the lands around it.",
+      leadParagraphHy: null,
+      photo: {
+        src: "/school-kessab-martyrs-community.jpg",
+        alt: "Pupils of the Martyrs' School, Kessab",
+        width: 1021,
+        height: 581,
+      },
+      photoCaption: "Pupils of the Martyrs' School, Kessab.",
+      photoCaptionHy: null,
+      paragraphs: [
+        "Its story has not been an easy one. The repatriation of 1947, and the emigration of the decades that followed, thinned both the community and the school's rolls. And through its long history the school lived through the displacements of Kessab — in 1909, in 1915, and again in 2014 — its building damaged and, each time, rebuilt when the people of Kessab returned home.",
+        "The Armenian Evangelical communities of Karaduran, Ekizolukh, and Korkune once kept schools of their own beside their churches. Today the Martyrs' School is the last of them still open — a living symbol of Kessab's Armenians, teaching on in faith, dedication, and hope.",
+      ],
+      paragraphsHy: null,
+    },
+
+    // 2 woven rows (Kindergarten, Community). Community's `.split.rev`
+    // markup renders photo-left the same as Kindergarten's non-`.rev`
+    // row, same confirmed CSS-order math as every other Syria school —
+    // `reverse: false` for both. The Kindergarten photo is deliberately
+    // the same file used by `introFeature` above — the mockup's own
+    // "In the Kindergarten" row uses a plain "A kindergarten class" alt
+    // (no window/town detail), matching the same real photo reused, not
+    // a distinct one invented to avoid repetition.
+    splitRows: [
+      {
+        eyebrow: "The Early Years",
+        eyebrowHy: null,
+        heading: "In the Kindergarten",
+        headingHy: null,
+        paragraphs: [
+          "The school's youngest children begin here — learning their first letters and numbers, and celebrating the seasons of the Christian year together in bright, decorated rooms.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-kessab-martyrs-kindergarten.jpg",
+          alt: "A kindergarten class",
+          width: 2560,
+          height: 1920,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "A Close Community",
+        eyebrowHy: null,
+        heading: "Teachers and Children Together",
+        headingHy: null,
+        paragraphs: [
+          "Small and close, the Martyrs' School is a community as much as a classroom — its teachers and pupils sharing the crafts, feasts, and quiet daily work that hold a small mountain school together.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-kessab-martyrs-community.jpg",
+          alt: "Teachers and pupils together",
+          width: 1088,
+          height: 596,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    languages: null,
+    programChips: null,
+    visionMission: null,
+
+    // No Events section in this mockup — confirmed absent (only About,
+    // History, Leadership, Student Life, Gallery, and Contact exist).
+    events: null,
+
+    // 6 photos, verbatim alt text from the mockup's own gallery figures.
+    // 4 reuse the exact same source files already used above (hero,
+    // kindergarten, community/vintage-band, community/split) — the
+    // mockup's own gallery duplicates them too, same pattern confirmed on
+    // every prior Syria school. The other 2 (Christmas, elementary) are
+    // gallery-only photos with no other home on the page.
+    gallery: {
+      eyebrow: "Gallery",
+      eyebrowHy: null,
+      heading: "Life at the Martyrs' School",
+      headingHy: null,
+      photos: [
+        {
+          src: "/school-kessab-martyrs-hero.jpg",
+          alt: "An elementary lesson",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-kessab-martyrs-kindergarten.jpg",
+          alt: "A kindergarten class",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-kessab-martyrs-gallery-outdoors.jpg",
+          alt: "Pupils outdoors in Kessab",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-kessab-martyrs-community.jpg",
+          alt: "Teachers and pupils",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-kessab-martyrs-gallery-christmas.jpg",
+          alt: "A kindergarten class at Christmas",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-kessab-martyrs-gallery-elementary.jpg",
+          alt: "An elementary class",
           caption: null,
           captionHy: null,
         },

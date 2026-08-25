@@ -57,13 +57,28 @@ export default async function SchoolDetailPage({
 
   const content = schoolContent[slug] ?? null;
 
+  // "Syria (Kessab)" is a display-grouping value, not real crumb text (see
+  // schools/page.tsx's own `countryDisplayLabel` for the same split, and
+  // churches/[slug]/page.tsx for the identical pattern already established
+  // there) — the Kessab church mockups show a 4th crumb segment
+  // ("Ministries › Churches › Syria › Kessab"), not a combined 3rd
+  // segment; Kessab Martyrs School's own mockup does the same
+  // ("Ministries › Schools › Syria › Kessab"). First used by this school —
+  // `breadcrumbSubregion` is null for every other school, unaffected.
+  const breadcrumbCountry = school.country === "Syria (Kessab)" ? "Syria" : school.country;
+  const breadcrumbSubregion = school.country === "Syria (Kessab)" ? "Kessab" : null;
+
   if (!content) {
     // 1 of 4 schools doesn't have a SchoolContent entry yet (Central High).
     // schools.ts carries no contact/address fields at all — render the
     // school name only, never invented prose, never a 404.
     return (
       <>
-        <ChurchBreadcrumb country={school.country} section="Schools" />
+        <ChurchBreadcrumb
+          country={breadcrumbCountry}
+          subregion={breadcrumbSubregion}
+          section="Schools"
+        />
         <section className={styles.minimalTop}>
           <h1 className={styles.minimalHeading}>{school.name}</h1>
           <div className={styles.minimalMeta}>{school.country}</div>
@@ -111,12 +126,17 @@ export default async function SchoolDetailPage({
     "emmanuel-al-ressaleh-school",
     "damascus-kenats-al-hayat-school",
     "syriac-evangelical-school",
+    "kessab-martyrs-school",
   ];
   const vintageSepia = !NO_SEPIA_SLUGS.includes(slug);
 
   return (
     <>
-      <ChurchBreadcrumb country={school.country} section="Schools" />
+      <ChurchBreadcrumb
+        country={breadcrumbCountry}
+        subregion={breadcrumbSubregion}
+        section="Schools"
+      />
       <SchoolTopBlock
         school={school}
         masthead={content.masthead}

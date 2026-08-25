@@ -91,4 +91,12 @@ export const schools: School[] = [
     photo: "/school-syriac-evangelical-hero.jpg",
     emblem: "/school-syriac-evangelical-emblem.png",
   },
+  {
+    id: "school-kessab-martyrs",
+    country: "Syria (Kessab)",
+    name: "Armenian Evangelical Martyrs' School, Kessab",
+    slug: "kessab-martyrs-school",
+    photo: "/school-kessab-martyrs-hero.jpg",
+    emblem: "/school-kessab-martyrs-emblem.png",
+  },
 ];

@@ -30,12 +30,24 @@ function cardEmblem(slug: string, fallback: string | null) {
   return fallback ? { src: fallback, alt: "" } : null;
 }
 
+// Display grouping only — the underlying data keeps each school's real
+// `country` value ("Syria" vs "Syria (Kessab)") untouched. Mirrors
+// churches/page.tsx's own `countryDisplayLabel` exactly (same rationale:
+// Kessab shows under the single "Syria" section, Aleppo/Damascus schools
+// first, matching directory order — Kessab Martyrs is appended last).
+const countryDisplayLabel: Record<string, string> = {
+  Lebanon: "Lebanon",
+  Syria: "Syria",
+  "Syria (Kessab)": "Syria",
+};
+
 function groupByCountry() {
   const groups = new Map<string, typeof schools>();
   for (const school of schools) {
-    const list = groups.get(school.country) ?? [];
+    const label = countryDisplayLabel[school.country] ?? school.country;
+    const list = groups.get(label) ?? [];
     list.push(school);
-    groups.set(school.country, list);
+    groups.set(label, list);
   }
   return [...groups.entries()];
 }

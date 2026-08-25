@@ -71,6 +71,14 @@ export default function SchoolContactSection({
                 ))}
               </span>
             </div>
+            {location.landmark && (
+              <div className={styles.row}>
+                <svg className={styles.rowIco}>
+                  <use href="#ic-church" />
+                </svg>
+                <span>{location.landmark}</span>
+              </div>
+            )}
             <div className={styles.spacer} />
             {mapsUrl && (
               <a
