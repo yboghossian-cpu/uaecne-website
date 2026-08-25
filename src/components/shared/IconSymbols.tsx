@@ -426,6 +426,53 @@ export default function IconSymbols() {
           />
           <path d="M7 8h7M7 12h10M7 16h6" stroke="currentColor" strokeWidth="1.6" />
         </symbol>
+
+        {/* "Four Areas of Work" icons for the Syria Educational Council
+            hub — geometry copied verbatim from
+            design-reference/syria-educational-council.html's own
+            #gear/#coins/#growth symbols (#book already existed, reused
+            as-is for Academic Oversight). */}
+        <symbol id="ic-gear" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          <path
+            d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M19.1 4.9L17 7M7 17l-2.1 2.1"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </symbol>
+        <symbol id="ic-coins" viewBox="0 0 24 24">
+          <ellipse cx="9" cy="7" rx="6" ry="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
+          <path
+            d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M9 15v2c0 1.7 2.7 3 6 3s6-1.3 6-3v-5c0-1.4-1.9-2.6-4.5-2.9"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
+        </symbol>
+        <symbol id="ic-growth" viewBox="0 0 24 24">
+          <path
+            d="M3 17l6-6 4 4 8-8"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M16 7h5v5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </symbol>
       </defs>
     </svg>
   );

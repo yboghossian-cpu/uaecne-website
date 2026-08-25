@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
-import { educationCouncilContent, haigazianContent, nestContent } from "@/data/higherEdContent";
+import {
+  educationCouncilContent,
+  haigazianContent,
+  nestContent,
+  syriaEducationalCouncilContent,
+} from "@/data/higherEdContent";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -38,6 +43,17 @@ const cards = [
     treatment: "photo" as const,
     photo: nestContent.heroPhoto,
     emblem: nestContent.logo,
+  },
+  {
+    id: "syria-educational-council",
+    slug: syriaEducationalCouncilContent.slug,
+    name: syriaEducationalCouncilContent.heading,
+    // Real crest exists (unlike the Lebanon Council) — shown in the label
+    // row like Haigazian/NEST's own emblem, but the picture area still
+    // uses the seal treatment (no campus/building photo, since this is a
+    // governing council, not a physical institution).
+    treatment: "seal" as const,
+    emblem: syriaEducationalCouncilContent.logo,
   },
 ];
 

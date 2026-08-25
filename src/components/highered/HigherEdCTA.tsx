@@ -9,20 +9,22 @@ type HigherEdCTAProps = {
 // only), every Higher Education mockup has one. External domains open in
 // a new tab; the Council's internal /schools link stays same-tab.
 export default function HigherEdCTA({ cta }: HigherEdCTAProps) {
-  const isExternal = cta.buttonHref.startsWith("http");
+  const isExternal = cta.buttonHref?.startsWith("http") ?? false;
 
   return (
     <section className={styles.cta}>
       <div className={styles.rule} />
       <h2 className={styles.heading}>{cta.heading}</h2>
       <p className={styles.body}>{cta.body}</p>
-      <a
-        className={styles.btn}
-        href={cta.buttonHref}
-        {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-      >
-        {cta.buttonLabel} →
-      </a>
+      {cta.buttonHref && cta.buttonLabel && (
+        <a
+          className={styles.btn}
+          href={cta.buttonHref}
+          {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        >
+          {cta.buttonLabel} →
+        </a>
+      )}
     </section>
   );
 }

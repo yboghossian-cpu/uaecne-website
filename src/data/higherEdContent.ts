@@ -29,13 +29,18 @@ export type HistoryEntry = {
 // "thenest.edu.lb"), so the href uses that exact string, not a guessed
 // URL. The Council's CTA links internally to the already-built /schools
 // page — a real, existing route, not invented.
+//
+// `buttonLabel`/`buttonHref` are independently optional (both-or-neither
+// in practice) — the Syria Educational Council's own CTA mockup has no
+// button at all (matching ChurchCTA's plain heading+body shape), unlike
+// every other Higher Education CTA. Omitting rather than inventing one.
 export type HigherEdCTA = {
   heading: string;
   headingHy: string | null;
   body: string;
   bodyHy: string | null;
-  buttonLabel: string;
-  buttonHref: string;
+  buttonLabel?: string;
+  buttonHref?: string;
 };
 
 // ===================== EDUCATION COUNCIL =====================
@@ -559,5 +564,336 @@ export const nestContent: NestContent = {
     bodyHy: null,
     buttonLabel: "Visit thenest.edu.lb",
     buttonHref: "https://thenest.edu.lb",
+  },
+};
+
+// ===================== SYRIA EDUCATIONAL COUNCIL =====================
+// A 4th, genuinely different branch (governing body for Syria's 6 schools,
+// not a Lebanon-shaped council and not a school-detail page) — its own
+// type, not squeezed into EducationCouncilContent or SchoolContent. Content
+// verbatim from design-reference/syria-educational-council.html,
+// cross-checked against "ՍՈՒՐԻՈՅ ՀԱՅ ԱՒԵՏԱՐԱՆԱԿԱՆ ԿՐԹԱԿԱՆ ԽՈՐՀՈՒՐԴ.docx" —
+// every section matched exactly, including all 4 "Areas of Work" and the
+// full 4-person leadership roster (independently verified against the
+// docx, not taken from the mockup alone — see OPEN_QUESTIONS). `location`/
+// `contactRows` are typed to match SchoolContent's own shape exactly
+// (imported, not duplicated) so SchoolContactSection can be reused as-is.
+
+import type { SchoolContent, SchoolContactRow } from "./schoolContent";
+
+export type SyriaEducationalCouncilContent = {
+  slug: string;
+  heading: string;
+  headingHy: string | null;
+  subheading: string;
+  subheadingHy: string | null;
+  metaLine: string;
+  metaLineHy: string | null;
+  logo: Photo | null;
+
+  factsBar: { label: string; labelHy: string | null; sub: string; subHy: string | null }[];
+
+  overview: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+  };
+
+  // Same shape as SchoolContent["visionMission"] — rendered via the
+  // cross-imported SchoolVisionMission component, unmodified.
+  missionVision: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    cards: { title: string; titleHy: string | null; body: string; bodyHy: string | null }[];
+  };
+
+  areas: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    items: {
+      icon: string;
+      title: string;
+      titleHy: string | null;
+      description: string;
+      descriptionHy: string | null;
+    }[];
+  };
+
+  schools: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    items: { city: string; name: string; href: string; crest: Photo | null }[];
+  };
+
+  roster: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    photo: Photo | null;
+    photoCaption: string | null;
+    photoCaptionHy: string | null;
+    people: { name: string; nameHy: string | null; role: string; roleHy: string | null }[];
+  };
+
+  location: SchoolContent["location"];
+  contactRows: SchoolContactRow[] | null;
+
+  cta: HigherEdCTA;
+};
+
+export const syriaEducationalCouncilContent: SyriaEducationalCouncilContent = {
+  slug: "syria-educational-council",
+
+  heading: "Armenian Evangelical Educational Council",
+  headingHy: null,
+  subheading: "Community of Syria",
+  subheadingHy: null,
+  metaLine: "Governing the six Armenian Evangelical schools of Syria · Aleppo",
+  metaLineHy: null,
+
+  // "1.png" — an AI-generated-style crest (same 5625×5625-canvas,
+  // glossy-3D tell as every Syria school logo this unit), used as-supplied
+  // per Yeghia's standing "use the emblems as is" ruling — flagged, not
+  // withheld.
+  logo: { src: "/higher-ed-syria-council-emblem.png", alt: "Educational Council crest" },
+
+  factsBar: [
+    { label: "6", labelHy: null, sub: "Schools", subHy: null },
+    { label: "4", labelHy: null, sub: "In Aleppo", subHy: null },
+    { label: "1", labelHy: null, sub: "In Damascus", subHy: null },
+    { label: "1", labelHy: null, sub: "In Kessab", subHy: null },
+  ],
+
+  overview: {
+    eyebrow: "Overview",
+    eyebrowHy: null,
+    heading: "The Highest Body for Our Schools",
+    headingHy: null,
+    paragraphs: [
+      "The Educational Council of the Armenian Evangelical Community of Syria is the highest body responsible for the community's education. It shapes educational policy, sets strategic direction, and oversees its schools — six in all: four in Aleppo, one in Damascus, and one in Kessab. Together these schools carry forward an educational mission more than a century old.",
+    ],
+    paragraphsHy: null,
+  },
+
+  missionVision: {
+    eyebrow: "Our Purpose",
+    eyebrowHy: null,
+    heading: "Mission & Vision",
+    headingHy: null,
+    cards: [
+      {
+        title: "Mission",
+        titleHy: null,
+        body: "To ensure a high standard of education grounded in Christian, national, and universal human values — raising conscious, responsible, capable, and service-minded generations, ready to contribute to the community and to the life of the homeland.",
+        bodyHy: null,
+      },
+      {
+        title: "Vision",
+        titleHy: null,
+        body: "To create a modern, safe, and inspiring educational environment in which knowledge, moral values, creative thinking, and social responsibility grow — strengthening the community's schools as pillars of Syria's educational and cultural life.",
+        bodyHy: null,
+      },
+    ],
+  },
+
+  // All 4 areas independently confirmed against the docx's own 4 headed
+  // sections (Academic Oversight / Administrative & Organizational
+  // Management / Economic Management / Institutional Development) —
+  // matched point-for-point, not paraphrased from the mockup alone.
+  areas: {
+    eyebrow: "What the Council Does",
+    eyebrowHy: null,
+    heading: "Four Areas of Work",
+    headingHy: null,
+    items: [
+      {
+        icon: "#ic-book",
+        title: "Academic Oversight",
+        titleHy: null,
+        description: "Setting educational policy and strategy, monitoring teaching quality, improving curricula, and developing teachers.",
+        descriptionHy: null,
+      },
+      {
+        icon: "#ic-gear",
+        title: "Administration",
+        titleHy: null,
+        description: "Keeping the schools running well, and coordinating buildings, materials, and technical needs.",
+        descriptionHy: null,
+      },
+      {
+        icon: "#ic-coins",
+        title: "Financial Management",
+        titleHy: null,
+        description: "Financial planning and oversight, and the effective distribution of resources across the schools.",
+        descriptionHy: null,
+      },
+      {
+        icon: "#ic-growth",
+        title: "Institutional Development",
+        titleHy: null,
+        description: "Long-term strategy, and strengthening the educational, cultural, and social role of the schools.",
+        descriptionHy: null,
+      },
+    ],
+  },
+
+  // Hrefs verified against the 6 live school routes already built this
+  // session — not invented slugs. Crests reused from each school's own
+  // already-committed emblem file, not duplicated.
+  schools: {
+    eyebrow: "Under the Council",
+    eyebrowHy: null,
+    heading: "The Six Schools",
+    headingHy: null,
+    items: [
+      {
+        city: "Aleppo",
+        name: "Armenian Evangelical Bethel Secondary School",
+        href: "/schools/bethel-secondary-school",
+        crest: { src: "/school-bethel-secondary-school-emblem.png", alt: "" },
+      },
+      {
+        city: "Aleppo",
+        name: "Aleppo College for Girls",
+        href: "/schools/aleppo-college-for-girls",
+        crest: { src: "/school-aleppo-college-for-girls-emblem.png", alt: "" },
+      },
+      {
+        city: "Aleppo",
+        name: "Syriac Evangelical School",
+        href: "/schools/syriac-evangelical-school",
+        crest: { src: "/school-syriac-evangelical-emblem.png", alt: "" },
+      },
+      {
+        city: "Aleppo",
+        name: "Armenian Evangelical Emmanuel School (Al Ressaleh)",
+        href: "/schools/emmanuel-al-ressaleh-school",
+        crest: { src: "/school-emmanuel-al-ressaleh-emblem.png", alt: "" },
+      },
+      {
+        city: "Kessab",
+        name: "Armenian Evangelical Martyrs' School",
+        href: "/schools/kessab-martyrs-school",
+        crest: { src: "/school-kessab-martyrs-emblem.png", alt: "" },
+      },
+      {
+        city: "Damascus",
+        name: "Armenian Evangelical Kenats (Life) School",
+        href: "/schools/damascus-kenats-al-hayat-school",
+        crest: { src: "/school-damascus-kenats-al-hayat-emblem.png", alt: "" },
+      },
+    ],
+  },
+
+  // Real photo of the actual 4 roster members, in the Council's own
+  // office (a real wooden seal reading "ARMENIAN PROTESTANT COMMUNITY IN
+  // SYRIA" is visible on the wall) — not the mockup's own lower-quality
+  // embedded copy. Individual name labels aren't attached to the group
+  // photo itself (matching the mockup's own footer note: "shown without
+  // individual name labels, as the source did not identify who is who"),
+  // but the 4 names below are independently confirmed by the docx.
+  roster: {
+    eyebrow: "Leadership",
+    eyebrowHy: null,
+    heading: "The Educational Council",
+    headingHy: null,
+    photo: {
+      src: "/higher-ed-syria-council-roster.jpg",
+      alt: "The Syria Armenian Evangelical Educational Council",
+    },
+    photoCaption: "The Educational Council, at the Armenian Evangelical Community of Syria.",
+    photoCaptionHy: null,
+    people: [
+      {
+        name: "Rev. Dr. Haroutune Selimian",
+        nameHy: null,
+        role: "President & License-Holder of the Schools",
+        roleHy: null,
+      },
+      {
+        name: "Mrs. Araz Mansourian-Shahinian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+      },
+      {
+        name: "Miss Dalar Tabbakh",
+        nameHy: null,
+        role: "Assistant Secretary",
+        roleHy: null,
+      },
+      {
+        name: "Mrs. Maria Bozayagalian",
+        nameHy: null,
+        role: "Representative Member",
+        roleHy: null,
+      },
+    ],
+  },
+
+  // P.O. Box 3833 — the same box already shared by ACG/Bethel/Emmanuel al
+  // Ressaleh (OPEN_QUESTIONS items 90/98). This is very likely the reason:
+  // it's this Council's own office box, and those are 3 of the 4 Aleppo
+  // schools it governs. Logged as a likely resolution, not asserted fact —
+  // see OPEN_QUESTIONS.
+  location: {
+    addressLines: ["Aleppo, Syria", "P.O. Box 3833"],
+    addressLinesHy: null,
+  },
+
+  // All verified, real (not pending). Per the mockup's own footer note,
+  // the source contact table had the President's Email/Cellphone rows
+  // swapped — confirmed directly in the docx (Email field held a phone
+  // number, Cellphone field held an email address). The office contact
+  // block below is used throughout instead of that swapped personal row.
+  contactRows: [
+    {
+      key: "Phone",
+      keyHy: null,
+      value: "+963 21 4 666 700",
+      valueHy: null,
+      href: null,
+    },
+    {
+      key: "Fax",
+      keyHy: null,
+      value: "+963 21 4 614 490",
+      valueHy: null,
+      href: null,
+    },
+    {
+      key: "Email",
+      keyHy: null,
+      value: "apcsofficedirectorsyria@gmail.com",
+      valueHy: null,
+      href: "mailto:apcsofficedirectorsyria@gmail.com",
+    },
+    {
+      key: "Facebook",
+      keyHy: null,
+      value: "Armenian Evangelical Educational Council in Syria",
+      valueHy: null,
+      href: "https://www.facebook.com/profile.php?id=100064268012369",
+    },
+  ],
+
+  // No button in this mockup's own CTA (unlike every other Higher
+  // Education page) — `buttonLabel`/`buttonHref` genuinely omitted, not
+  // invented (HigherEdCTA's type made optional this unit to support this).
+  cta: {
+    heading: "One Council, Six Schools, One Mission",
+    headingHy: null,
+    body: "Together, these six institutions continue the Armenian Evangelical Community of Syria's educational mission of more than a century — raising conscious, educated generations who keep their national identity and are guided by Christian values. The Council serves them all, within the Union of the Armenian Evangelical Churches in the Near East.",
+    bodyHy: null,
   },
 };

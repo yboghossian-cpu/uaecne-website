@@ -4,6 +4,7 @@ import {
   educationCouncilContent,
   haigazianContent,
   nestContent,
+  syriaEducationalCouncilContent,
 } from "@/data/higherEdContent";
 import HigherEdBreadcrumb from "@/components/highered/HigherEdBreadcrumb";
 import HigherEdCTA from "@/components/highered/HigherEdCTA";
@@ -20,11 +21,19 @@ import HaigazianClassBand from "@/components/highered/HaigazianClassBand";
 import NestSponsors from "@/components/highered/NestSponsors";
 import NestDegrees from "@/components/highered/NestDegrees";
 import NestLeadershipPair from "@/components/highered/NestLeadershipPair";
+import SyriaCouncilHero from "@/components/highered/SyriaCouncilHero";
+import SyriaCouncilOverview from "@/components/highered/SyriaCouncilOverview";
+import SyriaCouncilAreas from "@/components/highered/SyriaCouncilAreas";
+import SyriaCouncilSchools from "@/components/highered/SyriaCouncilSchools";
+import SyriaCouncilRoster from "@/components/highered/SyriaCouncilRoster";
+import SchoolVisionMission from "@/components/school/SchoolVisionMission";
+import SchoolContactSection from "@/components/school/SchoolContactSection";
 
 const SLUGS = [
   "educational-council",
   haigazianContent.slug,
   nestContent.slug,
+  syriaEducationalCouncilContent.slug,
 ] as const;
 
 type PageParams = { slug: string };
@@ -48,13 +57,17 @@ export async function generateMetadata({
   if (slug === nestContent.slug) {
     return { title: `${nestContent.masthead.heading} — UAECNE` };
   }
+  if (slug === syriaEducationalCouncilContent.slug) {
+    return { title: `${syriaEducationalCouncilContent.heading} — UAECNE` };
+  }
   return { title: "Higher Education — UAECNE" };
 }
 
-// Three fundamentally different page shapes (a governing council vs. two
-// academic institutions with different distinctive sections) — branched by
-// slug rather than forced into one generic template. See
-// src/data/higherEdContent.ts for the full content-model rationale.
+// Four fundamentally different page shapes (two governing councils, each
+// with its own genuinely different shape, vs. two academic institutions
+// with different distinctive sections) — branched by slug rather than
+// forced into one generic template. See src/data/higherEdContent.ts for
+// the full content-model rationale.
 export default async function HigherEducationDetailPage({
   params,
 }: {
@@ -117,6 +130,32 @@ export default async function HigherEducationDetailPage({
         <NestDegrees degrees={n.degrees} />
         <NestLeadershipPair leadership={n.leadership} />
         <HigherEdCTA cta={n.cta} />
+      </>
+    );
+  }
+
+  if (slug === syriaEducationalCouncilContent.slug) {
+    const s = syriaEducationalCouncilContent;
+    return (
+      <>
+        <SyriaCouncilHero
+          heading={s.heading}
+          headingHy={s.headingHy}
+          subheading={s.subheading}
+          metaLine={s.metaLine}
+          logo={s.logo}
+        />
+        <SyriaCouncilOverview overview={s.overview} factsBar={s.factsBar} />
+        <SchoolVisionMission visionMission={s.missionVision} />
+        <SyriaCouncilAreas areas={s.areas} />
+        <SyriaCouncilSchools schools={s.schools} />
+        <SyriaCouncilRoster roster={s.roster} />
+        <SchoolContactSection
+          location={s.location}
+          contactRows={s.contactRows}
+          schoolName={s.heading}
+        />
+        <HigherEdCTA cta={s.cta} />
       </>
     );
   }
