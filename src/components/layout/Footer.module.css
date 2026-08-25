@@ -23,26 +23,23 @@
   flex-shrink: 0;
 }
 
-.mirror {
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
-  color: var(--color-brown);
-  opacity: 0.7;
-  max-width: 16.25rem;
-  line-height: 1.5;
+/* Armenian-script column: mirrors the English block's structure exactly.
+   Only the Armenian text itself takes the Armenian face — the shared email
+   and phone numbers stay in the body face, as in the English column. */
+.armenianCol .headOffice,
+.armenianCol .orgName,
+.armenianCol .contact span {
+  font-family: var(--font-armenian);
 }
 
-.mirrorTag {
-  display: inline-block;
+.armenianCol .contact a {
   font-family: var(--font-body);
-  font-size: 0.5625rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-gold);
-  border: 1px dashed rgba(197, 160, 89, 0.6);
-  border-radius: 3px;
-  padding: 0.1875rem 0.4375rem;
-  margin-bottom: 0.5rem;
+}
+
+.phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .headOffice {
@@ -129,7 +126,11 @@
     max-width: 320px;
   }
 
-  .mirror {
+  .armenianCol {
     text-align: right;
+  }
+
+  .armenianCol .phones {
+    justify-content: flex-end;
   }
 }

@@ -23,8 +23,25 @@
   display: flex;
   flex-direction: column;
   gap: 1.625rem;
-  max-width: 1080px;
+  max-width: 1140px;
   margin: 0 auto;
+}
+
+/* De-arched hero photo: rounded rectangle, matching the rounded-card radius
+   used elsewhere on the site. Keeps the gold hairline + elevation the arched
+   frame had, so the hero still reads as part of the same family. */
+.artFrame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  box-shadow: var(--shadow-elevated);
+}
+
+.artPhoto {
+  object-fit: cover;
 }
 
 .heroCopy {
@@ -87,12 +104,15 @@
     gap: 3rem;
   }
 
+  /* Image given a larger share of the row (was 1.35 / 1) so it fills the
+     available whitespace; the copy column still clears its 560px max-width,
+     so the headline set at 4rem is unaffected. */
   .heroCopy {
-    flex: 1.35;
+    flex: 1.15;
   }
 
   .art {
-    flex: 1;
+    flex: 1.05;
   }
 
   .headline {

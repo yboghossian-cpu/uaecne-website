@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import ArchFrame from "@/components/shared/ArchFrame";
 import { useScrollReveal } from "./useScrollReveal";
 import styles from "./SacredLegacy.module.css";
@@ -17,7 +18,7 @@ export default function SacredLegacy() {
         <div className={styles.art}>
           <ArchFrame
             aspectRatio="3 / 4"
-            photoSrc="/sacred-legacy-faec.jpg"
+            photoSrc="/sacred-legacy-faec-approved.jpeg"
             photoAlt="First Armenian Evangelical Church, Beirut"
           />
         </div>
@@ -38,6 +39,17 @@ export default function SacredLegacy() {
             is my rock, in whom I take refuge.&rdquo;{" "}
             <span className={styles.quoteRef}>— Psalm 18:2</span>
           </p>
+          <nav className={styles.wayfinding} aria-label="Explore the Union">
+            <Link href="/resource-center/history" className={styles.wayLink}>
+              Our History
+            </Link>
+            <Link href="/churches" className={styles.wayLink}>
+              Our Churches
+            </Link>
+            <Link href="/schools" className={styles.wayLink}>
+              Our Schools
+            </Link>
+          </nav>
         </div>
       </div>
     </section>

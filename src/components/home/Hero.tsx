@@ -1,6 +1,6 @@
 "use client";
 
-import ArchFrame from "@/components/shared/ArchFrame";
+import Image from "next/image";
 import Medallion from "@/components/shared/Medallion";
 import { useScrollReveal } from "./useScrollReveal";
 import styles from "./Hero.module.css";
@@ -28,11 +28,18 @@ export default function Hero() {
           </p>
         </div>
         <div className={styles.art}>
-          <ArchFrame
-            aspectRatio="4 / 3"
-            photoSrc="/hero-general-assembly.jpg"
-            photoAlt="UAECNE General Assembly gathering"
-          />
+          {/* Rounded rectangle rather than the shared arched ArchFrame — the
+              hero is deliberately de-arched; every other photo slot on the
+              site keeps the arch. */}
+          <div className={styles.artFrame}>
+            <Image
+              src="/hero-general-assembly.jpg"
+              alt="UAECNE General Assembly gathering"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className={styles.artPhoto}
+            />
+          </div>
         </div>
       </div>
     </section>
