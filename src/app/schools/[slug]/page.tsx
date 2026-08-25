@@ -20,6 +20,8 @@ import SchoolPullQuoteBand from "@/components/school/SchoolPullQuoteBand";
 import SchoolVintageBand from "@/components/school/SchoolVintageBand";
 import SchoolLanguages from "@/components/school/SchoolLanguages";
 import SchoolEvents from "@/components/school/SchoolEvents";
+import SchoolProgramChips from "@/components/school/SchoolProgramChips";
+import SchoolVisionMission from "@/components/school/SchoolVisionMission";
 import SuccessionList from "@/components/church/SuccessionList";
 import WhiteChurchFeature from "@/components/church/WhiteChurchFeature";
 import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
@@ -89,7 +91,12 @@ export default async function SchoolDetailPage({
   // no-op for the other 3 schools since those fields are unset for them,
   // so it's safe to insert them at fixed positions without any per-school
   // branching.
-  const hasMagazineSections = Boolean(content.splitRows);
+  const hasMagazineSections = Boolean(content.splitRows) || Boolean(content.academicsRows);
+
+  // Bethel Secondary School's vintage-band photo has no sepia treatment in
+  // its own mockup CSS, unlike ACG's (see `SchoolVintageBand`'s own
+  // comment) — a real per-mockup difference, not an oversight.
+  const vintageSepia = slug !== "bethel-secondary-school";
 
   return (
     <>
@@ -126,7 +133,7 @@ export default async function SchoolDetailPage({
         />
       )}
       <SchoolPullQuoteBand pullQuoteBand={content.pullQuoteBand} />
-      <SchoolVintageBand vintageBand={content.vintageBand} />
+      <SchoolVintageBand vintageBand={content.vintageBand} sepia={vintageSepia} />
       <SchoolMissionValues missionValues={content.missionValues} />
       <SchoolLeadershipGrid leaders={content.leadership} />
       <SchoolMission mission={content.mission} />
@@ -139,7 +146,21 @@ export default async function SchoolDetailPage({
       <SchoolFaithCommunity faithCommunity={content.faithCommunity} />
       {content.splitRows?.map((row, i) => (
         <WhiteChurchFeature
-          key={i}
+          key={`split-${i}`}
+          feature={row}
+          photoWidth={row.photo.width}
+          photoHeight={row.photo.height}
+          reverse={row.reverse}
+          dropcapFirst={row.dropcapFirst}
+        />
+      ))}
+      {/* Bethel Secondary School's section-scoped row groups — see the
+          `SchoolSplitRow`/`academicsRows` etc. comments in schoolContent.ts.
+          Each field is null for every other school, so these blocks are
+          no-ops there. */}
+      {content.academicsRows?.map((row, i) => (
+        <WhiteChurchFeature
+          key={`academics-${i}`}
           feature={row}
           photoWidth={row.photo.width}
           photoHeight={row.photo.height}
@@ -148,6 +169,49 @@ export default async function SchoolDetailPage({
         />
       ))}
       <SchoolLanguages languages={content.languages} />
+      <SchoolProgramChips programChips={content.programChips} />
+      {content.curriculumRows?.map((row, i) => (
+        <WhiteChurchFeature
+          key={`curriculum-${i}`}
+          feature={row}
+          photoWidth={row.photo.width}
+          photoHeight={row.photo.height}
+          reverse={row.reverse}
+          dropcapFirst={row.dropcapFirst}
+        />
+      ))}
+      {content.worshipRows?.map((row, i) => (
+        <WhiteChurchFeature
+          key={`worship-${i}`}
+          feature={row}
+          photoWidth={row.photo.width}
+          photoHeight={row.photo.height}
+          reverse={row.reverse}
+          dropcapFirst={row.dropcapFirst}
+        />
+      ))}
+      <SchoolPullQuoteBand pullQuoteBand={content.pullQuoteBand2} />
+      {content.faithRows?.map((row, i) => (
+        <WhiteChurchFeature
+          key={`faith-${i}`}
+          feature={row}
+          photoWidth={row.photo.width}
+          photoHeight={row.photo.height}
+          reverse={row.reverse}
+          dropcapFirst={row.dropcapFirst}
+        />
+      ))}
+      {content.heritageRows?.map((row, i) => (
+        <WhiteChurchFeature
+          key={`heritage-${i}`}
+          feature={row}
+          photoWidth={row.photo.width}
+          photoHeight={row.photo.height}
+          reverse={row.reverse}
+          dropcapFirst={row.dropcapFirst}
+        />
+      ))}
+      <SchoolVisionMission visionMission={content.visionMission} />
       <SchoolEvents events={content.events} />
       {hasMagazineSections && (
         <SchoolContactSection

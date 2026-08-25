@@ -5,6 +5,14 @@
   padding: 2.75rem 1.25rem;
 }
 
+/* "Bare" mode (no eyebrow/heading/wash) — just the language-box row,
+   embedded at the end of another section rather than standing alone. */
+.bare {
+  padding: 0 1.25rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
 .centerHead {
   text-align: center;
   margin-bottom: 0.875rem;

@@ -59,4 +59,12 @@ export const schools: School[] = [
     photo: "/school-aleppo-college-for-girls-hero.jpg",
     emblem: "/school-aleppo-college-for-girls-emblem.png",
   },
+  {
+    id: "school-bethel-secondary",
+    country: "Syria",
+    name: "Armenian Evangelical Bethel Secondary School",
+    slug: "bethel-secondary-school",
+    photo: "/school-bethel-secondary-school-hero.jpg",
+    emblem: "/school-bethel-secondary-school-emblem.png",
+  },
 ];

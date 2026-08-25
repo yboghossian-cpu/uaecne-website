@@ -375,6 +375,25 @@ export default function IconSymbols() {
             strokeWidth="1.6"
           />
         </symbol>
+
+        {/* Inter-School Competitions event icon — geometry copied verbatim
+            from design-reference/bethel-secondary-school.html's own #trophy
+            symbol. First used by Bethel Secondary School's "Life at
+            Bethel" events section. */}
+        <symbol id="ic-trophy" viewBox="0 0 24 24">
+          <path
+            d="M8 4h8v5a4 4 0 0 1-8 0z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <path
+            d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 21h6M10 21v-2h4v2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </symbol>
       </defs>
     </svg>
   );

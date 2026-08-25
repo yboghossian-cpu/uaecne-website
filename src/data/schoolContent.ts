@@ -44,6 +44,25 @@ export type SchoolLeaderEntry = {
   photo: Photo | null;
 };
 
+// Shared shape for a single magazine-style woven photo/text row, rendered
+// via the cross-imported `WhiteChurchFeature`. Reused across `splitRows`
+// and Bethel Secondary School's section-scoped row groups below (introduced
+// because Bethel's mockup interleaves these rows with other section
+// content — chips, a second pull-quote, a bare language row — in a way one
+// flat array can't represent; grouping by section keeps each group
+// renderable as its own contiguous block in page.tsx).
+export type SchoolSplitRow = {
+  eyebrow: string;
+  eyebrowHy: string | null;
+  heading: string;
+  headingHy: string | null;
+  paragraphs: string[];
+  paragraphsHy: string[] | null;
+  photo: { src: string; alt: string; width: number; height: number };
+  reverse: boolean;
+  dropcapFirst: boolean;
+};
+
 export type SchoolContactRow = {
   key: string;
   keyHy: string | null;
@@ -273,21 +292,37 @@ export type SchoolContent = {
   // dimensions (never invented) — `WhiteChurchFeature` needs them because
   // it renders the photo at its natural, uncropped aspect ratio rather
   // than a fixed box.
-  splitRows?: {
-    eyebrow: string;
-    eyebrowHy: string | null;
-    heading: string;
-    headingHy: string | null;
-    paragraphs: string[];
-    paragraphsHy: string[] | null;
-    photo: { src: string; alt: string; width: number; height: number };
-    reverse: boolean;
-    dropcapFirst: boolean;
-  }[] | null;
+  splitRows?: SchoolSplitRow[] | null;
+
+  // Bethel Secondary School's section-scoped row groups — see
+  // `SchoolSplitRow`'s own comment for why these are separate fields
+  // instead of more `splitRows` entries. Each renders as its own
+  // contiguous `WhiteChurchFeature` block at a fixed point in page.tsx,
+  // interleaved with `programChips`/`languages`/`pullQuoteBand2`/
+  // `visionMission` to match the mockup's actual section boundaries.
+  // Null/omitted for every other school.
+  academicsRows?: SchoolSplitRow[] | null; // Languages, Reading & Research
+  curriculumRows?: SchoolSplitRow[] | null; // Robotics, Achievement
+  worshipRows?: SchoolSplitRow[] | null; // Morning worship (Christian Foundation)
+  faithRows?: SchoolSplitRow[] | null; // Faith in Practice (after pullQuoteBand2)
+  heritageRows?: SchoolSplitRow[] | null; // Montessori, Armenian Heritage
 
   // Standalone centered wash-band quote + attribution line — see
   // `SchoolPullQuoteBand`'s own comment for why this isn't `about.pullQuote`.
   pullQuoteBand?: {
+    quote: string;
+    quoteHy: string | null;
+    attribution: string;
+    attributionHy: string | null;
+  } | null;
+
+  // A second, independent pull-quote band, rendered further down the page
+  // (not adjacent to the first). Kept as its own field rather than turning
+  // `pullQuoteBand` into an array — only one school so far needs two at
+  // all, and every existing entry's single `pullQuoteBand` stays untouched.
+  // First needed by Bethel Secondary School's Proverbs 22:6 verse band,
+  // separate from its About-adjacent quote.
+  pullQuoteBand2?: {
     quote: string;
     quoteHy: string | null;
     attribution: string;
@@ -315,12 +350,17 @@ export type SchoolContent = {
   // Three-language academic-programme row (red-gradient boxes) with a
   // one-line intro above it. See `SchoolLanguages`'s own comment — no
   // existing chip/pill primitive matched this color-block treatment.
+  // `eyebrow`/`heading`/`intro` are independently nullable — null renders
+  // the bare language-box row alone, no header, no wash-band background.
+  // First needed by Bethel Secondary School, whose lang-row sits embedded
+  // inside its own "Academics" split-row section rather than as ACG's
+  // separate standalone wash section.
   languages?: {
-    eyebrow: string;
+    eyebrow: string | null;
     eyebrowHy: string | null;
-    heading: string;
+    heading: string | null;
     headingHy: string | null;
-    intro: string;
+    intro: string | null;
     introHy: string | null;
     items: { label: string; labelHy: string | null }[];
   } | null;
@@ -348,6 +388,31 @@ export type SchoolContent = {
   // multi-photo gallery before this unit, so there was no school-side
   // primitive to check first; the church one already does exactly this.
   gallery?: ChurchContent["gallery"];
+
+  // Centered eyebrow/heading above a wrapping row of red-left-accent pill
+  // tags (program names, no description). See `SchoolProgramChips`'s own
+  // comment — ACG's mockup has the identical `.chips`/`.chip` CSS class
+  // but never references it in markup (confirmed dead there); Bethel
+  // Secondary School's mockup is the first to actually use it. Null/omitted
+  // for every other school.
+  programChips?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    items: string[];
+  } | null;
+
+  // Plain 2-card Vision/Mission row (or more than 2, if a future school
+  // needs it) — see `SchoolVisionMission`'s own comment for why this isn't
+  // `missionValues` or `mission`. First used by Bethel Secondary School.
+  visionMission?: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    cards: { title: string; titleHy: string | null; body: string; bodyHy: string | null }[];
+  } | null;
 };
 
 export const schoolContent: Record<string, SchoolContent> = {
@@ -1556,6 +1621,572 @@ export const schoolContent: Record<string, SchoolContent> = {
         {
           src: "/school-aleppo-college-for-girls-vintage.jpg",
           alt: "Vintage class photo",
+          caption: null,
+          captionHy: null,
+        },
+      ],
+    },
+  },
+
+  // Armenian Evangelical Bethel Secondary School (Aleppo, Syria) — 2nd
+  // Syria school, verbatim from design-reference/bethel-secondary-school.html
+  // throughout. Cross-checked against "ՀԱՅ ԱՒԵՏԱՐԱՆԱԿԱՆ ԲԵԹԷԼ ԵՐԿՐՈՐԴԱԿԱՆ
+  // ՎԱՐԺԱՐԱՆ.docx" (Armenian source + an English contact-details page) —
+  // the docx corroborates every contact detail and the principal's name
+  // exactly, and additionally supplies 2 individual student exam results
+  // (2023-2024, 2024-2025) that the mockup itself doesn't mention; kept out
+  // of this build since the mockup is the verified locked source (see
+  // OPEN_QUESTIONS for the note).
+  "bethel-secondary-school": {
+    slug: "bethel-secondary-school",
+
+    masthead: {
+      locationLine: "Aleppo, Syria",
+      locationLineHy: null,
+      established: "1923",
+      establishedHy: null,
+    },
+
+    // "Approved Logo.png" — filename itself states approval; used as the
+    // real seal, same "use the emblems as is" instruction already applied
+    // to ACG.
+    logo: {
+      src: "/school-bethel-secondary-school-emblem.png",
+      alt: "Armenian Evangelical Bethel Secondary School crest",
+    },
+    heroPhoto: {
+      src: "/school-bethel-secondary-school-hero.jpg",
+      alt: "The Bethel school building in Aleppo",
+    },
+
+    factsBar: [
+      { label: "1923", labelHy: null, sub: "Founded", subHy: null },
+      { label: "KG – Grade 12", labelHy: null, sub: "Full Cycle", subHy: null },
+      { label: "Baccalaureate", labelHy: null, sub: "State-Certified", subHy: null },
+      { label: "Aleppo, Syria", labelHy: null, sub: "Location", subHy: null },
+    ],
+
+    // Required field, kept populated (same real text as `introFeature`,
+    // verbatim) for type parity even though `<SchoolAbout>` isn't rendered
+    // for this school — same reasoning as ACG's own `about` field.
+    about: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "One of Syria's Oldest Armenian Schools",
+      headingHy: null,
+      paragraphs: [
+        "Founded in Aleppo in 1923, the Armenian Evangelical Bethel Secondary School is one of the oldest and most deeply rooted educational institutions of Syria's Armenian community. It was established in the years after the Armenian Genocide, during the rebuilding of a displaced people — conceived as an educational, national, and spiritual centre for the families who were building new lives, and a part of the community's rebirth.",
+        "In its earliest years the school served around two hundred students. Today it educates children from kindergarten through the final year of secondary school, carrying that founding mission into its second century.",
+      ],
+      paragraphsHy: null,
+      pullQuote: null,
+      pullQuoteHy: null,
+    },
+
+    principalCard: null,
+
+    // The docx's own "Mailing Address: P.O Box 3833" confirms this is a
+    // real, correct value — not a copy-paste artifact from ACG's identical
+    // P.O. box (both are real Armenian Evangelical Aleppo institutions;
+    // presumably a shared regional box). Flagged in OPEN_QUESTIONS anyway
+    // since the coincidence is worth a record.
+    location: {
+      addressLines: ["Aleppo, Syria", "P.O. Box 3833"],
+      addressLinesHy: null,
+    },
+
+    // All verified, real (not pending). Facebook has no href in the
+    // mockup's own markup (name-only, unlike ACG's linked Facebook) — kept
+    // as a plain, non-linked value rather than inventing a URL.
+    contactRows: [
+      {
+        key: "Phone",
+        keyHy: null,
+        value: "+963 21 4 659 530",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Fax",
+        keyHy: null,
+        value: "+963 21 4 614 490",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Email",
+        keyHy: null,
+        value: "schoolbethel23@gmail.com",
+        valueHy: null,
+        href: "mailto:schoolbethel23@gmail.com",
+      },
+      {
+        key: "Facebook",
+        keyHy: null,
+        value: "Armenian Evng Bethel School",
+        valueHy: null,
+        href: null,
+      },
+      {
+        key: "Instagram",
+        keyHy: null,
+        value: "bethel_sec_school",
+        valueHy: null,
+        href: "https://instagram.com/bethel_sec_school",
+      },
+    ],
+
+    // 3 cards, matching the mockup's own `.lead-grid` exactly (Principal,
+    // Chair of Council — pending, Secretary). "Chair of Council" is this
+    // school's own free-text role label, not "Vice-Chair of the Council."
+    // Both real names shown as supplied, pending Union confirmation per
+    // the mockup's own footer note.
+    leadership: [
+      {
+        name: "Mrs. Lousin Abajian Chilaposhian",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-principal.jpg",
+          alt: "Mrs. Lousin Abajian Chilaposhian",
+        },
+      },
+      {
+        name: null,
+        nameHy: null,
+        role: "Chair of Council",
+        roleHy: null,
+        photo: null,
+      },
+      {
+        name: "Miss Lousig Emirkhanian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-secretary.png",
+          alt: "Miss Lousig Emirkhanian",
+        },
+      },
+    ],
+
+    directorsArchive: null,
+    mission: null,
+    missionValues: null,
+    academicHeritage: null,
+    supportServices: null,
+    signaturePrograms: null,
+    faithCommunity: null,
+
+    // No "Make an Inquiry" section in this mockup (same as ACG) — the
+    // Contact card's real mailto already covers enquiries.
+    inquiry: null,
+
+    cta: {
+      heading: "Educating Generations Since 1923",
+      headingHy: null,
+      body: "For more than a century, the Armenian Evangelical Bethel Secondary School has served Aleppo's Armenian community in the spirit of excellence, service, and faith — an institution of the Armenian Evangelical Educational Council of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
+      bodyHy: null,
+    },
+
+    // About/Intro woven row — rendered via `WhiteChurchFeature` with
+    // `reverse` in place of `<SchoolAbout>`, same pattern as ACG.
+    introFeature: {
+      eyebrow: "The School",
+      eyebrowHy: null,
+      heading: "One of Syria's Oldest Armenian Schools",
+      headingHy: null,
+      paragraphs: [
+        "Founded in Aleppo in 1923, the Armenian Evangelical Bethel Secondary School is one of the oldest and most deeply rooted educational institutions of Syria's Armenian community. It was established in the years after the Armenian Genocide, during the rebuilding of a displaced people — conceived as an educational, national, and spiritual centre for the families who were building new lives, and a part of the community's rebirth.",
+        "In its earliest years the school served around two hundred students. Today it educates children from kindergarten through the final year of secondary school, carrying that founding mission into its second century.",
+      ],
+      paragraphsHy: null,
+      photo: {
+        src: "/school-bethel-secondary-school-classroom.jpg",
+        alt: "Secondary students in class at Bethel",
+        width: 1280,
+        height: 960,
+      },
+    },
+
+    pullQuoteBand: {
+      quote:
+        "For more than a century, Bethel has remained faithful to its educational, national, and Christian mission — raising generations in a spirit of excellence, service, and faith.",
+      quoteHy: null,
+      attribution: "Armenian Evangelical Bethel Secondary School",
+      attributionHy: null,
+    },
+
+    pullQuoteBand2: {
+      quote: "Train up a child in the way he should go, and when he is old he will not depart from it.",
+      quoteHy: null,
+      attribution: "Proverbs 22:6 · The school's guiding verse",
+      attributionHy: null,
+    },
+
+    vintageBand: {
+      eyebrow: "Our History",
+      eyebrowHy: null,
+      heading: "From 1923 to a Full Secondary School",
+      headingHy: null,
+      leadParagraph:
+        "The school's first principal, Mr. Hovhannes Haytoshtian, led the institution until 1941. In the decades that followed, a succession of principals carried its mission forward. Between 1944 and 1955 the school taught up to the ninth grade — and for one year the tenth — and after 1955 continued with kindergarten and elementary sections.",
+      leadParagraphHy: null,
+      photo: {
+        src: "/school-bethel-secondary-school-vintage.jpg",
+        alt: "The Bethel school community gathered together",
+        width: 1280,
+        height: 960,
+      },
+      photoCaption: "The Bethel school community.",
+      photoCaptionHy: null,
+      paragraphs: [
+        "A turning point came in 2000, when the Armenian Evangelical Educational Council resolved to expand the school to offer a complete secondary education. With that decision, Bethel became the first Armenian Evangelical institution to teach from kindergarten through the twelfth grade.",
+        "The seventh grade opened in 2004–2005, followed by the eighth and ninth; the secondary section in 2008–2009; and the twelfth grade in 2009–2010. A second floor was added in the same period — six new classrooms, administrative offices, chemistry and science laboratories, and a computer lab.",
+      ],
+      paragraphsHy: null,
+    },
+
+    // Languages + Reading & Research — the mockup's own "A Rigorous,
+    // Multilingual Education" section. Both use `reverse: false`: Reading
+    // & Research's `.split.rev` markup, per the same CSS-order-override
+    // math confirmed on ACG (`.split.rev .txt{order:2}.split.rev
+    // .ph{order:1}`), renders photo-left/text-right identically to the
+    // non-`.rev` Languages row — not a real reversal.
+    academicsRows: [
+      {
+        eyebrow: "Languages",
+        eyebrowHy: null,
+        heading: "Taught in Three Languages",
+        headingHy: null,
+        paragraphs: [
+          "Bethel follows the Syrian national curriculum and grants officially recognised certificates at every level, from kindergarten to the secondary Baccalaureate. Alongside the Arabic of the state programme, students study English and French from their earliest years, with an emphasis on genuine fluency.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-french-lesson.jpg",
+          alt: "A French lesson in progress",
+          width: 1280,
+          height: 960,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Reading & Research",
+        eyebrowHy: null,
+        heading: "In the Library",
+        headingHy: null,
+        paragraphs: [
+          "In the school library, students read, research, and work with sources first-hand — building the habits of study and curiosity that carry them through their later years.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-library.jpg",
+          alt: "Students reading in the Bethel library",
+          width: 5184,
+          height: 3456,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    // Bare mode (no header, no wash) — embedded at the end of the
+    // Academics section, unlike ACG's standalone "Three Languages, One
+    // Curriculum" section. See `SchoolLanguages`'s own comment.
+    languages: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: null,
+      headingHy: null,
+      intro: null,
+      introHy: null,
+      items: [
+        { label: "English", labelHy: null },
+        { label: "Arabic", labelHy: null },
+        { label: "French", labelHy: null },
+      ],
+    },
+
+    programChips: {
+      eyebrow: "Beyond the Curriculum",
+      eyebrowHy: null,
+      heading: "Where Curiosity Comes Alive",
+      headingHy: null,
+      items: ["Robotics", "Magic Math", "Science Fair", "Montessori (KG)", "Science Olympiad", "Recitation & Debate"],
+    },
+
+    // Robotics + Achievement, inside the same "Beyond the Curriculum"
+    // section as the chips above. Achievement's `.split.rev` renders
+    // photo-left the same as Robotics's non-`.rev` row — same CSS-order
+    // math as `academicsRows`, `reverse: false` for both.
+    curriculumRows: [
+      {
+        eyebrow: "Innovation",
+        eyebrowHy: null,
+        heading: "Robotics & the Science Fair",
+        headingHy: null,
+        paragraphs: [
+          "Beyond the state programme, Bethel runs modern enrichment tracks — Robotics, Magic Math, and a science strand that treats discovery as a habit to practise. Its annual Science Fair gives students a stage to present their own investigations, and welcomes the wider circle of Aleppo's Armenian schools.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-robotics.jpg",
+          alt: "Students at a robotics and science activity",
+          width: 5472,
+          height: 3648,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Achievement",
+        eyebrowHy: null,
+        heading: "A Record of Results",
+        headingHy: null,
+        paragraphs: [
+          "Bethel is known for its academic standards. In recent years its students have earned outstanding results in the national Baccalaureate examinations — a testament to the school's consistent pursuit of excellence and the dedication of its teaching staff.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-exam.jpg",
+          alt: "Students sitting an examination",
+          width: 5712,
+          height: 4284,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    // "Christian Foundation" section's first row.
+    worshipRows: [
+      {
+        eyebrow: "Every Morning",
+        eyebrowHy: null,
+        heading: "A Day That Begins in Worship",
+        headingHy: null,
+        paragraphs: [
+          "Christian formation is inseparable from Bethel's identity and mission. Every school day opens with a shared time of worship, so that students' spiritual lives are nurtured alongside their intellectual and moral growth.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-worship.jpg",
+          alt: "Students gathered for morning worship",
+          width: 4080,
+          height: 3060,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    // "Faith in Practice" row, after the Proverbs 22:6 band
+    // (`pullQuoteBand2`). `.split.rev` — same CSS-order math, `reverse: false`.
+    faithRows: [
+      {
+        eyebrow: "Faith in Practice",
+        eyebrowHy: null,
+        heading: "A Living Community of Faith",
+        headingHy: null,
+        paragraphs: [
+          "Worship, prayer, and Christian witness are woven through the life of the school — not a subject set apart, but the ground on which everything else is built.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-prayer.jpg",
+          alt: "Children in prayer",
+          width: 4080,
+          height: 3060,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    // "Heritage & the Early Years" section. Identity's `.split.rev` — same
+    // CSS-order math, `reverse: false`.
+    heritageRows: [
+      {
+        eyebrow: "Kindergarten",
+        eyebrowHy: null,
+        heading: "A Montessori Start",
+        headingHy: null,
+        paragraphs: [
+          "In the kindergarten, Bethel draws on Montessori principles — nurturing independence, creativity, and the first sparks of critical thinking, so that a child's earliest experience of school is one of discovery.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-kindergarten.jpg",
+          alt: "Young children in a Bethel kindergarten class",
+          width: 1280,
+          height: 960,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+      {
+        eyebrow: "Identity",
+        eyebrowHy: null,
+        heading: "Rooted in Armenian Heritage",
+        headingHy: null,
+        paragraphs: [
+          "From their first years, children are immersed in Armenian language, faith, and heritage — carried in song, in costume, and in the commemorations that bind each generation to the ones before it.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-bethel-secondary-school-heritage-dress.jpg",
+          alt: "Children in Armenian traditional dress at a heritage celebration",
+          width: 3000,
+          height: 4000,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+
+    visionMission: {
+      eyebrow: "Our Purpose",
+      eyebrowHy: null,
+      heading: "Vision & Mission",
+      headingHy: null,
+      cards: [
+        {
+          title: "Vision",
+          titleHy: null,
+          body: "To raise a generation that is academically strong, morally responsible, firmly grounded in Christian values, conscious of its national identity, and devoted to the service of society.",
+          bodyHy: null,
+        },
+        {
+          title: "Mission",
+          titleHy: null,
+          body: "To provide a complete education in a safe, caring, and Christian environment — upholding high academic standards and developing each student's knowledge, skills, and values, so they can meet the challenges of a changing world while preserving their Armenian identity and Armenian Evangelical spiritual heritage.",
+          bodyHy: null,
+        },
+      ],
+    },
+
+    // Icons: #ic-trophy is new this unit; #ic-flask and #ic-book already
+    // existed (ic-flask from ACG, ic-book from AESSA's PEP card).
+    events: {
+      eyebrow: "Through the Year",
+      eyebrowHy: null,
+      heading: "Life at Bethel",
+      headingHy: null,
+      items: [
+        {
+          icon: "#ic-flask",
+          title: "Science Fair",
+          titleHy: null,
+          description: "An annual showcase of student investigations, open to Aleppo's Armenian schools.",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-book",
+          title: "Spelling Bee",
+          titleHy: null,
+          description: "The school's English spelling competition — \"Spell to Excel.\"",
+          descriptionHy: null,
+        },
+        {
+          icon: "#ic-trophy",
+          title: "Inter-School Competitions",
+          titleHy: null,
+          description: "Recitation, reading, theatre, and debate, alongside the Science Olympiad.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
+    // 13 photos, verbatim alt text from the mockup's own gallery figures.
+    // 6 reuse the exact same source files already used above (school
+    // building, classroom, French lesson, morning worship, prayer,
+    // heritage dress) — the mockup's own gallery duplicates them too, same
+    // pattern already confirmed on ACG. The other 7 are gallery-only
+    // photos with no other home on the page.
+    gallery: {
+      eyebrow: "Gallery",
+      eyebrowHy: null,
+      heading: "Life at Bethel School",
+      headingHy: null,
+      photos: [
+        {
+          src: "/school-bethel-secondary-school-hero.jpg",
+          alt: "The school building",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-classroom-lesson.jpg",
+          alt: "A classroom lesson",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-classroom.jpg",
+          alt: "Secondary students in class",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-french-lesson.jpg",
+          alt: "A French lesson",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-spelling-bee.jpg",
+          alt: "Bethel Spelling Bee",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-spelling-bee-ceremony.jpg",
+          alt: "Spelling Bee certificate ceremony",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-research.jpg",
+          alt: "Students at a research activity",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-worship.jpg",
+          alt: "Morning worship",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-prayer.jpg",
+          alt: "Children in prayer",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-pageant.jpg",
+          alt: "A Christian pageant",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-choir.jpg",
+          alt: "Choir performance with Armenian flags",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-heritage-dress.jpg",
+          alt: "Kindergarten heritage performance",
+          caption: null,
+          captionHy: null,
+        },
+        {
+          src: "/school-bethel-secondary-school-gallery-celebration-prep.jpg",
+          alt: "Students preparing a school celebration",
           caption: null,
           captionHy: null,
         },

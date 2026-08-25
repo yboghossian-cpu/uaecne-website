@@ -81,6 +81,10 @@
   filter: sepia(0.12);
 }
 
+.noSepia {
+  filter: none;
+}
+
 .cap {
   font-size: 0.6875rem;
   letter-spacing: 0.04em;
