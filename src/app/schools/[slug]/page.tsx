@@ -30,7 +30,14 @@ import styles from "./page.module.css";
 type PageParams = { slug: string };
 
 export function generateStaticParams() {
-  return schools.map((school) => ({ slug: school.slug }));
+  // Shamlian-Tatikian now has its own static route at
+  // /schools/armenian-evangelical-shamlian-tatikian-secondary-school
+  // (rendering the approved mockup verbatim) which overrides this dynamic
+  // segment for that exact path — excluded here so this route no longer
+  // also generates a page for it.
+  return schools
+    .filter((school) => school.slug !== "armenian-evangelical-shamlian-tatikian-secondary-school")
+    .map((school) => ({ slug: school.slug }));
 }
 
 export async function generateMetadata({
