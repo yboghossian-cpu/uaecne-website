@@ -28,3 +28,6 @@ next-env.d.ts
 # next.js agent-rules generation (disabled via agentRules: false, left uncommitted)
 /AGENTS.md
 /CLAUDE.md
+
+.vercel
+.env*

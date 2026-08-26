@@ -321,6 +321,78 @@ export default function IconSymbols() {
           </g>
         </symbol>
 
+        {/* Homepage second-half — Ministries grid card icons (photo-pending
+            fallback only, covered by real photos in practice) + the
+            feature/heritage quatrefoil watermark — geometry copied verbatim
+            from design-reference/uaecne-homepage-second-half-enhanced.html's
+            own <symbol> defs. (The mockup's own generic "cross" icon for
+            the Heritage seal badge was replaced with the real site seal,
+            /logo.svg, per the build instructions — see OPEN_QUESTIONS.) */}
+        <symbol id="ic-hp-church" viewBox="0 0 24 24">
+          <path d="M12 2v4M10 4h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          <path
+            d="M12 6l7 5v11H5V11z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+          />
+          <path d="M10 22v-5h4v5" stroke="currentColor" strokeWidth="1.3" />
+        </symbol>
+
+        <symbol id="ic-hp-book" viewBox="0 0 24 24">
+          <path
+            d="M4 5c3-1 6-1 8 1 2-2 5-2 8-1v13c-3-1-6-1-8 1-2-2-5-2-8-1z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+          />
+          <path d="M12 6v13" stroke="currentColor" strokeWidth="1.4" />
+        </symbol>
+
+        <symbol id="ic-hp-cap" viewBox="0 0 24 24">
+          <path
+            d="M12 4L2 9l10 5 8-4v6"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M6 12v4c0 1 3 3 6 3s6-2 6-3v-4"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+          />
+        </symbol>
+
+        <symbol id="ic-hp-hands" viewBox="0 0 24 24">
+          <path
+            d="M4 13l4-4c1-1 2-1 3 0l1 1M20 13l-4-4c-1-1-2-1-3 0l-1 1"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+            strokeLinecap="round"
+          />
+          <path
+            d="M6 12v5a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3v-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.4"
+          />
+        </symbol>
+
+        <symbol id="ic-hp-quat" viewBox="0 0 48 48">
+          <path
+            d="M24 4a10 10 0 0 1 10 10 10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10 10 10 0 0 1-10-10 10 10 0 0 1 10-10 10 10 0 0 1 10-10z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+          />
+          <circle cx="24" cy="24" r="6" fill="none" stroke="currentColor" strokeWidth="1" />
+        </symbol>
+
         {/* Facebook contact-row icon — geometry copied verbatim from
             design-reference/uaecne-church-emmanuel-aleppo.html's own #fb
             symbol (needed for a real Facebook link in ChurchContactSection,
