@@ -417,7 +417,7 @@ export const churchContent: Record<string, ChurchContent> = {
       alt: "First Armenian Evangelical Church of Beirut",
     },
     factsBar: [
-      { label: "Sunday Worship", labelHy: null, sub: "Weekly Service", subHy: null },
+      { label: "Sundays · 10:30–11:30", labelHy: null, sub: "Worship Service", subHy: null },
       { label: "Kantari, Beirut", labelHy: null, sub: "Mexique Street", subHy: null },
       { label: "1922", labelHy: null, sub: "Founded", subHy: null },
     ],
@@ -702,7 +702,7 @@ export const churchContent: Record<string, ChurchContent> = {
       alt: "Armenian Evangelical Church of Nor Marash",
     },
     factsBar: [
-      { label: "Weekly Worship", labelHy: null, sub: "Sunday Service", subHy: null },
+      { label: "Sundays · 10:30–11:30", labelHy: null, sub: "Worship Service", subHy: null },
       { label: "Bourj Hammoud", labelHy: null, sub: "East of Beirut River", subHy: null },
       { label: "1934", labelHy: null, sub: "Founded", subHy: null },
     ],
@@ -892,7 +892,7 @@ export const churchContent: Record<string, ChurchContent> = {
       alt: "Armenian Evangelical Emmanuel Church of Nor Amanos",
     },
     factsBar: [
-      { label: "Sunday Worship", labelHy: null, sub: "Weekly Service", subHy: null },
+      { label: "Sundays · 10:30–11:30", labelHy: null, sub: "Worship Service", subHy: null },
       { label: "Nor Amanos", labelHy: null, sub: "Baouchrieh, Mount Lebanon", subHy: null },
       { label: "1970", labelHy: null, sub: "Founded", subHy: null },
     ],
@@ -1090,7 +1090,7 @@ export const churchContent: Record<string, ChurchContent> = {
       alt: "Armenian Evangelical Church of Ashrafieh",
     },
     factsBar: [
-      { label: "Sunday Worship", labelHy: null, sub: "Weekly Service", subHy: null },
+      { label: "Sundays · 10:30–11:30", labelHy: null, sub: "Worship Service", subHy: null },
       { label: "Geitawi, Ashrafieh", labelHy: null, sub: "Beirut", subHy: null },
       { label: "1926", labelHy: null, sub: "Founded", subHy: null },
     ],
