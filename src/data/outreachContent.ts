@@ -307,12 +307,6 @@ export type SocialActionContent = {
       photo: Photo | null;
     }[];
   };
-  refugees: {
-    eyebrow: string;
-    eyebrowHy: string | null;
-    body: string;
-    bodyHy: string | null;
-  };
   cta: OutreachCTA;
 };
 
@@ -355,7 +349,6 @@ export const socialActionContent: SocialActionContent = {
     stats: [
       { number: "250+", caption: "Families receiving food vouchers and cash support", captionHy: null },
       { number: "0–4", caption: "Milk and diaper contribution for young children", captionHy: null },
-      { number: "Syria", caption: "Continued support for Syrian refugees in Lebanon", captionHy: null },
     ],
   },
 
@@ -426,13 +419,6 @@ export const socialActionContent: SocialActionContent = {
         photo: null,
       },
     ],
-  },
-
-  refugees: {
-    eyebrow: "Standing With the Displaced",
-    eyebrowHy: null,
-    body: "SAC continues to support the remaining Syrian refugees who are still living in Lebanon — extending care beyond borders and community.",
-    bodyHy: null,
   },
 
   cta: {

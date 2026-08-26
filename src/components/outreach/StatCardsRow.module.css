@@ -39,4 +39,17 @@
   .grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  /* Exactly 2 cards (SAC's stats after the Syria card's removal): a fixed
+     3-column template would leave the third cell empty. Switching to a
+     capped, centered 2-column layout only when the item count is exactly
+     2 — a plain :has() count check, not a width heuristic — so the
+     original 3-column 1fr layout above stays byte-identical (and
+     unaffected) for every 3-item grid (Camps' milestones, Youth Work's CE
+     stats). No other item count exists among this component's callers
+     today. */
+  .grid:has(> :nth-child(2):last-child) {
+    grid-template-columns: repeat(2, minmax(0, 300px));
+    justify-content: center;
+  }
 }

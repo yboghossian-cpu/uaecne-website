@@ -118,7 +118,6 @@ export default async function OutreachDetailPage({
         />
         <ProgramPillar pillars={s.pillars} />
         <ChildProgramCards children={s.children} />
-        <PullNote eyebrow={s.refugees.eyebrow} body={s.refugees.body} />
         <OutreachCTA cta={s.cta} />
       </>
     );
