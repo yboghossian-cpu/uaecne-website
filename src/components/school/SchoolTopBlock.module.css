@@ -31,6 +31,16 @@
   line-height: 1.05;
 }
 
+/* Per the mockup's .shero .motto — italic gold line under the name. */
+.tagline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+  color: var(--color-gold-decorative);
+  margin-top: 0.125rem;
+}
+
 .meta {
   color: var(--color-brown);
   font-family: var(--font-body);

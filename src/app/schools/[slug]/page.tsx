@@ -166,6 +166,7 @@ export default async function SchoolDetailPage({
           location={content.location}
           contactRows={content.contactRows}
           schoolName={school.name}
+          note={content.contactNote}
         />
       )}
       <SchoolPullQuoteBand pullQuoteBand={content.pullQuoteBand} />
@@ -175,7 +176,15 @@ export default async function SchoolDetailPage({
       <SchoolMission mission={content.mission} />
       <SchoolAcademics
         academicHeritage={content.academicHeritage}
-        sideArt={slug === "armenian-evangelical-secondary-school-anjar"}
+        sideArt={
+          slug === "armenian-evangelical-secondary-school-anjar" ||
+          slug === "armenian-evangelical-shamlian-tatikian-secondary-school"
+        }
+        artVariant={
+          slug === "armenian-evangelical-shamlian-tatikian-secondary-school"
+            ? "scripture"
+            : "medallion"
+        }
       />
       <SchoolSupportServices supportServices={content.supportServices} />
       <SchoolSignaturePrograms signaturePrograms={content.signaturePrograms} />

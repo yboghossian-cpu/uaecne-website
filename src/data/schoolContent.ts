@@ -82,6 +82,12 @@ export type SchoolContent = {
   masthead: {
     locationLine: string;
     locationLineHy: string | null;
+    // Optional italic tagline under the school name, per Shamlian-Tatikian's
+    // own mockup (.shero .motto). Verbatim source copy only — never an
+    // invented slogan. Null/omitted for every other school, which render
+    // exactly as before.
+    tagline?: string | null;
+    taglineHy?: string | null;
     // Nullable — null when no founding year is confirmed enough to show
     // in the masthead line at all (Emmanuel al-Ressaleh's own mockup has
     // none here, carrying "Pending" in its facts bar instead); skips the
@@ -109,6 +115,16 @@ export type SchoolContent = {
     // (not invented) when no reference/source doc supplies one (Shamlian).
     pullQuote: string | null;
     pullQuoteHy: string | null;
+    // Optional sub-headed prose blocks rendered after `paragraphs`, for a
+    // mockup whose History section carries its own sub-heading ("A Brief
+    // History" — Shamlian-Tatikian). Omitted for every other school, whose
+    // About renders exactly as before.
+    subsections?: {
+      heading: string;
+      headingHy: string | null;
+      paragraphs: string[];
+      paragraphsHy: string[] | null;
+    }[] | null;
   };
 
   // Independently nullable from `leadership` below even though (for AEC)
@@ -141,6 +157,13 @@ export type SchoolContent = {
   // at all (Shamlian-Tatikian). When both `location` and `contactRows` are
   // null, SchoolContactSection renders nothing (whole section omitted).
   contactRows: SchoolContactRow[] | null;
+
+  // Small italic footnote under the contact cards, recording genuinely
+  // unresolved source discrepancies (Shamlian-Tatikian's principal-surname
+  // conflict and its missing phone/email/street address). Omitted for every
+  // other school, whose contact section renders exactly as before.
+  contactNote?: string | null;
+  contactNoteHy?: string | null;
 
   // Fixed 3 cards: Principal / Vice-Chair of the Council / Secretary.
   leadership: SchoolLeaderEntry[] | null;
@@ -266,7 +289,10 @@ export type SchoolContent = {
     buttonLabel: string;
   } | null;
 
-  cta: { heading: string; headingHy: string | null; body: string; bodyHy: string | null }; // always present
+  // Nullable, additive — every other school still sets a real cta
+  // (unaffected). Null for a school whose approved mockup has no CTA band
+  // at all (Shamlian-Tatikian) — ChurchCTA renders nothing when null.
+  cta: { heading: string; headingHy: string | null; body: string; bodyHy: string | null } | null;
 
   // Additive fields below — all null/omitted for AEC, Shamlian-Tatikian,
   // and AESSA, unaffected. First used by Aleppo College for Girls.
@@ -643,93 +669,228 @@ export const schoolContent: Record<string, SchoolContent> = {
       locationLineHy: null,
       established: "1934",
       establishedHy: null,
+      tagline: "Educating Bourj Hammoud's Armenians since 1934",
+      taglineHy: null,
     },
 
-    // Both already tracked in public/ from the schools index build; logo.jpg
-    // MD5-confirmed byte-identical to the tracked emblem file.
+    // Both already tracked in public/ from the schools index build. The two
+    // files supplied for this rebuild are MD5-identical to what is already
+    // committed, so they are reused rather than duplicated:
+    //   logo.jpg                  91457a19... == school-shamlian-tatikian-emblem.jpg
+    //   Shamelian School Hero.jpeg d048b275... == school-shamlian-tatikian.jpeg
     logo: {
       src: "/school-shamlian-tatikian-emblem.jpg",
       alt: "Shamlian-Tatikian Secondary School seal",
     },
+    // Low-resolution source (640x393) — the only building photo supplied.
+    // Used as-is rather than upscaled.
     heroPhoto: {
       src: "/school-shamlian-tatikian.jpeg",
       alt: "Armenian Evangelical Shamlian-Tatikian Secondary School",
     },
 
     factsBar: [
-      { label: "1934", labelHy: null, sub: "Founded", subHy: null },
+      { label: "1934", labelHy: null, sub: "Established", subHy: null },
+      { label: "KG – Secondary", labelHy: null, sub: "Three Divisions", subHy: null },
+      { label: "Bourj Hammoud", labelHy: null, sub: "Beirut, Lebanon", subHy: null },
       { label: "250", labelHy: null, sub: "Students", subHy: null },
-      { label: "Bourj Hammoud", labelHy: null, sub: "Beirut Suburb", subHy: null },
-      { label: "Armenian Evangelical", labelHy: null, sub: "Tradition", subHy: null },
     ],
 
-    // Verbatim (lightly joined for paragraph flow) from "Arm. Evang.
-    // Sgamlian School - History.docx" — no independent Mission or Academic
-    // Heritage content exists in the source, so those two sections are
-    // omitted below rather than filled with invented text.
+    // All copy verbatim from the approved mockup
+    // (design-reference/uaecne-school-shamlian-tatikian.html), which carries
+    // the approved English text of "Arm. Evang. Sgamlian School - History.docx".
     about: {
-      eyebrow: "The Institution",
+      eyebrow: "Our Story",
       eyebrowHy: null,
-      heading: "About the School",
+      heading: "Our History",
       headingHy: null,
       paragraphs: [
-        "The Armenian Evangelical Secondary School in Bourj Hammoud — known as the Shamlian-Tatikian Secondary School — is one of four secondary schools owned and operated by the Union of Armenian Evangelical Churches in the Near East. The school began its educational ministry in 1934 with kindergarten and elementary classes only; today it serves 250 students across the kindergarten, elementary, and secondary divisions.",
-        "The surrounding neighborhood, Nor Marash — the first Armenian street in Beirut — was established in Bourj Hammoud in 1929 by Armenians who had arrived from Cilicia, Anatolia, and other regions following the Armenian Genocide of 1915. As the school grew, Rev. Aram Hadidian expanded the elementary department to six grades in 1936, added four intermediate grades in 1950, and the secondary division received official accreditation from the Lebanese government in 1958.",
-        "In 1964, through the generous donation of Mr. and Mrs. G. Shamlian and their son, Mr. G. Tatikian, the school constructed a modern new building bearing their name. Hundreds of graduates now live and work around the world, sustained by an active Alumni association in both Lebanon and the United States. Alongside the Lebanese governmental curriculum, the school teaches the Bible, holds daily morning chapels and spiritual retreats, and preserves Armenian identity through the teaching of Armenian language and history.",
+        "The Armenian Evangelical Secondary School in Bourj Hammoud — known as the Shamlian-Tatikian Secondary School — is one of the four secondary schools owned and operated by the Union of the Armenian Evangelical Churches in the Near East. It stands in Bourj Hammoud, in the north-eastern suburbs of Beirut, and began its educational ministry in 1934 with kindergarten and elementary classes. Today it serves 250 students across its kindergarten, elementary, and secondary divisions.",
       ],
       paragraphsHy: null,
       pullQuote: null,
       pullQuoteHy: null,
+      subsections: [
+        {
+          heading: "A Brief History",
+          headingHy: null,
+          paragraphs: [
+            "Nor Marash — the first Armenian street in Beirut — was established in Bourj Hammoud in 1929, settled by Armenians who had come from Cilicia, Anatolia, and beyond in the years after the Armenian Genocide of 1915. As the quarter grew, its families were eager to raise cultural institutions and churches alongside their modest homes. Among the first schools to open in Beirut was the Armenian Evangelical School — at first a kindergarten and two elementary classes, its first branch in Achrafieh, established through the initiative of the Nor Marash Armenian Evangelical Church.",
+            "Over the years the Armenian Evangelical Shamlian-Tatikian Secondary School grew into an independent institution, distinct from that original school of the 1930s. In 1936, Rev. Aram Hadidian expanded the elementary department to six grades; in 1950 he added the four intermediate grades; and in 1958 the secondary division received official accreditation from the Lebanese government.",
+            "In 1964, through the generous gift of Mr. and Mrs. G. Shamlian and their son, Mr. G. Tatikian, the school built a modern new building — and took the name it carries today. Hundreds have since graduated and gone out across the world, and the school keeps an active alumni association in both Lebanon and the United States.",
+          ],
+          paragraphsHy: null,
+        },
+      ],
     },
 
-    // Name verified verbatim from the source doc's own principal list
-    // ("Mrs. Kayane Tunberian (Current Principal)"). Photo intentionally
-    // NOT set — the two current-day staff photos on file are labeled "Mrs.
-    // Tamar — Secretary" and "Mrs. Kayane Messerian," neither matching this
-    // name; using either would be a guess. Renders with a real name and an
-    // arched photo-pending frame — flagged in OPEN_QUESTIONS, not resolved.
+    // Surname per the school's own history document. The supplied photo file
+    // is named "Mrs. Kayane Messerian" — the mockup shows the document's
+    // spelling and flags the conflict in `contactNote` below rather than
+    // resolving it. Pending Union confirmation.
     principalCard: {
       name: "Mrs. Kayane Tunberian",
       nameHy: null,
       role: "Principal",
       roleHy: null,
-      photo: null,
+      photo: {
+        src: "/school-shamlian-tatikian-principal.jpeg",
+        alt: "Mrs. Kayane Tunberian, Principal",
+      },
     },
 
-    // No address found anywhere in the source doc.
-    location: null,
-    // No email/phone found anywhere in the source doc.
-    contactRows: null,
+    // Only the district is known; no street address was supplied.
+    location: {
+      addressLines: ["Bourj Hammoud, Beirut, Lebanon"],
+      addressLinesHy: null,
+    },
 
-    leadership: [
-      { name: "Mrs. Kayane Tunberian", nameHy: null, role: "Principal", roleHy: null, photo: null },
-      { name: null, nameHy: null, role: "Vice-Chair of the Council", roleHy: null, photo: null },
-      { name: null, nameHy: null, role: "Secretary", roleHy: null, photo: null },
+    // Neither a phone number nor an email was supplied — rendered in the
+    // reference's italic "pending" style, never invented.
+    contactRows: [
+      { key: "Phone", keyHy: null, value: "pending", valueHy: null, href: null, pending: true },
+      { key: "Email", keyHy: null, value: "pending", valueHy: null, href: null, pending: true },
     ],
 
-    directorsArchive: null,
+    contactNote:
+      "Current principal's surname appears as “Tunberian” in the school's history document and as “Messerian” on the supplied photo — shown here as the document gives it, pending Union confirmation. Phone, email, and full street address were not supplied. Principal-succession spellings pending confirmation.",
+    contactNoteHy: null,
+
+    // The mockup's Leadership section carries exactly these two people — no
+    // Vice-Chair is named in it, so none is rendered.
+    leadership: [
+      {
+        name: "Mrs. Kayane Tunberian",
+        nameHy: null,
+        role: "Principal",
+        roleHy: null,
+        photo: {
+          src: "/school-shamlian-tatikian-principal.jpeg",
+          alt: "Mrs. Kayane Tunberian, Principal",
+        },
+      },
+      {
+        name: "Mrs. Tamar",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: {
+          src: "/school-shamlian-tatikian-secretary.jpeg",
+          alt: "Mrs. Tamar, Secretary",
+        },
+      },
+    ],
+
+    // 14 names, verbatim from the mockup's archive panel. No years are given
+    // for any of the thirteen past principals — the mockup renders an em dash
+    // in that column, so `years` carries the same, never an invented date.
+    directorsArchive: {
+      eyebrow: "Archive",
+      eyebrowHy: null,
+      heading: "Principals of the School",
+      headingHy: null,
+      note: "Compiled from the school's record; English spellings to be confirmed.",
+      noteHy: null,
+      entries: [
+        { name: "Mr. H. Boujikanian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Mr. P. Yeghyayian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Loutfi Haidostian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Apraham Jizmejian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Mrs. J. Merjanian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Badveli Z. Ilanjian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. E. Darakjian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Mr. Aram Boulghurjian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Mr. Aram Sarkissian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Mr. Yesayi Yesayian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Mgerdich Karageuzian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Hrayr Cholakian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Miss Vartoug Balekjian", nameHy: null, years: "—", note: null, noteHy: null, isCurrent: false },
+        { name: "Mrs. Kayane Tunberian", nameHy: null, years: "Present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
+
     mission: null,
-    academicHeritage: null,
+
+    academicHeritage: {
+      eyebrow: "Curriculum",
+      eyebrowHy: null,
+      heading: "Academic Life",
+      headingHy: null,
+      eras: [
+        {
+          period: "Lebanese National Curriculum",
+          description: "The school follows the official Lebanese government curriculum set by the Ministry of Education.",
+          descriptionHy: null,
+        },
+        {
+          period: "Kindergarten to Secondary",
+          description: "A full journey across the kindergarten, elementary, and secondary divisions.",
+          descriptionHy: null,
+        },
+        {
+          period: "Accredited Secondary · 1958",
+          description: "The secondary division has held official Lebanese government accreditation since 1958.",
+          descriptionHy: null,
+        },
+        {
+          period: "Armenian Language & History",
+          description: "Armenian language and history are taught throughout, to preserve the students' Armenian identity.",
+          descriptionHy: null,
+        },
+      ],
+    },
+
     missionValues: null,
     supportServices: null,
     signaturePrograms: null,
-    faithCommunity: null,
+
+    // No photographs exist for any of these four scenes — each renders the
+    // shared "Photo pending" frame, exactly as the mockup shows.
+    faithCommunity: {
+      heading: "Faith & Community",
+      headingHy: null,
+      items: [
+        {
+          title: "Daily Morning Chapel",
+          titleHy: null,
+          description: "As a faith-based school, every day begins with worship in the morning chapel.",
+          descriptionHy: null,
+          photo: null,
+        },
+        {
+          title: "Bible & Christian Formation",
+          titleHy: null,
+          description: "The Christian curriculum includes the teaching of the Bible, alongside spiritual retreats for the students.",
+          descriptionHy: null,
+          photo: null,
+        },
+        {
+          title: "Armenian Identity",
+          titleHy: null,
+          description: "Armenian language and history are woven through school life, keeping students rooted in their heritage.",
+          descriptionHy: null,
+          photo: null,
+        },
+        {
+          title: "An Alumni Family",
+          titleHy: null,
+          description: "Graduates span the world; the school's alumni associations in Lebanon and the United States keep the family close.",
+          descriptionHy: null,
+          photo: null,
+        },
+      ],
+      closingNote: null,
+      closingNoteHy: null,
+    },
 
     // No verified email exists for this school — Inquiry section omitted
     // entirely rather than guessing an address.
     inquiry: null,
 
-    // No reference/source text supplies closing copy for this school (no
-    // design mockup exists for it specifically) — written in the same
-    // house-style editorial convention already used for every church CTA
-    // (see churchContent.ts), anchored only to verified facts (founding
-    // year, location, the Union). Not a verbatim source quote.
-    cta: {
-      heading: "A Legacy of Faith & Learning",
-      headingHy: null,
-      body: "The Armenian Evangelical Shamlian-Tatikian Secondary School continues nine decades of Christian education and Armenian identity for the students of Bourj Hammoud.",
-      bodyHy: null,
-    },
+    // The approved mockup has no CTA band at all. `cta` is now nullable
+    // (see the type above) specifically for this case — no invented
+    // house-style copy, no leftover prior-build text.
+    cta: null,
   },
 
   "armenian-evangelical-secondary-school-anjar": {

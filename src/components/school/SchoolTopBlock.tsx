@@ -14,6 +14,10 @@ type Masthead = {
   // rather than rendering an odd "Founded Pending."
   established: string | null;
   establishedHy: string | null;
+  // Optional italic tagline under the school name (Shamlian-Tatikian's own
+  // mockup). Absent for every other school.
+  tagline?: string | null;
+  taglineHy?: string | null;
 };
 
 type SchoolTopBlockProps = {
@@ -55,6 +59,11 @@ export default function SchoolTopBlock({
         )}
         <div>
           <h1 className={styles.heading}>{school.name}</h1>
+          {/* Opt-in: only a school whose own mockup carries a tagline sets
+              this. Absent for every other school, which render unchanged. */}
+          {masthead.tagline && (
+            <div className={styles.tagline}>{masthead.tagline}</div>
+          )}
           <div className={styles.meta}>
             {masthead.locationLine}
             {masthead.established && (

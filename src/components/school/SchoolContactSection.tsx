@@ -7,6 +7,9 @@ type SchoolContactSectionProps = {
   // Required only to build the real Maps address-search link below — not
   // rendered anywhere in this component otherwise.
   schoolName: string;
+  // Opt-in italic footnote recording unresolved source discrepancies.
+  // Omitted for every other school, which render exactly as before.
+  note?: string | null;
 };
 
 // Icon keyed by row label, not just presence of an href — a pending Phone
@@ -29,6 +32,7 @@ export default function SchoolContactSection({
   location,
   contactRows,
   schoolName,
+  note,
 }: SchoolContactSectionProps) {
   if (!location && !contactRows) return null;
 
@@ -128,6 +132,7 @@ export default function SchoolContactSection({
           </div>
         )}
       </div>
+      {note && <p className={styles.note}>{note}</p>}
     </section>
   );
 }

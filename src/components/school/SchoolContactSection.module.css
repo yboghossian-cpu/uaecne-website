@@ -139,6 +139,18 @@
   flex: none;
 }
 
+/* Opt-in italic footnote for unresolved source discrepancies — matches
+   `.pending`'s tone rather than introducing a new color/weight. */
+.note {
+  max-width: 1080px;
+  margin: 1.25rem auto 0;
+  color: var(--color-brown);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.55;
+}
+
 @media (min-width: 720px) {
   .contact {
     padding: 3rem 2.125rem;

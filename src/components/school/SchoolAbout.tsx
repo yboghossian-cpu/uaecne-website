@@ -13,6 +13,14 @@ type SchoolAboutProps = {
     paragraphsHy: string[] | null;
     pullQuote: string | null;
     pullQuoteHy: string | null;
+    // Optional sub-headed prose blocks (Shamlian-Tatikian's "A Brief
+    // History"). Absent for every other school.
+    subsections?: {
+      heading: string;
+      headingHy: string | null;
+      paragraphs: string[];
+      paragraphsHy: string[] | null;
+    }[] | null;
   };
   principalCard: {
     name: string | null;
@@ -84,6 +92,18 @@ export default function SchoolAbout({ about, principalCard }: SchoolAboutProps) 
               </p>
             </div>
           )}
+          {/* Opt-in sub-headed prose blocks (Shamlian-Tatikian's "A Brief
+              History"). Absent for every other school. */}
+          {about.subsections?.map((sub, i) => (
+            <div className={styles.subsection} key={i}>
+              <h3 className={styles.subheading}>{sub.heading}</h3>
+              {sub.paragraphs.map((paragraph, j) => (
+                <p className={styles.paragraph} key={j}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>
