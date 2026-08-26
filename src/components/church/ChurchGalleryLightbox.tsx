@@ -84,13 +84,14 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
 
         <div className={styles.scroll} ref={scrollRef} onScroll={updateArrows}>
           {photos.map((photo, i) => (
-            <figure
-              className={styles.item}
-              key={i}
-              onClick={() => setLightboxIndex(i)}
-            >
-              <Image src={photo.src} alt={photo.alt} fill className={styles.itemPhoto} />
-              {photo.aiLabel && <span className={styles.aiLabel}>{photo.aiLabel}</span>}
+            <figure className={styles.itemFigure} key={i}>
+              <div className={styles.item} onClick={() => setLightboxIndex(i)}>
+                <Image src={photo.src} alt={photo.alt} fill className={styles.itemPhoto} />
+                {photo.aiLabel && <span className={styles.aiLabel}>{photo.aiLabel}</span>}
+              </div>
+              {photo.caption && (
+                <figcaption className={styles.itemCaption}>{photo.caption}</figcaption>
+              )}
             </figure>
           ))}
         </div>
@@ -106,7 +107,7 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
           </svg>
         </button>
       </div>
-      <div className={styles.hint}>← Scroll for more →</div>
+      {photos.length > 1 && <div className={styles.hint}>← Scroll for more →</div>}
 
       {current && (
         <div

@@ -31,6 +31,14 @@ const LIGHTBOX_GALLERY_SLUGS = new Set([
   "armenian-protestant-emmanuel-church-aleppo",
   "syriac-evangelical-church-aleppo",
   "armenian-evangelical-holy-trinity-church-kessab",
+  // Added 2026-08-26 — these 3 had real gallery photos but were never
+  // added to this set, so they silently fell through to the plain,
+  // non-clickable ChurchGallery (a per-page omission, not a missing
+  // capability: ChurchGalleryLightbox already existed and was already
+  // proven working on the 4 churches above).
+  "armenian-evangelical-church-ashrafieh",
+  "armenian-evangelical-martyrs-church-aleppo",
+  "armenian-evangelical-church-of-keorkuneh",
 ]);
 
 type PageParams = { slug: string };

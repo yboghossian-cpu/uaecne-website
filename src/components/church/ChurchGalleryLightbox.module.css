@@ -53,18 +53,33 @@
   scrollbar-color: var(--color-gold) transparent;
 }
 
-.item {
+/* Sizing/scroll-snap live on the figure (so an optional caption can sit
+   below the photo box without being clipped by the photo's own
+   aspect-ratio/overflow-hidden); .item stays the clickable photo box. */
+.itemFigure {
   flex: 0 0 auto;
   width: 340px;
+  scroll-snap-align: start;
+  margin: 0;
+}
+
+.item {
   aspect-ratio: 4 / 3;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shadow-soft);
   background: var(--color-ivory-wash);
-  scroll-snap-align: start;
   position: relative;
   cursor: zoom-in;
-  margin: 0;
+}
+
+.itemCaption {
+  font-family: var(--font-body);
+  font-size: 0.71875rem;
+  color: var(--color-brown);
+  text-align: center;
+  padding: 0.5625rem 0.5rem 0;
+  font-style: italic;
 }
 
 .aiLabel {
@@ -147,7 +162,7 @@
     padding: 4px 20px 14px;
   }
 
-  .item {
+  .itemFigure {
     width: 260px;
   }
 }
