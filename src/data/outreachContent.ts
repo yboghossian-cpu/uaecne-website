@@ -240,14 +240,16 @@ export const youthWorkContent: YouthWorkContent = {
     ],
   },
 
-  // Cross-links to the real, already-built /outreach/camps page.
+  // "Visit KCHAG Camps" button removed 2026-08-26 — buttonLabel/buttonHref
+  // null matches Camps' and SAC's own cta blocks exactly (OutreachCTA
+  // renders no button and no wrapping element when both are null).
   cta: {
     heading: "Educating Youth in Faith and Life",
     headingHy: null,
     body: "The CE Union brings together Armenian Evangelical youth across Lebanon and Syria — and its summer camps are held at KCHAG, the Christian Endeavour Summer Center.",
     bodyHy: null,
-    buttonLabel: "Visit KCHAG Camps",
-    buttonHref: "/outreach/camps",
+    buttonLabel: null,
+    buttonHref: null,
   },
 };
 
