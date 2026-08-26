@@ -98,7 +98,16 @@
     padding: 3.25rem 2.125rem;
   }
 
-  .grid {
+  /* Scoped to :not(.solo) — the unscoped rule this replaced applied a
+     2-column 280px/1fr template even to solo (no-pastorCard) sections,
+     which have only one grid child. Auto-placement dropped that lone
+     child into the narrow 280px first column, leaving it squeezed left
+     with the ~800px second column empty beside it (Syriac Evangelical
+     Aleppo, Damascus, Ekizolukh, Korkune, and Karaduran — every church
+     with pastorCard: null). Solo's base single-column `.grid` rule (its
+     own `1fr`, unaffected here) now correctly fills its full 820px
+     max-width instead. */
+  .grid:not(.solo) {
     grid-template-columns: 280px 1fr;
     gap: 2.125rem;
   }
