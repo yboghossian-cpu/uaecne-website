@@ -43,6 +43,11 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.125rem;
+  /* auto-fit + a capped card width: 2 cards sit side by side as before,
+     and a single remaining card (e.g. after a departure) centers at its
+     natural width instead of stretching full-row or leaving an empty
+     second cell. */
+  justify-content: center;
 }
 
 .card {
@@ -93,6 +98,6 @@
   }
 
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 360px));
   }
 }

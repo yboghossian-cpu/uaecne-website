@@ -532,8 +532,9 @@ export const nestContent: NestContent = {
     footnoteHy: null,
   },
 
-  // Both real photos MD5-confirmed — "Dr. Martin Accad.webp" (reused from
-  // the About/President card above) and "Rima Nasrallah.jpg".
+  // Real photo MD5-confirmed — "Dr. Martin Accad.webp" (reused from the
+  // About/President card above). Dr. Rima Nasrallah van Saane's entry was
+  // removed 2026-08-26 — she has left NEST.
   leadership: {
     eyebrow: "Leadership",
     eyebrowHy: null,
@@ -546,13 +547,6 @@ export const nestContent: NestContent = {
         role: "President · Professor of Islam and Christian-Muslim Relations",
         roleHy: null,
         photo: { src: "/higher-ed-nest-president.webp", alt: "Dr. Martin Accad" },
-      },
-      {
-        name: "Dr. Rima Nasrallah van Saane",
-        nameHy: null,
-        role: "Academic Dean · Associate Professor of Practical Theology",
-        roleHy: null,
-        photo: { src: "/higher-ed-nest-dean.jpg", alt: "Dr. Rima Nasrallah van Saane" },
       },
     ],
   },
