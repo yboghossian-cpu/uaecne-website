@@ -268,6 +268,20 @@
     outline-offset: 4px;
   }
 
+  /* Same type styling as .topLevelTrigger, but no dropdown chevron, pointer
+     cursor, or hover underline — this is a non-interactive label (no route,
+     no submenu), not a clickable trigger. */
+  .topLevelLabel {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-red);
+    white-space: nowrap;
+    cursor: default;
+  }
+
   .hasSubChildren {
     position: relative;
   }

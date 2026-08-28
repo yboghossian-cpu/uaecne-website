@@ -105,10 +105,9 @@ const navItems: NavItem[] = [
       },
     ],
   },
-  { label: "Memberships", href: "/memberships" },
+  { label: "Memberships" },
   {
     label: "Resource Center",
-    href: "/resource-center",
     children: [
       { label: "History of the UAECNE", href: "/resource-center/history" },
       {
@@ -202,7 +201,7 @@ export default function Nav() {
           >
             {item.href ? (
               <Link href={item.href}>{item.label}</Link>
-            ) : (
+            ) : item.children ? (
               <button
                 type="button"
                 className={styles.topLevelTrigger}
@@ -211,6 +210,14 @@ export default function Nav() {
               >
                 {item.label}
               </button>
+            ) : (
+              // No href and no children (Memberships today) — a plain,
+              // non-interactive label until a real route exists. Same type
+              // styling as the button triggers, but no dropdown chevron,
+              // pointer cursor, or hover underline (there's nothing to open).
+              <span className={styles.topLevelLabel} aria-disabled="true">
+                {item.label}
+              </span>
             )}
             {item.children && (
               <div
