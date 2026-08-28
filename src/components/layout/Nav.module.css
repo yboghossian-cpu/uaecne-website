@@ -201,8 +201,6 @@
     padding-top: 0.75rem;
   }
 
-  .hoverEnabled:hover .dropdown,
-  .hoverEnabled:focus-within .dropdown,
   .dropdown[data-open="true"] {
     display: block;
   }

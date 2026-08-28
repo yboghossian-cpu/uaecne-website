@@ -138,14 +138,30 @@ export default function Nav() {
     });
   }
 
-  function toggleDesktopGroup(label: string) {
+  const topLevelLabels = new Set(navItems.map((item) => item.label));
+
+  // isTopLevel distinguishes a top-level trigger (Union Leadership,
+  // Ministries, Partnerships, Resource Center) from a nested sub-trigger
+  // (e.g. "Ecumenical Partners" inside Partnerships). Opening a top-level
+  // trigger closes any other open top-level trigger first, so only one
+  // top-level menu is ever open at once; opening a nested sub-trigger only
+  // adds itself, leaving its own top-level parent (and any other nested
+  // group) untouched — Partnerships + Ecumenical Partners must stay open
+  // together for the 3-level flyout. Re-clicking an already-open label
+  // (top-level or nested) always just closes that one label.
+  function toggleDesktopGroup(label: string, isTopLevel: boolean) {
     setOpenDesktopGroups((prev) => {
       const next = new Set(prev);
       if (next.has(label)) {
         next.delete(label);
-      } else {
-        next.add(label);
+        return next;
       }
+      if (isTopLevel) {
+        for (const l of topLevelLabels) {
+          if (l !== label) next.delete(l);
+        }
+      }
+      next.add(label);
       return next;
     });
   }
@@ -153,15 +169,25 @@ export default function Nav() {
   // Desktop dropdown/flyout triggers are plain buttons (no href), so they
   // rely on explicit click/tap state below rather than :hover alone — a
   // touch device at desktop width has no hover to simulate on a button.
-  // Click-away closes everything; navigating via a link inside closes it too.
+  // Click-away closes everything; navigating via a link inside closes it
+  // too; Escape closes everything as well.
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenDesktopGroups(new Set());
       }
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpenDesktopGroups(new Set());
+      }
+    }
     document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   return (
@@ -174,11 +200,7 @@ export default function Nav() {
             setOpenDesktopGroups(new Set());
             // Deferred: blurring synchronously in the click handler
             // interfered with Link's own click handling and silently
-            // cancelled navigation. The clicked link otherwise keeps
-            // browser focus after client-side navigation, which would
-            // hold the dropdown open via the :focus-within CSS fallback
-            // (kept for Resource Center's keyboard access) even after
-            // this state resets.
+            // cancelled navigation.
             setTimeout(() => target.blur(), 0);
           }
         }}
@@ -186,18 +208,7 @@ export default function Nav() {
         {navItems.map((item) => (
           <li
             key={item.label}
-            className={
-              item.children
-                ? // Only a real-link parent (Resource Center today) gets the
-                  // hover/focus-within trigger; button-only parents rely
-                  // solely on click-driven data-open (see handleClickOutside
-                  // above) — mixing hover in for those left the dropdown
-                  // stuck open after a click+navigate, since :hover on this
-                  // li doesn't clear until the mouse actually moves, and the
-                  // clicked link's own li never unmounts across navigation.
-                  `${styles.hasChildren} ${item.href ? styles.hoverEnabled : ""}`
-                : undefined
-            }
+            className={item.children ? styles.hasChildren : undefined}
           >
             {item.href ? (
               <Link href={item.href}>{item.label}</Link>
@@ -206,7 +217,7 @@ export default function Nav() {
                 type="button"
                 className={styles.topLevelTrigger}
                 aria-expanded={openDesktopGroups.has(item.label)}
-                onClick={() => toggleDesktopGroup(item.label)}
+                onClick={() => toggleDesktopGroup(item.label, true)}
               >
                 {item.label}
               </button>
@@ -239,7 +250,7 @@ export default function Nav() {
                           type="button"
                           className={styles.subLevelTrigger}
                           aria-expanded={openDesktopGroups.has(child.label)}
-                          onClick={() => toggleDesktopGroup(child.label)}
+                          onClick={() => toggleDesktopGroup(child.label, false)}
                         >
                           {child.label}
                         </button>
