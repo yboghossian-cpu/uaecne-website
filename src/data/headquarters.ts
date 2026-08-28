@@ -75,7 +75,7 @@ export const headquartersOffices: HqOffice[] = [
     office: "Church Relations",
     phone: null,
     members: [
-      { name: "Rev. Nishan Bakalian", title: "Relations & Coordinator", photo: "/headquarters-nishan-bakalian.jpg", email: null },
+      { name: "Rev. Nishan Bakalian", title: "Relations & Coordinator", photo: null, email: null },
     ],
   },
   {
@@ -85,37 +85,30 @@ export const headquartersOffices: HqOffice[] = [
       { name: "Mrs. Rozette Alemian", title: "Office Director", photo: null, email: null },
       { name: "Mrs. Ani Basset", title: "Typographer", photo: null, email: null },
       { name: "Mrs. Helen Topeian", title: "Secretary & Typesetter", photo: null, email: null },
+      { name: "Dr. Yervant Kassouny", title: "Editor Emeritus, UAECNE Publications", photo: null, email: null },
     ],
   },
   {
     office: "Educational Council Office",
     phone: null,
     members: [
-      { name: "Ms. Vartoug Balekjian", title: "Council Coordinator", photo: "/headquarters-vartoug-balekjian.jpg", email: null },
+      { name: "Ms. Vartoug Balekjian", title: "Council Coordinator", photo: null, email: null },
     ],
   },
   {
     office: "Court Office",
     phone: null,
     members: [
-      { name: "Rev. Hrayr Cholakian", title: "Court Chair", photo: "/headquarters-hrayr-cholakian.jpg", email: null },
+      { name: "Rev. Hrayr Cholakian", title: "Court Chair", photo: null, email: null },
     ],
   },
   {
     office: "Christian Endeavor Office",
     phone: "01-565930",
     members: [
-      { name: "Pastor Datev Basmajian", title: "Youth Worker", photo: "/headquarters-datev-basmajian.jpg", email: null },
+      { name: "Pastor Datev Basmajian", title: "Youth Worker", photo: null, email: null },
       { name: "Mrs. Nayri Agishian", title: "Secretary", photo: null, email: null },
       { name: "Ms. Aline Tahazian", title: "Children & Media Coordinator", photo: null, email: null },
-    ],
-  },
-  {
-    // Listed in the source doc with no office and no title — flagged pending.
-    office: "Also at the Head Office",
-    phone: null,
-    members: [
-      { name: "Dr. Yervant Kassouny", title: "Role pending", photo: null, email: null, pending: true },
     ],
   },
 ];
