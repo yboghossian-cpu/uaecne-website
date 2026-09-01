@@ -865,15 +865,13 @@ export const churchContent: Record<string, ChurchContent> = {
       bodyHy: null,
     },
 
-    // OPEN_QUESTIONS.md #25/#34: churches.ts's email (aessa68@gmail.com) is
-    // the AESSA Anjar SCHOOL's address, not this church's — confirmed by
-    // Yeghia. The reference file's own header comment correctly flags this
-    // ("Email blank in source -> omitted"), but its body still renders the
-    // email (a bug in the reference file itself, not a superseding truth —
-    // see OPEN_QUESTIONS #34). Explicit null suppresses the email row
-    // entirely rather than falling through to churches.ts's suspect value.
-    // No "Our Location" card in the reference at all for this church.
-    contactOverride: { email: null, hideLocationCard: true },
+    // OPEN_QUESTIONS.md #19/#25/#34: churches.ts's email (aessa68@gmail.com)
+    // reads like the AESSA Anjar SCHOOL's address, not this church's own —
+    // still unverified. Maral confirmed via WhatsApp (2026-09-01) that it
+    // should render, so it's shown here rather than suppressed — kept
+    // flagged in OPEN_QUESTIONS pending a final check, not hidden. Location
+    // card restored too (previously hidden alongside the email).
+    contactOverride: { email: "aessa68@gmail.com" },
   },
 
   "armenian-evangelical-emmanuel-church-nor-amanos-dora": {
@@ -1367,7 +1365,7 @@ export const churchContent: Record<string, ChurchContent> = {
       {
         name: "Mr. Kevork Kerkezian",
         nameHy: null,
-        role: "Board Member",
+        role: "Vice-Chairman",
         roleHy: null,
         photo: {
           src: "/church-armenian-evangelical-church-anjar-leader-3.jpg",

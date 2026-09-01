@@ -54,7 +54,7 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 18. **RESOLVED — see Resolved section (AEC college logo).** Kept as a numbered placeholder rather than deleted-and-renumbered, so later items don't shift position across separate commits; the substantive note now lives in Resolved and item 15 above.
 
-19. **Nor Marash church email (`aessa68@gmail.com`) reads like a school/association address, not the church's own — kept verbatim per the sheet; confirm with the church directly.**
+19. **Nor Marash church email (`aessa68@gmail.com`) reads like a school/association address, not the church's own. Now DISPLAYED on the live church-detail page per Maral's WhatsApp confirmation (2026-09-01) that it should render — still flagged here as unverified pending a final check directly with the church.**
 
 20. **Emmanuel Nor Amanos — no service time given in the source doc.** `churches.ts`'s "Sundays 10:00-11:15" is sourced only from the directory spreadsheet, not corroborated anywhere in the reference file (facts bar stays generic "Sunday Worship / Weekly Service," no invented clock time on the built page) — same single-sourced status as FAEC/Syriac (items 32/33). Yeghia to confirm against the church.
 
@@ -66,7 +66,7 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 24. **Syriac Bouchriyeh founding year 1966 — sourced from a building inscription, not the text doc.**
 
-25. **Nor Marash email — reference file explicitly states it was left blank in the source, "not the church's"; stronger than item 19's loose flag, and `churches.ts`'s filled-in value (`aessa68@gmail.com`) should be treated as suspect, not authoritative. Resolved-in-render, 2026-08-20: the live church-detail page correctly omits the email entirely (see item 34) — still pending a real email from the church itself.**
+25. **Nor Marash email — reference file explicitly states it was left blank in the source, "not the church's"; stronger than item 19's loose flag, and `churches.ts`'s filled-in value (`aessa68@gmail.com`) remains suspect, not authoritative. Updated 2026-09-01: per Maral's WhatsApp confirmation, the email is now intentionally DISPLAYED on the live church-detail page (see item 34) rather than suppressed — kept flagged here as unverified, still pending a final check with the church itself, not a resolved item.**
 
 26. **FAEC Beirut masthead logo — reused from the Armenian Evangelical College; plausible but not independently confirmed as an intentional/approved reuse.**
 
@@ -84,7 +84,7 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 33. **Syriac Bouchriyeh service time "Sundays 10:00-11:00" — same status as item 32: sourced only from `churches.ts`/the directory spreadsheet, no specific clock time anywhere in the Syriac reference file. Yeghia to confirm against the church.**
 
-34. **`design-reference/uaecne-church-nor-marash-complete.html` has a live bug at source, confirmed by Yeghia (author of the file): its own header comment says the email was "blank in source → omitted (NOT the school's aessa68)," but the file's actual contact-card body still renders `aessa68@gmail.com` — the value the comment itself warns against. The ported church-detail page correctly omits the email (per Yeghia's ruling, trusting the comment over the buggy body here — not the same situation as the Syriac pastor-card case). The reference file itself should be corrected at some point so it stops carrying the wrong value in its body.**
+34. **`design-reference/uaecne-church-nor-marash-complete.html` has a live bug at source, confirmed by Yeghia (author of the file): its own header comment says the email was "blank in source → omitted (NOT the school's aessa68)," but the file's actual contact-card body still renders `aessa68@gmail.com` — the value the comment itself warns against. Updated 2026-09-01: the ported church-detail page now DISPLAYS the email per Maral's WhatsApp confirmation (see items 19/25) — a deliberate reversal of the earlier "correctly omits" ruling, not a re-introduction of the reference file's bug; still flagged as unverified. The reference file itself should still be corrected at some point so it stops carrying the wrong value in its body.**
 
 35. **Pastor surname romanization conflict across two churches, likely the same person — RESOLVED for the built pages, 2026-08-20.** The Nor Marash reference spells the current pastor (2014–present) "Rev. Raffi **Messerlian**." The Anjar reference itself doesn't have a Latin-script form for its own 1998–2013 pastor at all — only Armenian, "Վեր. Րաֆֆի Մըսրլեան" (see item 39). Yeghia supplied the verified English form directly: "Rev. Raffi Messerlian," applied on the Anjar succession entry (`name`) alongside the Armenian (`nameHy`) — not a transliteration invented here, a Yeghia-verified value. Both churches now show the same spelling for what's evidently the same man.
 
