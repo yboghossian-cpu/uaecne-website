@@ -15,20 +15,17 @@ type SyriaCouncilHeroProps = {
 // seal/facts-bar shape unlike the Lebanon Council's plain icon hero, which
 // has neither). Bakes its own 3-segment breadcrumb directly, matching the
 // established convention already used by CouncilHero (2-segment,
-// "Ministries › Higher Education") and SchoolTopBlock/ChurchTopBlock
-// family components generally — rather than extending the shared,
-// no-props `HigherEdBreadcrumb`, which every other Higher Education page
-// uses unmodified.
+// "Ministries › Schools") and SchoolTopBlock/ChurchTopBlock family
+// components generally — rather than extending the shared, no-props
+// `HigherEdBreadcrumb`, which the two remaining Higher Education pages
+// (Haigazian, NEST) still use unmodified.
 //
-// Breadcrumb note: the mockup's own crumb literally reads "Ministries ›
-// Schools › Syria" — but this page lives at
-// /higher-education/syria-educational-council, not under /schools, per
-// Yeghia's explicit routing decision (this is a governance/institutional
-// page, not a school-detail page — see the recon report). Matching the
-// mockup's literal text here would point to the wrong section entirely,
-// so the crumb instead reads "Ministries › Higher Education › Syria" —
-// correct for the real route, flagged as a deliberate deviation from the
-// mockup's own (inconsistent) crumb text rather than copied blindly.
+// Breadcrumb: reads "Ministries › Schools › Syria", matching the mockup's
+// own crumb text verbatim — this page now lives at
+// /schools/education-council-syria, per the Educational Councils move
+// (see OPEN_QUESTIONS). Previously read "Ministries › Higher Education ›
+// Syria" as a deliberate deviation while the page lived under
+// /higher-education/syria-educational-council.
 export default function SyriaCouncilHero({
   heading,
   subheading,
@@ -42,7 +39,7 @@ export default function SyriaCouncilHero({
         <span className={styles.sep} aria-hidden="true">
           ›
         </span>
-        <span>Higher Education</span>
+        <span>Schools</span>
         <span className={styles.sep} aria-hidden="true">
           ›
         </span>
