@@ -1,40 +1,26 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  educationCouncilContent,
-  haigazianContent,
-  nestContent,
-  syriaEducationalCouncilContent,
-} from "@/data/higherEdContent";
+import { haigazianContent, nestContent } from "@/data/higherEdContent";
 import HigherEdBreadcrumb from "@/components/highered/HigherEdBreadcrumb";
 import HigherEdCTA from "@/components/highered/HigherEdCTA";
 import InstitutionTopBlock from "@/components/highered/InstitutionTopBlock";
 import InstitutionAbout from "@/components/highered/InstitutionAbout";
 import InstitutionHistory from "@/components/highered/InstitutionHistory";
-import CouncilHero from "@/components/highered/CouncilHero";
-import CouncilAbout from "@/components/highered/CouncilAbout";
-import CouncilStructure from "@/components/highered/CouncilStructure";
-import CouncilSecretary from "@/components/highered/CouncilSecretary";
 import HaigazianMotto from "@/components/highered/HaigazianMotto";
 import HaigazianFaculties from "@/components/highered/HaigazianFaculties";
 import HaigazianClassBand from "@/components/highered/HaigazianClassBand";
 import NestSponsors from "@/components/highered/NestSponsors";
 import NestDegrees from "@/components/highered/NestDegrees";
 import NestLeadershipPair from "@/components/highered/NestLeadershipPair";
-import SyriaCouncilHero from "@/components/highered/SyriaCouncilHero";
-import SyriaCouncilOverview from "@/components/highered/SyriaCouncilOverview";
-import SyriaCouncilAreas from "@/components/highered/SyriaCouncilAreas";
-import SyriaCouncilSchools from "@/components/highered/SyriaCouncilSchools";
-import SyriaCouncilRoster from "@/components/highered/SyriaCouncilRoster";
-import SchoolVisionMission from "@/components/school/SchoolVisionMission";
-import SchoolContactSection from "@/components/school/SchoolContactSection";
 
-const SLUGS = [
-  "educational-council",
-  haigazianContent.slug,
-  nestContent.slug,
-  syriaEducationalCouncilContent.slug,
-] as const;
+// The Lebanon and Syria Educational Councils moved to /schools (see
+// /schools/education-council-lebanon and /schools/education-council-syria)
+// as part of the Educational Councils move; the old
+// /higher-education/educational-council and
+// /higher-education/syria-educational-council URLs now permanently
+// redirect to those (see next.config.ts). Only Haigazian and NEST remain
+// on this route.
+const SLUGS = [haigazianContent.slug, nestContent.slug] as const;
 
 type PageParams = { slug: string };
 
@@ -48,45 +34,24 @@ export async function generateMetadata({
   params: Promise<PageParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  if (slug === "educational-council") {
-    return { title: `${educationCouncilContent.heading} — UAECNE` };
-  }
   if (slug === haigazianContent.slug) {
     return { title: `${haigazianContent.masthead.heading} — UAECNE` };
   }
   if (slug === nestContent.slug) {
     return { title: `${nestContent.masthead.heading} — UAECNE` };
   }
-  if (slug === syriaEducationalCouncilContent.slug) {
-    return { title: `${syriaEducationalCouncilContent.heading} — UAECNE` };
-  }
   return { title: "Higher Education — UAECNE" };
 }
 
-// Four fundamentally different page shapes (two governing councils, each
-// with its own genuinely different shape, vs. two academic institutions
-// with different distinctive sections) — branched by slug rather than
-// forced into one generic template. See src/data/higherEdContent.ts for
-// the full content-model rationale.
+// Two academic institutions, each with its own distinctive sections —
+// branched by slug rather than forced into one generic template. See
+// src/data/higherEdContent.ts for the full content-model rationale.
 export default async function HigherEducationDetailPage({
   params,
 }: {
   params: Promise<PageParams>;
 }) {
   const { slug } = await params;
-
-  if (slug === "educational-council") {
-    const c = educationCouncilContent;
-    return (
-      <>
-        <CouncilHero heading={c.heading} subheading={c.subheading} />
-        <CouncilAbout about={c.about} />
-        <CouncilStructure structure={c.structure} />
-        <CouncilSecretary secretary={c.secretary} />
-        <HigherEdCTA cta={c.cta} />
-      </>
-    );
-  }
 
   if (slug === haigazianContent.slug) {
     const h = haigazianContent;
@@ -130,32 +95,6 @@ export default async function HigherEducationDetailPage({
         <NestDegrees degrees={n.degrees} />
         <NestLeadershipPair leadership={n.leadership} />
         <HigherEdCTA cta={n.cta} />
-      </>
-    );
-  }
-
-  if (slug === syriaEducationalCouncilContent.slug) {
-    const s = syriaEducationalCouncilContent;
-    return (
-      <>
-        <SyriaCouncilHero
-          heading={s.heading}
-          headingHy={s.headingHy}
-          subheading={s.subheading}
-          metaLine={s.metaLine}
-          logo={s.logo}
-        />
-        <SyriaCouncilOverview overview={s.overview} factsBar={s.factsBar} />
-        <SchoolVisionMission visionMission={s.missionVision} />
-        <SyriaCouncilAreas areas={s.areas} />
-        <SyriaCouncilSchools schools={s.schools} />
-        <SyriaCouncilRoster roster={s.roster} />
-        <SchoolContactSection
-          location={s.location}
-          contactRows={s.contactRows}
-          schoolName={s.heading}
-        />
-        <HigherEdCTA cta={s.cta} />
       </>
     );
   }
