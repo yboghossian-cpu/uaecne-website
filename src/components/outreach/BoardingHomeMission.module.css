@@ -1,0 +1,136 @@
+.section {
+  padding: 44px 34px;
+  background: var(--color-ivory-wash);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+}
+
+.centerHead {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 32px;
+}
+
+.flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ln {
+  height: 1px;
+  width: 50px;
+  background: var(--color-gold);
+  opacity: 0.6;
+}
+
+.med {
+  width: 22px;
+  height: 22px;
+  color: var(--color-gold);
+  opacity: 0.7;
+}
+
+.intro {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  text-align: center;
+  color: var(--color-brown);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.intro b {
+  color: var(--color-red);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.commit {
+  background: var(--color-ivory);
+  border: 1px solid rgba(197, 160, 89, 0.28);
+  border-radius: 14px;
+  padding: 30px 24px 26px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.emb {
+  width: 56px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border: 1.5px solid var(--color-gold);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-red);
+  background: #fbf5ea;
+}
+
+.emb svg {
+  width: 26px;
+  height: 26px;
+}
+
+.commit h4 {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.commit p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--color-brown);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 34px 20px;
+  }
+}

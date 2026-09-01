@@ -1,6 +1,6 @@
 .arch {
   position: relative;
-  border-radius: 150px 150px 10px 10px;
+  border-radius: 16px;
   overflow: hidden;
   background:
     repeating-linear-gradient(
@@ -18,7 +18,7 @@
   position: absolute;
   inset: 8px;
   border: 1px solid rgba(255, 253, 247, 0.28);
-  border-radius: 140px 140px 6px 6px;
+  border-radius: 12px;
   pointer-events: none;
 }
 

@@ -74,7 +74,7 @@
   width: 66px;
   height: 80px;
   border: 2px solid var(--color-gold);
-  border-radius: 33px 33px 6px 6px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

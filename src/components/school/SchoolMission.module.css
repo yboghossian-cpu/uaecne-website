@@ -57,7 +57,7 @@
   height: 60px;
   margin: 0 auto 1rem;
   border: 2px solid var(--color-gold);
-  border-radius: 26px 26px 4px 4px;
+  border-radius: 10px;
   display: flex;
   align-items: flex-end;
   justify-content: center;

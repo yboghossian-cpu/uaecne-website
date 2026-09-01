@@ -90,7 +90,7 @@
 
 .pic {
   aspect-ratio: 5 / 4;
-  border-radius: 120px 120px 6px 6px;
+  border-radius: 16px;
   overflow: hidden;
   position: relative;
   box-shadow: var(--shadow-elevated);
