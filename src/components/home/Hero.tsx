@@ -17,7 +17,7 @@ export default function Hero() {
       <Medallion size={230} className={styles.heroMedallion} />
       <div className={styles.heroInner}>
         <div className={styles.heroCopy}>
-          <span className={styles.eyebrow}>Est. 1846 · Beirut</span>
+          <span className={styles.eyebrow}>Est. 1846</span>
           <h1 className={styles.headline}>
             Faith, Unity &amp;
             <br />

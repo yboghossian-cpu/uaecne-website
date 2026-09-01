@@ -38,7 +38,6 @@ export const headquartersHero = {
 } as const;
 
 export const headquartersFacts: HqFact[] = [
-  { value: "1846", label: "Established" },
   { value: "Geitawi, Beirut", label: "Location" },
   { value: "Head Office", label: "Character" },
   { value: "UAECNE", label: "The Union" },
@@ -68,7 +67,6 @@ export const headquartersOffices: HqOffice[] = [
       { name: "Mrs. Juliette Zoulikian", title: "Accountant", photo: "/headquarters-juliette-zoulikian.jpg", email: null },
       { name: "Mr. Nishan Nalbandian", title: "Office Assistant", photo: "/headquarters-nishan-nalbandian.jpg", email: null },
       { name: "Mr. Dikran Arzoian", title: "Janitor", photo: null, email: null },
-      { name: "Mrs. Tina Motokian", title: "Office Cleaner", photo: null, email: null },
     ],
   },
   {
@@ -82,10 +80,10 @@ export const headquartersOffices: HqOffice[] = [
     office: "Publication Office",
     phone: "01-565931",
     members: [
-      { name: "Mrs. Rozette Alemian", title: "Office Director", photo: null, email: null },
+      { name: "Dr. Yervant Kassouny", title: "Editor Emeritus, UAECNE Publications", photo: null, email: null },
+      { name: "Mrs. Rozette Alemian", title: "Publications Office Manager", photo: null, email: null },
       { name: "Mrs. Ani Basset", title: "Typographer", photo: null, email: null },
       { name: "Mrs. Helen Topeian", title: "Secretary & Typesetter", photo: null, email: null },
-      { name: "Dr. Yervant Kassouny", title: "Editor Emeritus, UAECNE Publications", photo: null, email: null },
     ],
   },
   {
