@@ -557,7 +557,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       {
         name: null,
         nameHy: null,
-        role: "Vice-Chair of the Council",
+        role: "Chair of Council",
         roleHy: null,
         photo: null,
       },
@@ -996,7 +996,7 @@ export const schoolContent: Record<string, SchoolContent> = {
           alt: "Rev. Hagop Akbasharian",
         },
       },
-      { name: null, nameHy: null, role: "Vice-Chair of the Council", roleHy: null, photo: null },
+      { name: null, nameHy: null, role: "Chair of Council", roleHy: null, photo: null },
       {
         name: "Ms. Sevan Apelian",
         nameHy: null,
