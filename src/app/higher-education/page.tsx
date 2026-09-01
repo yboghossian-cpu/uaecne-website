@@ -2,37 +2,24 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
-import {
-  educationCouncilContent,
-  haigazianContent,
-  nestContent,
-  syriaEducationalCouncilContent,
-} from "@/data/higherEdContent";
+import { haigazianContent, nestContent } from "@/data/higherEdContent";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Higher Education — UAECNE",
 };
 
-// Only 3 institutions, each genuinely different (a governing council vs.
-// two real campuses) — a small hardcoded array reads more honestly here
-// than forcing a directory+content-record split like churches/schools,
-// which exists to handle dozens of entries with a shared shape.
+// Only 2 institutions now — the Lebanon and Syria Educational Councils
+// moved to the Schools index (see /schools/education-council-lebanon and
+// /schools/education-council-syria) as part of the Educational Councils
+// move; this hardcoded array reads more honestly than forcing a
+// directory+content-record split like churches/schools for just 2 entries.
 const cards = [
-  {
-    id: "educational-council",
-    slug: "educational-council",
-    name: educationCouncilContent.heading,
-    // No logo file exists for the Council — a seal/icon treatment, never
-    // "Photo Pending" (it isn't a campus).
-    treatment: "seal" as const,
-    emblem: null,
-  },
   {
     id: "haigazian-university",
     slug: haigazianContent.slug,
     name: haigazianContent.masthead.heading,
-    treatment: "photo" as const,
+    treatment: "photo" as "photo" | "seal",
     photo: haigazianContent.heroPhoto,
     emblem: haigazianContent.logo,
   },
@@ -43,17 +30,6 @@ const cards = [
     treatment: "photo" as const,
     photo: nestContent.heroPhoto,
     emblem: nestContent.logo,
-  },
-  {
-    id: "syria-educational-council",
-    slug: syriaEducationalCouncilContent.slug,
-    name: syriaEducationalCouncilContent.heading,
-    // Real crest exists (unlike the Lebanon Council) — shown in the label
-    // row like Haigazian/NEST's own emblem, but the picture area still
-    // uses the seal treatment (no campus/building photo, since this is a
-    // governing council, not a physical institution).
-    treatment: "seal" as const,
-    emblem: syriaEducationalCouncilContent.logo,
   },
 ];
 

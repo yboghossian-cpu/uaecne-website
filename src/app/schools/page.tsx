@@ -71,11 +71,57 @@ export default function SchoolsIndexPage() {
         </div>
       </section>
 
+      <section className={`${styles.country} ${styles.countryWash}`}>
+        <div className={styles.countryHead}>
+          <span className={styles.ln} />
+          <h2 className={styles.countryHeading}>Education Councils</h2>
+          <span className={`${styles.ln} ${styles.lnR}`} />
+        </div>
+        <div className={styles.grid}>
+          <Link href="/schools/education-council-lebanon" className={styles.school}>
+            <div className={`${styles.pic} ${styles.picPending}`}>
+              <span className={styles.glyph}>
+                <svg className={styles.glyphIcon}>
+                  <use href="#ic-edu" />
+                </svg>
+                <span className={styles.glyphCaption}>Photo pending</span>
+              </span>
+            </div>
+            <div className={styles.label}>
+              <svg className={styles.labelSeal}>
+                <use href="#seal-light" />
+              </svg>
+              <b className={styles.schoolName}>Education Council - Lebanon</b>
+            </div>
+          </Link>
+          <Link href="/schools/education-council-syria" className={styles.school}>
+            <div className={`${styles.pic} ${styles.picPending}`}>
+              <span className={styles.glyph}>
+                <svg className={styles.glyphIcon}>
+                  <use href="#ic-edu" />
+                </svg>
+                <span className={styles.glyphCaption}>Photo pending</span>
+              </span>
+            </div>
+            <div className={styles.label}>
+              <Image
+                src="/higher-ed-syria-council-emblem.png"
+                alt=""
+                width={42}
+                height={42}
+                className={styles.labelEmblem}
+              />
+              <b className={styles.schoolName}>Education Council - Syria</b>
+            </div>
+          </Link>
+        </div>
+      </section>
+
       {groups.map(([country, list], index) => (
         <section
           key={country}
           className={
-            index % 2 === 0
+            (index + 1) % 2 === 0
               ? `${styles.country} ${styles.countryWash}`
               : styles.country
           }
