@@ -41,6 +41,10 @@ const navItems: NavItem[] = [
             href: "/ministries/health-care/special-care-centers",
           },
           {
+            label: "Zvartnots",
+            href: "/ministries/health-care/zvartnots",
+          },
+          {
             label: "Karageusian Foundation — Lebanon, Syria",
             href: "/ministries/health-care/karageusian-foundation",
           },
