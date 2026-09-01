@@ -53,7 +53,6 @@ export const historyContent = {
     countries: [
       "Lebanon",
       "Syria",
-      "Iraq",
       "Turkey",
       "Egypt",
       "Iran",

@@ -33,7 +33,6 @@ const countryDisplayLabel: Record<string, string> = {
   "Syria (Kessab)": "Syria",
   Turkey: "Turkey",
   Iran: "Iran",
-  Iraq: "Iraq",
   Greece: "Greece",
   Australia: "Australia",
 };
