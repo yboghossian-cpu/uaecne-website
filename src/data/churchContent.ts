@@ -748,7 +748,7 @@ export const churchContent: Record<string, ChurchContent> = {
       {
         name: "Mr. Antranig Messerlian",
         nameHy: null,
-        role: "Board Member",
+        role: "Vice-Chairman",
         roleHy: null,
         photo: {
           src: "/church-armenian-evangelical-church-nor-marash-leader-2.jpg",
@@ -756,13 +756,13 @@ export const churchContent: Record<string, ChurchContent> = {
         },
       },
       {
-        name: "Mrs. Takouhi Sarkissian",
+        name: "Mrs. Silva Mncherian",
         nameHy: null,
-        role: "Board Member",
+        role: "Secretary",
         roleHy: null,
         photo: {
           src: "/church-armenian-evangelical-church-nor-marash-leader-3.jpg",
-          alt: "Mrs. Takouhi Sarkissian",
+          alt: "Mrs. Silva Mncherian",
         },
       },
     ],
