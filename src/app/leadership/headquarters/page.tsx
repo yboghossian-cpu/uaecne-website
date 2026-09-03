@@ -34,7 +34,7 @@ export default function HeadquartersPage() {
             <h1>Headquarters</h1>
           </div>
           <p className={styles.tagline}>
-            The Union&rsquo;s home in Beirut · <b>Est. 1846</b>
+            The Union&rsquo;s home in Beirut
           </p>
           <div className={styles.heroArt}>
             <div className={styles.arch}>
