@@ -10,7 +10,7 @@ type SchoolLeadershipGridProps = {
 // uaecne-school-aec-reference.html's .lead-grid. Two independent gaps,
 // never invented:
 //  - no photo -> arched placeholder icon (name still shown if verified)
-//  - no name  -> italic-gold "Name pending" label (AEC's Vice-Chair)
+//  - no name  -> italic-gold "Name pending" label (Anjar, Bethel)
 export default function SchoolLeadershipGrid({ leaders }: SchoolLeadershipGridProps) {
   if (!leaders) return null;
 

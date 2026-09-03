@@ -540,9 +540,10 @@ export const schoolContent: Record<string, SchoolContent> = {
       },
     ],
 
-    // Vice-Chair of the Council: no name found anywhere in the source .odt
-    // — OPEN_QUESTIONS flagged, never guessed. Real photo confirmed genuine
-    // (Nikon D500 EXIF, no AI-generation markers) for both other entries.
+    // Chair of the Council: name supplied by the Union (Nerses Baghdoyan);
+    // photo still pending, so the card renders the arched placeholder. Real
+    // photos confirmed genuine (Nikon D500 EXIF, no AI-generation markers)
+    // for both other entries.
     leadership: [
       {
         name: "Dr. Armen Urneshlian",
@@ -555,7 +556,7 @@ export const schoolContent: Record<string, SchoolContent> = {
         },
       },
       {
-        name: null,
+        name: "Nerses Baghdoyan",
         nameHy: null,
         role: "Chair of Council",
         roleHy: null,
