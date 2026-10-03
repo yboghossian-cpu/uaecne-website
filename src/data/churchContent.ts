@@ -381,6 +381,10 @@ export type ChurchContent = {
     // from the source doc's typo'd "facebo-ok"). Renders a real link, not
     // a dead href.
     facebook?: { label: string; url: string };
+    // Additional social links beyond Facebook — Instagram, YouTube, Website.
+    // Each renders as its own row with the matching icon. `key` selects the
+    // icon + row label; `url` is the full link; `label` is the display text.
+    socials?: { key: "Instagram" | "YouTube" | "Website"; label: string; url: string }[];
     // Renders "Pending" in place of a real phone/email value — for a
     // church whose reference explicitly marks contact details as
     // placeholders (e.g. the Syria churches), rather than showing
@@ -1817,6 +1821,17 @@ export const churchContent: Record<string, ChurchContent> = {
       phonePending: true,
       emailPending: true,
       secretary: "Mrs. Araz Mansourian-Shahinian",
+      facebook: {
+        label: "Armenian Evangelical Bethel Church, Aleppo",
+        url: "https://www.facebook.com/profile.php?id=100064428500572",
+      },
+      socials: [
+        {
+          key: "Instagram",
+          label: "bethel_church_1923",
+          url: "https://www.instagram.com/bethel_church_1923",
+        },
+      ],
       note: "Contact details are placeholders until verified copy is supplied.",
     },
   },

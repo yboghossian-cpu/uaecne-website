@@ -12,6 +12,16 @@ type ChurchContactSectionProps = {
   contactOverride: ContactOverride;
 };
 
+// Icon keyed by social row label, mirroring SchoolContactSection's ROW_ICON.
+// Facebook is listed for completeness even though its row is rendered
+// separately from its own typed field.
+const SOCIAL_ICON: Record<string, string> = {
+  Facebook: "#ic-fb",
+  Instagram: "#ic-ig",
+  YouTube: "#ic-yt",
+  Website: "#ic-globe",
+};
+
 // Two cards ("Our Location" / "Get in Touch") built from churches.ts's
 // directory fields (address, phone, secretary, serviceTime). `contactOverride`
 // patches specific fields when a reference file's own supplied contact data
@@ -110,24 +120,6 @@ export default function ChurchContactSection({
             </span>
             <h3 className={styles.cardTitle}>Get in Touch</h3>
           </div>
-          {contactOverride?.facebook && (
-            <div className={styles.row}>
-              <svg className={styles.rowIco}>
-                <use href="#ic-fb" />
-              </svg>
-              <span>
-                <span className={styles.key}>Facebook</span>
-                <a
-                  href={contactOverride.facebook.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  {contactOverride.facebook.label}
-                </a>
-              </span>
-            </div>
-          )}
           {phonePending ? (
             <div className={styles.row}>
               <svg className={styles.rowIco}>
@@ -189,6 +181,42 @@ export default function ChurchContactSection({
               </span>
             </div>
           )}
+          {contactOverride?.facebook && (
+            <div className={styles.row}>
+              <svg className={styles.rowIco}>
+                <use href="#ic-fb" />
+              </svg>
+              <span>
+                <span className={styles.key}>Facebook</span>
+                <a
+                  href={contactOverride.facebook.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  {contactOverride.facebook.label}
+                </a>
+              </span>
+            </div>
+          )}
+          {contactOverride?.socials?.map((social) => (
+            <div className={styles.row} key={social.key}>
+              <svg className={styles.rowIco}>
+                <use href={SOCIAL_ICON[social.key]} />
+              </svg>
+              <span>
+                <span className={styles.key}>{social.key}</span>
+                <a
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.link}
+                >
+                  {social.label}
+                </a>
+              </span>
+            </div>
+          ))}
           {note && <div className={styles.note}>{note}</div>}
         </div>
       </div>

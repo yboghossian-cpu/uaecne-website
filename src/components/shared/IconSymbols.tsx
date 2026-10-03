@@ -425,6 +425,37 @@ export default function IconSymbols() {
           <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
         </symbol>
 
+        {/* YouTube contact-row icon — geometry copied verbatim from the
+            Shamlian-Tatikian static route's own inline #yt symbol, so the
+            two sprites stay identical. First used by ChurchContactSection's
+            socials rows. */}
+        <symbol id="ic-yt" viewBox="0 0 24 24">
+          <rect
+            x="3"
+            y="6"
+            width="18"
+            height="12"
+            rx="3"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+          <path d="M11 9l4 3-4 3z" fill="currentColor" />
+        </symbol>
+
+        {/* Website/globe contact-row icon — no mockup supplies one, so it's
+            drawn to match the neighbouring social icons (24 box, 1.6
+            stroke) rather than imported from a different icon set. */}
+        <symbol id="ic-globe" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          <path
+            d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+          />
+        </symbol>
+
         {/* Events-card icons — geometry copied verbatim from
             uaecne-school-aleppo-college-girls.html's own #flask/#cart
             symbols (ic-heart already existed, reused as-is). First used by
