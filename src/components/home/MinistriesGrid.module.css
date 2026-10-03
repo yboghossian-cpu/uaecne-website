@@ -103,8 +103,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 26px;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
 .card {
@@ -161,6 +161,7 @@
 @media (min-width: 560px) {
   .grid {
     grid-template-columns: 1fr 1fr;
+    gap: 26px;
   }
 }
 
@@ -177,5 +178,35 @@
 
   .heading {
     font-size: 30px;
+  }
+}
+
+/* Two-up below 560px leaves each card ~160px wide at 375px, so the caption
+   type steps down to stay inside the narrower column. */
+@media (max-width: 559px) {
+  .cap {
+    padding: 12px 2px 0;
+  }
+
+  .cardTitle {
+    font-size: 17px;
+    line-height: 1.15;
+  }
+
+  .cardDescription {
+    font-size: 11px;
+    line-height: 1.45;
+    margin-top: 5px;
+  }
+
+  .go {
+    margin-top: 9px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+  }
+
+  .goIcon {
+    width: 10px;
+    height: 10px;
   }
 }
