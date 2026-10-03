@@ -173,23 +173,27 @@ export default function Nav() {
   // Desktop dropdown/flyout triggers are plain buttons (no href), so they
   // rely on explicit click/tap state below rather than :hover alone — a
   // touch device at desktop width has no hover to simulate on a button.
-  // Click-away closes everything; navigating via a link inside closes it
-  // too; Escape closes everything as well.
+  // Pointer-down away closes everything (desktop groups and the mobile
+  // panel); navigating via a link inside closes it too; so does Escape.
+  // The hamburger sits inside navRef, so its own toggle is never swallowed
+  // here.
   useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
+    function handlePointerDown(e: PointerEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenDesktopGroups(new Set());
+        setOpen(false);
       }
     }
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
         setOpenDesktopGroups(new Set());
+        setOpen(false);
       }
     }
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("pointerdown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("pointerdown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
@@ -298,7 +302,17 @@ export default function Nav() {
           <span className={styles.bar} />
         </button>
         <div id="nav-panel" className={styles.panel} data-open={open}>
-          <ul className={styles.list}>
+          {/* Links navigate client-side and Nav lives in the root layout, so
+              the panel has to dismiss itself here — the sub-group toggles are
+              buttons and deliberately leave it open. */}
+          <ul
+            className={styles.list}
+            onClick={(e) => {
+              if ((e.target as HTMLElement).closest("a")) {
+                setOpen(false);
+              }
+            }}
+          >
             {navItems.map((item) => (
               <li key={item.label}>
                 {item.href ? (
