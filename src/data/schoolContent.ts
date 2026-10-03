@@ -560,7 +560,10 @@ export const schoolContent: Record<string, SchoolContent> = {
         nameHy: null,
         role: "Chair of Council",
         roleHy: null,
-        photo: null,
+        photo: {
+          src: "/school-armenian-evangelical-college-chair.jpg",
+          alt: "Nerses Baghdoyan",
+        },
       },
       {
         name: "Vera Topakian",
