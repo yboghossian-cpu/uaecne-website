@@ -1552,12 +1552,11 @@ export const churchContent: Record<string, ChurchContent> = {
   // Yeghia's instruction: the mockup's Armenian masthead subtitle line
   // (".hy") is dropped entirely, and the Armenian pastors-succession list
   // is rendered in best-effort English transliteration (see the
-  // succession `note` below) rather than Armenian script. Phone/email are
-  // rendered as "Pending" (contactOverride) even though churches.ts has
-  // values for them — the mockup itself explicitly marks them
-  // placeholder/pending, which wins per rule 1 (verified reference over
-  // directory guess). See OPEN_QUESTIONS for the full list of
-  // pending-confirmation items.
+  // succession `note` below) rather than Armenian script. Phone/email were
+  // originally rendered as "Pending" per the mockup's own placeholder
+  // language; the Union has since supplied verified values, which are now
+  // set explicitly in each contactOverride. See OPEN_QUESTIONS for the
+  // remaining pending-confirmation items.
   "armenian-evangelical-bethel-church-aleppo": {
     slug: "armenian-evangelical-bethel-church-aleppo",
 
@@ -1813,13 +1812,15 @@ export const churchContent: Record<string, ChurchContent> = {
       bodyHy: null,
     },
 
-    // Phone/email rendered as "Pending" even though churches.ts has
-    // values — the approved mockup explicitly marks both placeholder
-    // ("Placeholder — pending"), which wins per rule 1. Secretary's real
-    // name is confirmed (matches the mockup's own leadership grid).
+    // Phone/email are now the Union's own verified values, superseding the
+    // mockup's "Placeholder — pending" marking. Set explicitly rather than
+    // falling through to churches.ts, whose directory values are formatted
+    // differently. A fax (+963 21 4 614 490) and the pastor's cell were
+    // also supplied but the church contact schema has no field for either,
+    // so neither is invented here — see OPEN_QUESTIONS.
     contactOverride: {
-      phonePending: true,
-      emailPending: true,
+      phone: "+963 21 4 642 450 · +963 21 4 467 528",
+      email: "bethelchurch31923@gmail.com",
       secretary: "Mrs. Araz Mansourian-Shahinian",
       facebook: {
         label: "Armenian Evangelical Bethel Church, Aleppo",
@@ -1832,7 +1833,6 @@ export const churchContent: Record<string, ChurchContent> = {
           url: "https://www.instagram.com/bethel_church_1923",
         },
       ],
-      note: "Contact details are placeholders until verified copy is supplied.",
     },
   },
 
@@ -2028,18 +2028,22 @@ export const churchContent: Record<string, ChurchContent> = {
     },
 
     // Facebook is real (corrected from the source doc's typo'd
-    // "facebo-ok"); phone/email/street address all pending per the
-    // mockup's own placeholder language.
+    // "facebo-ok"). Phone/email are the Union's own verified values,
+    // superseding the mockup's placeholder language. A fax
+    // (+963 21 2 111 070) was supplied but the church contact schema has no
+    // fax field, so it isn't invented here — see OPEN_QUESTIONS.
     contactOverride: {
-      phonePending: true,
-      emailPending: true,
+      phone: "+963 21 2 120 689",
+      email: "Arm.Evn.emmanuel.church@gmail.com",
       address: "Azizieh District, Aleppo, Syria",
       secretary: "Mrs. Tamar Kazanjian-Keoshgerian",
       facebook: {
         label: "emmanuel.church.official",
         url: "https://www.facebook.com/emmanuel.church.official/",
       },
-      note: "Phone, email and street address pending verification.",
+      // Phone and email are confirmed; only the street remains unverified,
+      // so the caveat is narrowed to the address rather than dropped.
+      note: "Street address pending verification.",
     },
   },
 
@@ -2204,21 +2208,24 @@ export const churchContent: Record<string, ChurchContent> = {
       bodyHy: null,
     },
 
-    // Facebook is real; phone/email/street address all pending per the
-    // mockup's own placeholder language. Secretary honorific: the English
-    // source doc says "Mrs." (matching Տիկ.); an Armenian office-list gloss
-    // elsewhere said "Miss" — using "Mrs." per the doc, flagged pending in
-    // OPEN_QUESTIONS.
+    // Facebook is real. Phone/email are the Union's own verified values,
+    // superseding the mockup's placeholder language — only 4 614 110 is
+    // confirmed, so churches.ts's second number (4640-040) is deliberately
+    // not carried over. Secretary honorific: the English source doc says
+    // "Mrs." (matching Տիկ.); an Armenian office-list gloss elsewhere said
+    // "Miss" — using "Mrs." per the doc, flagged pending in OPEN_QUESTIONS.
     contactOverride: {
-      phonePending: true,
-      emailPending: true,
+      phone: "+963 21 4 614 110",
+      email: "simondersahagian@yahoo.com",
       address: "Suleimaniyeh District, Aleppo, Syria",
       secretary: "Mrs. Sarin Seraydarian-Aghayegian",
       facebook: {
         label: "nahadagats.Church",
         url: "https://www.facebook.com/nahadagats.Church",
       },
-      note: "Phone, email and street address pending verification.",
+      // Phone and email are confirmed; only the street remains unverified,
+      // so the caveat is narrowed to the address rather than dropped.
+      note: "Street address pending verification.",
     },
   },
 
@@ -2372,31 +2379,31 @@ export const churchContent: Record<string, ChurchContent> = {
       bodyHy: null,
     },
 
-    // Facebook is real; phone/email/district/street all pending per the
-    // mockup's own placeholder language — even though churches.ts has
-    // values for phone/email, the mockup explicitly marks both pending
-    // (same precedent as Bethel, rule 1). churches.ts's address
-    // ("Assyrian Quarter, Aleppo, Syria") is more specific than the
-    // mockup's plain "Aleppo, Syria" — kept matching the approved mockup
-    // rather than silently substituting the directory's district name;
-    // flagged in OPEN_QUESTIONS in case that's the missing district. The
-    // contact row is relabeled "Vice-Chair" (not "Secretary") since Mary
-    // Hakko holds that office, not the secretary role.
+    // Facebook is real. Phone/email are the Union's own verified values,
+    // superseding the mockup's placeholder language — only 2 234 020 is
+    // confirmed, so churches.ts's second number (2211-782) is deliberately
+    // not carried over. A fax (+963 21 2 238 117) was supplied but the
+    // church contact schema has no fax field, so it isn't invented here.
+    // Mary Hakko's row is labelled "Secretary" per the Union's own
+    // supplied info, replacing the mockup's "Vice-Chair" wording.
     contactOverride: {
-      phonePending: true,
-      emailPending: true,
-      // Matches the approved mockup's own plain "Aleppo, Syria" — kept
-      // consistent with the note below (which still says district/street
-      // are pending) rather than showing churches.ts's more specific
-      // "Assyrian Quarter, Aleppo, Syria" and contradicting that note.
+      phone: "+963 21 2 234 020",
+      email: "Maryhakko18@gmail.com",
+      // Still the approved mockup's plain "Aleppo, Syria" rather than
+      // churches.ts's more specific "Assyrian Quarter, Aleppo, Syria" —
+      // the district was never confirmed, so it isn't substituted in; see
+      // OPEN_QUESTIONS in case that's the missing district.
       address: "Aleppo, Syria",
       secretary: "Miss Mary Hakko",
-      secretaryLabel: "Vice-Chair",
+      secretaryLabel: "Secretary",
       facebook: {
         label: "Syriac Evangelical Church",
         url: "https://www.facebook.com/share/1AQaGyyQnQ/",
       },
-      note: "Phone, email, district and street pending verification.",
+      // Phone and email are confirmed; the district and street both remain
+      // unverified — the address here is only "Aleppo, Syria" — so the
+      // caveat names both rather than the street alone.
+      note: "District and street address pending verification.",
     },
   },
 
