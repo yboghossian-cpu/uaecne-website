@@ -430,3 +430,315 @@ export const socialActionContent: SocialActionContent = {
     buttonHref: null,
   },
 };
+
+// Armenian Evangelical Boarding Home of Anjar — verbatim from
+// design-reference/uaecne-boarding-home-anjar.html. Placed under Outreach
+// (route + breadcrumb) per Yeghia's explicit ruling, 2026-08-21 — the
+// mockup's own crumb read "Ministries › Schools › Lebanon," but Yeghia
+// directed both the route AND the crumb text to move under Outreach
+// instead (see OPEN_QUESTIONS). Given its own separately-typed constant
+// (not forced into schoolContent.ts's SchoolContent shape) since 3 of its
+// sections — History, Leadership, Mission — don't fit that shape's
+// existing fields (named-era timeline vs. bare date-range period; narrative
+// leadership cards vs. a fixed role+photo grid; icon-badge mission cards
+// with an intro line vs. either icon-less or fixed-icon existing fields).
+export type BoardingHomeEra = {
+  title: string;
+  titleHy: string | null;
+  range: string;
+  description: string;
+  descriptionHy: string | null;
+};
+
+export type BoardingHomeLeadershipCard = {
+  tag: string;
+  tagHy: string | null;
+  heading: string;
+  headingHy: string | null;
+  body: string;
+  bodyHy: string | null;
+  current?: boolean;
+};
+
+export type BoardingHomeCommitment = {
+  icon: string; // IconSymbols id
+  title: string;
+  titleHy: string | null;
+  description: string;
+  descriptionHy: string | null;
+};
+
+export type BoardingHomeContent = {
+  slug: string;
+  title: string;
+  titleHy: string | null;
+  subline: string;
+  sublineHy: string | null;
+  location: string;
+  locationHy: string | null;
+  founded: string;
+  logo: Photo;
+  heroPhoto: Photo | null; // stays null — no building photo exists yet
+
+  factsBar: { label: string; sub: string }[]; // 4 cells, per the mockup's .facts
+
+  about: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    paragraphs: string[];
+    paragraphsHy: string[] | null;
+    displayLine: string | null; // the gold-rule pull-line beneath the prose — null until a sourced line exists
+    displayLineHy: string | null;
+  };
+
+  director: {
+    name: string;
+    nameHy: string | null;
+    role: string;
+    roleHy: string | null;
+    photo: Photo | null; // stays null — no director photo exists yet
+  };
+
+  history: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    intro: string;
+    introHy: string | null;
+    eras: BoardingHomeEra[];
+  };
+
+  leadership: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    intro: string;
+    introHy: string | null;
+    cards: BoardingHomeLeadershipCard[];
+  };
+
+  mission: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    // Split into 3 parts (not one string) so the mockup's bolded middle
+    // clause can render as real JSX rather than dangerouslySetInnerHTML —
+    // same discipline as YouthWorkAbout's renderParagraph.
+    introPrefix: string;
+    introBold: string;
+    introSuffix: string;
+    introHy: string | null;
+    commitments: BoardingHomeCommitment[];
+  };
+
+  closing: {
+    paragraphs: string[]; // first plain, second the italic "lead" line
+    paragraphsHy: string[] | null;
+  };
+
+  contact: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    location: string;
+    locationHy: string | null;
+    directorLabel: string;
+    director: string;
+    note: string;
+    noteHy: string | null;
+  };
+
+  cta: OutreachCTA;
+};
+
+export const boardingHomeContent: BoardingHomeContent = {
+  slug: "boarding-home-anjar",
+  title: "Armenian Evangelical Boarding Home of Anjar",
+  titleHy: null,
+  subline: "A family-like residential home and school for children of the Near East Diaspora.",
+  sublineHy: null,
+  location: "Anjar, Bekaa Valley, Lebanon",
+  locationHy: null,
+  founded: "1947",
+  logo: {
+    src: "/school-aessa-boarding-home-logo.jpeg",
+    alt: "Armenian Evangelical Boarding Home of Anjar logo",
+  },
+  heroPhoto: null,
+
+  factsBar: [
+    { label: "1947", sub: "Founded" },
+    { label: "Anjar, Bekaa Valley", sub: "Location" },
+    { label: "Home & School", sub: "Character" },
+    { label: "UAECNE", sub: "Affiliation" },
+  ],
+
+  about: {
+    eyebrow: "The Institution",
+    eyebrowHy: null,
+    heading: "A Home in the Bekaa Valley",
+    headingHy: null,
+    paragraphs: [
+      "Nestled against the historic backdrop of the Bekaa Valley in the unique Armenian village of Anjar, the Armenian Evangelical Boarding Home stands as a beacon of hope, resilience, and unwavering Christian service.",
+      "It is the only school in the Near East Diaspora that uniquely combines comprehensive residential care with a high-standard academic curriculum — and it holds a cherished place within the family of the Union of the Armenian Evangelical Churches in the Near East (UAECNE).",
+    ],
+    paragraphsHy: null,
+    displayLine: null, // removed 2026-10-13: not in the source docx (see OPEN_QUESTIONS)
+    displayLineHy: null,
+  },
+
+  director: {
+    name: "Mrs. Nanor Kelenjian Akbasharian",
+    nameHy: null,
+    role: "Boarding Home Director",
+    roleHy: null,
+    photo: null,
+  },
+
+  history: {
+    eyebrow: "Our History",
+    eyebrowHy: null,
+    heading: "Faith, Struggle & Perseverance",
+    headingHy: null,
+    intro:
+      "The history of our institution is deeply intertwined with the remarkable faith, struggle, and perseverance of the people of Musa Dagh.",
+    introHy: null,
+    eras: [
+      {
+        title: "The Exodus",
+        titleHy: null,
+        range: "1939 – 1940",
+        description:
+          "Following the historic mass departure of the Armenians from Musa Dagh and their eventual settlement in the dusty plains of Anjar in 1939, the community immediately prioritized the future of its children.",
+        descriptionHy: null,
+      },
+      {
+        title: "Birth of the Mission",
+        titleHy: null,
+        range: "1947",
+        description:
+          "Responding to intense post-war vulnerability, poverty, and the presence of numerous orphans across the region, Sister Hedwig Äenishänslin — a devoted missionary of the Swiss-German Hilfsbund mission who had previously served refugees in Greece — came to Anjar. Working tirelessly under harsh, desert-like conditions, she began educational and relief work from a single room.",
+        descriptionHy: null,
+      },
+      {
+        title: "Growth & Expansion",
+        titleHy: null,
+        range: "1950s – Present",
+        description:
+          "Under Sister Hedwig’s leadership, alongside fellow missionaries like Sisters Mary Rock and Anna Nitsche, the Boarding Home steadily grew, opening its doors to an initial group of students from Beirut, Zahle, Kessab, Damascus, Egypt and Jordan.",
+        descriptionHy: null,
+      },
+    ],
+  },
+
+  leadership: {
+    eyebrow: "Stewardship",
+    eyebrowHy: null,
+    heading: "Leadership",
+    headingHy: null,
+    intro:
+      "The administration and spiritual guidance of the school have been shaped by dedicated missionaries, educators, and pastors since its founding.",
+    introHy: null,
+    cards: [
+      {
+        tag: "The Founder",
+        tagHy: null,
+        heading: "Sister Hedwig Äenishänslin",
+        headingHy: null,
+        body: "Pioneering Swiss-German missionary who laid the foundational stone of the school and boarding department, guiding its expansion from a single-room operation into a full secondary and residential institution — alongside fellow missionaries Sister Mary Rock and Sister Anna Nitsche.",
+        bodyHy: null,
+      },
+      {
+        tag: "The Handover · 2013",
+        tagHy: null,
+        heading: "From Hilfsbund to UAECNE",
+        headingHy: null,
+        body: "Leadership transitioned through various directors from the Christlicher Hilfsbund im Orient in collaboration with UAECNE. In 2013, the Swiss-German Hilfsbund officially handed over full management to the Armenian Evangelical Churches in the Near East, placing the institution directly under local church leadership and securing its ongoing mission.",
+        bodyHy: null,
+      },
+      {
+        tag: "Today",
+        tagHy: null,
+        heading: "Current Leadership",
+        headingHy: null,
+        body: "The boarding department is directed by Mrs. Nanor Kelenjian Akbasharian, operating in coordination with the Executive Committee.",
+        bodyHy: null,
+        current: true,
+      },
+    ],
+  },
+
+  mission: {
+    eyebrow: "Purpose",
+    eyebrowHy: null,
+    heading: "Our Mission",
+    headingHy: null,
+    introPrefix: "True to the mission and heritage of the Armenian Evangelical Church, ",
+    introBold:
+      "our doors are open to children from diverse backgrounds, low socio-economic statuses, and challenging family environments",
+    introSuffix: " — without regard to denominational affiliations.",
+    introHy: null,
+    commitments: [
+      {
+        icon: "ic-home",
+        title: "A Safe Haven",
+        titleHy: null,
+        description:
+          "A secure, nurturing, and family-like residential environment where children experiencing social, emotional, or physical vulnerabilities can find healing, psychological support, and love.",
+        descriptionHy: null,
+      },
+      {
+        icon: "ic-book",
+        title: "Academic Excellence",
+        titleHy: null,
+        description:
+          "Rigorous educational programs that meet official government requirements, incorporating personalized remedial programs, modern digital tools, and language support to bridge any educational gaps.",
+        descriptionHy: null,
+      },
+      {
+        icon: "ic-mission-cross",
+        title: "Christian Faith & Values",
+        titleHy: null,
+        description:
+          "Guiding students toward a personal relationship with Jesus Christ, cultivating grace, empathy, and lifelong service through daily worship, Bible study, and Christian fellowship.",
+        descriptionHy: null,
+      },
+    ],
+  },
+
+  closing: {
+    paragraphs: [
+      "Today, the Armenian Evangelical Boarding Home of Anjar continues to adapt to the pressing needs of the modern world. Under the guidance of dedicated educators, compassionate caregivers, and church leadership, our boarders do not merely survive — they thrive, grow, and step out into the world as confident, compassionate, and faithful individuals.",
+      "We invite you to uphold the Boarding Home in your prayers and support, partnering with us as we continue to shape futures, heal hearts, and preserve our shared Christian and national heritage in the Near East.",
+    ],
+    paragraphsHy: null,
+  },
+
+  contact: {
+    eyebrow: "Reach Us",
+    eyebrowHy: null,
+    heading: "Contact",
+    headingHy: null,
+    location: "Anjar, Bekaa Valley, Lebanon",
+    locationHy: null,
+    directorLabel: "Director:",
+    director: "Mrs. Nanor Kelenjian Akbasharian",
+    note: "Direct contact details for the Boarding Home are being confirmed and will be published once verified.",
+    noteHy: null,
+  },
+
+  cta: {
+    heading: "A Home Since 1947",
+    headingHy: null,
+    body: "For generations, the Armenian Evangelical Boarding Home of Anjar has sheltered, taught, and nurtured children of the Near East Diaspora — a living witness of Christian service under the Union of the Armenian Evangelical Churches in the Near East.",
+    bodyHy: null,
+    buttonLabel: null,
+    buttonHref: null,
+  },
+};

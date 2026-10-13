@@ -1,0 +1,31 @@
+.section {
+  padding: 44px 34px;
+}
+
+.closing {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.closing p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--color-brown);
+  margin-bottom: 16px;
+}
+
+.lead {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--color-red);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 34px 20px;
+  }
+}

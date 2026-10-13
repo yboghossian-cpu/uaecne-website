@@ -1,0 +1,137 @@
+.section {
+  padding: 44px 34px;
+  background: var(--color-ivory-wash);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+}
+
+.centerHead {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 32px;
+}
+
+.flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ln {
+  height: 1px;
+  width: 50px;
+  background: var(--color-gold);
+  opacity: 0.6;
+}
+
+.med {
+  width: 22px;
+  height: 22px;
+  color: var(--color-gold);
+  opacity: 0.7;
+}
+
+.intro {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  text-align: center;
+  color: var(--color-brown);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.eras {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.era {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.era:last-child {
+  border-bottom: none;
+}
+
+@media (min-width: 720px) {
+  .era {
+    grid-template-columns: 210px 1fr;
+    gap: 30px;
+    align-items: start;
+  }
+}
+
+.yr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  flex: none;
+  box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.18);
+}
+
+.yr b {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 20px;
+}
+
+.rng {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-gold);
+  display: block;
+  margin-top: 2px;
+}
+
+.era p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 34px 20px;
+  }
+}

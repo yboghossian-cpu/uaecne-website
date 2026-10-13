@@ -2,15 +2,22 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
-import { campsContent, youthWorkContent, socialActionContent } from "@/data/outreachContent";
+import {
+  campsContent,
+  youthWorkContent,
+  socialActionContent,
+  boardingHomeContent,
+} from "@/data/outreachContent";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
   title: "Outreach — UAECNE",
 };
 
-// Only 3 sections, each genuinely different — a small hardcoded array,
-// same reasoning as the Higher Education index.
+// 4 sections, each genuinely different — a small hardcoded array, same
+// reasoning as the Higher Education index. Boarding Home added 2026-08-21,
+// routed under Outreach per Yeghia's explicit ruling (its own mockup's
+// crumb read "Ministries › Schools › Lebanon" — see OPEN_QUESTIONS).
 const cards = [
   {
     id: campsContent.slug,
@@ -29,6 +36,12 @@ const cards = [
     slug: socialActionContent.slug,
     name: socialActionContent.title,
     photo: socialActionContent.heroPhoto,
+  },
+  {
+    id: boardingHomeContent.slug,
+    slug: boardingHomeContent.slug,
+    name: boardingHomeContent.title,
+    photo: boardingHomeContent.heroPhoto,
   },
 ];
 

@@ -4,6 +4,7 @@ import {
   campsContent,
   youthWorkContent,
   socialActionContent,
+  boardingHomeContent,
 } from "@/data/outreachContent";
 import OutreachTopBlock from "@/components/outreach/OutreachTopBlock";
 import RedLabelBlock from "@/components/outreach/RedLabelBlock";
@@ -17,8 +18,22 @@ import ProgramPills from "@/components/outreach/ProgramPills";
 import SACAbout from "@/components/outreach/SACAbout";
 import ProgramPillar from "@/components/outreach/ProgramPillar";
 import ChildProgramCards from "@/components/outreach/ChildProgramCards";
+import BoardingHomeMasthead from "@/components/outreach/BoardingHomeMasthead";
+import BoardingHomeHero from "@/components/outreach/BoardingHomeHero";
+import BoardingHomeFacts from "@/components/outreach/BoardingHomeFacts";
+import BoardingHomeAbout from "@/components/outreach/BoardingHomeAbout";
+import BoardingHomeHistory from "@/components/outreach/BoardingHomeHistory";
+import BoardingHomeLeadership from "@/components/outreach/BoardingHomeLeadership";
+import BoardingHomeMission from "@/components/outreach/BoardingHomeMission";
+import BoardingHomeClosing from "@/components/outreach/BoardingHomeClosing";
+import BoardingHomeContact from "@/components/outreach/BoardingHomeContact";
 
-const SLUGS = [campsContent.slug, youthWorkContent.slug, socialActionContent.slug] as const;
+const SLUGS = [
+  campsContent.slug,
+  youthWorkContent.slug,
+  socialActionContent.slug,
+  boardingHomeContent.slug,
+] as const;
 
 type PageParams = { slug: string };
 
@@ -35,6 +50,7 @@ export async function generateMetadata({
   if (slug === campsContent.slug) return { title: `${campsContent.title} — UAECNE` };
   if (slug === youthWorkContent.slug) return { title: `${youthWorkContent.title} — UAECNE` };
   if (slug === socialActionContent.slug) return { title: `${socialActionContent.title} — UAECNE` };
+  if (slug === boardingHomeContent.slug) return { title: `${boardingHomeContent.title} — UAECNE` };
   return { title: "Outreach — UAECNE" };
 }
 
@@ -119,6 +135,24 @@ export default async function OutreachDetailPage({
         <ProgramPillar pillars={s.pillars} />
         <ChildProgramCards children={s.children} />
         <OutreachCTA cta={s.cta} />
+      </>
+    );
+  }
+
+  if (slug === boardingHomeContent.slug) {
+    const b = boardingHomeContent;
+    return (
+      <>
+        <BoardingHomeMasthead content={b} />
+        <BoardingHomeHero />
+        <BoardingHomeFacts factsBar={b.factsBar} />
+        <BoardingHomeAbout about={b.about} director={b.director} />
+        <BoardingHomeHistory history={b.history} />
+        <BoardingHomeLeadership leadership={b.leadership} />
+        <BoardingHomeMission mission={b.mission} />
+        <BoardingHomeClosing closing={b.closing} />
+        <BoardingHomeContact contact={b.contact} />
+        <OutreachCTA cta={b.cta} />
       </>
     );
   }
