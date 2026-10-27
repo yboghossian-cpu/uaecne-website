@@ -8,34 +8,37 @@ import { NextResponse, type NextRequest } from "next/server";
 const COOKIE = "uaecne_lang";
 const LANGS = new Set(["en", "hy"]);
 
+// Redirects are built from the visitor's own host (behind Caddy, Next's
+// idea of the URL is https://localhost:3000).
+function redirectTo(req: NextRequest, path: string, lang: string) {
+  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? req.nextUrl.host;
+  const proto = (req.headers.get("x-forwarded-proto") ?? req.nextUrl.protocol.replace(":", "")).split(",")[0].trim();
+  const res = NextResponse.redirect(new URL(path, `${proto}://${host}`), 307);
+  res.cookies.set(COOKIE, lang, { path: "/", maxAge: 31536000, sameSite: "lax" });
+  return res;
+}
+
 export function proxy(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;
 
   // /en/... or /hy/... typed directly -> plain URL + remember the language
   const prefix = pathname.match(/^\/(en|hy)(\/.*)?$/);
   if (prefix) {
-    const url = req.nextUrl.clone();
-    url.pathname = prefix[2] || "/";
-    const res = NextResponse.redirect(url);
-    res.cookies.set(COOKIE, prefix[1], { path: "/", maxAge: 31536000, sameSite: "lax" });
-    return res;
+    const qs = searchParams.toString();
+    return redirectTo(req, (prefix[2] || "/") + (qs ? `?${qs}` : ""), prefix[1]);
   }
 
   // ?lang=hy|en -> remember it and drop the parameter
   const q = searchParams.get("lang");
   if (q && LANGS.has(q)) {
-    const url = req.nextUrl.clone();
-    url.searchParams.delete("lang");
-    const res = NextResponse.redirect(url);
-    res.cookies.set(COOKIE, q, { path: "/", maxAge: 31536000, sameSite: "lax" });
-    return res;
+    const rest = new URLSearchParams(searchParams);
+    rest.delete("lang");
+    const qs = rest.toString();
+    return redirectTo(req, pathname + (qs ? `?${qs}` : ""), q);
   }
 
-  const c = req.cookies.get(COOKIE)?.value;
-  const lang = c && LANGS.has(c) ? c : "en";
-  const url = req.nextUrl.clone();
-  url.pathname = `/${lang}${pathname === "/" ? "" : pathname}`;
-  const res = NextResponse.rewrite(url);
+  // The language rewrite itself happens in next.config.ts.
+  const res = NextResponse.next();
   res.headers.set("Vary", "Cookie");
   return res;
 }

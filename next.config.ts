@@ -1,7 +1,27 @@
 import type { NextConfig } from "next";
 
+// Public pages live under /en/... and /hy/... in the app; visitors see plain
+// URLs. The language comes from the uaecne_lang cookie (see src/proxy.ts,
+// which handles the ?lang= and /hy/... links that set it). Done as config
+// rewrites — always internal — because a proxy rewrite behind the HTTPS
+// front server (Caddy) was treated as an external https://localhost hop.
+const PUBLIC = "(?!admin|media|_next|api|en(?:/|$)|hy(?:/|$)|favicon\\.ico|icon\\.png|apple-icon\\.png|robots\\.txt|sitemap\\.xml|.*\\.[a-zA-Z0-9]+$).+";
+const hy = [{ type: "cookie" as const, key: "uaecne_lang", value: "hy" }];
+
 const nextConfig: NextConfig = {
   agentRules: false,
+  async rewrites() {
+    return {
+      beforeFiles: [
+        { source: "/", has: hy, destination: "/hy" },
+        { source: "/", destination: "/en" },
+        { source: `/:path(${PUBLIC})`, has: hy, destination: "/hy/:path" },
+        { source: `/:path(${PUBLIC})`, destination: "/en/:path" },
+      ],
+      afterFiles: [],
+      fallback: [],
+    };
+  },
   async redirects() {
     return [
       // Iran churches removed from the site (Yeghia, 2026-10-27).
