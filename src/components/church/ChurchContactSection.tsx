@@ -10,6 +10,10 @@ type ContactOverride = ChurchContent["contactOverride"];
 type ChurchContactSectionProps = {
   church: Church;
   contactOverride: ContactOverride;
+  // From the locked template (src/lib/churchTemplate.ts): formatted service
+  // time, or where the congregation now worships. null = "Pending" — the row
+  // always shows, so every church's location card has the same rows.
+  serviceTime: string | null;
 };
 
 // Icon keyed by social row label, mirroring SchoolContactSection's ROW_ICON.
@@ -32,6 +36,7 @@ const SOCIAL_ICON: Record<string, string> = {
 export default function ChurchContactSection({
   church,
   contactOverride,
+  serviceTime,
 }: ChurchContactSectionProps) {
   const phonePending = contactOverride?.phonePending ?? false;
   const emailPending = contactOverride?.emailPending ?? false;
@@ -90,17 +95,15 @@ export default function ChurchContactSection({
               ))}
             </span>
           </div>
-          {church.serviceTime && (
-            <div className={styles.row}>
-              <svg className={styles.rowIco}>
-                <use href="#ic-dot" />
-              </svg>
-              <span>
-                <span className={styles.key}>Service Time</span>
-                {church.serviceTime}
-              </span>
-            </div>
-          )}
+          <div className={styles.row}>
+            <svg className={styles.rowIco}>
+              <use href="#ic-dot" />
+            </svg>
+            <span>
+              <span className={styles.key}>Service Time</span>
+              {serviceTime ?? <span className={styles.pending}>Pending</span>}
+            </span>
+          </div>
           <div className={styles.spacer} />
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.mapBtn}>
             <svg className={styles.mapBtnIcon}>

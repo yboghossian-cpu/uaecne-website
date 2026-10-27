@@ -53,6 +53,17 @@
   scrollbar-color: var(--color-gold) transparent;
 }
 
+/* Centre the row when the photos fit (e.g. a single photo under the
+   centred heading); auto margins collapse to 0 once the row overflows, so
+   scrolling still starts at the first photo. */
+.scroll > :first-child {
+  margin-left: auto;
+}
+
+.scroll > :last-child {
+  margin-right: auto;
+}
+
 /* Sizing/scroll-snap live on the figure (so an optional caption can sit
    below the photo box without being clipped by the photo's own
    aspect-ratio/overflow-hidden); .item stays the clickable photo box. */

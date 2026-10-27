@@ -348,6 +348,14 @@ export type ChurchContent = {
     photos: GalleryPhoto[];
   } | null;
 
+  // Template flags (see src/lib/churchTemplate.ts). `pastorVacant`: the
+  // church's own text says it has no (resident) pastor — the Pastor slot
+  // shows "Vacant" instead of "Name pending". `worshipsAt`: slug of the
+  // church where this congregation now worships; CTA and service-time row
+  // point there.
+  pastorVacant?: boolean;
+  worshipsAt?: string;
+
   cta: { heading: string; headingHy: string | null; body: string; bodyHy: string | null }; // always present
 
   // Contact info (address, phone, secretary, serviceTime, email) is read
@@ -1595,8 +1603,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote:
-        "For more than a century, Bethel has remained a living witness to faith, perseverance, service, and hope.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -1883,8 +1890,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote:
-        "Faithful to its historic calling: to proclaim the Gospel, nurture Christian faith, strengthen fellowship, and serve the wider community.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -2098,7 +2104,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote: "Named for the martyrs, the church has borne faithful witness in Aleppo for nearly a century.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -2276,7 +2282,7 @@ export const churchContent: Record<string, ChurchContent> = {
       paragraphsHy: null,
       dropcap: false,
       vacancyNote: "The church's pulpit is currently vacant.",
-      pullQuote: "A church re-founded in exile, keeping faith alive across generations in Aleppo.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -2287,9 +2293,11 @@ export const churchContent: Record<string, ChurchContent> = {
       {
         name: "Miss Mary Hakko",
         nameHy: null,
-        role: "Vice-Chairwoman",
+        // "Secretary" per the Union's own supplied info (see contactOverride
+        // below), superseding the mockup's "Vice-Chairwoman".
+        role: "Secretary",
         roleHy: null,
-        photo: { src: "/church-syriac-aleppo-vicechair-hakko.jpg", alt: "Vice-Chairwoman" },
+        photo: { src: "/church-syriac-aleppo-vicechair-hakko.jpg", alt: "Miss Mary Hakko" },
       },
     ],
     leadershipEyebrow: "The Team",
@@ -2456,7 +2464,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote: "A small congregation keeping faith alive in the heart of Damascus.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -2599,6 +2607,8 @@ export const churchContent: Record<string, ChurchContent> = {
   // photo — `ChurchGallery` preserves the real caption text faithfully.
   "armenian-evangelical-church-of-kaladouran": {
     slug: "armenian-evangelical-church-of-kaladouran",
+    pastorVacant: true,
+    worshipsAt: "armenian-evangelical-holy-trinity-church-kessab",
 
     masthead: {
       locationLine: "Karaduran, Kessab, Syria",
@@ -2638,8 +2648,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote:
-        "A century and a half of faith, witness, and learning on the hills of Kessab.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -2754,6 +2763,7 @@ export const churchContent: Record<string, ChurchContent> = {
   // 756×1008 portrait) plus visual inspection, not MD5.
   "armenian-evangelical-church-of-ekizolouk": {
     slug: "armenian-evangelical-church-of-ekizolouk",
+    pastorVacant: true,
 
     masthead: {
       locationLine: "Ekizolukh, Kessab, Syria",
@@ -2788,8 +2798,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote:
-        "Begun in 1911, interrupted by the Genocide, and completed in faith — a witness that endured.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -2898,6 +2907,8 @@ export const churchContent: Record<string, ChurchContent> = {
   // hanging chandelier) — no MD5 match, same as every Syria church so far.
   "armenian-evangelical-church-of-keorkuneh": {
     slug: "armenian-evangelical-church-of-keorkuneh",
+    pastorVacant: true,
+    worshipsAt: "armenian-evangelical-holy-trinity-church-kessab",
 
     masthead: {
       locationLine: "Korkune, Kessab, Syria",
@@ -2936,8 +2947,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote:
-        "A whole village gathered in faith — a witness woven into the identity of Korkune.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 
@@ -3105,8 +3115,7 @@ export const churchContent: Record<string, ChurchContent> = {
       ],
       paragraphsHy: null,
       dropcap: false,
-      pullQuote:
-        "Through genocide, displacement, and rebuilding — a witness that would not be extinguished.",
+      pullQuote: null,
       pullQuoteHy: null,
     },
 

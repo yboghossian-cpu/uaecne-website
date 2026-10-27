@@ -12,10 +12,6 @@
   align-items: start;
 }
 
-.solo {
-  max-width: 820px;
-}
-
 .eyebrow {
   font-family: var(--font-body);
   font-size: 0.625rem;
@@ -78,18 +74,16 @@
   font-style: italic;
 }
 
-.pullQuote {
-  margin-top: 1.25rem;
-  border-left: 3px solid var(--color-gold);
-  padding: 0.25rem 0 0.25rem 1.25rem;
-}
-
-.pullQuote p {
-  font-family: var(--font-heading);
+.pendingNote {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-brown);
   font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.4;
-  color: var(--color-red);
+  background: var(--color-ivory-wash);
+  border: 1px dashed rgba(197, 160, 89, 0.55);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
   margin: 0;
 }
 
@@ -98,16 +92,7 @@
     padding: 3.25rem 2.125rem;
   }
 
-  /* Scoped to :not(.solo) — the unscoped rule this replaced applied a
-     2-column 280px/1fr template even to solo (no-pastorCard) sections,
-     which have only one grid child. Auto-placement dropped that lone
-     child into the narrow 280px first column, leaving it squeezed left
-     with the ~800px second column empty beside it (Syriac Evangelical
-     Aleppo, Damascus, Ekizolukh, Korkune, and Karaduran — every church
-     with pastorCard: null). Solo's base single-column `.grid` rule (its
-     own `1fr`, unaffected here) now correctly fills its full 820px
-     max-width instead. */
-  .grid:not(.solo) {
+  .grid {
     grid-template-columns: 280px 1fr;
     gap: 2.125rem;
   }
