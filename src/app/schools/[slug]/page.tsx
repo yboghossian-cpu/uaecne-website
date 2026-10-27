@@ -95,6 +95,7 @@ export default async function SchoolDetailPage({
         contactRows={view.contactRows}
         schoolName={school.name}
         note={view.contactNote}
+        mapsUrl={view.mapsUrl}
       />
       <SchoolLeadershipGrid leaders={view.leadership} />
 

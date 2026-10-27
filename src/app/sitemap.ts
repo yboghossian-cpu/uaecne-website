@@ -3,6 +3,7 @@ import { churches } from "@/data/churches";
 import { schools } from "@/data/schools";
 import { campsContent, youthWorkContent, socialActionContent, boardingHomeContent } from "@/data/outreachContent";
 import { haigazianContent, nestContent } from "@/data/higherEdContent";
+import { syriaMinistries } from "@/data/syriaMinistries";
 import { SITE_URL } from "@/lib/site";
 
 // Pages with real content only. The 21 nav-listed "Coming Soon"
@@ -29,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...schools.map((s) => `/schools/${s.slug}`),
     ...[campsContent, youthWorkContent, socialActionContent, boardingHomeContent].map((o) => `/outreach/${o.slug}`),
     ...[haigazianContent, nestContent].map((h) => `/higher-education/${h.slug}`),
+    ...syriaMinistries.map((m) => `/ministries/syria/${m.slug}`),
   ];
   return routes.map((path) => ({ url: `${SITE_URL}${path === "/" ? "" : path}` }));
 }

@@ -80,6 +80,7 @@ export default async function OutreachDetailPage({
         <RedLabelBlock label={c.campsites.label} paragraphs={c.campsites.paragraphs} />
         <CampsHistory history={c.history} />
         <PullNote eyebrow={c.purpose.eyebrow} body={c.purpose.body} />
+        {c.kessab && <BoardingHomeHistory history={c.kessab} />}
         <ScrollGallery
           eyebrow={c.gallery.eyebrow}
           heading={c.gallery.heading}

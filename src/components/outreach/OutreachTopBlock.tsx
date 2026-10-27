@@ -15,6 +15,9 @@ type OutreachTopBlockProps = {
   // variant (not an inline style) so the media query can actually win.
   heroVariant: "wide" | "tall";
   heroIcon: string; // IconSymbols id for the photo-pending state, e.g. "ic-people"
+  // First crumb segment — "Outreach" by default (Syria ministry pages pass
+  // their own section).
+  crumbSection?: string;
 };
 
 // Crumb + title + subtitle, then the hero (real photo or the shared
@@ -28,12 +31,13 @@ export default function OutreachTopBlock({
   heroPhoto,
   heroVariant,
   heroIcon,
+  crumbSection = "Outreach",
 }: OutreachTopBlockProps) {
   const variantClass = heroVariant === "tall" ? styles.heroTall : styles.heroWide;
   return (
     <section className={styles.top}>
       <div className={styles.inner}>
-        <div className={styles.crumb}>Outreach › {crumbLabel}</div>
+        <div className={styles.crumb}>{crumbSection} › {crumbLabel}</div>
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.subtitle}>
           {subtitlePlain}

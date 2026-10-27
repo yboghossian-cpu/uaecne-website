@@ -10,6 +10,8 @@ type SchoolContactSectionProps = {
   // Opt-in italic footnote recording unresolved source discrepancies.
   // Omitted for every other school, which render exactly as before.
   note?: string | null;
+  // Curated Google Maps place link; falls back to an address search.
+  mapsUrl?: string | null;
 };
 
 // Icon keyed by row label, not just presence of an href — a pending Phone
@@ -33,6 +35,7 @@ export default function SchoolContactSection({
   contactRows,
   schoolName,
   note,
+  mapsUrl: curatedMapsUrl,
 }: SchoolContactSectionProps) {
   if (!location && !contactRows) return null;
 
@@ -43,7 +46,9 @@ export default function SchoolContactSection({
   // uses for its own Google Maps button. Exact per-unit Maps links (a
   // curated place link, not a generic address search) are pending from
   // Yeghia in a single later sweep — see OPEN_QUESTIONS.
-  const mapsUrl = location
+  const mapsUrl = curatedMapsUrl
+    ? curatedMapsUrl
+    : location
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
         `${schoolName} ${location.addressLines[0] ?? ""}`,
       )}`

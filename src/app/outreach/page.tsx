@@ -21,27 +21,33 @@ export const metadata: Metadata = {
 const cards = [
   {
     id: campsContent.slug,
-    slug: campsContent.slug,
+    href: `/outreach/${campsContent.slug}`,
     name: campsContent.title,
     photo: campsContent.heroPhoto,
   },
   {
     id: youthWorkContent.slug,
-    slug: youthWorkContent.slug,
+    href: `/outreach/${youthWorkContent.slug}`,
     name: youthWorkContent.title,
     photo: youthWorkContent.heroPhoto,
   },
   {
     id: socialActionContent.slug,
-    slug: socialActionContent.slug,
+    href: `/outreach/${socialActionContent.slug}`,
     name: socialActionContent.title,
     photo: socialActionContent.heroPhoto,
   },
   {
     id: boardingHomeContent.slug,
-    slug: boardingHomeContent.slug,
+    href: `/outreach/${boardingHomeContent.slug}`,
     name: boardingHomeContent.title,
     photo: boardingHomeContent.heroPhoto,
+  },
+  {
+    id: "syria-social-action-committee",
+    href: "/ministries/syria/social-action-committee",
+    name: "Social Action Committee — Syria",
+    photo: null,
   },
 ];
 
@@ -63,7 +69,7 @@ export default function OutreachIndexPage() {
       <section className={styles.section}>
         <div className={styles.grid}>
           {cards.map((card) => (
-            <Link key={card.id} href={`/outreach/${card.slug}`} className={styles.card}>
+            <Link key={card.id} href={card.href} className={styles.card}>
               <div className={styles.pic}>
                 {card.photo ? (
                   <Image src={card.photo.src} alt={card.photo.alt} fill className={styles.photo} />

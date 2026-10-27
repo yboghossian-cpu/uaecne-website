@@ -1941,7 +1941,7 @@ export const churchContent: Record<string, ChurchContent> = {
         nameHy: null,
         role: "Vice-Chairwoman",
         roleHy: null,
-        photo: null,
+        photo: { src: "/church-emmanuel-aleppo-betty-hatem.jpg", alt: "Mrs. Betty Hatem" },
       },
       {
         name: "Mrs. Tamar Kazanjian-Keoshgerian",
@@ -3384,6 +3384,345 @@ export const churchContent: Record<string, ChurchContent> = {
         label: "The Armenian Evangelical Churches of Kessab",
         url: "https://www.facebook.com/groups/255047687880778/",
       },
+    },
+  },
+  // Greece — Kokkinia (Piraeus). Source: GRC_Historical_summery.docx
+  // (Rev. Vicken Cholakian, 20 Oct 2026: historical overview + July 2026
+  // ministry report), his 25 Aug email (secretary Mrs. Marina Messrobian,
+  // portrait, logo) and the 20 Oct full-resolution photos. The report's
+  // first-person lines ("As pastor, I…") are put in the third person; no
+  // facts added.
+  "armenian-evangelical-church-kokkinia-piraeus": {
+    slug: "armenian-evangelical-church-kokkinia-piraeus",
+
+    masthead: {
+      locationLine: "Palea Kokkinia, Piraeus, Greece",
+      locationLineHy: null,
+      established: "1922",
+      establishedHy: null,
+    },
+
+    logo: { src: "/church-kokkinia-emblem.png", alt: "Armenian Evangelical Church of Greece emblem" },
+    heroPhoto: { src: "/church-kokkinia-hero.jpg", alt: "The Armenian Evangelical Church, Kokkinia (Piraeus)" },
+    factsBar: [],
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "By God’s grace and loving providence, the Armenian Evangelical Church of Greece continues its vital ministry across several key areas of church, cultural, and community life. Rev. Vicken Cholakian has been serving the church in Greece since 1994 as the head of the community and the pastor at the Kokkinia church.",
+        "The church’s ministry among Armenians in Greece has continued for over a century. This long legacy is made possible by the dedication of its believers and board members, alongside the vital partnership of the Union of the Armenian Evangelical Churches in the Near East (UAECNE) and the Armenian Missionary Association of America (AMAA).",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: {
+      name: "Rev. Vicken Cholakian",
+      nameHy: null,
+      role: "Pastor",
+      roleHy: null,
+      photo: { src: "/church-kokkinia-pastor.jpg", alt: "Rev. Vicken Cholakian" },
+    },
+
+    leadership: [
+      {
+        name: "Rev. Vicken Cholakian",
+        nameHy: null,
+        role: "Pastor",
+        roleHy: null,
+        photo: { src: "/church-kokkinia-pastor.jpg", alt: "Rev. Vicken Cholakian" },
+      },
+      {
+        name: "Mrs. Marina Messrobian",
+        nameHy: null,
+        role: "Secretary",
+        roleHy: null,
+        photo: { src: "/church-kokkinia-secretary.jpg", alt: "Mrs. Marina Messrobian" },
+      },
+    ],
+
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "A Century in Greece",
+      headingHy: null,
+      sections: [
+        {
+          heading: "Historical Overview",
+          headingHy: null,
+          paragraphs: [
+            "After the evacuation of Cilicia by the French forces in 1921 and the Smyrna Catastrophe in September 1922, about 90,000 Armenians from Asia Minor took refuge in Greece, including around 3,000 Armenian Evangelicals. Armenian Evangelicals established churches in four refugee neighborhoods of Athens and in Thessaloniki, as well as smaller communities in Corfu, Syros, Chios, Kefalonia, Corinth, and Kavala.",
+            "Despite early vitality, economic hardship and emigration — especially the repatriation to Soviet Armenia (1946–47) — caused the community to decline; by 1948, only 120 Evangelical families remained.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Pastors and Workers",
+          headingHy: null,
+          paragraphs: [
+            "Several dedicated ministers and missionaries served across Greece. Rev. Hagop Yeghiazarian — born in Mush (1888); teacher and pastor in Adana, Smyrna, Thessaloniki, Kavala — served 20 years with the support of German mission. Rev. Hovsep Djedjizian — born in Adapazarı (1864); Robert College graduate; studied theology in Edinburgh — served in Adapazarı, Constantinople, and later in Corfu and Kokkinia; he died in 1941. Rev. Ruben Kayaian, an itinerant preacher, ministered in 41 Greek cities and islands and opened schools, libraries, and youth associations. Many female evangelists, under Mrs. Marden’s direction, served in Athens, Thessaloniki, and elsewhere, offering spiritual and social care.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "The Churches in Athens",
+          headingHy: null,
+          paragraphs: [
+            "The Armenian Evangelical Church of Dergouti (“Fix,” Neos Kosmos) began after the Smyrna disaster, serving about 10,000 refugees in the Dergouti camp. Rev. Garabed Stambolian (born Aintab, 1882–1945) was the first official pastor of the Greek-Armenian Evangelicals — a brilliant preacher, writer, and moral leader.",
+            "Rev. Giragos Farajian succeeded him in 1938, leading heroically during WWII and organizing humanitarian aid, feeding hundreds daily through Red Cross and church kitchens. Rev. Krikor Demirdjian followed in 1947 as pastor for all the Evangelical churches in Greece. Many ministers, teachers, and deacons assisted the ministry over the years. After Demirdjian’s death (1985), visiting pastors continued the ministry until 1987.",
+            "Rev. Mher Khatchigian and his wife Kohar served the church in Kokkinia and Neos Kosmos 1987–1993. Rev. Vicken Cholakian has been serving the church in Greece since 1994 as the head of the community and the pastor at the Kokkinia church.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "Educational Life",
+          headingHy: null,
+          paragraphs: [
+            "There were two Armenian Evangelical schools in Athens, in Dergouti and in Kokkinia. The first one was founded in 1923 with 60 pupils; the second one was founded in 1924. Classes began outdoors, later in huts, reaching up to 450 students in the 1930s.",
+            "After the Dergouti refugee camp was demolished in 1963–66, Rev. Jirair Bezdigian secured a new site for modern church and school buildings. The foundation was laid in 1967, and the buildings were dedicated in 1969. The school functioned until 1972, then was closed due to financial and enrollment challenges. It was served by numerous Armenian and Greek educators, including principals, pastors, and teachers. The Gulbenkian Foundation later offered support; teachers received training in Scotland.",
+            "The Kokkinia church kindergarten operated until 2018. Mrs. Kohar Khatchigian served from 1987–1993, Mrs. Salpi Cholakian from 1994–2008, and Mrs. Karineh Markarian from 2008–2018. The kindergarten closed its doors in 2018 because of its building’s condition.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+        {
+          heading: "The Church Today",
+          headingHy: null,
+          paragraphs: [
+            "Alongside the weekly Sunday worship services, the Sunday School program faithfully serves children and early teens under the guidance of dedicated teachers, who are being trained by the head of the Children’s ministry of the UAECNE, Miss Aline Tahazian. Throughout the year, the church conducts seasonal Bible study series and, on various occasions, hosts educational lectures featuring guest pastors and lay speakers.",
+            "The church is home to Arevig, a unique Armenian bookstore founded in 2002 by the late Salpi Cholakian, which continues her legacy by serving both individual readers and educational institutions across Athens. The Women’s Auxiliary holds regular prayer meetings, conducts pastoral visitations, organizes an annual fundraising food bazaar every November, and takes part in organizing the World Day of Prayer every first Friday of March. Each June, the adult and women’s groups host an open-field Kermes on the church grounds, bringing together approximately 220 members of the broader Armenian community.",
+            "For 15 years, the church compound has officially hosted the center for the “All Armenian Fund” Committee of Greece. Since 2014, the church has been officially registered as a legal entity under Greek law. The church hosted Hamazkayin’s inaugural Armenian Dance Festival on its field, bringing together 700 guests and 200 dancers from Armenia and across Europe. The ministry extends beyond Athens to the fellowship in Thessaloniki.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: {
+      eyebrow: null,
+      eyebrowHy: null,
+      heading: "Ministries & Programs",
+      headingHy: null,
+      items: [
+        "Sunday Worship",
+        "Sunday School",
+        "Bible Studies",
+        "Lectures & Learning",
+        "Arevig Bookstore",
+        "Women’s Auxiliary",
+        "Annual Mid-June Kermes",
+        "Relief for Families in Need",
+      ],
+      itemsHy: null,
+    },
+
+    milestone: null,
+    specialProject: null,
+
+    succession: {
+      eyebrow: "Those Who Served",
+      eyebrowHy: null,
+      heading: "Pastors of the Church",
+      headingHy: null,
+      note: null,
+      noteHy: null,
+      entries: [
+        { name: "Rev. Garabed Stambolian", nameHy: null, years: "until 1938", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Giragos Farajian", nameHy: null, years: "1938 – 1947", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Krikor Demirdjian", nameHy: null, years: "1947 – 1985", note: null, noteHy: null, isCurrent: false },
+        { name: "Visiting pastors", nameHy: null, years: "1985 – 1987", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Mher Khatchigian", nameHy: null, years: "1987 – 1993", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Vicken Cholakian", nameHy: null, years: "1994 – present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
+
+    anniversary: null,
+
+    gallery: {
+      eyebrow: "In Pictures",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        { src: "/church-kokkinia-gallery-front.jpg", alt: "The church in Palea Kokkinia", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-exterior.jpg", alt: "The church hall", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-building.jpg", alt: "The church building", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-1927.jpg", alt: "The Kokkinia building in 1927", caption: "Kokkinia, 1927", captionHy: null },
+        { src: "/church-kokkinia-gallery-interior-1.jpg", alt: "The sanctuary", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-interior-2.jpg", alt: "The sanctuary", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-interior-3.jpg", alt: "The sanctuary and pulpit", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-interior-4.jpg", alt: "The organ", caption: null, captionHy: null },
+        { src: "/church-kokkinia-gallery-board.jpg", alt: "Church board and dignitaries", caption: "Church board and dignitaries", captionHy: null },
+      ],
+    },
+
+    cta: { heading: "Join Us in Worship", headingHy: null, body: "", bodyHy: null },
+
+    contactOverride: {
+      address: "30 Lamias Street, Palea Kokkinia, Piraeus 18542, Greece",
+    },
+  },
+
+  // Greece — Thessaloniki. Source: the Thessaloniki section of
+  // GRC_Historical_summery.docx (Rev. Vicken Cholakian, 20 Oct 2026). No
+  // photos were supplied.
+  "armenian-evangelical-church-thessaloniki": {
+    slug: "armenian-evangelical-church-thessaloniki",
+
+    masthead: {
+      locationLine: "Thessaloniki, Greece",
+      locationLineHy: null,
+      established: "1922",
+      establishedHy: null,
+    },
+
+    logo: null,
+    heroPhoto: null,
+    factsBar: [],
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "The Armenian Evangelical Church of Thessaloniki was founded in 1922 by Rev. Vartan Yeranian. Today the ministry of the Armenian Evangelical Church of Greece extends beyond Athens to the fellowship in Thessaloniki, under the leadership of Pastor Samvel Mailyan.",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: null,
+    leadership: null,
+
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "The Thessaloniki Church",
+      headingHy: null,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "Founded in 1922 by Rev. Vartan Yeranian, the church was later led by Rev. Giragos Farajian (from 1927). It had about 102 families in 1937 but declined later through emigration. During WWII, lay members like Andranig Bodourian and others kept the church active.",
+            "The church built its own property in 1935; later, when no Evangelicals remained, it was replaced by an apartment building, with one hall reserved for church use. Children attended mission schools (American and Danish), and the Apostolic schools. The community was supported by American missionaries (Brewster, Getchell, White, Riggs) and by Danish and Swedish Missions which ran schools, workshops, and relief programs for refugees.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: null,
+    milestone: null,
+    specialProject: null,
+    succession: null,
+    anniversary: null,
+    gallery: null,
+
+    cta: { heading: "Join Us in Worship", headingHy: null, body: "", bodyHy: null },
+
+    contactOverride: null,
+  },
+  // Syria — Church of Christ, Aleppo. Source: "Armenian Evangelical Christ
+  // Church in Aleppo.docx" (APCS Drive) + web form 01 (Sep 2026). Founding
+  // year 1922 per both church sources (the old directory table said
+  // 1924-25). Pastor spelled "Bchara" as in the directory and the form's
+  // name field (the docx spells "Beshara") — pending Union confirmation.
+  "church-of-christ-aleppo": {
+    slug: "church-of-christ-aleppo",
+
+    masthead: {
+      locationLine: "Suleymaniye, Aleppo, Syria",
+      locationLineHy: null,
+      established: "1922",
+      establishedHy: null,
+      establishedLabel: "Founded",
+    },
+
+    logo: null,
+    heroPhoto: { src: "/church-of-christ-aleppo-hero.jpg", alt: "Church of Christ, Aleppo" },
+    factsBar: [
+      { label: "Suleymaniye", labelHy: null, sub: "Aleppo, Syria", subHy: null },
+      { label: "1922", labelHy: null, sub: "Founded", subHy: null },
+    ],
+
+    about: {
+      eyebrow: "The Congregation",
+      eyebrowHy: null,
+      heading: "About This Church",
+      headingHy: null,
+      paragraphs: [
+        "The Church of Christ, Aleppo, was founded in 1922, during the years following the Armenian Genocide, when large numbers of Armenian survivors had found refuge and a new home in Aleppo. From its beginnings, the church developed as a center of Evangelical worship, biblical teaching, fellowship, and service within the Armenian community.",
+        "Today, the Church of Christ, Aleppo, continues its ministry under the pastoral leadership of Rev. Bchara Moussa Oghli, remaining committed to the proclamation of the Gospel, Christian fellowship, spiritual nurture, and service to the community.",
+      ],
+      paragraphsHy: null,
+    },
+
+    pastorCard: null,
+
+    leadership: [
+      { name: "Rev. Bchara Moussa Oghli", nameHy: null, role: "Pastor", roleHy: null, photo: { src: "/church-of-christ-aleppo-pastor.jpg", alt: "Rev. Bchara Moussa Oghli" } },
+      { name: "Sonia Atamian", nameHy: null, role: "Secretary", roleHy: null, photo: { src: "/church-of-christ-aleppo-secretary.jpg", alt: "Sonia Atamian" } },
+    ],
+
+    history: {
+      eyebrow: "Our Story",
+      eyebrowHy: null,
+      heading: "A Brief Historical Overview",
+      headingHy: null,
+      sections: [
+        {
+          heading: null,
+          headingHy: null,
+          paragraphs: [
+            "An important contribution to the early life and ministry surrounding the church came through Miss Hedwig Büll, the Estonian missionary who arrived in Aleppo in 1921 through the Action Chrétienne en Orient. Having already devoted herself to Armenian survivors of the Genocide, she continued in Aleppo through spiritual, educational, humanitarian, and social ministries. The mission center associated with her became closely connected with the developing ministry of the Church of Christ.",
+            "Her work was later strengthened by Madame Anne-Marie Tartar, who came to Aleppo in 1948 and worked alongside Hedwig Büll. Together they developed the Elim and Sichar mission houses into active centers of Evangelical outreach, where Armenians and Arabs gathered for Bible study, worship, evangelism, and Christian fellowship.",
+            "Throughout the following decades, the congregation was served by devoted pastors and Christian workers. Among them were Rev. Nerses Khachadourian and Rev. Barkev Apartian, both of whom made important contributions to the spiritual life of the congregation. Rev. Barkev Apartian served the Church of Christ for many years.",
+            "Despite the challenges brought by migration, economic hardship, and the war in Syria, the Church of Christ has continued its Christian witness and ministry in Aleppo.",
+          ],
+          paragraphsHy: null,
+          image: null,
+        },
+      ],
+    },
+
+    programs: null,
+    milestone: null,
+    specialProject: null,
+    succession: null,
+    anniversary: null,
+    gallery: {
+      eyebrow: "In Pictures",
+      eyebrowHy: null,
+      heading: "Gallery",
+      headingHy: null,
+      photos: [
+        { src: "/church-of-christ-aleppo-gallery-1.jpg", alt: "The sanctuary", caption: null, captionHy: null },
+        { src: "/church-of-christ-aleppo-gallery-2.jpg", alt: "The sanctuary", caption: null, captionHy: null },
+        { src: "/church-of-christ-aleppo-gallery-3.jpg", alt: "The church courtyard", caption: null, captionHy: null },
+        { src: "/church-of-christ-aleppo-gallery-4.jpg", alt: "The church buildings", caption: null, captionHy: null },
+        { src: "/church-of-christ-aleppo-gallery-5.jpg", alt: "At worship", caption: null, captionHy: null },
+        { src: "/church-of-christ-aleppo-gallery-6.jpg", alt: "At worship", caption: null, captionHy: null },
+        { src: "/church-of-christ-aleppo-gallery-7.jpg", alt: "The church entrance", caption: null, captionHy: null },
+      ],
+    },
+
+    cta: { heading: "Join Us in Worship", headingHy: null, body: "", bodyHy: null },
+
+    contactOverride: {
+      phone: "+963 21 4 644 409 · +963 21 4 644 419",
+      address: "Suleymaniye, near Faur hospital, Aleppo, Syria\nP.O. Box 15, Aleppo",
+      secretary: "Sonia Atamian",
+      mapsUrl: "https://maps.app.goo.gl/qqZ35UH1t794XAnD6",
+      otherServices: ["Women's Worship Service — Monday"],
+      socials: [{ key: "Website", label: "apcsy.org", url: "https://apcsy.org/" }],
     },
   },
 };

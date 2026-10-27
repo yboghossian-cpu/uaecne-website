@@ -171,6 +171,7 @@ export function buildSchoolView(school: School, content: SchoolContent) {
       photo: principal?.photo ?? null,
     },
     location: content.location,
+    mapsUrl: content.mapsUrl ?? null,
     contactRows: buildContactRows(content),
     contactNote: content.contactNote ?? null,
     leadership: buildLeadership(content),

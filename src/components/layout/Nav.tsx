@@ -16,6 +16,10 @@ const navItems: NavItem[] = [
     children: [
       { label: "Central Committee", href: "/leadership/central-committee" },
       { label: "Headquarters", href: "/leadership/headquarters" },
+      {
+        label: "Syria Community Headquarters",
+        href: "/ministries/syria/community-headquarters",
+      },
     ],
   },
   {
@@ -51,6 +55,10 @@ const navItems: NavItem[] = [
           {
             label: "Jinishian — Lebanon, Syria",
             href: "/ministries/health-care/jinishian",
+          },
+          {
+            label: "Bethel Polyclinic — Syria",
+            href: "/ministries/syria/bethel-polyclinic",
           },
         ],
       },

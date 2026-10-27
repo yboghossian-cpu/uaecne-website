@@ -76,6 +76,17 @@ export type CampsContent = {
     headingHy: string | null;
     photos: Photo[];
   };
+  // Programme at KCHAG Kessab (reports from the Armenian Protestant
+  // Community in Syria, APCS Drive "KCHAG Camps 2026", English sections).
+  kessab: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    intro: string;
+    introHy: string | null;
+    eras: BoardingHomeEra[];
+  } | null;
   cta: OutreachCTA;
 };
 
@@ -105,7 +116,7 @@ export const campsContent: CampsContent = {
     headingHy: null,
     paragraphs: [
       "In 1949, several young visionaries carried out a long-awaited dream by purchasing five beautiful hillside acres just outside Beirut and hosting the first youth conference at the Christian Endeavor Summer Center (KCHAG). Over 100 young men and women enthusiastically attended, pitching tents until buildings were constructed.",
-      "By 1960, KCHAG boasted over 30 buildings, including a chapel, dining hall, snack shop, and sports field — a vibrant life that became the heartbeat of the Armenian Evangelical community. Dozens of children's and youth camps, women's conferences, church retreats, and educational programs were planned annually by Armenian and non-Armenian evangelical churches and sister organizations alike.",
+      "By 1960, KCHAG boasted over 30 buildings, including a chapel, dining hall, snack shop, sports field, and a vibrant life that became the heartbeat of the Armenian Evangelical community. Dozens of children's and youth camps, women's conferences, church retreats, and educational programs were planned annually by Armenian and non-Armenian evangelical churches and sister organizations alike.",
       "The 1975 civil war and the three decades that followed interrupted and damaged KCHAG in a major way. Since 2002, cleanup and renovation has started at a slow pace. It is time to dedicate more time, resources and efforts. KCHAG has had a rich past. By faith and work, it can also have a great future for ministry and community development.",
     ],
     paragraphsHy: null,
@@ -119,7 +130,7 @@ export const campsContent: CampsContent = {
   purpose: {
     eyebrow: "Purpose",
     eyebrowHy: null,
-    body: "The campsites serve as the venue for the CE Union's summer camps and various activities throughout the year — bringing together Armenian Evangelical youth from across Lebanon and Syria for spiritual growth, fellowship, and community building.",
+    body: "The CE Union's summer camps and other activities take place in KCHAG.",
     bodyHy: null,
   },
 
@@ -133,10 +144,27 @@ export const campsContent: CampsContent = {
     photos: [],
   },
 
+  kessab: {
+    eyebrow: "KCHAG Kessab",
+    eyebrowHy: null,
+    heading: "Summer 2026 in Kessab",
+    headingHy: null,
+    intro: "Retreats and conferences held in Kessab in 2026 by the Armenian Evangelical Churches of Syria, under the auspices of Rev. Dr. Haroutune Selimian, Head of the Armenian Protestant Community in Syria.",
+    introHy: null,
+    eras: [
+      { title: "Youth Retreat", titleHy: null, range: "8–13 August 2026", description: "“Let Us Awake, Let Us Walk Together” (Ephesians 5:14-20). Organized by the Executive Committee of Christian Endeavor of the Armenian Evangelical Churches of Syria; 28 youth from Aleppo and Kessab, with Mrs. Sevan Der Sahagian as general leader and messages by Pastor Simon Der Sahagian.", descriptionHy: null },
+      { title: "Children’s Retreat", titleHy: null, range: "17–20 August 2026", description: "“Little Hands, Big Deeds” (John 6:1-14). Organized by the Sunday Schools of the Armenian Evangelical Churches of Syria; 38 children from Aleppo and Kessab, with Mrs. Aline Khatchadourian as general leader, 13 leaders, and messages by Mrs. Sevan Der Sahagian.", descriptionHy: null },
+      { title: "Women’s Joint Retreat", titleHy: null, range: "20–24 August 2026", description: "“For I know the plans I have for you, declares the Lord” (Jeremiah 29:11). Organized by the Women’s Board of the Armenian Evangelical Churches; 50 women from Aleppo and Kessab, led by Mrs. Armig Boziakalian, with biblical messages by Pastor Shant Agishian.", descriptionHy: null },
+      { title: "Family Retreat", titleHy: null, range: "2026", description: "“Let Us Wake Up and Walk Together,” based on the story of Noah (Genesis 6–9); around 60 participants, with Bible studies led by Rev. Dr. Haroutune Selimian.", descriptionHy: null },
+      { title: "C.E. Youth Retreat", titleHy: null, range: "From 3 September 2026", description: "A three-day journey based on Matthew 14:22–33, under the spiritual leadership of Rev. Dr. Haroutune Selimian, with a youth kermess in the courtyard of the Armenian Evangelical School of Kessab on Friday, September 4.", descriptionHy: null },
+      { title: "Teachers’ Training Conference", titleHy: null, range: "7–9 September 2026", description: "The teachers of the schools of the Armenian Protestant Community in Syria gathered in Kessab for professional development, spiritual renewal and fellowship, opening with worship at the Holy Trinity Church.", descriptionHy: null },
+    ],
+  },
+
   cta: {
     heading: "By Faith and Work",
     headingHy: null,
-    body: "KCHAG has had a rich past. By faith and work, it can also have a great future for ministry and community development — a place of spiritual growth and fellowship for generations of Armenian Evangelical youth.",
+    body: "KCHAG has had a rich past. By faith and work, it can also have a great future for ministry and community development.",
     bodyHy: null,
     buttonLabel: null,
     buttonHref: null,

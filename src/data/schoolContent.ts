@@ -77,6 +77,8 @@ export type SchoolContactRow = {
 };
 
 export type SchoolContent = {
+  // Curated Google Maps place link (from the school's web form).
+  mapsUrl?: string;
   slug: string; // FK -> schools.ts School.slug
 
   masthead: {
@@ -489,7 +491,9 @@ export const schoolContent: Record<string, SchoolContent> = {
       headingHy: null,
       paragraphs: [
         "The Armenian Evangelical College is the first Armenian secondary school established in the Diaspora following the Armenian Genocide. Founded to the glory of God and in service to succeeding generations of Armenians and Lebanese, the College remains steadfast in its commitment to academic excellence, Christian values, and community service.",
+        "From its origins in the nineteenth century in the Ottoman Empire, the Armenian Evangelical Church has recognized education as an essential component of its mission and ministry. Through the establishment of schools, the Church sought not only to provide academic instruction but also to nurture faith, character, and a sense of service among future generations.",
         "Today, the Armenian Evangelical College remains the only Armenian school located in Beirut's central administrative district, continuing its historic mission of educating Armenian and Lebanese youth.",
+        "The Armenian Evangelical College remains committed to preserving the vision of its founders and upholding its century-old tradition of providing quality education rooted in faith, values, and excellence. At the same time, the College recognizes the importance of responding to the evolving needs of contemporary education by embracing innovation, advancing pedagogical practices, and integrating modern technology as an essential tool for learning and growth.",
       ],
       paragraphsHy: null,
       pullQuote:
@@ -577,7 +581,54 @@ export const schoolContent: Record<string, SchoolContent> = {
       },
     ],
 
-    directorsArchive: null,
+    splitRows: [
+      {
+        eyebrow: "Principal 1967–2017",
+        eyebrowHy: null,
+        heading: "Dr. Zaven M. Messerlian",
+        headingHy: null,
+        paragraphs: [
+          "Dr. Zaven M. Messerlian was born in Beirut. After his graduation from the Armenian Evangelical College, he received his B.A. in 1959 in European history and his M.A. in 1963 in Middle Eastern history, both from the American University of Beirut. The National Academy of Sciences of the Republic of Armenia granted him an honorary doctorate in Armenology in 2003. The General Assembly of the National Academy of Sciences of Republic of Armenia in its meeting in 2014 elected him as a foreign member of the Academy.",
+          "In October 1960, Z. Messerlian joined the Armenian Evangelical College faculty and in July 1967 became the school's principal, until the end of September 2017. As of October 1, 2017 he became the honorary principal, a position he still holds.",
+          "In 1986, the Central Committee of the Union of Armenian Evangelical Churches in the Near East awarded him a gold medal for his 25 years service in education. The Board of Trustees of the Armenian Evangelical College honoured him with a plaque of recognition at the 85th anniversary commemoration of the school at the Unesco Palace in 2008. In 2010, the President of the Republic of Lebanon granted him the Medal of Education. In 2011, the Minister of Education and Science of the Republic of Armenia granted the Golden Medal of the Ministry. In 2014, by a Presidential decree, the president of the Republic of Armenia granted him the Movses Khorenatsi medal.",
+          "He has published 14 books. In 2017 his golden jubilee as principal of the Armenian Evangelical College was celebrated and the Union of the Armenian Evangelical Churches in the Near East honoured him with a plaque.",
+        ],
+        paragraphsHy: null,
+        photo: {
+          src: "/school-armenian-evangelical-college-zaven-messerlian.jpg",
+          alt: "Dr. Zaven M. Messerlian",
+          width: 392,
+          height: 624,
+        },
+        reverse: false,
+        dropcapFirst: false,
+      },
+    ],
+    directorsArchive: {
+      eyebrow: "Archive",
+      eyebrowHy: null,
+      heading: "Principals of the Armenian Evangelical College",
+      headingHy: null,
+      note: "1923 to the present day.",
+      noteHy: null,
+      entries: [
+        { name: "Bedros Kardzair", nameHy: null, years: "1923–1928", note: null, noteHy: null, isCurrent: false },
+        { name: "Mihran Donabedian", nameHy: null, years: "1929–1930", note: null, noteHy: null, isCurrent: false },
+        { name: "Paul Der Boghossian", nameHy: null, years: "1930–1933", note: null, noteHy: null, isCurrent: false },
+        { name: "Miss Jenny Jilson", nameHy: null, years: "1933–1937", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Yeghia Kassouny", nameHy: null, years: "1937–1943", note: null, noteHy: null, isCurrent: false },
+        { name: "Mrs. Araxi Poladian", nameHy: null, years: "1943–1944", note: null, noteHy: null, isCurrent: false },
+        { name: "Khacher Kalousdian (principal)", nameHy: null, years: "1945–1953", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Puzant Roubian (president)", nameHy: null, years: "1952–1953", note: null, noteHy: null, isCurrent: false },
+        { name: "Rev. Dickran Kherlopian", nameHy: null, years: "1953–1955", note: null, noteHy: null, isCurrent: false },
+        { name: "Nazar Daghlian", nameHy: null, years: "1954–1956", note: null, noteHy: null, isCurrent: false },
+        { name: "Prof. Taniel Vosguian", nameHy: null, years: "1956–1957", note: null, noteHy: null, isCurrent: false },
+        { name: "Pastor Apraham Jizmejian", nameHy: null, years: "1957–1960", note: null, noteHy: null, isCurrent: false },
+        { name: "Hagop Kasbarian", nameHy: null, years: "1960–1967", note: null, noteHy: null, isCurrent: false },
+        { name: "Dr. Zaven Messerlian", nameHy: null, years: "1967–2017", note: null, noteHy: null, isCurrent: false },
+        { name: "Dr. Armen Urneshlian", nameHy: null, years: "2017–present", note: null, noteHy: null, isCurrent: true },
+      ],
+    },
     missionValues: null,
     supportServices: null,
     signaturePrograms: null,
@@ -620,27 +671,33 @@ export const schoolContent: Record<string, SchoolContent> = {
       headingHy: null,
       eras: [
         {
-          period: "1921–1923",
+          period: "1921–1927",
           description:
-            "Founded from Miss Elizabeth Webb's American high school for Armenian girls (1921) and, in October 1923, a new high school for boys with 56 students under Mr. Bedros Kardzayr — graduating its first class in 1927.",
+            "In 1921, Miss Elizabeth Webb, an American missionary, founded an American high school for Armenian girls under the patronage of the American Board of Commissioners for Foreign Missions. In October 1923, by the decision of the Board of the Armenian Evangelical Church, a new high school for boys was established with an enrolment of 56 students under the leadership of Mr. Bedros Kardzayr. The school graduated its first class in 1927.",
           descriptionHy: null,
         },
         {
-          period: "1933–1950",
+          period: "1930–1950",
           description:
-            "Reorganized as The Armenian Evangelical High School for Boys and Girls under Miss Jenny Jilson, brought under the First Armenian Evangelical Church in 1943, and officially renamed the Armenian Evangelical College in 1950.",
+            "In 1930, the high school was merged with the Second Armenian Evangelical Elementary School, further expanding the institution’s educational scope and strengthening the Armenian Evangelical educational mission in Beirut. In 1933, the two schools were reorganized and merged to form The Armenian Evangelical High School for Boys and Girls, with Miss Jenny Jilson serving as principal. In 1943, the school came under the ownership of the First Armenian Evangelical Church. Freshman and sophomore classes were introduced in 1948, leading to the institution the designation of “college.” In 1950, the school was officially renamed the Armenian Evangelical College (AEC).",
           descriptionHy: null,
         },
         {
           period: "1952–1971",
           description:
-            "Relocated to its present Mexique Street premises in the Elizabeth Webb Building (1952); the Yeprem and Martha Philibosian Building — home of AEC to this day — was inaugurated in 1971.",
+            "In 1952, the school relocated from downtown Beirut to its present premises on Mexique Street, occupying the Elizabeth Webb Building. In 1955, the freshman and sophomore classes became part of the newly established Haigazian College (later Haigazian University in 1996), located adjacent to the church. In subsequent years, a dedicated school building was constructed near the Webb House, including a girls’ boarding section serving Haigazian College students. In 1971, the Yeprem and Martha Philibosian Building, a major extension of the original structure, was inaugurated through the generous support of its principal benefactor, Miss Ruth Philibosian. This building continues to serve as the home of AEC to this day.",
+          descriptionHy: null,
+        },
+        {
+          period: "1975–1990",
+          description:
+            "The Lebanese Civil War (1975–1990) brought significant challenges and caused considerable damage to the school facilities. Nevertheless, the College persevered, remaining committed to its educational mission and continuing its service to generations of students.",
           descriptionHy: null,
         },
         {
           period: "2023",
           description:
-            "Celebrated its centennial with commemorative events in Beirut and Los Angeles, honoring a century of educational excellence, faith, and service.",
+            "In 2023, the Armenian Evangelical College celebrated its centennial anniversary with commemorative events held in Beirut and Los Angeles, honoring a century of educational excellence, faith, and service.",
           descriptionHy: null,
         },
       ],
@@ -1586,6 +1643,7 @@ export const schoolContent: Record<string, SchoolContent> = {
   // throughout, including all contact details.
   "aleppo-college-for-girls": {
     slug: "aleppo-college-for-girls",
+    mapsUrl: "https://maps.app.goo.gl/okFQcK2pAuhx4bVC6",
 
     // The mockup's own masthead line carries two founding facts ("Girls'
     // Section founded 1923 · roots in Aintab, 1876"), more than the fixed
@@ -2613,6 +2671,7 @@ export const schoolContent: Record<string, SchoolContent> = {
   // see the founding-year/spelling OPEN_QUESTIONS item for this school.
   "emmanuel-al-ressaleh-school": {
     slug: "emmanuel-al-ressaleh-school",
+    mapsUrl: "https://maps.app.goo.gl/e4Ewo4CXCaBFuk198",
 
     // No founding year in the masthead meta line at all — see
     // `masthead.established`'s own type comment (new this unit). The facts
@@ -3223,6 +3282,7 @@ export const schoolContent: Record<string, SchoolContent> = {
   // corroborates the phone number and Arabic name exactly.
   "syriac-evangelical-school": {
     slug: "syriac-evangelical-school",
+    mapsUrl: "https://maps.app.goo.gl/kbrbLqbuXextM1E79",
 
     masthead: {
       locationLine: "Aleppo, Syria",

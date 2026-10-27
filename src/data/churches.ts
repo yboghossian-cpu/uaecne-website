@@ -181,7 +181,7 @@ export const churches: Church[] = [
     address: "Aleppo, Syria\nP.O.Box 15, Aleppo",
     phone: "(963-21) 4644-409 / 4644-419",
     email: "bcharamo@gmail.com",
-    estYear: "1924-25",
+    estYear: "1922",
     secretary: "",
     isNew: false,
     slug: "church-of-christ-aleppo",
