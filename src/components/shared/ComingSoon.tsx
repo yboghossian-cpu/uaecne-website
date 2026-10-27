@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Medallion from "./Medallion";
 import styles from "./ComingSoon.module.css";
 
@@ -14,7 +15,8 @@ type ComingSoonProps = {
 // invented description, history, leadership, or contact details; that
 // would be fabrication, and the entire point of this component is that we
 // have none of that yet for these pages.
-export default function ComingSoon({ name }: ComingSoonProps) {
+export default async function ComingSoon({ name }: ComingSoonProps) {
+  const tx = await getT();
   return (
     <section className={styles.wrap}>
       <Medallion size={220} className={`${styles.med} ${styles.medLeft}`} />
@@ -22,8 +24,8 @@ export default function ComingSoon({ name }: ComingSoonProps) {
       <div className={styles.inner}>
         <Medallion size={48} className={styles.seal} />
         <h1 className={styles.heading}>{name}</h1>
-        <div className={styles.banner}>Coming Soon</div>
-        <p className={styles.note}>This page is coming soon.</p>
+        <div className={styles.banner}>{tx("Coming Soon")}</div>
+        <p className={styles.note}>{tx("This page is coming soon.")}</p>
       </div>
     </section>
   );

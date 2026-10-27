@@ -12,6 +12,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
   return (
     <div className={styles.shell}>
       <aside className={styles.side}>
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- separate root layout / file download: full page load */}
         <a href="/admin" className={styles.brand}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="" />

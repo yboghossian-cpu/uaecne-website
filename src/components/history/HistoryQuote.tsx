@@ -1,10 +1,13 @@
-import { historyContent } from "@/data/historyContent";
+import { getL } from "@/lib/i18n/server";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryQuote.module.css";
 
 // Gold-accented pull-quote band — the Union's mission statement, matching
 // the mockup's .quote section.
-export default function HistoryQuote() {
+export default async function HistoryQuote() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { text, source } = historyContent.quote;
 
   return (

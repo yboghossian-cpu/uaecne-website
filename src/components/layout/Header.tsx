@@ -1,18 +1,22 @@
+import { getLang, getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "./Nav";
+import LangSwitch from "./LangSwitch";
 import { getSettings } from "@/lib/server/settings";
 import styles from "./Header.module.css";
 
-export default function Header() {
-  const { donateUrl } = getSettings();
+export default async function Header() {
+  const tx = await getT();
+  const { donateUrl, armenianLive } = getSettings();
+  const lang = await getLang();
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.logoLink} aria-label="Home">
+        <Link href="/" className={styles.logoLink} aria-label={tx("Home")}>
           <Image
             src="/logo.svg"
-            alt="Union of the Armenian Evangelical Churches in the Near East"
+            alt={tx("Union of the Armenian Evangelical Churches in the Near East")}
             width={48}
             height={48}
             priority
@@ -20,23 +24,15 @@ export default function Header() {
         </Link>
 
         <div className={styles.controls}>
-          <div className={styles.langToggle} aria-label="Language">
-            <span className={styles.langActive} aria-current="true">
-              EN
-            </span>
-            <span aria-hidden="true">|</span>
-            <span className={styles.langInactive} aria-disabled="true">
-              ՀԱՅ
-            </span>
-          </div>
+          <LangSwitch lang={lang} enabled={armenianLive} />
           <Nav />
           {donateUrl ? (
             <a href={donateUrl} className={styles.donateButton} target="_blank" rel="noopener noreferrer">
-              Donate
+              {tx("Donate")}
             </a>
           ) : (
             <span role="button" aria-disabled="true" className={styles.donateButton}>
-              Donate
+              {tx("Donate")}
             </span>
           )}
         </div>

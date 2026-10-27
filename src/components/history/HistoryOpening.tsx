@@ -1,9 +1,12 @@
-import { historyContent } from "@/data/historyContent";
+import { getL } from "@/lib/i18n/server";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryOpening.module.css";
 
 // Illuminated drop-cap opening narrative, matching the mockup's .opening.
-export default function HistoryOpening() {
+export default async function HistoryOpening() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { eyebrow, lead, paragraphs } = historyContent.opening;
 
   return (

@@ -1,10 +1,13 @@
-import { historyContent } from "@/data/historyContent";
+import { getL } from "@/lib/i18n/server";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryGovernance.module.css";
 
 // Governance close — President (1) / Central Committee (12), matching
 // the mockup's .gov section.
-export default function HistoryGovernance() {
+export default async function HistoryGovernance() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { eyebrow, heading, intro, cards } = historyContent.governance;
 
   return (

@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import Image from "next/image";
 import Link from "next/link";
 import ArchFrame from "@/components/shared/ArchFrame";
@@ -13,6 +15,7 @@ import styles from "./SpiritualHeritage.module.css";
 // "/resource-center/history-of-the-uaecne", is a wrong placeholder guess —
 // corrected here to "/resource-center/history").
 export default function SpiritualHeritage() {
+  const tx = useT();
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -29,30 +32,27 @@ export default function SpiritualHeritage() {
           <ArchFrame
             aspectRatio="3 / 4"
             photoSrc="/spiritual-heritage-sanctuary.jpg"
-            photoAlt="Sanctuary interior during a General Assembly session"
+            photoAlt={tx("Sanctuary interior during a General Assembly session")}
           />
           <div className={styles.verse}>
-            &ldquo;For where two or three gather in my name, there am I with them.&rdquo;
-            <span className={styles.verseCite}>Matthew 18:20</span>
+            {tx("“For where two or three gather in my name, there am I with them.”")}
+            <span className={styles.verseCite}>{tx("Matthew 18:20")}</span>
           </div>
         </div>
         <div className={styles.hcopy}>
           <div className={styles.seal}>
             <Image src="/logo.svg" alt="" width={30} height={30} />
           </div>
-          <div className={styles.eyb}>Since 1846</div>
+          <div className={styles.eyb}>{tx("Since 1846")}</div>
           <h2 className={styles.heading}>
-            Our Spiritual <em className={styles.em}>Heritage</em>
+            {tx("Our Spiritual ")}<em className={styles.em}>{tx("Heritage")}</em>
           </h2>
           <p className={styles.paragraph}>
-            Born in the Ottoman era as a movement of reform and renewal, the Union of the Armenian
-            Evangelical Churches has been carried through generations of exile, endurance, and
-            rebuilding — and lives today as a communion of faith across nine nations of the Near
-            East.
+            {tx("Born in the Ottoman era as a movement of reform and renewal, the Union of the Armenian Evangelical Churches has been carried through generations of exile, endurance, and rebuilding — and lives today as a communion of faith across nine nations of the Near East.")}
           </p>
-          <p className={styles.invite}>Nearly two centuries of that story await.</p>
+          <p className={styles.invite}>{tx("Nearly two centuries of that story await.")}</p>
           <Link href="/resource-center/history" className={styles.cta}>
-            Read the Full History
+            {tx("Read the Full History")}
             <svg className={styles.ctaIcon} viewBox="0 0 24 24" aria-hidden="true">
               <use href="#ic-arrow" />
             </svg>

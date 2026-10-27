@@ -1,6 +1,7 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { haigazianContent, nestContent } from "@/data/higherEdContent";
+import { haigazianContent as haigazianContent__en, nestContent as nestContent__en } from "@/data/higherEdContent";
 import HigherEdBreadcrumb from "@/components/highered/HigherEdBreadcrumb";
 import HigherEdCTA from "@/components/highered/HigherEdCTA";
 import FollowBand from "@/components/shared/FollowBand";
@@ -21,7 +22,7 @@ import NestLeadershipPair from "@/components/highered/NestLeadershipPair";
 // /higher-education/syria-educational-council URLs now permanently
 // redirect to those (see next.config.ts). Only Haigazian and NEST remain
 // on this route.
-const SLUGS = [haigazianContent.slug, nestContent.slug] as const;
+const SLUGS = [haigazianContent__en.slug, nestContent__en.slug] as const;
 
 type PageParams = { slug: string };
 
@@ -34,6 +35,9 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
+  const L = await getL();
+  const haigazianContent = L(haigazianContent__en);
+  const nestContent = L(nestContent__en);
   const { slug } = await params;
   if (slug === haigazianContent.slug) {
     return { title: `${haigazianContent.masthead.heading} — UAECNE` };
@@ -52,6 +56,10 @@ export default async function HigherEducationDetailPage({
 }: {
   params: Promise<PageParams>;
 }) {
+  const L = await getL();
+  const haigazianContent = L(haigazianContent__en);
+  const nestContent = L(nestContent__en);
+  const tx = await getT();
   const { slug } = await params;
 
   if (slug === haigazianContent.slug) {
@@ -72,7 +80,7 @@ export default async function HigherEducationDetailPage({
         <HaigazianMotto motto={h.motto} />
         <HaigazianFaculties faculties={h.faculties} />
         <HaigazianClassBand classBand={h.classBand} />
-        <FollowBand social={h.social} name="Haigazian University" />
+        <FollowBand social={h.social} name={tx("Haigazian University")} />
         <HigherEdCTA cta={h.cta} />
       </>
     );
@@ -96,7 +104,7 @@ export default async function HigherEducationDetailPage({
         <NestSponsors sponsors={n.sponsors} />
         <NestDegrees degrees={n.degrees} />
         <NestLeadershipPair leadership={n.leadership} />
-        <FollowBand social={n.social} name="Near East School of Theology" />
+        <FollowBand social={n.social} name={tx("Near East School of Theology")} />
         <HigherEdCTA cta={n.cta} />
       </>
     );

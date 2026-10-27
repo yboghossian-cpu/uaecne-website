@@ -36,6 +36,19 @@
   color: var(--color-brown);
 }
 
+.langBtn {
+  font: inherit;
+  color: var(--color-brown);
+  background: none;
+  border: none;
+  padding: 0.25rem 0.1rem;
+  cursor: pointer;
+}
+
+.langBtn:hover {
+  color: var(--color-red);
+}
+
 .langActive {
   font-weight: 600;
   color: var(--color-red);

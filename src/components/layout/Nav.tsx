@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./Nav.module.css";
@@ -141,6 +143,7 @@ const navItems: NavItem[] = [
 ];
 
 export default function Nav() {
+  const tx = useT();
   const [open, setOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
   const [openDesktopGroups, setOpenDesktopGroups] = useState<Set<string>>(
@@ -237,7 +240,7 @@ export default function Nav() {
             className={item.children ? styles.hasChildren : undefined}
           >
             {item.href ? (
-              <Link href={item.href}>{item.label}</Link>
+              <Link href={item.href}>{tx(item.label)}</Link>
             ) : item.children ? (
               <button
                 type="button"
@@ -245,7 +248,7 @@ export default function Nav() {
                 aria-expanded={openDesktopGroups.has(item.label)}
                 onClick={() => toggleDesktopGroup(item.label, true)}
               >
-                {item.label}
+                {tx(item.label)}
               </button>
             ) : (
               // No href and no children (Memberships today) — a plain,
@@ -253,7 +256,7 @@ export default function Nav() {
               // styling as the button triggers, but no dropdown chevron,
               // pointer cursor, or hover underline (there's nothing to open).
               <span className={styles.topLevelLabel} aria-disabled="true">
-                {item.label}
+                {tx(item.label)}
               </span>
             )}
             {item.children && (
@@ -270,7 +273,7 @@ export default function Nav() {
                       }
                     >
                       {child.href ? (
-                        <Link href={child.href}>{child.label}</Link>
+                        <Link href={child.href}>{tx(child.label)}</Link>
                       ) : (
                         <button
                           type="button"
@@ -278,7 +281,7 @@ export default function Nav() {
                           aria-expanded={openDesktopGroups.has(child.label)}
                           onClick={() => toggleDesktopGroup(child.label, false)}
                         >
-                          {child.label}
+                          {tx(child.label)}
                         </button>
                       )}
                       {child.children && (
@@ -290,7 +293,7 @@ export default function Nav() {
                             {child.children.map((grandchild) => (
                               <li key={grandchild.href}>
                                 <Link href={grandchild.href!}>
-                                  {grandchild.label}
+                                  {tx(grandchild.label)}
                                 </Link>
                               </li>
                             ))}
@@ -310,7 +313,7 @@ export default function Nav() {
         <button
           type="button"
           className={styles.toggle}
-          aria-label="Menu"
+          aria-label={tx("Menu")}
           aria-expanded={open}
           aria-controls="nav-panel"
           onClick={() => setOpen((prev) => !prev)}
@@ -334,9 +337,9 @@ export default function Nav() {
             {navItems.map((item) => (
               <li key={item.label}>
                 {item.href ? (
-                  <Link href={item.href}>{item.label}</Link>
+                  <Link href={item.href}>{tx(item.label)}</Link>
                 ) : (
-                  <span className={styles.groupLabel}>{item.label}</span>
+                  <span className={styles.groupLabel}>{tx(item.label)}</span>
                 )}
                 {item.children && (
                   <ul className={styles.sublist}>
@@ -350,14 +353,14 @@ export default function Nav() {
                               aria-expanded={openGroups.has(child.label)}
                               onClick={() => toggleGroup(child.label)}
                             >
-                              {child.label}
+                              {tx(child.label)}
                             </button>
                             {openGroups.has(child.label) && (
                               <ul className={styles.subsublist}>
                                 {child.children.map((grandchild) => (
                                   <li key={grandchild.href}>
                                     <Link href={grandchild.href!}>
-                                      {grandchild.label}
+                                      {tx(grandchild.label)}
                                     </Link>
                                   </li>
                                 ))}
@@ -365,7 +368,7 @@ export default function Nav() {
                             )}
                           </>
                         ) : (
-                          <Link href={child.href!}>{child.label}</Link>
+                          <Link href={child.href!}>{tx(child.label)}</Link>
                         )}
                       </li>
                     ))}

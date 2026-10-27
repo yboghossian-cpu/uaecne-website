@@ -79,6 +79,19 @@ export default function SettingsForm({ settings: s, mailOn }: { settings: SiteSe
       </section>
 
       <section className={styles.card}>
+        <h2 className={styles.cardTitle}>Armenian version</h2>
+        <p className={styles.cardHint}>
+          While off, visitors see English only; you can still preview Armenian at{" "}
+          <a href="/?lang=hy" target="_blank" rel="noreferrer">/?lang=hy</a>. Turn on after the translation audit
+          (Admin › Translations).
+        </p>
+        <label className={styles.check}>
+          <input type="checkbox" name="armenianLive" defaultChecked={s.armenianLive} />
+          Show the ՀԱՅ switch to visitors
+        </label>
+      </section>
+
+      <section className={styles.card}>
         <h2 className={styles.cardTitle}>Announcement banner</h2>
         <p className={styles.cardHint}>
           A thin red strip above the header on every page — for urgent or seasonal notices.

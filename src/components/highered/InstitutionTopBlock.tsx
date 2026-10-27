@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import styles from "./InstitutionTopBlock.module.css";
 
@@ -17,7 +18,7 @@ type InstitutionTopBlockProps = {
 // shared "photo pending" fallback, same language as the schools index
 // card / SchoolTopBlock), and the red facts strip. Shared by Haigazian and
 // NEST — both real institutions with the same top-of-page shape.
-export default function InstitutionTopBlock({
+export default async function InstitutionTopBlock({
   heading,
   locationLine,
   established,
@@ -25,6 +26,7 @@ export default function InstitutionTopBlock({
   heroPhoto,
   factsBar,
 }: InstitutionTopBlockProps) {
+  const tx = await getT();
   return (
     <section className={styles.top}>
       <div className={styles.titleRow}>
@@ -35,7 +37,7 @@ export default function InstitutionTopBlock({
           <h1 className={styles.heading}>{heading}</h1>
           <div className={styles.meta}>
             {locationLine}
-            {" · Founded "}
+            {tx(" · Founded ")}
             <b className={styles.estYear}>{established}</b>
           </div>
         </div>
@@ -49,7 +51,7 @@ export default function InstitutionTopBlock({
             <svg className={styles.heroGlyphIcon} aria-hidden="true">
               <use href="#ic-edu" />
             </svg>
-            <span className={styles.heroGlyphCaption}>Photo pending</span>
+            <span className={styles.heroGlyphCaption}>{tx("Photo pending")}</span>
           </span>
         )}
       </div>

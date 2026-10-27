@@ -1,13 +1,14 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Medallion from "@/components/shared/Medallion";
 import styles from "./page.module.css";
 import {
-  headquartersHero,
-  headquartersFacts,
-  headquartersHouses,
-  headquartersOffices,
-  headquartersContact,
+  headquartersHero as headquartersHero__en,
+  headquartersFacts as headquartersFacts__en,
+  headquartersHouses as headquartersHouses__en,
+  headquartersOffices as headquartersOffices__en,
+  headquartersContact as headquartersContact__en,
 } from "@/data/headquarters";
 
 export const metadata: Metadata = {
@@ -16,7 +17,14 @@ export const metadata: Metadata = {
     "The UAECNE Head Office in the Geitawi section of Beirut — the administrative and spiritual centre of the Union of the Armenian Evangelical Churches in the Near East.",
 };
 
-export default function HeadquartersPage() {
+export default async function HeadquartersPage() {
+  const L = await getL();
+  const headquartersContact = L(headquartersContact__en);
+  const headquartersHero = L(headquartersHero__en);
+  const headquartersFacts = L(headquartersFacts__en);
+  const headquartersHouses = L(headquartersHouses__en);
+  const headquartersOffices = L(headquartersOffices__en);
+  const tx = await getT();
   const c = headquartersContact;
 
   return (
@@ -28,13 +36,13 @@ export default function HeadquartersPage() {
         </svg>
         <div className={styles.cheroInner}>
           <div className={styles.crumb}>
-            Union Leadership <span>›</span> Headquarters
+            {tx("Union Leadership ")}<span>›</span>{tx(" Headquarters")}
           </div>
           <div className={styles.masthead}>
-            <h1>Headquarters</h1>
+            <h1>{tx("Headquarters")}</h1>
           </div>
           <p className={styles.tagline}>
-            The Union&rsquo;s home in Beirut
+            {tx("The Union’s home in Beirut")}
           </p>
           <div className={styles.heroArt}>
             <div className={styles.arch}>
@@ -67,20 +75,16 @@ export default function HeadquartersPage() {
       {/* about */}
       <section className={styles.section}>
         <div className={styles.aboutTxt}>
-          <div className={styles.eyebrowDot}>The Head Office</div>
-          <h2>The Heart of the Union</h2>
+          <div className={styles.eyebrowDot}>{tx("The Head Office")}</div>
+          <h2>{tx("The Heart of the Union")}</h2>
           <p>
-            <span className={styles.dropcap}>T</span>he UAECNE Headquarters, located in the Geitawi
-            section of Beirut, Lebanon, serves as the administrative and spiritual centre of the Union
-            of the Armenian Evangelical Churches in the Near East.
+            {(() => { const t = tx("The UAECNE Headquarters, located in the Geitawi section of Beirut, Lebanon, serves as the administrative and spiritual centre of the Union of the Armenian Evangelical Churches in the Near East."); return <><span className={styles.dropcap}>{t.charAt(0)}</span>{t.slice(1)}</>; })()}
           </p>
           <p>
-            Within its walls it houses the President&rsquo;s office, personnel offices, a reception
-            hall, and a meeting room, alongside the Educational Council office, the Publication office,
-            the Court of First Appeals, the Christian Endeavor office, and residences.
+            {tx("Within its walls it houses the President’s office, personnel offices, a reception hall, and a meeting room, alongside the Educational Council office, the Publication office, the Court of First Appeals, the Christian Endeavor office, and residences.")}
           </p>
           <div className={styles.pullquote}>
-            <p>One house from which a Union spanning seven countries is served.</p>
+            <p>{tx("One house from which a Union spanning seven countries is served.")}</p>
           </div>
         </div>
       </section>
@@ -89,8 +93,8 @@ export default function HeadquartersPage() {
       <section className={`${styles.section} ${styles.wash}`}>
         <div className={styles.washInner}>
           <div className={styles.centerHead}>
-            <div className={styles.eb}>Within These Walls</div>
-            <h2>What the Headquarters Houses</h2>
+            <div className={styles.eb}>{tx("Within These Walls")}</div>
+            <h2>{tx("What the Headquarters Houses")}</h2>
             <div className={styles.flourish}>
               <span className={styles.ln} />
               <Medallion size={22} className={styles.med} />
@@ -111,8 +115,8 @@ export default function HeadquartersPage() {
       {/* team */}
       <section className={styles.section}>
         <div className={styles.centerHead}>
-          <div className={styles.eb}>At the Head Office</div>
-          <h2>Our Team</h2>
+          <div className={styles.eb}>{tx("At the Head Office")}</div>
+          <h2>{tx("Our Team")}</h2>
           <div className={styles.flourish}>
             <span className={styles.ln} />
             <Medallion size={22} className={styles.med} />
@@ -165,8 +169,8 @@ export default function HeadquartersPage() {
       {/* contact */}
       <section className={styles.section}>
         <div className={styles.centerHead}>
-          <div className={styles.eb}>Reach Us</div>
-          <h2>Contact the Head Office</h2>
+          <div className={styles.eb}>{tx("Reach Us")}</div>
+          <h2>{tx("Contact the Head Office")}</h2>
         </div>
         <div className={styles.contactWrap}>
           <div className={styles.contactGrid}>
@@ -175,7 +179,7 @@ export default function HeadquartersPage() {
                 <svg>
                   <use href="#ic-pin" />
                 </svg>{" "}
-                Address
+                {tx("Address")}
               </h4>
               <p className={styles.addrLine}>
                 {c.addressLines.map((line, i) => (
@@ -189,7 +193,7 @@ export default function HeadquartersPage() {
                 <svg>
                   <use href="#ic-pin" />
                 </svg>{" "}
-                View on Google Maps
+                {tx("View on Google Maps")}
               </a>
             </div>
             <div className={styles.cbox}>
@@ -197,14 +201,14 @@ export default function HeadquartersPage() {
                 <svg>
                   <use href="#ic-mail" />
                 </svg>{" "}
-                Office
+                {tx("Office")}
               </h4>
               <div className={styles.crow}>
                 <svg>
                   <use href="#ic-mail" />
                 </svg>
                 <div>
-                  <span className={styles.k}>Email</span>
+                  <span className={styles.k}>{tx("Email")}</span>
                   <a href={`mailto:${c.email}`}>{c.email}</a>
                 </div>
               </div>
@@ -213,7 +217,7 @@ export default function HeadquartersPage() {
                   <use href="#ic-phone" />
                 </svg>
                 <div>
-                  <span className={styles.k}>Phone</span>
+                  <span className={styles.k}>{tx("Phone")}</span>
                   <a href={`tel:${c.phones[0].replace(/[^+\d]/g, "")}`}>{c.phones[0]}</a> ·{" "}
                   <a href={`tel:${c.phones[1].replace(/[^+\d]/g, "")}`}>{c.phones[1]}</a>
                 </div>

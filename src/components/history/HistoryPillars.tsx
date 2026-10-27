@@ -1,12 +1,16 @@
+import { getT, getL } from "@/lib/i18n/server";
 import Link from "next/link";
-import { historyContent } from "@/data/historyContent";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryPillars.module.css";
 
 // Four thematic pillars (Education, Compassion, Social Outreach,
 // Children & Youth), alternating arched photo-pending slots — matches the
 // mockup's .pillars, each .prow individually revealed.
-export default function HistoryPillars() {
+export default async function HistoryPillars() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
+  const tx = await getT();
   const { eyebrow, heading } = historyContent.pillarsHead;
   const { pillars } = historyContent;
 
@@ -33,7 +37,7 @@ export default function HistoryPillars() {
                 <svg className={styles.phIcon} viewBox="0 0 24 24" aria-hidden="true">
                   <use href={`#${pillar.icon}`} />
                 </svg>
-                <span>Archival photo pending</span>
+                <span>{tx("Archival photo pending")}</span>
               </div>
             </div>
             <div className={styles.body}>

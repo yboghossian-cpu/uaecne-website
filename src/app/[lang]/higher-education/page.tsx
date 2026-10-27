@@ -1,8 +1,9 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
-import { haigazianContent, nestContent } from "@/data/higherEdContent";
+import { haigazianContent as haigazianContent__en, nestContent as nestContent__en } from "@/data/higherEdContent";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -14,37 +15,38 @@ export const metadata: Metadata = {
 // /schools/education-council-syria) as part of the Educational Councils
 // move; this hardcoded array reads more honestly than forcing a
 // directory+content-record split like churches/schools for just 2 entries.
-const cards = [
+const cardsEn = [
   {
     id: "haigazian-university",
-    slug: haigazianContent.slug,
-    name: haigazianContent.masthead.heading,
+    slug: haigazianContent__en.slug,
+    name: haigazianContent__en.masthead.heading,
     treatment: "photo" as "photo" | "seal",
-    photo: haigazianContent.heroPhoto,
-    emblem: haigazianContent.logo,
+    photo: haigazianContent__en.heroPhoto,
+    emblem: haigazianContent__en.logo,
   },
   {
     id: "near-east-school-of-theology",
-    slug: nestContent.slug,
-    name: nestContent.masthead.heading,
+    slug: nestContent__en.slug,
+    name: nestContent__en.masthead.heading,
     treatment: "photo" as const,
-    photo: nestContent.heroPhoto,
-    emblem: nestContent.logo,
+    photo: nestContent__en.heroPhoto,
+    emblem: nestContent__en.logo,
   },
 ];
 
-export default function HigherEducationIndexPage() {
+export default async function HigherEducationIndexPage() {
+  const L = await getL();
+  const cards = L(cardsEn);
+  const tx = await getT();
   return (
     <>
       <section className={styles.hero}>
         <Medallion size={220} className={`${styles.med} ${styles.medLeft}`} />
         <Medallion size={220} className={`${styles.med} ${styles.medRight}`} />
         <div className={styles.heroInner}>
-          <h1 className={styles.heroHeading}>Higher Education</h1>
+          <h1 className={styles.heroHeading}>{tx("Higher Education")}</h1>
           <p className={styles.heroSub}>
-            The UAECNE sustains and partners with institutions of higher learning —
-            a governing council and two academic institutions rooted in the Armenian
-            Evangelical heritage.
+            {tx("The UAECNE sustains and partners with institutions of higher learning — a governing council and two academic institutions rooted in the Armenian Evangelical heritage.")}
           </p>
         </div>
       </section>

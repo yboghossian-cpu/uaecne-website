@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import styles from "./OutreachTopBlock.module.css";
 
@@ -23,7 +24,7 @@ type OutreachTopBlockProps = {
 // Crumb + title + subtitle, then the hero (real photo or the shared
 // "photo pending" fallback) at a configurable aspect ratio. Shared by all
 // 3 Outreach pages.
-export default function OutreachTopBlock({
+export default async function OutreachTopBlock({
   crumbLabel,
   title,
   subtitlePlain,
@@ -33,6 +34,7 @@ export default function OutreachTopBlock({
   heroIcon,
   crumbSection = "Outreach",
 }: OutreachTopBlockProps) {
+  const tx = await getT();
   const variantClass = heroVariant === "tall" ? styles.heroTall : styles.heroWide;
   return (
     <section className={styles.top}>
@@ -59,7 +61,7 @@ export default function OutreachTopBlock({
             <svg className={styles.heroGlyphIcon} viewBox="0 0 24 24" aria-hidden="true">
               <use href={`#${heroIcon}`} />
             </svg>
-            <span className={styles.heroGlyphCaption}>Photo pending</span>
+            <span className={styles.heroGlyphCaption}>{tx("Photo pending")}</span>
           </span>
         )}
       </div>

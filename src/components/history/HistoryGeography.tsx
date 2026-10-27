@@ -1,11 +1,14 @@
+import { getL } from "@/lib/i18n/server";
 import Image from "next/image";
-import { historyContent } from "@/data/historyContent";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryGeography.module.css";
 
 // "Across the Near East & Beyond" — real map + country-name pills,
 // matching the mockup's .geo section.
-export default function HistoryGeography() {
+export default async function HistoryGeography() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { eyebrow, heading, intro, map, countries } = historyContent.geography;
 
   return (

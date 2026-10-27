@@ -1,10 +1,13 @@
-import { historyContent } from "@/data/historyContent";
+import { getL } from "@/lib/i18n/server";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryPartners.module.css";
 
 // Partners & Memberships grid (AMAA/AEWC/WCC/WCRC/MECC/FMEEC), matching
 // the mockup's .mem-grid.
-export default function HistoryPartners() {
+export default async function HistoryPartners() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { eyebrow, heading, intro } = historyContent.partnersHead;
   const { partners } = historyContent;
 

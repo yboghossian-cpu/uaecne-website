@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { ChurchContent } from "@/data/churchContent";
@@ -18,6 +20,7 @@ type ChurchGalleryLightboxProps = {
 // the plain `ChurchGallery` (no lightbox) stays unchanged and is still
 // used by every church whose reference has no lightbox.
 export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightboxProps) {
+  const tx = useT();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -74,7 +77,7 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
         <button
           type="button"
           className={atStart ? `${styles.arrow} ${styles.left} ${styles.hidden}` : `${styles.arrow} ${styles.left}`}
-          aria-label="Previous"
+          aria-label={tx("Previous")}
           onClick={() => scrollByStep(-1)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -99,7 +102,7 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
         <button
           type="button"
           className={atEnd ? `${styles.arrow} ${styles.right} ${styles.hidden}` : `${styles.arrow} ${styles.right}`}
-          aria-label="Next"
+          aria-label={tx("Next")}
           onClick={() => scrollByStep(1)}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -107,7 +110,7 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
           </svg>
         </button>
       </div>
-      {photos.length > 1 && <div className={styles.hint}>← Scroll for more →</div>}
+      {photos.length > 1 && <div className={styles.hint}>{tx("← Scroll for more →")}</div>}
 
       {current && (
         <div
@@ -121,15 +124,15 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
           <button
             type="button"
             className={styles.lbClose}
-            aria-label="Close"
+            aria-label={tx("Close")}
             onClick={() => setLightboxIndex(null)}
           >
-            &times;
+            {tx("&times;")}
           </button>
           <button
             type="button"
             className={`${styles.lbNav} ${styles.prev}`}
-            aria-label="Previous"
+            aria-label={tx("Previous")}
             onClick={() => setLightboxIndex((i) => (i === null ? null : (i - 1 + photos.length) % photos.length))}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -146,7 +149,7 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
           <button
             type="button"
             className={`${styles.lbNav} ${styles.next}`}
-            aria-label="Next"
+            aria-label={tx("Next")}
             onClick={() => setLightboxIndex((i) => (i === null ? null : (i + 1) % photos.length))}
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">

@@ -1,3 +1,4 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -48,9 +49,11 @@ function groupByCountry(churches: Church[]) {
   return [...groups.entries()];
 }
 
-export default function ChurchesIndexPage() {
-  const churchContent = getAllChurchContent();
-  const groups = groupByCountry(getChurches());
+export default async function ChurchesIndexPage() {
+  const tx = await getT();
+  const L = await getL();
+  const churchContent = L(getAllChurchContent());
+  const groups = groupByCountry(L(getChurches()));
 
   return (
     <>
@@ -58,12 +61,9 @@ export default function ChurchesIndexPage() {
         <Medallion size={220} className={`${styles.med} ${styles.medLeft}`} />
         <Medallion size={220} className={`${styles.med} ${styles.medRight}`} />
         <div className={styles.heroInner}>
-          <h1 className={styles.heroHeading}>Churches</h1>
+          <h1 className={styles.heroHeading}>{tx("Churches")}</h1>
           <p className={styles.heroSub}>
-            The UAECNE oversees Armenian and Syriac Evangelical churches
-            across Lebanon, Syria, Turkey, Greece, and Australia. Explore the
-            churches below to learn about their history, leadership, and
-            worship life.
+            {tx("The UAECNE oversees Armenian and Syriac Evangelical churches across Lebanon, Syria, Turkey, Greece, and Australia. Explore the churches below to learn about their history, leadership, and worship life.")}
           </p>
         </div>
       </section>
@@ -79,7 +79,7 @@ export default function ChurchesIndexPage() {
         >
           <div className={styles.countryHead}>
             <span className={styles.ln} />
-            <h2 className={styles.countryHeading}>{countryLabel}</h2>
+            <h2 className={styles.countryHeading}>{tx(countryLabel)}</h2>
             <span className={`${styles.ln} ${styles.lnR}`} />
           </div>
           <div className={styles.grid}>
@@ -93,7 +93,7 @@ export default function ChurchesIndexPage() {
                 className={styles.church}
               >
                 {church.isNew && (
-                  <span className={styles.newTag}>New</span>
+                  <span className={styles.newTag}>{tx("New")}</span>
                 )}
                 <div
                   className={
@@ -115,7 +115,7 @@ export default function ChurchesIndexPage() {
                         <use href="#ic-church" />
                       </svg>
                       <span className={styles.glyphCaption}>
-                        Photo pending
+                        {tx("Photo pending")}
                       </span>
                     </span>
                   )}

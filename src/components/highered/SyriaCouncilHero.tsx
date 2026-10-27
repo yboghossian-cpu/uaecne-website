@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SyriaEducationalCouncilContent } from "@/data/higherEdContent";
 import styles from "./SyriaCouncilHero.module.css";
@@ -26,24 +27,25 @@ type SyriaCouncilHeroProps = {
 // (see OPEN_QUESTIONS). Previously read "Ministries › Higher Education ›
 // Syria" as a deliberate deviation while the page lived under
 // /higher-education/syria-educational-council.
-export default function SyriaCouncilHero({
+export default async function SyriaCouncilHero({
   heading,
   subheading,
   metaLine,
   logo,
 }: SyriaCouncilHeroProps) {
+  const tx = await getT();
   return (
     <section className={styles.top}>
       <div className={styles.crumb}>
-        <span>Ministries</span>
+        <span>{tx("Ministries")}</span>
         <span className={styles.sep} aria-hidden="true">
           ›
         </span>
-        <span>Schools</span>
+        <span>{tx("Schools")}</span>
         <span className={styles.sep} aria-hidden="true">
           ›
         </span>
-        <span>Syria</span>
+        <span>{tx("Syria")}</span>
       </div>
       <div className={styles.masthead}>
         {logo && (

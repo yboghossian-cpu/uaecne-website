@@ -1,3 +1,4 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getSchool, getSchoolContent, getSchools } from "@/lib/server/content";
@@ -39,9 +40,10 @@ export async function generateMetadata({
   params: Promise<PageParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const school = getSchool(slug);
+  const L = await getL();
+  const school = L(getSchool(slug));
   if (!school) return { title: "School — UAECNE" };
-  const content = getSchoolContent(slug);
+  const content = L(getSchoolContent(slug));
   return pageMetadata({
     title: `${school.name} — UAECNE`,
     // Verbatim from the page's own About text — no new copy.
@@ -56,14 +58,19 @@ export default async function SchoolDetailPage({
 }: {
   params: Promise<PageParams>;
 }) {
+  const tx = await getT();
   const { slug } = await params;
-  const school = getSchool(slug);
-  const content = getSchoolContent(slug);
+  const L = await getL();
+  const schoolEn = getSchool(slug);
+  const contentEn = getSchoolContent(slug);
+  const school = L(schoolEn);
+  const content = L(contentEn);
   if (!school || !content) notFound();
 
   // Locked school template — same spine as the churches. Structure and
   // template wording come from buildSchoolView, never per-school branching.
-  const view = buildSchoolView(school, content);
+  // Built from English (template rules read English role names), then translated.
+  const view = L(buildSchoolView(schoolEn!, contentEn!));
 
   // "Syria (Kessab)" is a display-grouping value — Kessab schools show a
   // 4th crumb segment ("Ministries › Schools › Syria › Kessab").
@@ -82,7 +89,7 @@ export default async function SchoolDetailPage({
 
   return (
     <>
-      <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} section="Schools" />
+      <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} section={tx("Schools")} />
       <SchoolTopBlock
         school={school}
         masthead={view.masthead}

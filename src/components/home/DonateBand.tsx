@@ -1,9 +1,12 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import { useScrollReveal } from "./useScrollReveal";
 import styles from "./DonateBand.module.css";
 
 export default function DonateBand({ donateUrl }: { donateUrl?: string }) {
+  const tx = useT();
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -12,16 +15,13 @@ export default function DonateBand({ donateUrl }: { donateUrl?: string }) {
       data-visible={visible}
       className={`${styles.band} scroll-reveal`}
     >
-      <h2 className={styles.heading}>Support our Mission</h2>
+      <h2 className={styles.heading}>{tx("Support our Mission")}</h2>
       <p className={styles.subtext}>
-        Your dedication and generosity empower the UAECNE to continue its
-        vital work in spiritual growth, education, and compassionate outreach
-        across the Near East. Join us in sustaining a heritage of faith since
-        1846.
+        {tx("Your dedication and generosity empower the UAECNE to continue its vital work in spiritual growth, education, and compassionate outreach across the Near East. Join us in sustaining a heritage of faith since 1846.")}
       </p>
       {donateUrl ? (
         <a href={donateUrl} className={styles.cta} target="_blank" rel="noopener noreferrer">
-          Donate Now
+          {tx("Donate Now")}
         </a>
       ) : (
         <span
@@ -29,7 +29,7 @@ export default function DonateBand({ donateUrl }: { donateUrl?: string }) {
           aria-disabled="true"
           className={styles.cta}
         >
-          Donate Now
+          {tx("Donate Now")}
         </span>
       )}
     </section>

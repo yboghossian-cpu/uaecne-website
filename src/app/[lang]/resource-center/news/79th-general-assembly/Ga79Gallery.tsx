@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import styles from "./Ga79Gallery.module.css";
@@ -10,6 +12,7 @@ const images = Array.from({ length: COUNT }, (_, i) => `/ga79-gallery-${i + 1}.j
 const ratios = [0.667, 1.737, 1.5, 0.667, 1.5, 1.5, 1.5, 1.5, 1.457, 1.5, 1.5, 1.28, 1.5, 1.733, 1.5, 1.5, 1.806, 1.5, 1.5, 1.5, 0.667, 1.5, 1.5, 1.5, 1.227, 1.537];
 
 export default function Ga79Gallery() {
+  const tx = useT();
   const trackRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState<number | null>(null);
   const [canLeft, setCanLeft] = useState(false);
@@ -67,7 +70,7 @@ export default function Ga79Gallery() {
           className={`${styles.edge} ${styles.edgeLeft}`}
           onClick={() => scrollBy(-1)}
           disabled={!canLeft}
-          aria-label="Scroll gallery left"
+          aria-label={tx("Scroll gallery left")}
         >
           <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
@@ -92,7 +95,7 @@ export default function Ga79Gallery() {
           className={`${styles.edge} ${styles.edgeRight}`}
           onClick={() => scrollBy(1)}
           disabled={!canRight}
-          aria-label="Scroll gallery right"
+          aria-label={tx("Scroll gallery right")}
         >
           <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </button>
@@ -100,14 +103,14 @@ export default function Ga79Gallery() {
 
       {open !== null && (
         <div className={styles.lightbox} role="dialog" aria-modal="true" onClick={close}>
-          <button type="button" className={styles.lbClose} onClick={close} aria-label="Close">
+          <button type="button" className={styles.lbClose} onClick={close} aria-label={tx("Close")}>
             <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
           </button>
           <button
             type="button"
             className={`${styles.lbNav} ${styles.lbPrev}`}
             onClick={(e) => { e.stopPropagation(); show(open - 1); }}
-            aria-label="Previous"
+            aria-label={tx("Previous")}
           >
             <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>
@@ -118,7 +121,7 @@ export default function Ga79Gallery() {
             type="button"
             className={`${styles.lbNav} ${styles.lbNext}`}
             onClick={(e) => { e.stopPropagation(); show(open + 1); }}
-            aria-label="Next"
+            aria-label={tx("Next")}
           >
             <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
           </button>

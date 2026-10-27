@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import styles from "./ChurchBreadcrumb.module.css";
 
 type ChurchBreadcrumbProps = {
@@ -14,28 +15,29 @@ type ChurchBreadcrumbProps = {
 
 // "Ministries › {section} › {country}[ › {subregion}]" — country comes
 // straight from the directory's own `country` field, no new content needed.
-export default function ChurchBreadcrumb({
+export default async function ChurchBreadcrumb({
   country,
   section = "Churches",
   subregion,
 }: ChurchBreadcrumbProps) {
+  const tx = await getT();
   return (
     <div className={styles.crumb}>
-      <span>Ministries</span>
+      <span>{tx("Ministries")}</span>
       <span className={styles.sep} aria-hidden="true">
         ›
       </span>
-      <span>{section}</span>
+      <span>{tx(section)}</span>
       <span className={styles.sep} aria-hidden="true">
         ›
       </span>
-      <span>{country}</span>
+      <span>{tx(country)}</span>
       {subregion && (
         <>
           <span className={styles.sep} aria-hidden="true">
             ›
           </span>
-          <span>{subregion}</span>
+          <span>{tx(subregion)}</span>
         </>
       )}
     </div>

@@ -1,3 +1,4 @@
+import { getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getChurch, getChurchContent, getChurches } from "@/lib/server/content";
@@ -33,9 +34,10 @@ export async function generateMetadata({
   params: Promise<PageParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const church = getChurch(slug);
+  const L = await getL();
+  const church = L(getChurch(slug));
   if (!church) return { title: "Church — UAECNE" };
-  const content = getChurchContent(slug);
+  const content = L(getChurchContent(slug));
   // Description reuses text already on the page: the About paragraph for
   // churches with a full profile, otherwise the directory's own facts.
   const description = content?.about.paragraphs[0]
@@ -65,11 +67,16 @@ export default async function ChurchDetailPage({
   // generated from churches.ts's own 25 entries.
   if (!church) notFound();
 
-  const content = getChurchContent(slug);
+  const contentEn = getChurchContent(slug);
   // Locked church template: every church — full profile or directory-only —
   // renders the same sections in the same order with the same labels.
   // Structure and wording come from buildChurchView, never per-church data.
-  const view = buildChurchView(church, content);
+  // Built from the English data (the template's rules read English role
+  // names), then translated as a whole for the current language.
+  const L = await getL();
+  const view = L(buildChurchView(church, contentEn));
+  const content = L(contentEn);
+  const churchL = L(church);
 
   // "Syria (Kessab)" is a display-grouping value, not real crumb text (see
   // churches/page.tsx's own `countryDisplayLabel` for the same split) — the
@@ -82,7 +89,7 @@ export default async function ChurchDetailPage({
     <>
       <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} />
       <ChurchTopBlock
-        church={church}
+        church={churchL}
         masthead={view.masthead}
         logo={view.logo}
         heroPhoto={view.heroPhoto}
@@ -92,7 +99,8 @@ export default async function ChurchDetailPage({
       <ChurchAbout about={view.about} pastorCard={view.pastorCard} />
       <WorshipTodayNotice notice={content?.worshipToday ?? null} />
       <ChurchContactSection
-        church={church}
+        church={churchL}
+        mapsQuery={`${church.name} ${church.address.split("\n")[0] ?? ""}`}
         contactOverride={content?.contactOverride ?? null}
         serviceTime={view.serviceTime}
       />

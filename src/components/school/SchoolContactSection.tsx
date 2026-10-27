@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import type { SchoolContent, SchoolContactRow } from "@/data/schoolContent";
 import SocialLinks from "@/components/shared/SocialLinks";
 import { hasSocial, type SocialLinks as Social } from "@/lib/social";
@@ -34,7 +35,7 @@ const ROW_ICON: Record<string, string> = {
 // at all, so both cards are wholly sourced from SchoolContent and each
 // independently nullable. Renders nothing when both are null (validated by
 // Shamlian-Tatikian, which has neither).
-export default function SchoolContactSection({
+export default async function SchoolContactSection({
   location,
   contactRows: contactRowsIn,
   schoolName,
@@ -42,6 +43,7 @@ export default function SchoolContactSection({
   mapsUrl: curatedMapsUrl,
   social: socialIn,
 }: SchoolContactSectionProps) {
+  const tx = await getT();
   const social = hasSocial(socialIn) ? socialIn : null;
   // Facebook/Instagram rows in "Get in Touch" are replaced by the
   // "Follow Us" links under the location once verified links exist.
@@ -77,14 +79,14 @@ export default function SchoolContactSection({
                   <use href="#ic-pin" />
                 </svg>
               </span>
-              <h3 className={styles.cardTitle}>Our Location</h3>
+              <h3 className={styles.cardTitle}>{tx("Our Location")}</h3>
             </div>
             <div className={styles.row}>
               <svg className={styles.rowIco}>
                 <use href="#ic-pin" />
               </svg>
               <span>
-                <span className={styles.key}>Address</span>
+                <span className={styles.key}>{tx("Address")}</span>
                 {location.addressLines.map((line, i) => (
                   <span key={i} className={styles.addressLine}>
                     {line}
@@ -112,7 +114,7 @@ export default function SchoolContactSection({
                 <svg className={styles.mapBtnIcon}>
                   <use href="#ic-pin" />
                 </svg>
-                View on Maps
+                {tx("View on Maps")}
               </a>
             )}
           </div>
@@ -126,7 +128,7 @@ export default function SchoolContactSection({
                   <use href="#ic-mail" />
                 </svg>
               </span>
-              <h3 className={styles.cardTitle}>Get in Touch</h3>
+              <h3 className={styles.cardTitle}>{tx("Get in Touch")}</h3>
             </div>
             {contactRows.map((row, i) => (
               <div className={styles.row} key={i}>
@@ -134,7 +136,7 @@ export default function SchoolContactSection({
                   <use href={ROW_ICON[row.key] ?? (row.href ? "#ic-mail" : "#ic-user")} />
                 </svg>
                 <span>
-                  <span className={styles.key}>{row.key}</span>
+                  <span className={styles.key}>{tx(row.key)}</span>
                   {row.href ? (
                     <a href={row.href} className={styles.link}>
                       {row.value}
@@ -159,7 +161,7 @@ export default function SchoolContactSection({
                   <use href="#ic-globe" />
                 </svg>
               </span>
-              <h3 className={styles.cardTitle}>Online</h3>
+              <h3 className={styles.cardTitle}>{tx("Online")}</h3>
             </div>
             <SocialLinks social={social} name={schoolName} />
           </div>

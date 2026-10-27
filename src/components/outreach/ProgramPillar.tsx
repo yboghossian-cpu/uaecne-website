@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SocialActionContent } from "@/data/outreachContent";
 import styles from "./ProgramPillar.module.css";
@@ -9,7 +10,8 @@ type ProgramPillarProps = {
 // "How We Serve" — 2 alternating photo+bullets rows (photo left/right by
 // row), each with a real, verbatim bullet list. Both photos are currently
 // photo-pending — SAC-only, no reuse target.
-export default function ProgramPillar({ pillars }: ProgramPillarProps) {
+export default async function ProgramPillar({ pillars }: ProgramPillarProps) {
+  const tx = await getT();
   return (
     <section className={styles.wrap}>
       <div className={styles.centerHead}>
@@ -32,7 +34,7 @@ export default function ProgramPillar({ pillars }: ProgramPillarProps) {
                   <svg className={styles.picGlyphIcon} viewBox="0 0 24 24" aria-hidden="true">
                     <use href="#ic-photo" />
                   </svg>
-                  <span className={styles.picGlyphCaption}>Photo pending</span>
+                  <span className={styles.picGlyphCaption}>{tx("Photo pending")}</span>
                 </span>
               )}
             </div>

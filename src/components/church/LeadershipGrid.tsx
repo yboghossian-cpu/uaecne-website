@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import styles from "./LeadershipGrid.module.css";
 
@@ -30,12 +31,13 @@ type LeadershipGridProps = {
 // Syriac). Any entry with no photo gets the medallion "photo pending"
 // treatment, matching src/app/churches/page.module.css's .picPending/.glyph
 // pattern (icon + caption on a warm gradient) rather than a bare rectangle.
-export default function LeadershipGrid({
+export default async function LeadershipGrid({
   leaders,
   eyebrow = "The Ministry",
   heading = "Leadership",
   note,
 }: LeadershipGridProps) {
+  const tx = await getT();
   if (!leaders) return null;
 
   return (
@@ -58,7 +60,7 @@ export default function LeadershipGrid({
                   <svg className={styles.glyphIcon}>
                     <use href="#ic-user" />
                   </svg>
-                  <span className={styles.glyphCaption}>Photo pending</span>
+                  <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
                 </span>
               )}
             </div>

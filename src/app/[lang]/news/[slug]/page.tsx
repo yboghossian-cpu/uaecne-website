@@ -1,3 +1,4 @@
+import { getT, getL, getLang } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,7 +16,8 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
-  const post = getPostBySlug((await params).slug);
+  const L = await getL();
+  const post = L(getPostBySlug((await params).slug));
   if (!post) return { title: "News — UAECNE" };
   return pageMetadata({
     title: `${post.title} — UAECNE`,
@@ -55,32 +57,35 @@ function Body({ text }: { text: string }) {
 }
 
 export default async function NewsArticle({ params }: { params: Promise<Params> }) {
-  const post = getPostBySlug((await params).slug);
+  const tx = await getT();
+  const L = await getL();
+  const lang = await getLang();
+  const post = L(getPostBySlug((await params).slug));
   if (!post) notFound();
   if (post.link) redirect(post.link);
   const isEvent = post.kind === "event";
   return (
     <article className={styles.article}>
-      <nav className={styles.crumb} aria-label="Breadcrumb">
-        <Link href="/news">News &amp; Events</Link> <span aria-hidden="true">›</span> {isEvent ? "Event" : "News"}
+      <nav className={styles.crumb} aria-label={tx("Breadcrumb")}>
+        <Link href="/news">{tx("News & Events")}</Link> <span aria-hidden="true">›</span> {isEvent ? tx("Event") : tx("News")}
       </nav>
       {post.kicker && <p className={styles.kicker}>{post.kicker}</p>}
       <h1 className={styles.title}>{post.title}</h1>
-      <p className={styles.meta}>{formatDate(post.date)}</p>
+      <p className={styles.meta}>{formatDate(post.date, false, lang)}</p>
       {isEvent && (
         <dl className={styles.eventBox}>
           {post.event_start && (
             <div>
-              <dt>When</dt>
+              <dt>{tx("When")}</dt>
               <dd>
-                {formatDate(post.event_start, true)}
-                {post.event_end ? ` – ${formatDate(post.event_end, true)}` : ""}
+                {formatDate(post.event_start, true, lang)}
+                {post.event_end ? ` – ${formatDate(post.event_end, true, lang)}` : ""}
               </dd>
             </div>
           )}
           {post.location && (
             <div>
-              <dt>Where</dt>
+              <dt>{tx("Where")}</dt>
               <dd>{post.location}</dd>
             </div>
           )}
@@ -101,7 +106,7 @@ export default async function NewsArticle({ params }: { params: Promise<Params> 
       {post.excerpt && <p className={styles.lede}>{post.excerpt}</p>}
       <Body text={post.body} />
       <p className={styles.back}>
-        <Link href="/news">← All news &amp; events</Link>
+        <Link href="/news">{tx("← All news & events")}</Link>
       </p>
     </article>
   );

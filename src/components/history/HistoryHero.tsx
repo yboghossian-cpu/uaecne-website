@@ -1,10 +1,13 @@
+import { getL } from "@/lib/i18n/server";
 import Image from "next/image";
-import { historyContent } from "@/data/historyContent";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import styles from "./HistoryHero.module.css";
 
 // Burgundy field hero with the real UAECNE seal in a gold-ringed disc,
 // matching design-reference/uaecne-history.html's .hero exactly.
-export default function HistoryHero() {
+export default async function HistoryHero() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { crumb, seal, kicker, title, estabLine } = historyContent;
 
   return (

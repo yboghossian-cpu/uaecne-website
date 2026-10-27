@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import type { SchoolContent } from "@/data/schoolContent";
 import styles from "./SchoolLanguages.module.css";
 
@@ -18,7 +19,8 @@ type SchoolLanguagesProps = {
 // language-box row — Bethel Secondary School's lang-row sits embedded at
 // the end of its own "Academics" section (no separate heading, no wash),
 // unlike ACG's standalone section.
-export default function SchoolLanguages({ languages }: SchoolLanguagesProps) {
+export default async function SchoolLanguages({ languages }: SchoolLanguagesProps) {
+  const tx = await getT();
   if (!languages) return null;
 
   const bare = languages.eyebrow === null;
@@ -36,7 +38,7 @@ export default function SchoolLanguages({ languages }: SchoolLanguagesProps) {
         {languages.items.map((item, i) => (
           <div className={styles.lang} key={i}>
             <b>{item.label}</b>
-            <span>Language</span>
+            <span>{tx("Language")}</span>
           </div>
         ))}
       </div>

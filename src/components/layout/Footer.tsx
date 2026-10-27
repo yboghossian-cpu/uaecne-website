@@ -1,9 +1,11 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import Link from "next/link";
 import { getSettings, telHref } from "@/lib/server/settings";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+export default async function Footer() {
+  const tx = await getT();
   const year = new Date().getFullYear();
   const { contact, social: links } = getSettings();
   const socialAll = [
@@ -36,9 +38,9 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.cols}>
         <div className={styles.contactCol}>
-          <p className={styles.headOffice}>UAECNE — Head Office</p>
+          <p className={styles.headOffice}>{tx("UAECNE — Head Office")}</p>
           <p className={styles.orgName}>
-            Union of the Armenian Evangelical Churches in the Near East
+            {tx("Union of the Armenian Evangelical Churches in the Near East")}
           </p>
 
           {contactBlock(contact.addressEn)}
@@ -88,21 +90,22 @@ export default function Footer() {
 
         <ul className={styles.social}>
           <li>
-            <Link href="/news">News &amp; Events</Link>
+            <Link href="/news">{tx("News & Events")}</Link>
           </li>
           <li>
-            <Link href="/contact">Contact</Link>
+            <Link href="/contact">{tx("Contact")}</Link>
           </li>
           <li>
-            <Link href="/prayer-request">Prayer Request</Link>
+            <Link href="/prayer-request">{tx("Prayer Request")}</Link>
           </li>
         </ul>
         </div>
 
         <p className={styles.copyright}>
-          © {year} UAECNE. All Rights Reserved.
+          © {year}{tx(" UAECNE. All Rights Reserved.")}
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- separate root layout / file download: full page load */}
           <a href="/admin" className={styles.adminLink} rel="nofollow">
-            Admin login
+            {tx("Admin login")}
           </a>
         </p>
       </div>

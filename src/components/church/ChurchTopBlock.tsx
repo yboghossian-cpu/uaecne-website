@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { Church } from "@/data/churches";
 import ChurchFactsBar from "./ChurchFactsBar";
@@ -33,13 +34,14 @@ type ChurchTopBlockProps = {
 // facts like neighborhood name or founding year — see the note on
 // ChurchContent.masthead in churchContent.ts), the wide hero photo, and the
 // red facts strip.
-export default function ChurchTopBlock({
+export default async function ChurchTopBlock({
   church,
   masthead,
   logo,
   heroPhoto,
   factsBar,
 }: ChurchTopBlockProps) {
+  const tx = await getT();
   return (
     <section className={styles.top}>
       <div className={styles.titleRow}>
@@ -56,7 +58,7 @@ export default function ChurchTopBlock({
           <h1 className={styles.heading}>{church.name}</h1>
           <div className={styles.meta}>
             {masthead.locationLine}
-            {` · ${masthead.establishedLabel ?? "Established"} `}
+            {` · ${masthead.establishedLabel ?? tx("Established")} `}
             <b className={styles.estYear}>{masthead.established}</b>
             {masthead.establishedSuffix}
             {masthead.secondDate && (
@@ -77,7 +79,7 @@ export default function ChurchTopBlock({
             <svg className={styles.heroGlyphIcon} viewBox="0 0 24 24" aria-hidden="true">
               <use href="#ic-church" />
             </svg>
-            <span className={styles.heroGlyphCaption}>Photo pending</span>
+            <span className={styles.heroGlyphCaption}>{tx("Photo pending")}</span>
           </span>
         )}
       </div>

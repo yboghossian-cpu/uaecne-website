@@ -1,3 +1,4 @@
+import { getL } from "@/lib/i18n/server";
 import Hero from "@/components/home/Hero";
 import TickerBand from "@/components/home/TickerBand";
 import StatsRow from "@/components/home/StatsRow";
@@ -9,9 +10,10 @@ import DonateBand from "@/components/home/DonateBand";
 import { getHomepagePost, postHref } from "@/lib/server/posts";
 import { getSettings } from "@/lib/server/settings";
 
-export default function Home() {
+export default async function Home() {
   // "Latest Updates" shows the featured (else newest) post from Admin › News.
-  const post = getHomepagePost();
+  const L = await getL();
+  const post = L(getHomepagePost());
   const { donateUrl } = getSettings();
   return (
     <>

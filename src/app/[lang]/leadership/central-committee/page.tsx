@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Medallion from "@/components/shared/Medallion";
@@ -90,13 +91,14 @@ const members = [
   },
 ];
 
-export default function CentralCommitteePage() {
+export default async function CentralCommitteePage() {
+  const tx = await getT();
   return (
     <>
       <section className={styles.banner}>
         <div className={styles.bannerInner}>
-          <h1 className={styles.bannerHeading}>Central Committee</h1>
-          <span className={styles.updated}>Last updated · May 2026</span>
+          <h1 className={styles.bannerHeading}>{tx("Central Committee")}</h1>
+          <span className={styles.updated}>{tx("Last updated · May 2026")}</span>
         </div>
       </section>
 
@@ -119,7 +121,7 @@ export default function CentralCommitteePage() {
                     <svg className={styles.glyphIcon}>
                       <use href="#ic-user" />
                     </svg>
-                    <span className={styles.glyphCaption}>Photo pending</span>
+                    <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
                   </span>
                 )}
               </div>

@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import PastorCard from "./PastorCard";
 import styles from "./ChurchAbout.module.css";
 
@@ -20,7 +21,8 @@ type ChurchAboutProps = {
 // Locked template: pastor card on the left, About text on the right, first
 // paragraph with the gold drop cap. Same layout for every church — a missing
 // photo or name shows as pending inside the card, never a different layout.
-export default function ChurchAbout({ about, pastorCard }: ChurchAboutProps) {
+export default async function ChurchAbout({ about, pastorCard }: ChurchAboutProps) {
+  const tx = await getT();
   return (
     <section className={styles.about}>
       <div className={styles.grid}>
@@ -30,8 +32,7 @@ export default function ChurchAbout({ about, pastorCard }: ChurchAboutProps) {
           <h2 className={styles.heading}>{about.heading}</h2>
           {about.pending ? (
             <p className={styles.pendingNote}>
-              The full profile of this church — its history, ministries and leadership — is being
-              prepared. Contact details below are current.
+              {tx("The full profile of this church — its history, ministries and leadership — is being prepared. Contact details below are current.")}
             </p>
           ) : (
             about.paragraphs.map((paragraph, i) =>

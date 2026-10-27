@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { EducationCouncilContent } from "@/data/higherEdContent";
 import styles from "./CouncilSecretary.module.css";
@@ -10,7 +11,8 @@ type CouncilSecretaryProps = {
 // (the Council isn't a physical campus), so this deliberately doesn't
 // reuse ChurchContactSection/SchoolContactSection's two-card location+
 // contact shape.
-export default function CouncilSecretary({ secretary }: CouncilSecretaryProps) {
+export default async function CouncilSecretary({ secretary }: CouncilSecretaryProps) {
+  const tx = await getT();
   return (
     <section className={styles.wrap}>
       <div className={styles.inner}>
@@ -37,14 +39,14 @@ export default function CouncilSecretary({ secretary }: CouncilSecretaryProps) {
           </div>
         </div>
         <div>
-          <div className={styles.eyebrow}>Contact</div>
-          <h3 className={styles.heading}>Get in Touch</h3>
+          <div className={styles.eyebrow}>{tx("Contact")}</div>
+          <h3 className={styles.heading}>{tx("Get in Touch")}</h3>
           <div className={styles.row}>
             <svg className={styles.rowIco} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
               <path d="M6 3h3l2 5-2.5 1.5a11 11 0 005 5L21 15v3a2 2 0 01-2 2A16 16 0 014 5a2 2 0 012-2z" />
             </svg>
             <span>
-              <span className={styles.key}>Phone</span>
+              <span className={styles.key}>{tx("Phone")}</span>
               <span className={styles.value}>{secretary.phone}</span>
             </span>
           </div>
@@ -54,7 +56,7 @@ export default function CouncilSecretary({ secretary }: CouncilSecretaryProps) {
               <path d="M4 7l8 6 8-6" />
             </svg>
             <span>
-              <span className={styles.key}>Email</span>
+              <span className={styles.key}>{tx("Email")}</span>
               <a href={`mailto:${secretary.email}`} className={`${styles.value} ${styles.link}`}>
                 {secretary.email}
               </a>

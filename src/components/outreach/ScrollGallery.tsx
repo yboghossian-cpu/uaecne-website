@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Photo } from "@/data/outreachContent";
@@ -20,6 +22,7 @@ const PLACEHOLDER_COUNT = 6;
 // — ported from the mockup's vanilla-JS behavior into React state. Native
 // browser scrolling handles touch/swipe for free.
 export default function ScrollGallery({ eyebrow, heading, photos }: ScrollGalleryProps) {
+  const tx = useT();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -61,7 +64,7 @@ export default function ScrollGallery({ eyebrow, heading, photos }: ScrollGaller
         <button
           type="button"
           className={atStart ? `${styles.arrow} ${styles.left} ${styles.hidden}` : `${styles.arrow} ${styles.left}`}
-          aria-label="Previous photos"
+          aria-label={tx("Previous photos")}
           onClick={() => scrollByStep(-1)}
         >
           <svg className={styles.arrowIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -79,7 +82,7 @@ export default function ScrollGallery({ eyebrow, heading, photos }: ScrollGaller
                   <svg className={styles.itemGlyphIcon} viewBox="0 0 24 24" aria-hidden="true">
                     <use href="#ic-photo" />
                   </svg>
-                  <span className={styles.itemGlyphCaption}>Photo pending</span>
+                  <span className={styles.itemGlyphCaption}>{tx("Photo pending")}</span>
                 </span>
               )}
             </div>
@@ -89,7 +92,7 @@ export default function ScrollGallery({ eyebrow, heading, photos }: ScrollGaller
         <button
           type="button"
           className={atEnd ? `${styles.arrow} ${styles.right} ${styles.hidden}` : `${styles.arrow} ${styles.right}`}
-          aria-label="More photos"
+          aria-label={tx("More photos")}
           onClick={() => scrollByStep(1)}
         >
           <svg className={styles.arrowIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -97,7 +100,7 @@ export default function ScrollGallery({ eyebrow, heading, photos }: ScrollGaller
           </svg>
         </button>
       </div>
-      <div className={styles.cue}>Swipe or tap the arrows</div>
+      <div className={styles.cue}>{tx("Swipe or tap the arrows")}</div>
     </section>
   );
 }

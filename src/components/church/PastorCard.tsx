@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import styles from "./PastorCard.module.css";
 
@@ -12,7 +13,8 @@ type PastorCardProps = {
 };
 
 // Small photo+name+role card, shown beside the About text.
-export default function PastorCard({ name, role, photo }: PastorCardProps) {
+export default async function PastorCard({ name, role, photo }: PastorCardProps) {
+  const tx = await getT();
   return (
     <div className={styles.card}>
       <div className={photo ? styles.picWrap : `${styles.picWrap} ${styles.picPending}`}>
@@ -23,7 +25,7 @@ export default function PastorCard({ name, role, photo }: PastorCardProps) {
             <svg className={styles.glyphIcon} aria-hidden="true">
               <use href="#ic-user" />
             </svg>
-            <span className={styles.glyphCaption}>Photo pending</span>
+            <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
           </span>
         )}
       </div>

@@ -11,6 +11,7 @@ import { saveSettings as storeSettings, type SiteSettings } from "@/lib/server/s
 import { blankFor, checkShape, inferShape } from "@/lib/admin/shape";
 import { mailConfigured, notifyRecipients, sendMail } from "@/lib/server/mail";
 import { LANGS } from "@/lib/i18n/config";
+import { getDictionary } from "@/lib/i18n/dictionary";
 
 export type ActionResult = { ok: boolean; message: string };
 
@@ -91,6 +92,7 @@ export async function saveSettingsAction(_prev: ActionResult, fd: FormData): Pro
       x: url(fd.get("x")),
     },
     donateUrl: url(fd.get("donateUrl")),
+    armenianLive: fd.get("armenianLive") === "on",
     announcement: {
       enabled: fd.get("announcementEnabled") === "on",
       text: String(fd.get("announcementText") ?? "").trim(),
@@ -460,4 +462,42 @@ function findMediaUse(u: string): string[] {
   const settings = db.prepare("SELECT 1 FROM settings WHERE instr(value, ?) > 0").get(u);
   if (settings) out.push("Settings");
   return out;
+}
+
+// ---------------- translations ----------------
+
+export async function saveTranslation(source: string, hy: string, approve: boolean): Promise<ActionResult> {
+  await requireAdmin();
+  const db = requireDb();
+  getDictionary();
+  const text = hy.trim();
+  db.prepare(
+    `INSERT INTO translations (source, hy, status, updated_at) VALUES (?, ?, ?, datetime('now'))
+     ON CONFLICT(source) DO UPDATE SET hy = excluded.hy, status = excluded.status, updated_at = excluded.updated_at`,
+  ).run(source, text, approve && text ? "approved" : "draft");
+  revalidatePath("/", "layout");
+  return { ok: true, message: approve ? "Approved" : "Saved" };
+}
+
+export async function approveAllShown(sources: string[]): Promise<ActionResult> {
+  await requireAdmin();
+  const db = requireDb();
+  getDictionary();
+  const dict = getDictionary();
+  const stmt = db.prepare(
+    `INSERT INTO translations (source, hy, status, updated_at) VALUES (?, ?, 'approved', datetime('now'))
+     ON CONFLICT(source) DO UPDATE SET status = 'approved', updated_at = excluded.updated_at`,
+  );
+  let n = 0;
+  db.transaction(() => {
+    for (const s of sources) {
+      const hy = dict.get(s);
+      if (hy) {
+        stmt.run(s, hy);
+        n++;
+      }
+    }
+  })();
+  revalidatePath("/", "layout");
+  return { ok: true, message: `${n} approved` };
 }

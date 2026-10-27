@@ -15,6 +15,8 @@ export type SiteSettings = {
   };
   social: { facebook: string; youtube: string; instagram: string; x: string };
   donateUrl: string;
+  // Shows the ՀԱՅ switch to visitors (after the translation audit).
+  armenianLive: boolean;
   announcement: { enabled: boolean; text: string; linkLabel: string; linkUrl: string };
   seo: { defaultDescription: string };
   notifications: { emails: string[] };
@@ -34,6 +36,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     x: "",
   },
   donateUrl: "",
+  armenianLive: false,
   announcement: { enabled: false, text: "", linkLabel: "", linkUrl: "" },
   seo: {
     defaultDescription: "The Union of the Armenian Evangelical Churches in the Near East — est. 1846.",

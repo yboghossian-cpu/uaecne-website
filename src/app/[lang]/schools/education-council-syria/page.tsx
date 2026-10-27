@@ -1,5 +1,6 @@
+import { getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
-import { syriaEducationalCouncilContent } from "@/data/higherEdContent";
+import { syriaEducationalCouncilContent as syriaEducationalCouncilContent__en } from "@/data/higherEdContent";
 import SyriaCouncilHero from "@/components/highered/SyriaCouncilHero";
 import SyriaCouncilOverview from "@/components/highered/SyriaCouncilOverview";
 import SyriaCouncilAreas from "@/components/highered/SyriaCouncilAreas";
@@ -10,10 +11,12 @@ import SchoolContactSection from "@/components/school/SchoolContactSection";
 import HigherEdCTA from "@/components/highered/HigherEdCTA";
 
 export const metadata: Metadata = {
-  title: `${syriaEducationalCouncilContent.heading} — UAECNE`,
+  title: `${syriaEducationalCouncilContent__en.heading} — UAECNE`,
 };
 
-export default function EducationCouncilSyriaPage() {
+export default async function EducationCouncilSyriaPage() {
+  const L = await getL();
+  const syriaEducationalCouncilContent = L(syriaEducationalCouncilContent__en);
   const s = syriaEducationalCouncilContent;
   return (
     <>

@@ -1,10 +1,11 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  campsContent,
-  youthWorkContent,
-  socialActionContent,
-  boardingHomeContent,
+  campsContent as campsContent__en,
+  youthWorkContent as youthWorkContent__en,
+  socialActionContent as socialActionContent__en,
+  boardingHomeContent as boardingHomeContent__en,
 } from "@/data/outreachContent";
 import OutreachTopBlock from "@/components/outreach/OutreachTopBlock";
 import RedLabelBlock from "@/components/outreach/RedLabelBlock";
@@ -30,10 +31,10 @@ import BoardingHomeContact from "@/components/outreach/BoardingHomeContact";
 import FollowBand from "@/components/shared/FollowBand";
 
 const SLUGS = [
-  campsContent.slug,
-  youthWorkContent.slug,
-  socialActionContent.slug,
-  boardingHomeContent.slug,
+  campsContent__en.slug,
+  youthWorkContent__en.slug,
+  socialActionContent__en.slug,
+  boardingHomeContent__en.slug,
 ] as const;
 
 type PageParams = { slug: string };
@@ -47,6 +48,11 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
+  const L = await getL();
+  const campsContent = L(campsContent__en);
+  const youthWorkContent = L(youthWorkContent__en);
+  const socialActionContent = L(socialActionContent__en);
+  const boardingHomeContent = L(boardingHomeContent__en);
   const { slug } = await params;
   if (slug === campsContent.slug) return { title: `${campsContent.title} — UAECNE` };
   if (slug === youthWorkContent.slug) return { title: `${youthWorkContent.title} — UAECNE` };
@@ -63,6 +69,12 @@ export default async function OutreachDetailPage({
 }: {
   params: Promise<PageParams>;
 }) {
+  const L = await getL();
+  const campsContent = L(campsContent__en);
+  const youthWorkContent = L(youthWorkContent__en);
+  const socialActionContent = L(socialActionContent__en);
+  const boardingHomeContent = L(boardingHomeContent__en);
+  const tx = await getT();
   const { slug } = await params;
 
   if (slug === campsContent.slug) {
@@ -87,7 +99,7 @@ export default async function OutreachDetailPage({
           heading={c.gallery.heading}
           photos={c.gallery.photos}
         />
-        <FollowBand social={c.social} name="KCHAG" />
+        <FollowBand social={c.social} name={tx("KCHAG")} />
         <OutreachCTA cta={c.cta} />
       </>
     );

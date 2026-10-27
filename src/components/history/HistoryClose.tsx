@@ -1,10 +1,13 @@
+import { getL } from "@/lib/i18n/server";
 import Image from "next/image";
-import { historyContent } from "@/data/historyContent";
+import { historyContent as historyContent__en } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryClose.module.css";
 
 // Closing seal band, matching the mockup's .close section.
-export default function HistoryClose() {
+export default async function HistoryClose() {
+  const L = await getL();
+  const historyContent = L(historyContent__en);
   const { seal, closing } = historyContent;
 
   return (

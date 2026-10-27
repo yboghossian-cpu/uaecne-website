@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import type { Church } from "@/data/churches";
 import type { ChurchContent } from "@/data/churchContent";
 import SocialLinks from "@/components/shared/SocialLinks";
@@ -16,6 +17,8 @@ type ChurchContactSectionProps = {
   // time, or where the congregation now worships. null = "Pending" — the row
   // always shows, so every church's location card has the same rows.
   serviceTime: string | null;
+  // English name + address for the Google Maps search (works in both languages).
+  mapsQuery?: string;
 };
 
 // Icon keyed by social row label, mirroring SchoolContactSection's ROW_ICON.
@@ -35,11 +38,13 @@ const SOCIAL_ICON: Record<string, string> = {
 // address) — start from churches.ts, then spread the override on top; only
 // its set keys change. An explicit `email: null` suppresses the email row
 // entirely (see OPEN_QUESTIONS.md #34, Nor Marash).
-export default function ChurchContactSection({
+export default async function ChurchContactSection({
   church,
   contactOverride,
   serviceTime,
+  mapsQuery,
 }: ChurchContactSectionProps) {
+  const tx = await getT();
   const phonePending = contactOverride?.phonePending ?? false;
   const emailPending = contactOverride?.emailPending ?? false;
   const phone = contactOverride?.phone ?? church.phone;
@@ -66,7 +71,7 @@ export default function ChurchContactSection({
   const mapsUrl =
     contactOverride?.mapsUrl ??
     `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      `${church.name} ${addressLines[0] ?? ""}`,
+      mapsQuery ?? `${church.name} ${addressLines[0] ?? ""}`,
     )}`;
   const otherServices = contactOverride?.otherServices ?? [];
   const emailLabels = contactOverride?.emailLabels ?? [];
@@ -91,14 +96,14 @@ export default function ChurchContactSection({
                 <use href="#ic-pin" />
               </svg>
             </span>
-            <h3 className={styles.cardTitle}>Our Location</h3>
+            <h3 className={styles.cardTitle}>{tx("Our Location")}</h3>
           </div>
           <div className={styles.row}>
             <svg className={styles.rowIco}>
               <use href="#ic-pin" />
             </svg>
             <span>
-              <span className={styles.key}>Address</span>
+              <span className={styles.key}>{tx("Address")}</span>
               {addressLines.map((line, i) => (
                 <span key={i} className={styles.addressLine}>
                   {line}
@@ -111,8 +116,8 @@ export default function ChurchContactSection({
               <use href="#ic-dot" />
             </svg>
             <span>
-              <span className={styles.key}>Service Time</span>
-              {serviceTime ?? <span className={styles.pending}>Pending</span>}
+              <span className={styles.key}>{tx("Service Time")}</span>
+              {serviceTime ?? <span className={styles.pending}>{tx("Pending")}</span>}
             </span>
           </div>
           {otherServices.length > 0 && (
@@ -121,7 +126,7 @@ export default function ChurchContactSection({
                 <use href="#ic-dot" />
               </svg>
               <span>
-                <span className={styles.key}>Other Services</span>
+                <span className={styles.key}>{tx("Other Services")}</span>
                 {otherServices.map((line) => (
                   <span key={line} className={styles.addressLine}>
                     {line}
@@ -136,7 +141,7 @@ export default function ChurchContactSection({
             <svg className={styles.mapBtnIcon}>
               <use href="#ic-pin" />
             </svg>
-            View on Maps
+            {tx("View on Maps")}
           </a>
         </div>
         )}
@@ -148,7 +153,7 @@ export default function ChurchContactSection({
                 <use href="#ic-mail" />
               </svg>
             </span>
-            <h3 className={styles.cardTitle}>Get in Touch</h3>
+            <h3 className={styles.cardTitle}>{tx("Get in Touch")}</h3>
           </div>
           {phonePending ? (
             <div className={styles.row}>
@@ -156,8 +161,8 @@ export default function ChurchContactSection({
                 <use href="#ic-phone" />
               </svg>
               <span>
-                <span className={styles.key}>Phone</span>
-                <span className={styles.pending}>Pending</span>
+                <span className={styles.key}>{tx("Phone")}</span>
+                <span className={styles.pending}>{tx("Pending")}</span>
               </span>
             </div>
           ) : (
@@ -167,7 +172,7 @@ export default function ChurchContactSection({
                   <use href="#ic-phone" />
                 </svg>
                 <span>
-                  <span className={styles.key}>Phone</span>
+                  <span className={styles.key}>{tx("Phone")}</span>
                   {phone}
                 </span>
               </div>
@@ -179,7 +184,7 @@ export default function ChurchContactSection({
                 <use href="#ic-phone" />
               </svg>
               <span>
-                <span className={styles.key}>Fax</span>
+                <span className={styles.key}>{tx("Fax")}</span>
                 {fax}
               </span>
             </div>
@@ -190,8 +195,8 @@ export default function ChurchContactSection({
                 <use href="#ic-mail" />
               </svg>
               <span>
-                <span className={styles.key}>Email</span>
-                <span className={styles.pending}>Pending</span>
+                <span className={styles.key}>{tx("Email")}</span>
+                <span className={styles.pending}>{tx("Pending")}</span>
               </span>
             </div>
           ) : (
@@ -203,10 +208,10 @@ export default function ChurchContactSection({
                 <span>
                   <span className={styles.key}>
                     {emailLabels[i]
-                      ? `Email · ${emailLabels[i]}`
+                      ? `${tx("Email")} · ${tx(emailLabels[i])}`
                       : emails.length > 1
-                        ? `Email ${i + 1}`
-                        : "Email"}
+                        ? `${tx("Email")} ${i + 1}`
+                        : tx("Email")}
                   </span>
                   <a href={`mailto:${email}`} className={styles.link}>
                     {email}
@@ -221,7 +226,7 @@ export default function ChurchContactSection({
                 <use href="#ic-user" />
               </svg>
               <span>
-                <span className={styles.key}>{secretaryLabel}</span>
+                <span className={styles.key}>{tx(secretaryLabel)}</span>
                 {secretary}
               </span>
             </div>
@@ -232,7 +237,7 @@ export default function ChurchContactSection({
                 <use href="#ic-fb" />
               </svg>
               <span>
-                <span className={styles.key}>Facebook</span>
+                <span className={styles.key}>{tx("Facebook")}</span>
                 <a
                   href={contactOverride.facebook.url}
                   target="_blank"
@@ -251,7 +256,7 @@ export default function ChurchContactSection({
                   <use href={SOCIAL_ICON[s.key]} />
                 </svg>
                 <span>
-                  <span className={styles.key}>{s.key}</span>
+                  <span className={styles.key}>{tx(s.key)}</span>
                   <a href={s.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
                     {s.label}
                   </a>

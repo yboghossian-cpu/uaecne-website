@@ -111,10 +111,17 @@ export function getPostById(id: number): Post | null {
   return (db.prepare("SELECT * FROM posts WHERE id = ?").get(id) as Post) ?? null;
 }
 
-export function formatDate(iso: string | null, withTime = false): string {
+// Western Armenian month names (classical orthography).
+const HY_MONTHS = ["Յունուար", "Փետրուար", "Մարտ", "Ապրիլ", "Մայիս", "Յունիս", "Յուլիս", "Օգոստոս", "Սեպտեմբեր", "Հոկտեմբեր", "Նոյեմբեր", "Դեկտեմբեր"];
+
+export function formatDate(iso: string | null, withTime = false, lang: "en" | "hy" = "en"): string {
   if (!iso) return "";
   const d = new Date(iso.length <= 10 ? `${iso}T00:00:00` : iso);
   if (Number.isNaN(d.getTime())) return iso;
+  if (lang === "hy") {
+    const time = withTime && iso.length > 10 ? `, ${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}` : "";
+    return `${d.getDate()} ${HY_MONTHS[d.getMonth()]} ${d.getFullYear()}${time}`;
+  }
   return d.toLocaleString("en-GB", {
     day: "numeric",
     month: "long",

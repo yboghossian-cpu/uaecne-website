@@ -11,6 +11,7 @@ const LINKS = [
   { href: "/admin/churches", label: "Churches" },
   { href: "/admin/schools", label: "Schools" },
   { href: "/admin/media", label: "Media" },
+  { href: "/admin/translations", label: "Translations" },
   { href: "/admin/settings", label: "Settings" },
   { href: "/admin/account", label: "Account" },
 ];

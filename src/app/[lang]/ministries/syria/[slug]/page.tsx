@@ -1,6 +1,7 @@
+import { getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { syriaMinistries } from "@/data/syriaMinistries";
+import { syriaMinistries as syriaMinistries__en } from "@/data/syriaMinistries";
 import { pageMetadata, summarize } from "@/lib/site";
 import OutreachTopBlock from "@/components/outreach/OutreachTopBlock";
 import RedLabelBlock from "@/components/outreach/RedLabelBlock";
@@ -14,7 +15,9 @@ import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
 
 type PageParams = { slug: string };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const L = await getL();
+  const syriaMinistries = L(syriaMinistries__en);
   return syriaMinistries.map((m) => ({ slug: m.slug }));
 }
 
@@ -23,6 +26,8 @@ export async function generateMetadata({
 }: {
   params: Promise<PageParams>;
 }): Promise<Metadata> {
+  const L = await getL();
+  const syriaMinistries = L(syriaMinistries__en);
   const { slug } = await params;
   const page = syriaMinistries.find((m) => m.slug === slug);
   if (!page) return { title: "Syria — UAECNE" };
@@ -41,6 +46,8 @@ export default async function SyriaMinistryPage({
 }: {
   params: Promise<PageParams>;
 }) {
+  const L = await getL();
+  const syriaMinistries = L(syriaMinistries__en);
   const { slug } = await params;
   const page = syriaMinistries.find((m) => m.slug === slug);
   if (!page) notFound();

@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SchoolLeaderEntry } from "@/data/schoolContent";
 import styles from "./SchoolLeadershipGrid.module.css";
@@ -11,13 +12,14 @@ type SchoolLeadershipGridProps = {
 // never invented:
 //  - no photo -> arched placeholder icon (name still shown if verified)
 //  - no name  -> italic-gold "Name pending" label (Anjar, Bethel)
-export default function SchoolLeadershipGrid({ leaders }: SchoolLeadershipGridProps) {
+export default async function SchoolLeadershipGrid({ leaders }: SchoolLeadershipGridProps) {
+  const tx = await getT();
   if (!leaders) return null;
 
   return (
     <section className={styles.lead}>
-      <div className={styles.eyebrow}>Administration</div>
-      <h2 className={styles.heading}>Leadership</h2>
+      <div className={styles.eyebrow}>{tx("Administration")}</div>
+      <h2 className={styles.heading}>{tx("Leadership")}</h2>
       <div className={styles.grid}>
         {leaders.map((leader, i) => (
           <div className={styles.person} key={i}>
@@ -43,7 +45,7 @@ export default function SchoolLeadershipGrid({ leaders }: SchoolLeadershipGridPr
               {leader.name ? (
                 <b className={styles.name}>{leader.name}</b>
               ) : (
-                <b className={`${styles.name} ${styles.namePending}`}>Name pending</b>
+                <b className={`${styles.name} ${styles.namePending}`}>{tx("Name pending")}</b>
               )}
               <span className={styles.role}>{leader.role}</span>
             </div>

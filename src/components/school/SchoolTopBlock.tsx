@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { School } from "@/data/schools";
 import SchoolFactsBar from "./SchoolFactsBar";
@@ -38,13 +39,14 @@ type SchoolTopBlockProps = {
 // normal rounded-rect shape but renders the same "photo pending" language
 // as the schools index card's placeholder (diagonal-stripe wash + icon +
 // caption) instead of a decorative crest graphic — never a bare gray box.
-export default function SchoolTopBlock({
+export default async function SchoolTopBlock({
   school,
   masthead,
   logo,
   heroPhoto,
   factsBar,
 }: SchoolTopBlockProps) {
+  const tx = await getT();
   return (
     <section className={styles.top}>
       <div className={styles.titleRow}>
@@ -63,7 +65,7 @@ export default function SchoolTopBlock({
             {masthead.locationLine}
             {masthead.established && (
               <>
-                {" · Founded "}
+                {tx(" · Founded ")}
                 <b className={styles.estYear}>{masthead.established}</b>
               </>
             )}
@@ -79,7 +81,7 @@ export default function SchoolTopBlock({
             <svg className={styles.heroGlyphIcon} aria-hidden="true">
               <use href="#ic-edu" />
             </svg>
-            <span className={styles.heroGlyphCaption}>Photo pending</span>
+            <span className={styles.heroGlyphCaption}>{tx("Photo pending")}</span>
           </span>
         )}
       </div>

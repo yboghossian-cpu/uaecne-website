@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import PublicForm from "@/components/forms/PublicForm";
@@ -10,13 +11,14 @@ export const metadata: Metadata = pageMetadata({
   path: "/prayer-request",
 });
 
-export default function PrayerRequestPage() {
+export default async function PrayerRequestPage() {
+  const tx = await getT();
   return (
     <>
-      <PageHero title="Prayer Request" subtitle="Share your prayer request with the Union." />
+      <PageHero title={tx("Prayer Request")} subtitle={tx("Share your prayer request with the Union.")} />
       <section className={`${styles.wrap} ${styles.single}`}>
         <div className={styles.card}>
-          <h2 className={styles.cardHeading}>Your prayer request</h2>
+          <h2 className={styles.cardHeading}>{tx("Your prayer request")}</h2>
           <PublicForm form="prayer" />
         </div>
       </section>

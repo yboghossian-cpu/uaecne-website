@@ -1,3 +1,4 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -53,9 +54,11 @@ function groupByCountry(schools: School[]) {
   return [...groups.entries()];
 }
 
-export default function SchoolsIndexPage() {
-  const schoolContent = getAllSchoolContent();
-  const groups = groupByCountry(getSchools());
+export default async function SchoolsIndexPage() {
+  const tx = await getT();
+  const L = await getL();
+  const schoolContent = L(getAllSchoolContent());
+  const groups = groupByCountry(L(getSchools()));
 
   return (
     <>
@@ -63,12 +66,9 @@ export default function SchoolsIndexPage() {
         <Medallion size={220} className={`${styles.med} ${styles.medLeft}`} />
         <Medallion size={220} className={`${styles.med} ${styles.medRight}`} />
         <div className={styles.heroInner}>
-          <h1 className={styles.heroHeading}>Schools</h1>
+          <h1 className={styles.heroHeading}>{tx("Schools")}</h1>
           <p className={styles.heroSub}>
-            The UAECNE sustains a network of Armenian Evangelical schools
-            carrying a legacy of education, faith, and Armenian heritage.
-            Explore the schools below to learn about their history,
-            programs, and community.
+            {tx("The UAECNE sustains a network of Armenian Evangelical schools carrying a legacy of education, faith, and Armenian heritage. Explore the schools below to learn about their history, programs, and community.")}
           </p>
         </div>
       </section>
@@ -76,7 +76,7 @@ export default function SchoolsIndexPage() {
       <section className={`${styles.country} ${styles.countryWash}`}>
         <div className={styles.countryHead}>
           <span className={styles.ln} />
-          <h2 className={styles.countryHeading}>Education Councils</h2>
+          <h2 className={styles.countryHeading}>{tx("Education Councils")}</h2>
           <span className={`${styles.ln} ${styles.lnR}`} />
         </div>
         <div className={styles.grid}>
@@ -86,14 +86,14 @@ export default function SchoolsIndexPage() {
                 <svg className={styles.glyphIcon}>
                   <use href="#ic-edu" />
                 </svg>
-                <span className={styles.glyphCaption}>Photo pending</span>
+                <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
               </span>
             </div>
             <div className={styles.label}>
               <svg className={styles.labelSeal}>
                 <use href="#seal-light" />
               </svg>
-              <b className={styles.schoolName}>Education Council - Lebanon</b>
+              <b className={styles.schoolName}>{tx("Education Council - Lebanon")}</b>
             </div>
           </Link>
           <Link href="/schools/education-council-syria" className={styles.school}>
@@ -102,7 +102,7 @@ export default function SchoolsIndexPage() {
                 <svg className={styles.glyphIcon}>
                   <use href="#ic-edu" />
                 </svg>
-                <span className={styles.glyphCaption}>Photo pending</span>
+                <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
               </span>
             </div>
             <div className={styles.label}>
@@ -113,7 +113,7 @@ export default function SchoolsIndexPage() {
                 height={42}
                 className={styles.labelEmblem}
               />
-              <b className={styles.schoolName}>Education Council - Syria</b>
+              <b className={styles.schoolName}>{tx("Education Council - Syria")}</b>
             </div>
           </Link>
         </div>
@@ -130,7 +130,7 @@ export default function SchoolsIndexPage() {
         >
           <div className={styles.countryHead}>
             <span className={styles.ln} />
-            <h2 className={styles.countryHeading}>{country}</h2>
+            <h2 className={styles.countryHeading}>{tx(country)}</h2>
             <span className={`${styles.ln} ${styles.lnR}`} />
           </div>
           <div className={styles.grid}>
@@ -161,7 +161,7 @@ export default function SchoolsIndexPage() {
                           <use href="#ic-edu" />
                         </svg>
                         <span className={styles.glyphCaption}>
-                          Photo pending
+                          {tx("Photo pending")}
                         </span>
                       </span>
                     )}

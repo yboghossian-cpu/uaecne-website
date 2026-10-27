@@ -1,3 +1,4 @@
+import { getT, getL, getLang } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +13,9 @@ export const metadata: Metadata = pageMetadata({
   path: "/news",
 });
 
-function Card({ post }: { post: Post }) {
+async function Card({ post }: { post: Post }) {
+  const tx = await getT();
+  const lang = await getLang();
   const isEvent = post.kind === "event";
   return (
     <Link href={postHref(post)} className={styles.card}>
@@ -30,11 +33,11 @@ function Card({ post }: { post: Post }) {
             <use href="#med" />
           </svg>
         )}
-        <span className={styles.badge}>{isEvent ? "Event" : "News"}</span>
+        <span className={styles.badge}>{isEvent ? tx("Event") : tx("News")}</span>
       </div>
       <div className={styles.cardBody}>
         <p className={styles.meta}>
-          {isEvent && post.event_start ? formatDate(post.event_start, true) : formatDate(post.date)}
+          {isEvent && post.event_start ? formatDate(post.event_start, true, lang) : formatDate(post.date, false, lang)}
           {isEvent && post.location ? ` · ${post.location}` : ""}
         </p>
         <h3 className={styles.cardTitle}>{post.title}</h3>
@@ -44,8 +47,10 @@ function Card({ post }: { post: Post }) {
   );
 }
 
-export default function NewsIndex() {
-  const posts = getPublishedPosts();
+export default async function NewsIndex() {
+  const tx = await getT();
+  const L = await getL();
+  const posts = L(getPublishedPosts());
   const now = new Date().toISOString().slice(0, 16);
   const upcoming = posts
     .filter((p) => p.kind === "event" && (p.event_end ?? p.event_start ?? "") >= now)
@@ -54,10 +59,10 @@ export default function NewsIndex() {
 
   return (
     <>
-      <PageHero title="News & Events" subtitle="Updates and upcoming events from the Union." />
+      <PageHero title={tx("News & Events")} subtitle={tx("Updates and upcoming events from the Union.")} />
       {upcoming.length > 0 && (
         <section className={`${styles.section} ${styles.wash}`}>
-          <h2 className={styles.heading}>Upcoming Events</h2>
+          <h2 className={styles.heading}>{tx("Upcoming Events")}</h2>
           <div className={styles.grid}>
             {upcoming.map((p) => (
               <Card key={p.id || p.slug} post={p} />
@@ -66,7 +71,7 @@ export default function NewsIndex() {
         </section>
       )}
       <section className={styles.section}>
-        <h2 className={styles.heading}>Latest</h2>
+        <h2 className={styles.heading}>{tx("Latest")}</h2>
         {rest.length ? (
           <div className={styles.grid}>
             {rest.map((p) => (
@@ -74,7 +79,7 @@ export default function NewsIndex() {
             ))}
           </div>
         ) : (
-          <p className={styles.empty}>No news yet.</p>
+          <p className={styles.empty}>{tx("No news yet.")}</p>
         )}
       </section>
     </>

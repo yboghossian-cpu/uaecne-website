@@ -1,12 +1,13 @@
+import { getT, getL } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
 import {
-  campsContent,
-  youthWorkContent,
-  socialActionContent,
-  boardingHomeContent,
+  campsContent as campsContent__en,
+  youthWorkContent as youthWorkContent__en,
+  socialActionContent as socialActionContent__en,
+  boardingHomeContent as boardingHomeContent__en,
 } from "@/data/outreachContent";
 import styles from "./page.module.css";
 
@@ -18,30 +19,30 @@ export const metadata: Metadata = {
 // reasoning as the Higher Education index. Boarding Home added 2026-08-21,
 // routed under Outreach per Yeghia's explicit ruling (its own mockup's
 // crumb read "Ministries › Schools › Lebanon" — see OPEN_QUESTIONS).
-const cards = [
+const cardsEn = [
   {
-    id: campsContent.slug,
-    href: `/outreach/${campsContent.slug}`,
-    name: campsContent.title,
-    photo: campsContent.heroPhoto,
+    id: campsContent__en.slug,
+    href: `/outreach/${campsContent__en.slug}`,
+    name: campsContent__en.title,
+    photo: campsContent__en.heroPhoto,
   },
   {
-    id: youthWorkContent.slug,
-    href: `/outreach/${youthWorkContent.slug}`,
-    name: youthWorkContent.title,
-    photo: youthWorkContent.heroPhoto,
+    id: youthWorkContent__en.slug,
+    href: `/outreach/${youthWorkContent__en.slug}`,
+    name: youthWorkContent__en.title,
+    photo: youthWorkContent__en.heroPhoto,
   },
   {
-    id: socialActionContent.slug,
-    href: `/outreach/${socialActionContent.slug}`,
-    name: socialActionContent.title,
-    photo: socialActionContent.heroPhoto,
+    id: socialActionContent__en.slug,
+    href: `/outreach/${socialActionContent__en.slug}`,
+    name: socialActionContent__en.title,
+    photo: socialActionContent__en.heroPhoto,
   },
   {
-    id: boardingHomeContent.slug,
-    href: `/outreach/${boardingHomeContent.slug}`,
-    name: boardingHomeContent.title,
-    photo: boardingHomeContent.heroPhoto,
+    id: boardingHomeContent__en.slug,
+    href: `/outreach/${boardingHomeContent__en.slug}`,
+    name: boardingHomeContent__en.title,
+    photo: boardingHomeContent__en.heroPhoto,
   },
   {
     id: "syria-social-action-committee",
@@ -57,17 +58,19 @@ const cards = [
   },
 ];
 
-export default function OutreachIndexPage() {
+export default async function OutreachIndexPage() {
+  const L = await getL();
+  const cards = L(cardsEn);
+  const tx = await getT();
   return (
     <>
       <section className={styles.hero}>
         <Medallion size={220} className={`${styles.med} ${styles.medLeft}`} />
         <Medallion size={220} className={`${styles.med} ${styles.medRight}`} />
         <div className={styles.heroInner}>
-          <h1 className={styles.heroHeading}>Outreach</h1>
+          <h1 className={styles.heroHeading}>{tx("Outreach")}</h1>
           <p className={styles.heroSub}>
-            Camps, youth work, and social action — the UAECNE&rsquo;s ministry beyond the
-            church walls, serving young people and the most vulnerable alike.
+            {tx("Camps, youth work, and social action — the UAECNE’s ministry beyond the church walls, serving young people and the most vulnerable alike.")}
           </p>
         </div>
       </section>
@@ -84,7 +87,7 @@ export default function OutreachIndexPage() {
                     <svg className={styles.glyphIcon}>
                       <use href="#ic-edu" />
                     </svg>
-                    <span className={styles.glyphCaption}>Photo pending</span>
+                    <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
                   </span>
                 )}
               </div>

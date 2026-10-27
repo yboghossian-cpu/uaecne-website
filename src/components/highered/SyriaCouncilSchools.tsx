@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import Link from "next/link";
 import type { SyriaEducationalCouncilContent } from "@/data/higherEdContent";
@@ -13,7 +14,8 @@ type SyriaCouncilSchoolsProps = {
 // one-off inline grid, not an importable component). Each card links to
 // one of the 6 already-live school routes — hrefs are the real, built
 // paths, not invented.
-export default function SyriaCouncilSchools({ schools }: SyriaCouncilSchoolsProps) {
+export default async function SyriaCouncilSchools({ schools }: SyriaCouncilSchoolsProps) {
+  const tx = await getT();
   return (
     <section className={styles.wrap}>
       <div className={styles.centerHead}>
@@ -33,7 +35,7 @@ export default function SyriaCouncilSchools({ schools }: SyriaCouncilSchoolsProp
               <div className={styles.name}>{school.name}</div>
             </div>
             <div className={styles.go}>
-              View school
+              {tx("View school")}
               <svg className={styles.goIco} aria-hidden="true">
                 <use href="#ic-arrow" />
               </svg>

@@ -1,5 +1,7 @@
 "use client";
 
+
+import { useT } from "@/lib/i18n/client";
 import Link from "next/link";
 import ArchFrame from "@/components/shared/ArchFrame";
 import Medallion from "@/components/shared/Medallion";
@@ -45,6 +47,7 @@ const ministries = [
 ];
 
 export default function MinistriesGrid() {
+  const tx = useT();
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -63,9 +66,9 @@ export default function MinistriesGrid() {
         className={`${styles.section} scroll-reveal`}
       >
         <div className={styles.secHead}>
-          <div className={styles.eyebrow}>What We Do</div>
+          <div className={styles.eyebrow}>{tx("What We Do")}</div>
           <h2 className={styles.heading}>
-            Ministries Across the <em className={styles.em}>Near East</em>
+            {tx("Ministries Across the ")}<em className={styles.em}>{tx("Near East")}</em>
           </h2>
           <div className={styles.flourish}>
             <span className={styles.fln} />
@@ -73,9 +76,7 @@ export default function MinistriesGrid() {
             <span className={styles.fln} />
           </div>
           <p className={styles.intro}>
-            From congregations of worship to schools, universities, and works of compassion — the
-            Union serves communities across nine nations. Explore the ministries that carry its
-            mission forward.
+            {tx("From congregations of worship to schools, universities, and works of compassion — the Union serves communities across nine nations. Explore the ministries that carry its mission forward.")}
           </p>
         </div>
         <div className={styles.grid}>
@@ -90,7 +91,7 @@ export default function MinistriesGrid() {
                 <h3 className={styles.cardTitle}>{ministry.title}</h3>
                 <p className={styles.cardDescription}>{ministry.description}</p>
                 <span className={styles.go}>
-                  Explore
+                  {tx("Explore")}
                   <svg className={styles.goIcon} viewBox="0 0 24 24" aria-hidden="true">
                     <use href="#ic-arrow" />
                   </svg>

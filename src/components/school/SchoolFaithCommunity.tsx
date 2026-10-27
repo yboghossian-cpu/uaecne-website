@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SchoolContent } from "@/data/schoolContent";
 import styles from "./SchoolFaithCommunity.module.css";
@@ -11,7 +12,8 @@ type SchoolFaithCommunityProps = {
 // currently render the "photo pending" fallback — same visual language as
 // every other unverified photo slot on the site. Null for AEC and
 // Shamlian.
-export default function SchoolFaithCommunity({ faithCommunity }: SchoolFaithCommunityProps) {
+export default async function SchoolFaithCommunity({ faithCommunity }: SchoolFaithCommunityProps) {
+  const tx = await getT();
   if (!faithCommunity) return null;
 
   return (
@@ -42,7 +44,7 @@ export default function SchoolFaithCommunity({ faithCommunity }: SchoolFaithComm
                   className={styles.picPhoto}
                 />
               ) : (
-                <span className={styles.phTag}>Photo pending</span>
+                <span className={styles.phTag}>{tx("Photo pending")}</span>
               )}
             </div>
           </div>

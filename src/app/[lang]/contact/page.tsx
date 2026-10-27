@@ -1,3 +1,4 @@
+import { getT, getLang } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import PublicForm from "@/components/forms/PublicForm";
@@ -11,29 +12,31 @@ export const metadata: Metadata = pageMetadata({
   path: "/contact",
 });
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const tx = await getT();
   const { contact } = getSettings();
+  const lang = await getLang();
   return (
     <>
-      <PageHero title="Contact" subtitle="Get in touch with the UAECNE head office in Beirut." />
+      <PageHero title={tx("Contact")} subtitle={tx("Get in touch with the UAECNE head office in Beirut.")} />
       <section className={styles.wrap}>
         <aside className={styles.info}>
-          <p className={styles.eyebrow}>Head Office</p>
-          <h2 className={styles.infoHeading}>Union of the Armenian Evangelical Churches in the Near East</h2>
+          <p className={styles.eyebrow}>{tx("Head Office")}</p>
+          <h2 className={styles.infoHeading}>{tx("Union of the Armenian Evangelical Churches in the Near East")}</h2>
           <address className={styles.address}>
-            {contact.addressEn.map((line, i) => (
+            {(lang === "hy" ? contact.addressHy : contact.addressEn).map((line, i) => (
               <span key={i}>{line}</span>
             ))}
           </address>
           {contact.email && (
             <p className={styles.line}>
-              <span className={styles.lineLabel}>Email</span>
+              <span className={styles.lineLabel}>{tx("Email")}</span>
               <a href={`mailto:${contact.email}`}>{contact.email}</a>
             </p>
           )}
           {contact.phones.length > 0 && (
             <p className={styles.line}>
-              <span className={styles.lineLabel}>Phone</span>
+              <span className={styles.lineLabel}>{tx("Phone")}</span>
               {contact.phones.map((p) => (
                 <a key={p} href={telHref(p)}>
                   {p}
@@ -43,7 +46,7 @@ export default function ContactPage() {
           )}
         </aside>
         <div className={styles.card}>
-          <h2 className={styles.cardHeading}>Send us a message</h2>
+          <h2 className={styles.cardHeading}>{tx("Send us a message")}</h2>
           <PublicForm form="contact" />
         </div>
       </section>
