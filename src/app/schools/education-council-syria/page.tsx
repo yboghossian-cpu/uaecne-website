@@ -33,6 +33,7 @@ export default function EducationCouncilSyriaPage() {
         location={s.location}
         contactRows={s.contactRows}
         schoolName={s.heading}
+        social={s.social}
       />
       <HigherEdCTA cta={s.cta} />
     </>

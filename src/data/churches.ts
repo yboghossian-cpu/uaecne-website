@@ -7,6 +7,8 @@
  * sheet's own row order (grouped by country).
  */
 
+import type { SocialLinks } from "@/lib/social";
+
 export type Church = {
   id: string;
   country: string;
@@ -22,6 +24,8 @@ export type Church = {
   slug: string;
   photo: string | null;
   emblem: string | null;
+  // Official website / social accounts, shown under "Our Location".
+  social?: SocialLinks;
 };
 
 export const churches: Church[] = [

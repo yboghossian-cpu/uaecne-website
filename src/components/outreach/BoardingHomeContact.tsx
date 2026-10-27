@@ -1,4 +1,5 @@
 import type { BoardingHomeContent } from "@/data/outreachContent";
+import SocialLinks from "@/components/shared/SocialLinks";
 import styles from "./BoardingHomeContact.module.css";
 
 type BoardingHomeContactProps = {
@@ -24,6 +25,7 @@ export default function BoardingHomeContact({ contact }: BoardingHomeContactProp
             <div className={styles.crow}>
               <span className={styles.v}>{contact.location}</span>
             </div>
+            <SocialLinks social={contact.social} name="Armenian Evangelical Boarding Home of Anjar" />
           </div>
           <div className={styles.blk}>
             <h4>Office</h4>

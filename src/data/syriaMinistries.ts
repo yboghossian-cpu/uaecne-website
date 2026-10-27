@@ -1,3 +1,4 @@
+import type { SocialLinks } from "@/lib/social";
 /**
  * Ministries of the Armenian Protestant Community in Syria — one shared
  * page shape for the Bethel Polyclinic, the Social Action Committee and
@@ -37,6 +38,8 @@ export type SyriaMinistryPage = {
     mapsUrl: string | null;
   };
   gallery: Photo[];
+  // Official website / social accounts, shown under "Our Location".
+  social?: SocialLinks;
   cta: { heading: string; body: string };
 };
 

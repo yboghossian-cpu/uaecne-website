@@ -9,6 +9,8 @@
  * entries for other countries without one.
  */
 
+import type { SocialLinks } from "@/lib/social";
+
 export type School = {
   id: string;
   country: string;
@@ -16,6 +18,8 @@ export type School = {
   slug: string;
   photo: string | null;
   emblem: string | null;
+  // Official website / social accounts, shown under "Our Location".
+  social?: SocialLinks;
 };
 
 export const schools: School[] = [

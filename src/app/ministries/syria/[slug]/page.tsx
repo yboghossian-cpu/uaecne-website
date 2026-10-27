@@ -82,6 +82,7 @@ export default async function SyriaMinistryPage({
         contactRows={page.contact.rows}
         schoolName={page.title}
         mapsUrl={page.contact.mapsUrl}
+        social={page.social}
       />
       {page.gallery.length > 0 && (
         <ChurchGalleryLightbox

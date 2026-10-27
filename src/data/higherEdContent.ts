@@ -1,3 +1,4 @@
+import type { SocialLinks } from "@/lib/social";
 /**
  * Higher Education content — three institutions under one Ministries
  * section, each with a genuinely different shape (a governing council vs.
@@ -577,6 +578,8 @@ import type { SchoolContent, SchoolContactRow } from "./schoolContent";
 
 export type SyriaEducationalCouncilContent = {
   slug: string;
+  // Official website / social accounts, shown under "Our Location".
+  social?: SocialLinks;
   heading: string;
   headingHy: string | null;
   subheading: string;

@@ -456,6 +456,25 @@ export default function IconSymbols() {
           />
         </symbol>
 
+        {/* X, TikTok and LinkedIn glyphs for the "Follow Us" row — drawn in
+            the same 24 box / 1.6 stroke style as the icons above. */}
+        <symbol id="ic-x" viewBox="0 0 24 24">
+          <path d="M5 4l14 16M19 4L5 20" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        </symbol>
+        <symbol id="ic-tiktok" viewBox="0 0 24 24">
+          <path
+            d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5M14 4c.5 2.5 2.3 4 5 4.2"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+          />
+        </symbol>
+        <symbol id="ic-in" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.6" />
+          <path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </symbol>
+
         {/* Events-card icons — geometry copied verbatim from
             uaecne-school-aleppo-college-girls.html's own #flask/#cart
             symbols (ic-heart already existed, reused as-is). First used by

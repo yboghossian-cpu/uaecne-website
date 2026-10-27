@@ -1,5 +1,7 @@
 import type { Church } from "@/data/churches";
 import type { ChurchContent } from "@/data/churchContent";
+import SocialLinks from "@/components/shared/SocialLinks";
+import { hasSocial } from "@/lib/social";
 import styles from "./ChurchContactSection.module.css";
 
 // Derived from ChurchContent so the two never drift apart (see
@@ -69,6 +71,10 @@ export default function ChurchContactSection({
   const otherServices = contactOverride?.otherServices ?? [];
   const emailLabels = contactOverride?.emailLabels ?? [];
   const fax = contactOverride?.fax;
+  // Verified social accounts live on the directory entry and are shown
+  // under "Our Location"; the older per-page Facebook/social rows in
+  // "Get in Touch" are then not repeated.
+  const social = hasSocial(church.social) ? church.social : null;
 
   return (
     <section className={styles.contact}>
@@ -124,6 +130,7 @@ export default function ChurchContactSection({
               </span>
             </div>
           )}
+          <SocialLinks social={social} name={church.name} />
           <div className={styles.spacer} />
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.mapBtn}>
             <svg className={styles.mapBtnIcon}>
@@ -219,7 +226,7 @@ export default function ChurchContactSection({
               </span>
             </div>
           )}
-          {contactOverride?.facebook && (
+          {!social && contactOverride?.facebook && (
             <div className={styles.row}>
               <svg className={styles.rowIco}>
                 <use href="#ic-fb" />
@@ -237,24 +244,21 @@ export default function ChurchContactSection({
               </span>
             </div>
           )}
-          {contactOverride?.socials?.map((social) => (
-            <div className={styles.row} key={social.key}>
-              <svg className={styles.rowIco}>
-                <use href={SOCIAL_ICON[social.key]} />
-              </svg>
-              <span>
-                <span className={styles.key}>{social.key}</span>
-                <a
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.link}
-                >
-                  {social.label}
-                </a>
-              </span>
-            </div>
-          ))}
+          {!social &&
+            contactOverride?.socials?.map((s) => (
+              <div className={styles.row} key={s.key}>
+                <svg className={styles.rowIco}>
+                  <use href={SOCIAL_ICON[s.key]} />
+                </svg>
+                <span>
+                  <span className={styles.key}>{s.key}</span>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                    {s.label}
+                  </a>
+                </span>
+              </div>
+            ))}
+          {!showLocationCard && <SocialLinks social={social} name={church.name} />}
           {note && <div className={styles.note}>{note}</div>}
         </div>
       </div>

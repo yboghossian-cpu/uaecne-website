@@ -1,3 +1,4 @@
+import type { SocialLinks } from "@/lib/social";
 /**
  * Outreach content — three sections under a new top-level nav item, each
  * with a genuinely different shape (a campsite with history + gallery vs.
@@ -613,6 +614,8 @@ export type BoardingHomeContent = {
     location: string;
     locationHy: string | null;
     directorLabel: string;
+    // Official website / social accounts, shown under "Location".
+    social?: SocialLinks;
     director: string;
     note: string;
     noteHy: string | null;

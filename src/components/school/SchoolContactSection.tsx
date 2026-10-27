@@ -1,4 +1,6 @@
 import type { SchoolContent, SchoolContactRow } from "@/data/schoolContent";
+import SocialLinks from "@/components/shared/SocialLinks";
+import { hasSocial, type SocialLinks as Social } from "@/lib/social";
 import styles from "./SchoolContactSection.module.css";
 
 type SchoolContactSectionProps = {
@@ -12,6 +14,8 @@ type SchoolContactSectionProps = {
   note?: string | null;
   // Curated Google Maps place link; falls back to an address search.
   mapsUrl?: string | null;
+  // Verified social accounts, shown under "Our Location".
+  social?: Social | null;
 };
 
 // Icon keyed by row label, not just presence of an href — a pending Phone
@@ -32,12 +36,20 @@ const ROW_ICON: Record<string, string> = {
 // Shamlian-Tatikian, which has neither).
 export default function SchoolContactSection({
   location,
-  contactRows,
+  contactRows: contactRowsIn,
   schoolName,
   note,
   mapsUrl: curatedMapsUrl,
+  social: socialIn,
 }: SchoolContactSectionProps) {
-  if (!location && !contactRows) return null;
+  const social = hasSocial(socialIn) ? socialIn : null;
+  // Facebook/Instagram rows in "Get in Touch" are replaced by the
+  // "Follow Us" links under the location once verified links exist.
+  const SOCIAL_ROWS = ["Facebook", "Instagram", "YouTube", "Website"];
+  const filtered =
+    social && contactRowsIn ? contactRowsIn.filter((r) => !SOCIAL_ROWS.includes(r.key)) : contactRowsIn;
+  const contactRows = filtered && filtered.length ? filtered : social ? null : contactRowsIn;
+  if (!location && !contactRows && !social) return null;
 
   const showBoth = location && contactRows;
   // Real, functional address-search link — not a pin/coordinate (never
@@ -88,6 +100,7 @@ export default function SchoolContactSection({
                 <span>{location.landmark}</span>
               </div>
             )}
+            <SocialLinks social={social} name={schoolName} />
             <div className={styles.spacer} />
             {mapsUrl && (
               <a
@@ -134,6 +147,21 @@ export default function SchoolContactSection({
                 </span>
               </div>
             ))}
+            {!location && <SocialLinks social={social} name={schoolName} />}
+          </div>
+        )}
+
+        {!location && !contactRows && social && (
+          <div className={styles.card}>
+            <div className={styles.cardHead}>
+              <span className={styles.icoWrap}>
+                <svg className={styles.ico}>
+                  <use href="#ic-globe" />
+                </svg>
+              </span>
+              <h3 className={styles.cardTitle}>Online</h3>
+            </div>
+            <SocialLinks social={social} name={schoolName} />
           </div>
         )}
       </div>
