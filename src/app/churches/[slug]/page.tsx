@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { churches } from "@/data/churches";
-import { churchContent } from "@/data/churchContent";
+import { getChurch, getChurchContent, getChurches } from "@/lib/server/content";
 import { pageMetadata, summarize } from "@/lib/site";
 import { buildChurchView } from "@/lib/churchTemplate";
 import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
@@ -25,7 +24,7 @@ import MilestoneTimeline from "@/components/church/MilestoneTimeline";
 type PageParams = { slug: string };
 
 export function generateStaticParams() {
-  return churches.map((church) => ({ slug: church.slug }));
+  return getChurches().map((church) => ({ slug: church.slug }));
 }
 
 export async function generateMetadata({
@@ -34,9 +33,9 @@ export async function generateMetadata({
   params: Promise<PageParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const church = churches.find((c) => c.slug === slug);
+  const church = getChurch(slug);
   if (!church) return { title: "Church — UAECNE" };
-  const content = churchContent[slug];
+  const content = getChurchContent(slug);
   // Description reuses text already on the page: the About paragraph for
   // churches with a full profile, otherwise the directory's own facts.
   const description = content?.about.paragraphs[0]
@@ -60,13 +59,13 @@ export default async function ChurchDetailPage({
   params: Promise<PageParams>;
 }) {
   const { slug } = await params;
-  const church = churches.find((c) => c.slug === slug);
+  const church = getChurch(slug);
 
   // Should never actually trigger — every slug reaching this route was
   // generated from churches.ts's own 25 entries.
   if (!church) notFound();
 
-  const content = churchContent[slug] ?? null;
+  const content = getChurchContent(slug);
   // Locked church template: every church — full profile or directory-only —
   // renders the same sections in the same order with the same labels.
   // Structure and wording come from buildChurchView, never per-church data.

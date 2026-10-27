@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
-import { churches } from "@/data/churches";
-import { churchContent } from "@/data/churchContent";
+import type { Church } from "@/data/churches";
+import type { ChurchContent } from "@/data/churchContent";
+import { getAllChurchContent, getChurches } from "@/lib/server/content";
 import styles from "./page.module.css";
 
 // Card photo/emblem derive from the detail page's own content when one
@@ -11,11 +12,11 @@ import styles from "./page.module.css";
 // hero/logo can never diverge (this is what fixed Anjar showing its logo
 // as the card photo). churches.ts stays the fallback for the 19 churches
 // without a ChurchContent entry yet.
-function cardPhoto(slug: string, fallback: string | null) {
+function cardPhoto(churchContent: Record<string, ChurchContent>, slug: string, fallback: string | null) {
   return churchContent[slug]?.heroPhoto ?? (fallback ? { src: fallback, alt: "" } : null);
 }
 
-function cardEmblem(slug: string, fallback: string | null) {
+function cardEmblem(churchContent: Record<string, ChurchContent>, slug: string, fallback: string | null) {
   return churchContent[slug]?.logo ?? (fallback ? { src: fallback, alt: "" } : null);
 }
 
@@ -36,8 +37,8 @@ const countryDisplayLabel: Record<string, string> = {
   Australia: "Australia",
 };
 
-function groupByCountry() {
-  const groups = new Map<string, typeof churches>();
+function groupByCountry(churches: Church[]) {
+  const groups = new Map<string, Church[]>();
   for (const church of churches) {
     const label = countryDisplayLabel[church.country] ?? church.country;
     const list = groups.get(label) ?? [];
@@ -48,7 +49,8 @@ function groupByCountry() {
 }
 
 export default function ChurchesIndexPage() {
-  const groups = groupByCountry();
+  const churchContent = getAllChurchContent();
+  const groups = groupByCountry(getChurches());
 
   return (
     <>
@@ -82,8 +84,8 @@ export default function ChurchesIndexPage() {
           </div>
           <div className={styles.grid}>
             {list.map((church) => {
-              const photo = cardPhoto(church.slug, church.photo);
-              const emblem = cardEmblem(church.slug, church.emblem);
+              const photo = cardPhoto(churchContent, church.slug, church.photo);
+              const emblem = cardEmblem(churchContent, church.slug, church.emblem);
               return (
               <Link
                 key={church.id}

@@ -1,18 +1,36 @@
 import Image from "next/image";
+import Link from "next/link";
+import { getSettings, telHref } from "@/lib/server/settings";
 import styles from "./Footer.module.css";
-
-const social = [
-  { label: "Facebook", href: "https://www.facebook.com/UAECNE" },
-  {
-    label: "YouTube",
-    href: "https://www.youtube.com/channel/UCuK0j_A_Wx0oyNYvWJv5Ngg",
-  },
-];
-
-const socialInactive = ["Instagram", "X"];
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { contact, social: links } = getSettings();
+  const socialAll = [
+    { label: "Facebook", href: links.facebook },
+    { label: "YouTube", href: links.youtube },
+    { label: "Instagram", href: links.instagram },
+    { label: "X", href: links.x },
+  ];
+  const social = socialAll.filter((s) => s.href);
+  const socialInactive = socialAll.filter((s) => !s.href).map((s) => s.label);
+  const contactBlock = (lines: string[]) => (
+    <div className={styles.contact}>
+      {lines.map((line, i) => (
+        <span key={i}>{line}</span>
+      ))}
+      {contact.email && <a href={`mailto:${contact.email}`}>{contact.email}</a>}
+      {contact.phones.length > 0 && (
+        <span className={styles.phones}>
+          {contact.phones.map((p) => (
+            <a key={p} href={telHref(p)}>
+              {p}
+            </a>
+          ))}
+        </span>
+      )}
+    </div>
+  );
 
   return (
     <footer className={styles.footer}>
@@ -23,18 +41,7 @@ export default function Footer() {
             Union of the Armenian Evangelical Churches in the Near East
           </p>
 
-          <div className={styles.contact}>
-            <span>Kobayyat Street; Sector 67; Building # 228</span>
-            <span>Jeitawi Region, Ashrafieh</span>
-            <span>Beirut, Lebanon</span>
-            <a href="mailto:office.director@uaecne.org">
-              office.director@uaecne.org
-            </a>
-            <span className={styles.phones}>
-              <a href="tel:+9611443547">+961-1-443547</a>
-              <a href="tel:+9611565628">+961-1-565628</a>
-            </span>
-          </div>
+          {contactBlock(contact.addressEn)}
         </div>
 
         <Image
@@ -56,22 +63,12 @@ export default function Footer() {
             Մերձաւոր Արեւելքի Հայ Աւետարանական Եկեղեցիներու Միութիւն
           </p>
 
-          <div className={styles.contact}>
-            <span>Քոպայէթ փողոց, Սեկտոր 67, Շէնք թիւ 228</span>
-            <span>Ժէյթաուի շրջան, Աշրաֆիէ</span>
-            <span>Պէյրութ, Լիբանան</span>
-            <a href="mailto:office.director@uaecne.org">
-              office.director@uaecne.org
-            </a>
-            <span className={styles.phones}>
-              <a href="tel:+9611443547">+961-1-443547</a>
-              <a href="tel:+9611565628">+961-1-565628</a>
-            </span>
-          </div>
+          {contactBlock(contact.addressHy)}
         </div>
       </div>
 
       <div className={styles.bottom}>
+        <div className={styles.linksRow}>
         <ul className={styles.social}>
           {social.map((item) => (
             <li key={item.label}>
@@ -88,6 +85,19 @@ export default function Footer() {
             </li>
           ))}
         </ul>
+
+        <ul className={styles.social}>
+          <li>
+            <Link href="/news">News &amp; Events</Link>
+          </li>
+          <li>
+            <Link href="/contact">Contact</Link>
+          </li>
+          <li>
+            <Link href="/prayer-request">Prayer Request</Link>
+          </li>
+        </ul>
+        </div>
 
         <p className={styles.copyright}>
           © {year} UAECNE. All Rights Reserved.

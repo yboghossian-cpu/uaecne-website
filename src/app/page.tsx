@@ -6,8 +6,13 @@ import MinistriesGrid from "@/components/home/MinistriesGrid";
 import News from "@/components/home/News";
 import SpiritualHeritage from "@/components/home/SpiritualHeritage";
 import DonateBand from "@/components/home/DonateBand";
+import { getHomepagePost, postHref } from "@/lib/server/posts";
+import { getSettings } from "@/lib/server/settings";
 
 export default function Home() {
+  // "Latest Updates" shows the featured (else newest) post from Admin › News.
+  const post = getHomepagePost();
+  const { donateUrl } = getSettings();
   return (
     <>
       <Hero />
@@ -15,9 +20,21 @@ export default function Home() {
       <StatsRow />
       <SacredLegacy />
       <MinistriesGrid />
-      <News />
+      {post && (
+        <News
+          post={{
+            title: post.title,
+            kicker: post.kicker,
+            tag: post.tag,
+            excerpt: post.excerpt,
+            cover: post.cover,
+            coverAlt: post.cover_alt,
+            href: postHref(post),
+          }}
+        />
+      )}
       <SpiritualHeritage />
-      <DonateBand />
+      <DonateBand donateUrl={donateUrl} />
     </>
   );
 }

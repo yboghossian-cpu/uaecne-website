@@ -1,0 +1,22 @@
+.bar {
+  background: var(--color-red);
+  color: var(--color-ivory);
+  padding: 0.6rem 1rem;
+  text-align: center;
+}
+
+.text {
+  margin: 0 auto;
+  max-width: 960px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.link {
+  color: var(--color-gold-decorative);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}

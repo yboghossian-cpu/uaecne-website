@@ -1,0 +1,89 @@
+.wrap {
+  display: grid;
+  gap: 2rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 4rem;
+}
+
+@media (min-width: 900px) {
+  .wrap {
+    grid-template-columns: 340px 1fr;
+    align-items: start;
+    padding-top: 3.75rem;
+  }
+  .single {
+    grid-template-columns: minmax(0, 760px);
+    justify-content: center;
+  }
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 18px;
+  padding: 1.75rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 2.25rem 2.25rem 2rem;
+  }
+}
+
+.cardHeading {
+  font-size: 1.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.info {
+  font-family: var(--font-body);
+  color: var(--color-brown);
+  display: grid;
+  gap: 0.9rem;
+}
+
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.infoHeading {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.address {
+  font-style: normal;
+  display: grid;
+  gap: 0.15rem;
+}
+
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.9rem;
+  align-items: baseline;
+}
+
+.line a {
+  color: var(--color-red);
+  text-decoration: none;
+}
+
+.line a:hover {
+  text-decoration: underline;
+}
+
+.lineLabel {
+  width: 100%;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}

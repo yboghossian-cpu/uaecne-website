@@ -126,6 +126,9 @@ const navItems: NavItem[] = [
         label: "79th General Assembly",
         href: "/resource-center/news/79th-general-assembly",
       },
+      { label: "News & Events", href: "/news" },
+      { label: "Contact", href: "/contact" },
+      { label: "Prayer Request", href: "/prayer-request" },
     ],
   },
 ];

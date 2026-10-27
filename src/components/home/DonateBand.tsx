@@ -3,7 +3,7 @@
 import { useScrollReveal } from "./useScrollReveal";
 import styles from "./DonateBand.module.css";
 
-export default function DonateBand() {
+export default function DonateBand({ donateUrl }: { donateUrl?: string }) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -19,13 +19,19 @@ export default function DonateBand() {
         across the Near East. Join us in sustaining a heritage of faith since
         1846.
       </p>
-      <span
-        role="button"
-        aria-disabled="true"
-        className={styles.cta}
-      >
-        Donate Now
-      </span>
+      {donateUrl ? (
+        <a href={donateUrl} className={styles.cta} target="_blank" rel="noopener noreferrer">
+          Donate Now
+        </a>
+      ) : (
+        <span
+          role="button"
+          aria-disabled="true"
+          className={styles.cta}
+        >
+          Donate Now
+        </span>
+      )}
     </section>
   );
 }

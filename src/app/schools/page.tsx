@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Medallion from "@/components/shared/Medallion";
-import { schools } from "@/data/schools";
-import { schoolContent } from "@/data/schoolContent";
+import type { School } from "@/data/schools";
+import type { SchoolContent } from "@/data/schoolContent";
+import { getAllSchoolContent, getSchools } from "@/lib/server/content";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -19,12 +20,12 @@ export const metadata: Metadata = {
 // null` (AESSA — verified no building photo exists) renders the
 // photo-pending placeholder instead of incorrectly falling through to
 // schools.ts's fallback field.
-function cardPhoto(slug: string, fallback: string | null) {
+function cardPhoto(schoolContent: Record<string, SchoolContent>, slug: string, fallback: string | null) {
   const entry = schoolContent[slug];
   if (entry) return entry.heroPhoto;
   return fallback ? { src: fallback, alt: "" } : null;
 }
-function cardEmblem(slug: string, fallback: string | null) {
+function cardEmblem(schoolContent: Record<string, SchoolContent>, slug: string, fallback: string | null) {
   const entry = schoolContent[slug];
   if (entry) return entry.logo;
   return fallback ? { src: fallback, alt: "" } : null;
@@ -41,8 +42,8 @@ const countryDisplayLabel: Record<string, string> = {
   "Syria (Kessab)": "Syria",
 };
 
-function groupByCountry() {
-  const groups = new Map<string, typeof schools>();
+function groupByCountry(schools: School[]) {
+  const groups = new Map<string, School[]>();
   for (const school of schools) {
     const label = countryDisplayLabel[school.country] ?? school.country;
     const list = groups.get(label) ?? [];
@@ -53,7 +54,8 @@ function groupByCountry() {
 }
 
 export default function SchoolsIndexPage() {
-  const groups = groupByCountry();
+  const schoolContent = getAllSchoolContent();
+  const groups = groupByCountry(getSchools());
 
   return (
     <>
@@ -133,8 +135,8 @@ export default function SchoolsIndexPage() {
           </div>
           <div className={styles.grid}>
             {list.map((school) => {
-              const photo = cardPhoto(school.slug, school.photo);
-              const emblem = cardEmblem(school.slug, school.emblem);
+              const photo = cardPhoto(schoolContent, school.slug, school.photo);
+              const emblem = cardEmblem(schoolContent, school.slug, school.emblem);
               return (
                 <Link
                   key={school.id}

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
-import { churches } from "@/data/churches";
-import { schools } from "@/data/schools";
+import { getChurches, getSchools } from "@/lib/server/content";
+import { getPublishedPosts } from "@/lib/server/posts";
 import { campsContent, youthWorkContent, socialActionContent, boardingHomeContent } from "@/data/outreachContent";
 import { haigazianContent, nestContent } from "@/data/higherEdContent";
 import { syriaMinistries } from "@/data/syriaMinistries";
@@ -26,8 +26,14 @@ const STATIC_ROUTES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     ...STATIC_ROUTES,
-    ...churches.map((c) => `/churches/${c.slug}`),
-    ...schools.map((s) => `/schools/${s.slug}`),
+    "/news",
+    "/contact",
+    "/prayer-request",
+    ...getChurches().map((c) => `/churches/${c.slug}`),
+    ...getSchools().map((s) => `/schools/${s.slug}`),
+    ...getPublishedPosts()
+      .filter((p) => !p.link)
+      .map((p) => `/news/${p.slug}`),
     ...[campsContent, youthWorkContent, socialActionContent, boardingHomeContent].map((o) => `/outreach/${o.slug}`),
     ...[haigazianContent, nestContent].map((h) => `/higher-education/${h.slug}`),
     ...syriaMinistries.map((m) => `/ministries/syria/${m.slug}`),

@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "./Nav";
+import { getSettings } from "@/lib/server/settings";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const { donateUrl } = getSettings();
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -28,9 +30,15 @@ export default function Header() {
             </span>
           </div>
           <Nav />
-          <span role="button" aria-disabled="true" className={styles.donateButton}>
-            Donate
-          </span>
+          {donateUrl ? (
+            <a href={donateUrl} className={styles.donateButton} target="_blank" rel="noopener noreferrer">
+              Donate
+            </a>
+          ) : (
+            <span role="button" aria-disabled="true" className={styles.donateButton}>
+              Donate
+            </span>
+          )}
         </div>
       </div>
     </header>

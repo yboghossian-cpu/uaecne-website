@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { schools } from "@/data/schools";
-import { schoolContent } from "@/data/schoolContent";
+import { getSchool, getSchoolContent, getSchools } from "@/lib/server/content";
 import { pageMetadata, summarize } from "@/lib/site";
 import { buildSchoolView } from "@/lib/schoolTemplate";
 import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
@@ -29,7 +28,9 @@ import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
 type PageParams = { slug: string };
 
 export function generateStaticParams() {
-  return schools.filter((school) => schoolContent[school.slug]).map((school) => ({ slug: school.slug }));
+  return getSchools()
+    .filter((school) => getSchoolContent(school.slug))
+    .map((school) => ({ slug: school.slug }));
 }
 
 export async function generateMetadata({
@@ -38,9 +39,9 @@ export async function generateMetadata({
   params: Promise<PageParams>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const school = schools.find((s) => s.slug === slug);
+  const school = getSchool(slug);
   if (!school) return { title: "School — UAECNE" };
-  const content = schoolContent[slug];
+  const content = getSchoolContent(slug);
   return pageMetadata({
     title: `${school.name} — UAECNE`,
     // Verbatim from the page's own About text — no new copy.
@@ -56,8 +57,8 @@ export default async function SchoolDetailPage({
   params: Promise<PageParams>;
 }) {
   const { slug } = await params;
-  const school = schools.find((s) => s.slug === slug);
-  const content = schoolContent[slug];
+  const school = getSchool(slug);
+  const content = getSchoolContent(slug);
   if (!school || !content) notFound();
 
   // Locked school template — same spine as the churches. Structure and

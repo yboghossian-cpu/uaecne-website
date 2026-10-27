@@ -13,7 +13,17 @@ import styles from "./News.module.css";
 // ("Photo slot holds the existing General Assembly photograph already on
 // the site.") is a build instruction to whoever implements this, not real
 // page copy — intentionally not rendered.
-export default function News() {
+export type HomeNewsPost = {
+  title: string;
+  kicker: string;
+  tag: string;
+  excerpt: string;
+  cover: string | null;
+  coverAlt: string;
+  href: string;
+};
+
+export default function News({ post }: { post: HomeNewsPost }) {
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -35,29 +45,17 @@ export default function News() {
       </div>
       <div className={styles.feature}>
         <div className={styles.ph}>
-          <Image
-            src="/news-general-assembly.jpg"
-            alt="Delegates of the 79th General Assembly gathered at the First Armenian Evangelical Church"
-            fill
-            className={styles.photo}
-          />
-          <span className={styles.tag}>General Assembly · Beirut</span>
+          {post.cover && <Image src={post.cover} alt={post.coverAlt} fill className={styles.photo} />}
+          {post.tag && <span className={styles.tag}>{post.tag}</span>}
         </div>
         <div className={styles.bd}>
           <svg className={styles.sealWm} viewBox="0 0 48 48" aria-hidden="true">
             <use href="#ic-hp-quat" />
           </svg>
-          <div className={styles.kick}>June 2026 · 79th General Assembly</div>
-          <h3 className={styles.headline}>A Milestone Gathering in Beirut</h3>
-          <p className={styles.excerpt}>
-            Held on June 21–22, 2026, in Beirut, the 79th General Assembly of the UAECNE marked
-            the church&rsquo;s 180th anniversary under the theme &ldquo;Freedom of Conscience and
-            Responsible Faith.&rdquo; Forty voting members convened in person and online to
-            review reports on the resilience of the Union&rsquo;s ministries, schools, and
-            finances — closing with committee elections, a memorial for past leaders, and a Holy
-            Communion service.
-          </p>
-          <Link href="/resource-center/news/79th-general-assembly" className={styles.more}>
+          {post.kicker && <div className={styles.kick}>{post.kicker}</div>}
+          <h3 className={styles.headline}>{post.title}</h3>
+          <p className={styles.excerpt}>{post.excerpt}</p>
+          <Link href={post.href} className={styles.more}>
             Read the full story
             <svg className={styles.moreIcon} viewBox="0 0 24 24" aria-hidden="true">
               <use href="#ic-arrow" />
