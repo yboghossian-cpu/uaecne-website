@@ -1,7 +1,7 @@
 "use client";
 
 
-import { useT } from "@/lib/i18n/client";
+import { useLang, useT } from "@/lib/i18n/client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import styles from "./Nav.module.css";
@@ -142,8 +142,13 @@ const navItems: NavItem[] = [
   },
 ];
 
+const TOP_SHORT: Record<string, string> = { "Union Leadership": "Leadership", Partnerships: "Partners" };
+
 export default function Nav() {
   const tx = useT();
+  const lang = useLang();
+  // Shorter Armenian labels for the one-line desktop bar only.
+  const topLabel = (s: string) => tx(lang === "hy" ? (TOP_SHORT[s] ?? s) : s);
   const [open, setOpen] = useState(false);
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set());
   const [openDesktopGroups, setOpenDesktopGroups] = useState<Set<string>>(
@@ -240,7 +245,7 @@ export default function Nav() {
             className={item.children ? styles.hasChildren : undefined}
           >
             {item.href ? (
-              <Link href={item.href}>{tx(item.label)}</Link>
+              <Link href={item.href}>{topLabel(item.label)}</Link>
             ) : item.children ? (
               <button
                 type="button"
@@ -248,7 +253,7 @@ export default function Nav() {
                 aria-expanded={openDesktopGroups.has(item.label)}
                 onClick={() => toggleDesktopGroup(item.label, true)}
               >
-                {tx(item.label)}
+                {topLabel(item.label)}
               </button>
             ) : (
               // No href and no children (Memberships today) — a plain,
@@ -256,7 +261,7 @@ export default function Nav() {
               // styling as the button triggers, but no dropdown chevron,
               // pointer cursor, or hover underline (there's nothing to open).
               <span className={styles.topLevelLabel} aria-disabled="true">
-                {tx(item.label)}
+                {topLabel(item.label)}
               </span>
             )}
             {item.children && (

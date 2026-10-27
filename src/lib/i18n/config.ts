@@ -49,3 +49,12 @@ export function isTranslatable(s: string): boolean {
   if (/^[a-z0-9]+(-[a-z0-9]+)+$/.test(t)) return false; // slugs / icon ids
   return true;
 }
+
+/** A NO_TRANSLATE key only protects plain values (a slug, a URL, a list of
+ *  phone numbers); an object under it — e.g. photo: { src, alt } — still has
+ *  its translatable fields (the alt text) localized. */
+export function isProtected(key: string, value: unknown): boolean {
+  if (!NO_TRANSLATE_KEYS.has(key)) return false;
+  if (value === null || typeof value !== "object") return true;
+  return Array.isArray(value) && value.every((x) => typeof x !== "object" || x === null);
+}

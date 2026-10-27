@@ -42,8 +42,8 @@ export default async function LeadershipGrid({
 
   return (
     <section className={styles.lead}>
-      <div className={styles.eyebrow}>{eyebrow}</div>
-      <h2 className={styles.heading}>{heading}</h2>
+      <div className={styles.eyebrow}>{tx(eyebrow)}</div>
+      <h2 className={styles.heading}>{tx(heading)}</h2>
       <div className={styles.grid}>
         {leaders.map((leader, i) => (
           <div className={styles.person} key={i}>
@@ -51,7 +51,7 @@ export default async function LeadershipGrid({
               {leader.photo ? (
                 <Image
                   src={leader.photo.src}
-                  alt={leader.photo.alt}
+                  alt={tx(leader.photo.alt)}
                   fill
                   className={styles.photo}
                 />

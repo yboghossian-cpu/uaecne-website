@@ -39,7 +39,7 @@ export default async function OutreachTopBlock({
   return (
     <section className={styles.top}>
       <div className={styles.inner}>
-        <div className={styles.crumb}>{crumbSection} › {crumbLabel}</div>
+        <div className={styles.crumb}>{tx(crumbSection)} › {crumbLabel}</div>
         <h1 className={styles.title}>{title}</h1>
         <div className={styles.subtitle}>
           {subtitlePlain}

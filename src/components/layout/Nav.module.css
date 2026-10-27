@@ -360,3 +360,18 @@
     outline-offset: 2px;
   }
 }
+
+/* Armenian labels run longer than English: tighter tracking and spacing so
+   the desktop bar still fits on one line. */
+@media (min-width: 1024px) {
+  :global(html[data-lang="hy"]) .desktopList {
+    gap: 1.1rem;
+  }
+
+  :global(html[data-lang="hy"]) .desktopList a,
+  :global(html[data-lang="hy"]) .topLevelTrigger,
+  :global(html[data-lang="hy"]) .topLevelLabel {
+    letter-spacing: 0.02em;
+    font-size: 0.78rem;
+  }
+}

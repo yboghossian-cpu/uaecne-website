@@ -1,5 +1,6 @@
 "use client";
 
+import { useT } from "@/lib/i18n/client";
 import Medallion from "@/components/shared/Medallion";
 import { useScrollReveal } from "./useScrollReveal";
 import styles from "./StatsRow.module.css";
@@ -12,6 +13,7 @@ const stats = [
 ];
 
 export default function StatsRow() {
+  const tx = useT();
   const { ref, visible } = useScrollReveal<HTMLElement>();
 
   return (
@@ -21,7 +23,7 @@ export default function StatsRow() {
           <div key={stat.label} className={styles.stat}>
             <Medallion size={20} className={styles.medallion} />
             <div className={styles.number}>{stat.number}</div>
-            <div className={styles.label}>{stat.label}</div>
+            <div className={styles.label}>{tx(stat.label)}</div>
           </div>
         ))}
       </div>

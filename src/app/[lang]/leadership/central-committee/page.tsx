@@ -112,7 +112,7 @@ export default async function CentralCommitteePage() {
                 {member.photo ? (
                   <Image
                     src={member.photo}
-                    alt={member.name}
+                    alt={tx(member.name)}
                     fill
                     className={styles.photo}
                   />
@@ -126,8 +126,8 @@ export default async function CentralCommitteePage() {
                 )}
               </div>
               <div className={styles.info}>
-                <span className={styles.name}>{member.name}</span>
-                <div className={styles.role}>{member.role}</div>
+                <span className={styles.name}>{tx(member.name)}</span>
+                <div className={styles.role}>{tx(member.role)}</div>
               </div>
             </article>
           ))}

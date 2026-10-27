@@ -1,6 +1,6 @@
 import "server-only";
 import { lang as rootLang } from "next/root-params";
-import { DEFAULT_LANG, NO_TRANSLATE_KEYS, isLang, isTranslatable, type Lang } from "./config";
+import { DEFAULT_LANG, isLang, isProtected, isTranslatable, type Lang } from "./config";
 import { getDictionary } from "./dictionary";
 
 export type T = (s: string) => string;
@@ -60,7 +60,7 @@ function localizeWith<V>(value: V, t: T, lang: Lang): V {
         out[k] = human;
         continue;
       }
-      out[k] = NO_TRANSLATE_KEYS.has(k) ? v : localizeWith(v, t, lang);
+      out[k] = isProtected(k, v) ? v : localizeWith(v, t, lang);
     }
     return out as V;
   }

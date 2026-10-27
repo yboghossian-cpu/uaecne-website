@@ -70,8 +70,8 @@ export default function ChurchGalleryLightbox({ gallery }: ChurchGalleryLightbox
   return (
     <section className={styles.gallery}>
       <div className={styles.centerHead}>
-        {gallery.eyebrow && <div className={styles.eyebrow}>{gallery.eyebrow}</div>}
-        <h2 className={styles.heading}>{gallery.heading}</h2>
+        {gallery.eyebrow && <div className={styles.eyebrow}>{tx(gallery.eyebrow)}</div>}
+        <h2 className={styles.heading}>{tx(gallery.heading)}</h2>
       </div>
       <div className={styles.wrap}>
         <button

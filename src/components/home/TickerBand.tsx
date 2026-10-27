@@ -1,3 +1,4 @@
+import { getT, type T } from "@/lib/i18n/server";
 import styles from "./TickerBand.module.css";
 
 const phrases = [
@@ -9,12 +10,12 @@ const phrases = [
   "UNION OF THE ARMENIAN EVANGELICAL CHURCHES IN THE NEAR EAST",
 ];
 
-function TickerContent({ keyPrefix }: { keyPrefix: string }) {
+function TickerContent({ keyPrefix, tx }: { keyPrefix: string; tx: T }) {
   return (
     <>
       {phrases.map((phrase, i) => (
         <span key={`${keyPrefix}-${i}`} className={styles.item}>
-          {phrase}
+          {tx(phrase)}
           <span aria-hidden="true"> • </span>
         </span>
       ))}
@@ -22,13 +23,14 @@ function TickerContent({ keyPrefix }: { keyPrefix: string }) {
   );
 }
 
-export default function TickerBand() {
+export default async function TickerBand() {
+  const tx = await getT();
   return (
     <div className={styles.ticker}>
       <div className={styles.track}>
-        <TickerContent keyPrefix="a" />
+        <TickerContent keyPrefix="a" tx={tx} />
         <span className={styles.duplicate} aria-hidden="true">
-          <TickerContent keyPrefix="b" />
+          <TickerContent keyPrefix="b" tx={tx} />
         </span>
       </div>
     </div>

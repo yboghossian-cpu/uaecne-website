@@ -10,7 +10,7 @@ import { buildSchoolView } from "@/lib/schoolTemplate";
 import { getAllChurchContent, getChurches, getAllSchoolContent, getSchools } from "@/lib/server/content";
 import { getAllPostsForAdmin } from "@/lib/server/posts";
 import { getSettings } from "@/lib/server/settings";
-import { NO_TRANSLATE_KEYS, isTranslatable } from "./config";
+import { isProtected, isTranslatable } from "./config";
 
 /**
  * Every English text the public site can show, with where it appears —
@@ -33,7 +33,7 @@ export function collectSources(): SourceString[] {
     if (typeof v === "object") {
       const o = v as Record<string, unknown>;
       for (const [k, x] of Object.entries(o)) {
-        if (k.endsWith("Hy") || NO_TRANSLATE_KEYS.has(k)) continue;
+        if (k.endsWith("Hy") || isProtected(k, x)) continue;
         const human = o[`${k}Hy`];
         if (human !== undefined && human !== null && (typeof human !== "string" || human.trim())) continue;
         walk(x, where, k);

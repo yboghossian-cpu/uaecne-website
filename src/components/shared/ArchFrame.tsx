@@ -1,3 +1,6 @@
+"use client";
+
+import { useT } from "@/lib/i18n/client";
 import type { ReactNode } from "react";
 import Image from "next/image";
 import styles from "./ArchFrame.module.css";
@@ -24,6 +27,7 @@ export default function ArchFrame({
   photoSrc,
   photoAlt = "",
 }: ArchFrameProps) {
+  const tx = useT();
   return (
     <div
       className={className ? `${styles.arch} ${className}` : styles.arch}
@@ -34,7 +38,7 @@ export default function ArchFrame({
       ) : (
         <>
           <span className={styles.glyph}>{children}</span>
-          <span className={styles.phTag}>{label}</span>
+          <span className={styles.phTag}>{tx(label)}</span>
         </>
       )}
     </div>

@@ -82,7 +82,7 @@ export default function Ga79Gallery() {
               className={styles.frame}
               key={src}
               onClick={() => show(i)}
-              aria-label={`Open photo ${i + 1} of ${COUNT}`}
+              aria-label={tx("Open photo {n} of {total}").replace("{n}", String(i + 1)).replace("{total}", String(COUNT))}
               style={{ aspectRatio: String(ratios[i]) }}
             >
               <Image src={src} alt="" fill sizes="(max-width: 760px) 60vw, 360px" className={styles.frameImg} />

@@ -17,5 +17,12 @@ export function useLang(): Lang {
 /** Translator for client components (only UI labels are sent to the browser). */
 export function useT(): (s: string) => string {
   const { lang, messages } = useContext(LangContext);
-  return (s: string) => (lang === "en" ? s : (messages[s] ?? s));
+  return (s: string) => {
+    if (lang === "en" || typeof s !== "string") return s;
+    const hit = messages[s];
+    if (hit) return hit;
+    const m = s.match(/^(\s*)([\s\S]*?)(\s*)$/);
+    const core = m && (m[1] || m[3]) ? messages[m[2]] : undefined;
+    return core ? m![1] + core + m![3] : s;
+  };
 }
