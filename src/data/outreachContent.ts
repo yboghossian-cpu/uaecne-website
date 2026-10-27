@@ -45,6 +45,8 @@ export type OutreachCTA = {
 // ===================== CAMPS (KCHAG) =====================
 
 export type CampsContent = {
+  // Official website / social accounts ("Follow Us" band).
+  social?: SocialLinks;
   slug: string;
   title: string;
   titleHy: string | null;
@@ -93,6 +95,12 @@ export type CampsContent = {
 
 export const campsContent: CampsContent = {
   slug: "camps",
+  // KCHAG's official site and accounts (linked from kchag.org).
+  social: {
+    facebook: "https://www.facebook.com/KCHAGLebanon",
+    instagram: "https://www.instagram.com/kchag_lebanon/",
+    website: "https://www.kchag.org/",
+  },
   title: "Camps",
   titleHy: null,
   subtitlePlain: "The Christian Endeavour Summer Center · ",
@@ -796,6 +804,7 @@ export const boardingHomeContent: BoardingHomeContent = {
     location: "Anjar, Bekaa Valley, Lebanon",
     locationHy: null,
     directorLabel: "Director:",
+    social: { facebook: "https://www.facebook.com/kisherotig.anjar/" },
     director: "Mrs. Nanor Kelenjian Akbasharian",
     note: "Direct contact details for the Boarding Home are being confirmed and will be published once verified.",
     noteHy: null,

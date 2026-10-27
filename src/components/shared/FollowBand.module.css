@@ -1,0 +1,22 @@
+.band {
+  padding: 26px 20px 30px;
+  background: var(--color-ivory);
+}
+
+.inner {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.inner > div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.inner ul {
+  justify-content: center;
+}

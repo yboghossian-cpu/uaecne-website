@@ -62,6 +62,7 @@ const person = (name: string, role: string, photo: string | null): SchoolLeaderE
 export const syriaMinistries: SyriaMinistryPage[] = [
   {
     slug: "bethel-polyclinic",
+    social: { facebook: "https://www.facebook.com/profile.php?id=100063887564467", website: "https://apcsy.org/pages/polyclinic" },
     crumbSection: "Health Care › Syria",
     title: "Bethel Polyclinic",
     subtitlePlain: "Armenian Evangelical Bethel Church, Aleppo · ",
@@ -125,6 +126,7 @@ export const syriaMinistries: SyriaMinistryPage[] = [
   },
   {
     slug: "social-action-committee",
+    social: { website: "https://apcsy.org/pages/social-work" },
     crumbSection: "Outreach › Syria",
     title: "Social Action Committee — Syria",
     subtitlePlain: "The Armenian Protestant Community in Syria · ",
@@ -275,6 +277,7 @@ export const syriaMinistries: SyriaMinistryPage[] = [
   },
   {
     slug: "community-headquarters",
+    social: { website: "https://apcsy.org/" },
     crumbSection: "Union Leadership › Syria",
     title: "Headquarters of the Armenian Protestant Community in Syria",
     subtitlePlain: "Aleppo · ",

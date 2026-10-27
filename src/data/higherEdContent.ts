@@ -167,6 +167,8 @@ export const educationCouncilContent: EducationCouncilContent = {
 // (typed separately below, not part of this shared shape).
 
 type InstitutionCore = {
+  // Official website / social accounts ("Follow Us" band).
+  social?: SocialLinks;
   slug: string;
   masthead: {
     heading: string;
@@ -235,6 +237,13 @@ export type HaigazianContent = InstitutionCore & {
 
 export const haigazianContent: HaigazianContent = {
   slug: "haigazian-university",
+  social: {
+    facebook: "https://www.facebook.com/universityhaigazian/",
+    instagram: "https://www.instagram.com/haigazian.university/",
+    youtube: "https://www.youtube.com/@Haigazian",
+    linkedin: "https://www.linkedin.com/school/haigazian-university/",
+    website: "https://www.haigazian.edu.lb/",
+  },
 
   masthead: {
     heading: "Haigazian University",
@@ -414,6 +423,11 @@ export type NestContent = InstitutionCore & {
 
 export const nestContent: NestContent = {
   slug: "near-east-school-of-theology",
+  social: {
+    facebook: "https://www.facebook.com/NearEastSchoolofTheology",
+    instagram: "https://www.instagram.com/near_east_school_of_theology/",
+    website: "https://www.theonest.edu.lb/",
+  },
 
   masthead: {
     heading: "Near East School of Theology",
@@ -649,6 +663,10 @@ export type SyriaEducationalCouncilContent = {
 };
 
 export const syriaEducationalCouncilContent: SyriaEducationalCouncilContent = {
+  social: {
+    facebook: "https://www.facebook.com/profile.php?id=100064268012369",
+    website: "https://apcsy.org/pages/educational-institutions",
+  },
   slug: "syria-educational-council",
 
   heading: "Armenian Evangelical Educational Council",

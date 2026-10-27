@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { haigazianContent, nestContent } from "@/data/higherEdContent";
 import HigherEdBreadcrumb from "@/components/highered/HigherEdBreadcrumb";
 import HigherEdCTA from "@/components/highered/HigherEdCTA";
+import FollowBand from "@/components/shared/FollowBand";
 import InstitutionTopBlock from "@/components/highered/InstitutionTopBlock";
 import InstitutionAbout from "@/components/highered/InstitutionAbout";
 import InstitutionHistory from "@/components/highered/InstitutionHistory";
@@ -71,6 +72,7 @@ export default async function HigherEducationDetailPage({
         <HaigazianMotto motto={h.motto} />
         <HaigazianFaculties faculties={h.faculties} />
         <HaigazianClassBand classBand={h.classBand} />
+        <FollowBand social={h.social} name="Haigazian University" />
         <HigherEdCTA cta={h.cta} />
       </>
     );
@@ -94,6 +96,7 @@ export default async function HigherEducationDetailPage({
         <NestSponsors sponsors={n.sponsors} />
         <NestDegrees degrees={n.degrees} />
         <NestLeadershipPair leadership={n.leadership} />
+        <FollowBand social={n.social} name="Near East School of Theology" />
         <HigherEdCTA cta={n.cta} />
       </>
     );

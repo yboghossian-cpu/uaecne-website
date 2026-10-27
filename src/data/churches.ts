@@ -45,6 +45,7 @@ export const churches: Church[] = [
     slug: "first-armenian-evangelical-church-beirut",
     photo: "/church-first-armenian-evangelical-church-beirut.jpg",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/FAECBeirut/", youtube: "https://www.youtube.com/@firstarmenianevangelicalchurch" },
   },
   {
     id: "B-LB-02",
@@ -62,6 +63,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-ashrafieh",
     photo: "/church-armenian-evangelical-church-ashrafieh.jpeg",
     emblem: "/church-armenian-evangelical-church-ashrafieh-emblem.png",
+    social: { facebook: "https://www.facebook.com/profile.php?id=100063582671248", youtube: "https://www.youtube.com/@ashrafiehchurch9339", website: "https://www.arevchas.com/" },
   },
   {
     id: "B-LB-03",
@@ -78,6 +80,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-nor-marash",
     photo: "/church-armenian-evangelical-church-nor-marash.jpeg",
     emblem: "/church-armenian-evangelical-church-nor-marash-emblem.png",
+    social: { facebook: "https://www.facebook.com/profile.php?id=100068540893274" },
   },
   {
     id: "B-LB-04",
@@ -95,6 +98,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-emmanuel-church-nor-amanos-dora",
     photo: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora.jpeg",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/Armenian.Evangelical.Emmanuel.Church.Lebanon/" },
   },
   {
     id: "B-LB-05",
@@ -127,6 +131,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-anjar",
     photo: "/church-armenian-evangelical-church-anjar-logo.png",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/AEChurchAnjar/", youtube: "https://www.youtube.com/@armenianevangelicalchurcho8308" },
   },
   {
     id: "B-SY-01",
@@ -143,6 +148,7 @@ export const churches: Church[] = [
     slug: "armenian-protestant-emmanuel-church-aleppo",
     photo: "/church-emmanuel-aleppo-hero.jpg",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/emmanuel.church.official" },
   },
   {
     id: "B-SY-02",
@@ -159,6 +165,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-bethel-church-aleppo",
     photo: "/church-bethel-aleppo-hero.jpg",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/profile.php?id=100064428500572", instagram: "https://www.instagram.com/bethel_church_1923/", website: "https://apcsy.org/" },
   },
   {
     id: "B-SY-03",
@@ -175,6 +182,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-martyrs-church-aleppo",
     photo: "/church-martyrs-aleppo-hero.jpg",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/nahadagats.Church" },
   },
   {
     id: "B-SY-04",
@@ -191,6 +199,7 @@ export const churches: Church[] = [
     slug: "church-of-christ-aleppo",
     photo: null,
     emblem: null,
+    social: { website: "https://apcsy.org/" },
   },
   {
     id: "B-SY-05",
@@ -207,6 +216,7 @@ export const churches: Church[] = [
     slug: "syriac-evangelical-church-aleppo",
     photo: "/church-syriac-aleppo-hero.jpg",
     emblem: null,
+    social: { facebook: "https://www.facebook.com/profile.php?id=100065019660592" },
   },
   {
     id: "B-SY-05A",
@@ -239,6 +249,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-holy-trinity-church-kessab",
     photo: null,
     emblem: null,
+    social: { facebook: "https://www.facebook.com/groups/255047687880778" },
   },
   {
     id: "B-SY-07",
@@ -255,6 +266,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-of-ekizolouk",
     photo: null,
     emblem: null,
+    social: { facebook: "https://www.facebook.com/groups/255047687880778" },
   },
   {
     id: "B-SY-08",
@@ -271,6 +283,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-of-keorkuneh",
     photo: null,
     emblem: null,
+    social: { facebook: "https://www.facebook.com/groups/255047687880778" },
   },
   {
     id: "B-SY-09",
@@ -287,6 +300,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-of-kaladouran",
     photo: null,
     emblem: null,
+    social: { facebook: "https://www.facebook.com/groups/255047687880778" },
   },
   {
     id: "B-IDX-TR-01",
@@ -335,6 +349,7 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-kokkinia-piraeus",
     photo: null,
     emblem: null,
+    social: { facebook: "https://www.facebook.com/profile.php?id=100064501370006" },
   },
   {
     id: "B-IDX-GR-02",
@@ -368,5 +383,6 @@ export const churches: Church[] = [
     slug: "armenian-evangelical-church-of-sydney",
     photo: null,
     emblem: null,
+    social: { facebook: "https://www.facebook.com/aecsydney/", website: "https://willoughbyarmenian.uca.org.au/" },
   },
 ];

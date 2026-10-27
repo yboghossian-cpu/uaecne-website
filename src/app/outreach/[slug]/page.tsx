@@ -27,6 +27,7 @@ import BoardingHomeLeadership from "@/components/outreach/BoardingHomeLeadership
 import BoardingHomeMission from "@/components/outreach/BoardingHomeMission";
 import BoardingHomeClosing from "@/components/outreach/BoardingHomeClosing";
 import BoardingHomeContact from "@/components/outreach/BoardingHomeContact";
+import FollowBand from "@/components/shared/FollowBand";
 
 const SLUGS = [
   campsContent.slug,
@@ -86,6 +87,7 @@ export default async function OutreachDetailPage({
           heading={c.gallery.heading}
           photos={c.gallery.photos}
         />
+        <FollowBand social={c.social} name="KCHAG" />
         <OutreachCTA cta={c.cta} />
       </>
     );
