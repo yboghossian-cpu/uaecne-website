@@ -1,5 +1,6 @@
 .facts {
-  margin: 22px 34px 0;
+  width: min(1080px, calc(100% - 40px));
+  margin: 18px auto 0;
   display: grid;
   grid-template-columns: 1fr;
   background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
@@ -47,8 +48,4 @@
   }
 }
 
-@media (max-width: 640px) {
-  .facts {
-    margin: 22px 20px 0;
-  }
-}
+

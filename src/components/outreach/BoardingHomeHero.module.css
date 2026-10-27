@@ -1,16 +1,47 @@
 .wrap {
-  margin: 20px 34px 0;
-  display: flex;
-  justify-content: center;
+  width: min(1080px, calc(100% - 40px));
+  margin: 20px auto 0;
 }
 
 .arch {
   width: 100%;
-  max-width: 760px;
+}
+
+@media (min-width: 720px) {
+  .arch {
+    aspect-ratio: 16 / 7 !important;
+  }
 }
 
 @media (max-width: 640px) {
   .wrap {
-    margin: 16px 20px 0;
+    margin-top: 16px;
   }
+}
+
+/* Light "photo pending" treatment, matching the church and school pages,
+   until a real photo of the Boarding Home is supplied. */
+.wrap .arch {
+  background:
+    repeating-linear-gradient(135deg, rgba(197, 160, 89, 0.09) 0 2px, transparent 2px 15px),
+    linear-gradient(160deg, #fbf3e2, #efe2c8);
+  box-shadow: var(--shadow-soft);
+}
+
+.wrap .arch::after {
+  border-color: rgba(197, 160, 89, 0.35);
+}
+
+.wrap .arch > span:first-child {
+  color: rgba(139, 0, 0, 0.22);
+}
+
+.wrap .arch > span:first-child svg {
+  width: 26%;
+  height: 26%;
+}
+
+.wrap .arch > span:last-child {
+  color: var(--color-brown);
+  background: rgba(255, 253, 247, 0.85);
 }

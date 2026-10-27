@@ -447,6 +447,6 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
 
 - **[Boarding Home of Anjar] Founder's surname spelling — confirm.** The source docx reads "Sister Hedwig Äenishänslin" and the page follows it. The usual Swiss spelling of this surname is "Aenishänslin" (no leading Ä). Confirm with Maral before treating as final. The docx also dates her leadership "1948–1970s" while the mission began in 1947; the page shows no leadership date range.
 
-- **[Boarding Home of Anjar] Still pending:** hero photo, director photo (Mrs. Nanor Kelenjian Akbasharian), Boarding Home phone and email. All render as "Pending" placeholders.
+- **[Boarding Home of Anjar] Still pending:** hero photo, Boarding Home phone and email. (Director photo added 2026-10-27 from WhatsApp 00003507.) All render as "Pending" placeholders.
 
 - **[Outreach index] Hero subtitle still reads "Camps, youth work, and social action…"** — it does not mention the Boarding Home now that it is the 4th Outreach card. Copy decision for Yeghia; not changed.

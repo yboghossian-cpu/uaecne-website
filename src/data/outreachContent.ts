@@ -562,7 +562,7 @@ export type BoardingHomeContent = {
     nameHy: string | null;
     role: string;
     roleHy: string | null;
-    photo: Photo | null; // stays null — no director photo exists yet
+    photo: Photo | null;
   };
 
   history: {
@@ -662,7 +662,8 @@ export const boardingHomeContent: BoardingHomeContent = {
     nameHy: null,
     role: "Boarding Home Director",
     roleHy: null,
-    photo: null,
+    // Real photo sent by Mrs. Nanor (WhatsApp "UNION website", 20/10/2026, 00003507).
+    photo: { src: "/outreach-boarding-home-director-nanor-akbasharian.jpg", alt: "Mrs. Nanor Kelenjian Akbasharian" },
   },
 
   history: {
