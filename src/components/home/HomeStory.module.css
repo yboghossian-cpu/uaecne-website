@@ -7,6 +7,11 @@
 .root {
   --bg: #fffdf7;
   --wash: #f7f2e9;
+  --red: #8b0000;
+  --red-deep: #6e0000;
+  --red-dark: #4a0000;
+  --gold-brand: #c5a059;
+  --ivory: #fffdf7;
   --ink: #2b1a10;
   --accent: #8b0000;
   --gold: #a87f3a;
@@ -306,7 +311,12 @@ a.magnet:focus-visible {
 
 /* ---------------------------------------------------------------- ticker */
 .ticker {
-  background: var(--wash);
+  --ink: var(--ivory);
+  --accent: var(--gold-brand);
+  --gold: var(--gold-brand);
+  --line: transparent;
+  background: var(--red);
+  color: var(--ivory);
   padding: clamp(2.5rem, 7vh, 4.5rem) 0;
   overflow: hidden;
   border-block: 1px solid var(--line);
@@ -487,6 +497,13 @@ a.magnet:focus-visible {
 
 /* ----------------------------------------------------------------- doors */
 .doors {
+  --ink: var(--ivory);
+  --muted: rgba(255, 253, 247, 0.85);
+  --gold: var(--gold-brand);
+  --lift: 0 0 40px rgba(0, 0, 0, 0.18), 0 28px 60px -22px rgba(0, 0, 0, 0.5);
+  --lift-hover: 0 0 0 2px var(--gold-brand), 0 0 50px rgba(0, 0, 0, 0.25), 0 36px 70px -24px rgba(0, 0, 0, 0.55);
+  background: linear-gradient(180deg, var(--red), var(--red-deep));
+  color: var(--ivory);
   padding: clamp(5rem, 14vh, 10rem) clamp(1rem, 4vw, 4rem);
 }
 
@@ -940,8 +957,9 @@ a.magnet:focus-visible {
 /* ---------------------------------------------------------------- donate */
 .donate {
   --p: 0;
-  background: var(--wash);
-  border-top: 1px solid var(--line);
+  --muted: rgba(255, 253, 247, 0.9);
+  background: linear-gradient(180deg, var(--red), var(--red-dark));
+  color: var(--ivory);
   padding: clamp(6rem, 16vh, 11rem) clamp(1.25rem, 6vw, 6rem);
   text-align: center;
 }
@@ -952,7 +970,7 @@ a.magnet:focus-visible {
   font-weight: 700;
   font-size: clamp(3.2rem, 10vw, 9.5rem);
   line-height: 0.9;
-  color: var(--accent);
+  color: var(--ivory);
   letter-spacing: calc((1 - clamp(0, var(--p) * 2, 1)) * 0.18em - 0.02em);
 }
 
@@ -966,15 +984,15 @@ a.magnet:focus-visible {
 }
 
 .donateBtn {
-  background: #8b0000;
-  border-color: #8b0000;
-  color: #fff6e6;
+  background: var(--gold-brand);
+  border-color: var(--gold-brand);
+  color: var(--red-dark);
 }
 a.donateBtn:hover,
 a.donateBtn:focus-visible {
-  background: #3a0a0c;
-  border-color: #3a0a0c;
-  color: #fff6e6;
+  background: #d4af37;
+  border-color: #d4af37;
+  color: var(--red-dark);
 }
 span.donateBtn {
   opacity: 0.85;
