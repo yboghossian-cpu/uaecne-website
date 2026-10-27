@@ -108,7 +108,7 @@ function Ticker({ phrases }: { phrases: string[] }) {
   const half = Math.ceil(phrases.length / 2);
   const lines = [phrases.slice(0, half), phrases.slice(half)];
   return (
-    <section className={styles.ticker} aria-label={phrases.join(" · ")} data-tone="crimson">
+    <section className={styles.ticker} aria-label={phrases.join(" · ")}>
       {lines.map((line, i) => (
         <div key={i} className={styles.tickerRow} aria-hidden="true">
           <div
@@ -213,11 +213,11 @@ export default function HomeStory(props: HomeStoryProps) {
   const landPhoto = land !== null ? lands.countries[land]?.photo : null;
 
   return (
-    <div ref={root} className={styles.root} data-active-tone="crimson">
+    <div ref={root} className={styles.root} >
       <Cursor root={root} />
 
       {/* ================= HERO — 1846 → 2026 through the arch ================= */}
-      <section ref={heroRef} className={styles.hero} data-scrub="sticky" data-tone="crimson" aria-labelledby="home-title">
+      <section ref={heroRef} className={styles.hero} data-scrub="sticky" aria-labelledby="home-title">
         <div className={styles.heroStage} onPointerMove={trackPointer}>
           <div className={styles.heroYear} aria-hidden="true">
             <span ref={yearRef}>1846</span>
@@ -248,7 +248,7 @@ export default function HomeStory(props: HomeStoryProps) {
       <Ticker phrases={ticker} />
 
       {/* ================= LEGACY ================= */}
-      <section className={styles.legacy} data-tone="ivory" data-scrub="pass">
+      <section className={styles.legacy} data-scrub="pass">
         <div className={styles.legacyArch} onPointerMove={trackPointer}>
           <div className={styles.legacyArchIn}>
             <Image src={legacy.photo.src} alt={legacy.photo.alt} fill sizes="(min-width: 900px) 40vw, 90vw" className={styles.cover} />
@@ -273,7 +273,7 @@ export default function HomeStory(props: HomeStoryProps) {
       </section>
 
       {/* ================= NUMBERS — photos inside the figures ================= */}
-      <section className={styles.numbers} data-tone="parchment">
+      <section className={styles.numbers}>
         {numbers.map((n) => (
           <div key={n.label} className={styles.number} onPointerMove={trackPointer} style={{ "--img": `url(${n.photo})` } as CSSProperties}>
             <span className={styles.numberValue}>
@@ -285,7 +285,7 @@ export default function HomeStory(props: HomeStoryProps) {
       </section>
 
       {/* ================= DOORS — four ministries ================= */}
-      <section className={styles.doors} data-tone="crimson">
+      <section className={styles.doors}>
         <header className={styles.doorsHead}>
           <p className={styles.eyebrow}>{doors.eyebrow}</p>
           <h2 className={styles.h2}>{doors.heading}</h2>
@@ -307,7 +307,7 @@ export default function HomeStory(props: HomeStoryProps) {
       </section>
 
       {/* ================= LANDS — hover a country ================= */}
-      <section className={styles.lands} data-tone="ivory" onPointerMove={trackPointer} onPointerLeave={() => setLand(null)}>
+      <section className={styles.lands} onPointerMove={trackPointer} onPointerLeave={() => setLand(null)}>
         <div className={styles.landsHead}>
           <p className={styles.eyebrow}>{lands.eyebrow}</p>
           <h2 className={styles.h2}>{lands.heading}</h2>
@@ -354,7 +354,7 @@ export default function HomeStory(props: HomeStoryProps) {
       </section>
 
       {/* ================= FILM — every congregation ================= */}
-      <section className={styles.film} data-scrub="sticky" data-tone="night">
+      <section className={styles.film} data-scrub="sticky">
         <div className={styles.filmStage}>
           <div className={styles.filmTrack}>
             <div className={styles.filmIntro}>
@@ -383,7 +383,7 @@ export default function HomeStory(props: HomeStoryProps) {
 
       {/* ================= NEWS ================= */}
       {news && (
-        <section className={styles.news} data-tone="ivory" data-scrub="pass">
+        <section className={styles.news} data-scrub="pass">
           <header className={styles.newsHead}>
             <p className={styles.eyebrow}>{news.eyebrow}</p>
             <h2 className={styles.h2}>{news.heading}</h2>
@@ -406,27 +406,31 @@ export default function HomeStory(props: HomeStoryProps) {
       )}
 
       {/* ================= HERITAGE ================= */}
-      <section className={styles.heritage} data-tone="night" data-scrub="pass">
-        <div className={styles.heritageImg}>
-          <Image src={heritage.photo.src} alt={heritage.photo.alt} fill sizes="100vw" className={styles.cover} />
+      <section className={styles.heritage} data-scrub="pass">
+        <div className={styles.heritageArch} onPointerMove={trackPointer}>
+          <div className={styles.heritageArchIn}>
+            <Image src={heritage.photo.src} alt={heritage.photo.alt} fill sizes="(min-width: 900px) 40vw, 90vw" className={styles.cover} />
+          </div>
         </div>
-        <blockquote className={styles.verse}>
-          <WordLight text={heritage.verse} />
-          <cite>{heritage.cite}</cite>
-        </blockquote>
-        <div className={styles.heritageText}>
-          <p className={styles.eyebrow}>{heritage.eyebrow}</p>
-          <h2 className={styles.h2}>
-            {heritage.titleA} {heritage.titleB}
-          </h2>
-          <p className={styles.lead}>{heritage.body}</p>
-          <p className={styles.invite}>{heritage.invite}</p>
-          <Magnetic href="/resource-center/history">{heritage.cta}</Magnetic>
+        <div className={styles.heritageBody}>
+          <blockquote className={styles.verse}>
+            <WordLight text={heritage.verse} />
+            <cite>{heritage.cite}</cite>
+          </blockquote>
+          <div className={styles.heritageText}>
+            <p className={styles.eyebrow}>{heritage.eyebrow}</p>
+            <h2 className={styles.h2}>
+              {heritage.titleA} {heritage.titleB}
+            </h2>
+            <p className={styles.lead}>{heritage.body}</p>
+            <p className={styles.invite}>{heritage.invite}</p>
+            <Magnetic href="/resource-center/history">{heritage.cta}</Magnetic>
+          </div>
         </div>
       </section>
 
       {/* ================= DONATE ================= */}
-      <section className={styles.donate} data-tone="gold" data-scrub="pass">
+      <section className={styles.donate} data-scrub="pass">
         <h2 className={styles.donateTitle}>{donate.heading}</h2>
         <p className={styles.donateBody}>{donate.body}</p>
         {donate.url ? (

@@ -514,8 +514,10 @@
   width: 74%;
   aspect-ratio: 1567 / 1600;
   overflow: hidden;
-  border-radius: 48% 48% 10px 10px / 38% 38% 10px 10px;
-  box-shadow: 0 40px 70px -30px rgba(40, 25, 10, 0.7);
+  border-radius: 18px;
+  box-shadow:
+    0 0 40px rgba(139, 0, 0, 0.2),
+    0 30px 60px -22px rgba(139, 0, 0, 0.45);
   transform-origin: 50% -12%;
 }
 .bellSwing img {
@@ -994,7 +996,8 @@
   min-width: 260px;
   height: 82vh;
   overflow: hidden;
-  border-radius: calc((1 - var(--e)) * 999px) calc((1 - var(--e)) * 999px) 0 0;
+  border-radius: calc((1 - var(--e)) * 18px);
+  box-shadow: 0 0 48px rgba(240, 165, 74, calc((1 - var(--e)) * 0.25));
 }
 
 .todayRow {
