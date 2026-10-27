@@ -42,20 +42,19 @@ export const historyContent = {
   },
 
   geography: {
-    eyebrow: "One Fellowship, Nine Lands",
+    eyebrow: "One Fellowship, Seven Lands",
     heading: "Across the Near East & Beyond",
     intro:
       "The UAECNE serves Armenian Evangelical communities spread across a broad geographical region — bound by one faith across borders and generations.",
     map: {
-      src: "/history-map-nine-lands.png",
-      alt: "Map of the nine countries served by the UAECNE",
+      src: "/history-map-seven-lands.png",
+      alt: "Map of the seven countries served by the UAECNE",
     },
     countries: [
       "Lebanon",
       "Syria",
       "Turkey",
       "Egypt",
-      "Iran",
       "Greece",
       "Cyprus",
       "Australia",

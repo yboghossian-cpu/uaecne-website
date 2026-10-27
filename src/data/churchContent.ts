@@ -355,6 +355,8 @@ export type ChurchContent = {
   // point there.
   pastorVacant?: boolean;
   worshipsAt?: string;
+  // The church reports no regular worship service (Ekizolukh, form 08).
+  noRegularWorship?: boolean;
 
   cta: { heading: string; headingHy: string | null; body: string; bodyHy: string | null }; // always present
 
@@ -406,6 +408,17 @@ export type ChurchContent = {
     // card (e.g. "Contact details are placeholders until verified copy is
     // supplied."). Null/omitted renders nothing extra.
     note?: string;
+    // Curated Google Maps place link supplied by the church (web form).
+    // When absent, "View on Maps" falls back to an address search.
+    mapsUrl?: string;
+    // Fax number, when the church supplies one.
+    fax?: string;
+    // Role label per email (same order as the email list), e.g.
+    // ["Pastor", "Secretary"]. Absent = "Email" / "Email 1, 2…".
+    emailLabels?: string[];
+    // Weekly services besides Sunday worship, as supplied by the church
+    // (e.g. "Women's Worship Service — Wednesday").
+    otherServices?: string[];
   } | null;
 };
 
@@ -582,7 +595,10 @@ export const churchContent: Record<string, ChurchContent> = {
     // uaecne-church-faec-beirut-complete.html: `Mexique Street, Kantari,
     // Beirut, Lebanon` — no P.O. box in the reference's location card, so
     // none is added here.
-    contactOverride: { address: "Mexique Street, Kantari, Beirut, Lebanon" },
+    contactOverride: {
+      address: "Mexique Street, Kantari, Beirut, Lebanon",
+      emailLabels: ["Pastor", "Secretary"],
+    },
   },
 
   "syriac-evangelical-church-sed-el-bouchrieh": {
@@ -956,10 +972,8 @@ export const churchContent: Record<string, ChurchContent> = {
         nameHy: null,
         role: "Secretary",
         roleHy: null,
-        photo: {
-          src: "/church-armenian-evangelical-emmanuel-church-nor-amanos-dora-leader-3.jpg",
-          alt: "Mrs. Ani Svadjian",
-        },
+        // Photo removed 2026-10-27: Garbis rejected it (23 Jul).
+        photo: null,
       },
     ],
 
@@ -1827,10 +1841,19 @@ export const churchContent: Record<string, ChurchContent> = {
     // so neither is invented here — see OPEN_QUESTIONS.
     contactOverride: {
       phone: "+963 21 4 642 450 · +963 21 4 467 528",
+      fax: "+963 21 4 614 490",
       email: "bethelchurch31923@gmail.com",
       secretary: "Mrs. Araz Mansourian-Shahinian",
+      address: "Jabriye District, Aleppo, Syria\nP.O. Box 3833 – Suleymanieh, Aleppo",
+      mapsUrl: "https://maps.app.goo.gl/cWpD5sGQ6ETcwPNY8p",
+      otherServices: [
+        "Bible Study — Tuesday",
+        "Women's Worship Service — Wednesday",
+        "Youth Worship Service — Friday",
+        "Junior and Sunday School Worship Services — Sunday",
+      ],
       facebook: {
-        label: "Armenian Evangelical Bethel Church, Aleppo",
+        label: "Armenian Evangelical Bethel Church, Aleppo-Syria",
         url: "https://www.facebook.com/profile.php?id=100064428500572",
       },
       socials: [
@@ -2040,16 +2063,19 @@ export const churchContent: Record<string, ChurchContent> = {
     // fax field, so it isn't invented here — see OPEN_QUESTIONS.
     contactOverride: {
       phone: "+963 21 2 120 689",
+      fax: "+963 21 2 111 070",
       email: "Arm.Evn.emmanuel.church@gmail.com",
-      address: "Azizieh District, Aleppo, Syria",
+      address: "Azizieh District, Aleppo, Syria\nP.O. Box 303 – Azizieh, Aleppo",
       secretary: "Mrs. Tamar Kazanjian-Keoshgerian",
+      mapsUrl: "https://maps.app.goo.gl/3r1MruTDw48iuzsv8",
+      otherServices: [
+        "Women's Worship Service — Thursday",
+        "Junior, Youth and Sunday School Worship Services — Sunday",
+      ],
       facebook: {
-        label: "emmanuel.church.official",
+        label: "First Armenian Evangelical Emmanuel Church – Aleppo",
         url: "https://www.facebook.com/emmanuel.church.official/",
       },
-      // Phone and email are confirmed; only the street remains unverified,
-      // so the caveat is narrowed to the address rather than dropped.
-      note: "Street address pending verification.",
     },
   },
 
@@ -2221,17 +2247,19 @@ export const churchContent: Record<string, ChurchContent> = {
     // "Mrs." (matching Տիկ.); an Armenian office-list gloss elsewhere said
     // "Miss" — using "Mrs." per the doc, flagged pending in OPEN_QUESTIONS.
     contactOverride: {
-      phone: "+963 21 4 614 110",
+      phone: "+963 21 4 614 110 · +963 21 4 640 040",
       email: "simondersahagian@yahoo.com",
-      address: "Suleimaniyeh District, Aleppo, Syria",
+      address: "Suleimaniyeh District, Aleppo, Syria\nP.O. Box 4727 – Suleymanieh, Aleppo",
       secretary: "Mrs. Sarin Seraydarian-Aghayegian",
+      mapsUrl: "https://maps.app.goo.gl/p8gXvT4pG7Y4hrJX9",
+      otherServices: [
+        "Women's Worship Service — Wednesday",
+        "Junior and Sunday School Worship Services — Sunday",
+      ],
       facebook: {
-        label: "nahadagats.Church",
+        label: "Nahadagats Church (Նահատակաց Եկեղեցի)",
         url: "https://www.facebook.com/nahadagats.Church",
       },
-      // Phone and email are confirmed; only the street remains unverified,
-      // so the caveat is narrowed to the address rather than dropped.
-      note: "Street address pending verification.",
     },
   },
 
@@ -2243,8 +2271,8 @@ export const churchContent: Record<string, ChurchContent> = {
   // flagged in OPEN_QUESTIONS. Pulpit is vacant — no pastorCard, and the
   // single leadership card is Miss Mary Hakko, Vice-Chairwoman. No
   // programs module (none in the source) and no milestone band (this
-  // mockup has neither). Uses `ChurchGalleryLightbox` — 2 real photos +
-  // 2 church-approved AI-render photos (kept, labeled, provenance logged).
+  // mockup has neither). Uses `ChurchGalleryLightbox` — 2 real photos
+  // (the 2 AI-render photos were removed 2026-10-27: no AI images).
   "syriac-evangelical-church-aleppo": {
     slug: "syriac-evangelical-church-aleppo",
 
@@ -2276,7 +2304,7 @@ export const churchContent: Record<string, ChurchContent> = {
       heading: "About the Syriac Evangelical Church",
       headingHy: null,
       paragraphs: [
-        "Founded in 1885 in Urfa — by the grace of Jesus Christ and with the help of Armenian Evangelicals — the Syriac Evangelical Church was later re-established in Aleppo after its people were forced to flee the massacres against Christians. For well over a century it has borne faithful Christian witness within the community of Aleppo.",
+        "Founded in 1885 in Urfa — by the grace of Jesus Christ and with the help of Armenian Evangelicals — the Syriac Evangelical Church was later re-established in Aleppo after its people were forced to flee the massacres against Christians.",
         "Across its history the church has been served by devoted pastors, and its life continues through worship and fellowship.",
       ],
       paragraphsHy: null,
@@ -2293,9 +2321,8 @@ export const churchContent: Record<string, ChurchContent> = {
       {
         name: "Miss Mary Hakko",
         nameHy: null,
-        // "Secretary" per the Union's own supplied info (see contactOverride
-        // below), superseding the mockup's "Vice-Chairwoman".
-        role: "Secretary",
+        // Vice-Chair per form 11, the Armenian source doc and Maral (01/09).
+        role: "Vice-Chairman",
         roleHy: null,
         photo: { src: "/church-syriac-aleppo-vicechair-hakko.jpg", alt: "Miss Mary Hakko" },
       },
@@ -2363,20 +2390,6 @@ export const churchContent: Record<string, ChurchContent> = {
           caption: null,
           captionHy: null,
         },
-        {
-          src: "/church-syriac-aleppo-gallery-worship-ai.jpg",
-          alt: "Congregation at worship",
-          caption: null,
-          captionHy: null,
-          aiLabel: "Church-approved render",
-        },
-        {
-          src: "/church-syriac-aleppo-gallery-children-ai.jpg",
-          alt: "Children's gathering",
-          caption: null,
-          captionHy: null,
-          aiLabel: "Church-approved render",
-        },
       ],
     },
 
@@ -2395,23 +2408,18 @@ export const churchContent: Record<string, ChurchContent> = {
     // Mary Hakko's row is labelled "Secretary" per the Union's own
     // supplied info, replacing the mockup's "Vice-Chair" wording.
     contactOverride: {
-      phone: "+963 21 2 234 020",
+      phone: "+963 21 2 234 020 · +963 21 2 211 782",
+      fax: "+963 21 2 238 117",
       email: "Maryhakko18@gmail.com",
-      // Still the approved mockup's plain "Aleppo, Syria" rather than
-      // churches.ts's more specific "Assyrian Quarter, Aleppo, Syria" —
-      // the district was never confirmed, so it isn't substituted in; see
-      // OPEN_QUESTIONS in case that's the missing district.
-      address: "Aleppo, Syria",
+      address: "Alsyrian Quarter, Aleppo, Syria",
       secretary: "Miss Mary Hakko",
-      secretaryLabel: "Secretary",
+      secretaryLabel: "Vice-Chair",
+      mapsUrl: "https://maps.app.goo.gl/xH4YPeKmJCECmNzk9",
+      otherServices: ["Sunday School Worship Service — Sunday"],
       facebook: {
         label: "Syriac Evangelical Church",
         url: "https://www.facebook.com/share/1AQaGyyQnQ/",
       },
-      // Phone and email are confirmed; the district and street both remain
-      // unverified — the address here is only "Aleppo, Syria" — so the
-      // caveat names both rather than the street alone.
-      note: "District and street address pending verification.",
     },
   },
 
@@ -2431,6 +2439,7 @@ export const churchContent: Record<string, ChurchContent> = {
   // mockup's own lower-res embeds.
   "damascus-armenian-evangelical-church": {
     slug: "damascus-armenian-evangelical-church",
+    pastorVacant: true,
 
     masthead: {
       locationLine: "Damascus, Syria",
@@ -2459,8 +2468,8 @@ export const churchContent: Record<string, ChurchContent> = {
       heading: "About the Church",
       headingHy: null,
       paragraphs: [
-        "The city of Damascus has long been a museum of historical events — and its Evangelical community, too, has known its own trials, its own faithful figures, and its own honors. Founded in the years of Armenian migration, the Damascus Armenian Evangelical Church has borne witness through a century of upheaval, endurance, and hope.",
-        "Through war and emigration the congregation grew small, and for a time the church’s doors were closed; yet today it gathers again as a community of about fifteen Evangelical families, holding fast to its calling.",
+        "Damascus, one of the world’s oldest continuously inhabited cities, has witnessed countless historical events and transformations. Within this rich history, the Armenian Evangelical Church of Damascus has developed its own story of faith, service, challenge, and perseverance, shaped by generations of devoted pastors, lay leaders, and members of the congregation.",
+        "Today, the Armenian Evangelical Church of Damascus continues to look toward the future with faith and hope. The remaining congregation comprises approximately 15 families, who continue to represent the Armenian Evangelical presence and witness in the Syrian capital.",
       ],
       paragraphsHy: null,
       dropcap: false,
@@ -2485,9 +2494,9 @@ export const churchContent: Record<string, ChurchContent> = {
           heading: null,
           headingHy: null,
           paragraphs: [
-            "The city of Damascus has been a museum of historical events, and so its Evangelical community, too, has had its own events, figures, and honors. In those years of migration it was not easy to keep records; but according to the information gathered, on August 26, 1922, Rev. Garabed Hasessian took up the pulpit of the Damascus Armenian Evangelical Church and served until November 1, 1923, after which Rev. Nerses Sarian took the pulpit.",
-            "On Sundays, worship was held in the Arab Evangelical Church; there were also Sunday school, women’s worship services, and Bible studies. In the summer of 1925, more than half of the community emigrated to Beirut and America.",
-            "Between 1930 and 2010, the church had thirteen resident pastors, along with periodic workers. In 2011 the war against Syria began, and much of the Armenian population emigrated to other countries; many families of the Damascus church left as well, and because of the country’s insecurity the church remained closed until 2020. Today the church has about fifteen Evangelical families.",
+            "According to available historical records, Rev. Garabed Hasesian assumed pastoral responsibility for the Armenian Evangelical Church of Damascus on August 26, 1922, and served until November 1, 1923, when Rev. Nerses Sarian succeeded him.",
+            "During these early years, Sunday worship services were held at the Arab Evangelical Church. Alongside regular worship, the Armenian Evangelical Community developed a range of spiritual and educational ministries, including Sunday School, women’s ministry, Bible studies, and educational activities. In the summer of 1925, more than half of the Armenian Evangelical Community in Damascus emigrated to Beirut and the United States. This significant demographic change had a lasting impact on the life and development of the congregation.",
+            "Between 1930 and 2010, the church was served by thirteen resident pastors, in addition to various ministers and lay workers who contributed to its spiritual life, Christian education, and service to the community. The outbreak of the war in Syria in 2011 brought profound changes to the Armenian community throughout the country. Many Armenian families from Damascus emigrated, while the deteriorating security situation placed increasing pressure on the life and ministry of the church. Eventually, regular church activities were suspended. Despite these difficult circumstances, a small Armenian Evangelical community has remained in Damascus, preserving its faith, fellowship, and connection to the historic ministry of the church.",
           ],
           paragraphsHy: null,
           image: null,
@@ -2535,7 +2544,7 @@ export const churchContent: Record<string, ChurchContent> = {
     vision: {
       eyebrow: "Our Vision",
       eyebrowHy: null,
-      body: "To restore the Armenian Evangelical Church to its vitality, so that the Lord Jesus Christ may be proclaimed and the number of the saved may increase.",
+      body: "The vision of the Armenian Evangelical Church of Damascus is to restore a vibrant and active church life, proclaim the Gospel of Jesus Christ, strengthen the faith and fellowship of the Armenian Protestant community, and reach others with the message of salvation and hope.",
       bodyHy: null,
     },
 
@@ -2571,9 +2580,10 @@ export const churchContent: Record<string, ChurchContent> = {
     // placeholder language — nothing in churches.ts to conflict with, since
     // this is a new directory row with those same fields left blank.
     contactOverride: {
-      phonePending: true,
       emailPending: true,
-      note: "District, street address, phone, and email pending verification.",
+      address: "Damascus, Syria\nP.O. Box 718",
+      mapsUrl: "https://maps.app.goo.gl/2gcNKhmivRNUu29G8",
+      otherServices: ["Women's Worship Service — Wednesday"],
     },
   },
 
@@ -2723,13 +2733,12 @@ export const churchContent: Record<string, ChurchContent> = {
     // with Emmanuel Aleppo's precedent of showing a real regional address
     // alongside a still-pending-street note.
     contactOverride: {
-      email: null,
-      phonePending: true,
+      phone: "(963-41) 710-917",
+      email: "shantagishian@gmail.com",
       facebook: {
-        label: "Facebook group",
+        label: "The Armenian Evangelical Churches of Kessab",
         url: "https://www.facebook.com/groups/255047687880778/",
       },
-      note: "Phone and street pending verification.",
     },
   },
 
@@ -2764,6 +2773,7 @@ export const churchContent: Record<string, ChurchContent> = {
   "armenian-evangelical-church-of-ekizolouk": {
     slug: "armenian-evangelical-church-of-ekizolouk",
     pastorVacant: true,
+    noRegularWorship: true,
 
     masthead: {
       locationLine: "Ekizolukh, Kessab, Syria",
@@ -2805,7 +2815,18 @@ export const churchContent: Record<string, ChurchContent> = {
     // Inactive church — no resident pastor since February 2020, no
     // leadership, no programs.
     pastorCard: null,
-    leadership: null,
+    leadership: [
+      {
+        name: "Mr. Cesar Der Sahagian",
+        nameHy: null,
+        role: "Vice-Chairman",
+        roleHy: null,
+        photo: {
+          src: "/church-holy-trinity-kessab-vc.jpg",
+          alt: "Mr. Cesar Der Sahagian",
+        },
+      },
+    ],
     programs: null,
 
     worshipToday: {
@@ -2871,13 +2892,13 @@ export const churchContent: Record<string, ChurchContent> = {
     // row, and churches.ts's email is the shared visiting pastor's address,
     // not specific to this inactive church.
     contactOverride: {
-      email: null,
-      phonePending: true,
+      phone: "+963 17 711 015",
+      email: "shantagishian@gmail.com",
+      address: "Ekizolukh, Kessab (Via Lattakia), Syria",
       facebook: {
-        label: "Facebook group",
+        label: "The Armenian Evangelical Churches of Kessab",
         url: "https://www.facebook.com/groups/255047687880778/",
       },
-      note: "Phone and street pending verification.",
     },
   },
 
@@ -2954,7 +2975,18 @@ export const churchContent: Record<string, ChurchContent> = {
     // Inactive church — no resident pastor since February 2020, no
     // leadership, no programs.
     pastorCard: null,
-    leadership: null,
+    leadership: [
+      {
+        name: "Mr. Cesar Der Sahagian",
+        nameHy: null,
+        role: "Vice-Chairman",
+        roleHy: null,
+        photo: {
+          src: "/church-holy-trinity-kessab-vc.jpg",
+          alt: "Mr. Cesar Der Sahagian",
+        },
+      },
+    ],
     programs: null,
 
     worshipToday: {
@@ -3019,10 +3051,13 @@ export const churchContent: Record<string, ChurchContent> = {
     // Touch card; churches.ts's email is the shared visiting pastor's
     // address, not specific to this inactive church.
     contactOverride: {
-      email: null,
-      phonePending: true,
-      note:
-        "Contact details pending verification. For worship, the congregation gathers at Holy Trinity Church, Kessab.",
+      phone: "+963 17 711 015",
+      email: "shantagishian@gmail.com",
+      mapsUrl: "https://maps.app.goo.gl/JShPtDHSMmXkLbpw9",
+      facebook: {
+        label: "The Armenian Evangelical Churches of Kessab",
+        url: "https://www.facebook.com/groups/255047687880778/",
+      },
     },
   },
 
@@ -3334,15 +3369,21 @@ export const churchContent: Record<string, ChurchContent> = {
     // as Syriac Aleppo. Phone/email/district/street all pending per the
     // mockup's own note.
     contactOverride: {
-      phonePending: true,
-      emailPending: true,
+      phone: "+963 17 711 015",
+      email: "shantagishian@gmail.com",
+      address: "Kessab (Via Lattakia), Syria",
       secretary: "Mr. Cesar Der Sahagian",
       secretaryLabel: "Vice-Chair",
+      mapsUrl: "https://maps.app.goo.gl/kmpzVXTuWzky4wAW7",
+      otherServices: [
+        "Women's Worship Service",
+        "Sunday School Worship Service",
+        "Junior and Youth Worship Service",
+      ],
       facebook: {
-        label: "Facebook group",
+        label: "The Armenian Evangelical Churches of Kessab",
         url: "https://www.facebook.com/groups/255047687880778/",
       },
-      note: "Phone, email, district and street pending verification.",
     },
   },
 };

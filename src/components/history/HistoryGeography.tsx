@@ -3,7 +3,7 @@ import { historyContent } from "@/data/historyContent";
 import Reveal from "./Reveal";
 import styles from "./HistoryGeography.module.css";
 
-// "Across the Near East & Beyond" — real map + nine country-name pills,
+// "Across the Near East & Beyond" — real map + country-name pills,
 // matching the mockup's .geo section.
 export default function HistoryGeography() {
   const { eyebrow, heading, intro, map, countries } = historyContent.geography;

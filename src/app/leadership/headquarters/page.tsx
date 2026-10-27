@@ -80,7 +80,7 @@ export default function HeadquartersPage() {
             the Court of First Appeals, the Christian Endeavor office, and residences.
           </p>
           <div className={styles.pullquote}>
-            <p>One house from which a Union spanning nine countries is served.</p>
+            <p>One house from which a Union spanning seven countries is served.</p>
           </div>
         </div>
       </section>

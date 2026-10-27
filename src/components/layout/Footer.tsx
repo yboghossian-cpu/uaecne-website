@@ -20,8 +20,7 @@ export default function Footer() {
         <div className={styles.contactCol}>
           <p className={styles.headOffice}>UAECNE — Head Office</p>
           <p className={styles.orgName}>
-            Union of the Armenian Evangelical Churches in the Near East, Est.
-            1846
+            Union of the Armenian Evangelical Churches in the Near East
           </p>
 
           <div className={styles.contact}>
@@ -54,8 +53,7 @@ export default function Footer() {
         >
           <p className={styles.headOffice}>ՄԱՀԱԵՄ — Կեդրոնական Գրասենեակ</p>
           <p className={styles.orgName}>
-            Մերձաւոր Արեւելքի Հայ Աւետարանական Եկեղեցիներու Միութիւն, Հիմն.
-            1846
+            Մերձաւոր Արեւելքի Հայ Աւետարանական Եկեղեցիներու Միութիւն
           </p>
 
           <div className={styles.contact}>

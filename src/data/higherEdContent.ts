@@ -141,7 +141,7 @@ export const educationCouncilContent: EducationCouncilContent = {
   secretary: {
     name: "Ms. Vartoug Balekjian",
     nameHy: null,
-    role: "Council Secretary",
+    role: "Council Coordinator",
     roleHy: null,
     photo: { src: "/higher-ed-council-secretary.jpg", alt: "Ms. Vartoug Balekjian" },
     phone: "70-12 93 47",

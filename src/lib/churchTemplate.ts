@@ -68,7 +68,11 @@ function buildFacts(church: Church, content: ChurchContent | null): Fact[] {
   const worshipCell = cells.find(isWorship);
   const special = worshipCell && /held at/i.test(worshipCell.sub) ? worshipCell : null;
   const worship: Fact = special ?? {
-    label: church.serviceTime ? formatServiceTime(church.serviceTime) : "Sunday · pending",
+    label: content?.noRegularWorship
+      ? "No regular service"
+      : church.serviceTime
+        ? formatServiceTime(church.serviceTime)
+        : "Sunday · pending",
     labelHy: null,
     sub: "Worship Service",
     subHy: null,
@@ -201,7 +205,9 @@ export function buildChurchView(church: Church, content: ChurchContent | null) {
 
   const serviceTime = host
     ? `Held at the ${host}`
-    : church.serviceTime
+    : content?.noRegularWorship
+      ? "No regular worship service"
+      : church.serviceTime
       ? formatServiceTime(church.serviceTime)
       : null;
 

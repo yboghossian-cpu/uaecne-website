@@ -2621,7 +2621,7 @@ export const schoolContent: Record<string, SchoolContent> = {
     masthead: {
       locationLine: "Aleppo College Compound, Aleppo, Syria",
       locationLineHy: null,
-      established: null,
+      established: "1925",
       establishedHy: null,
     },
 
@@ -2639,7 +2639,7 @@ export const schoolContent: Record<string, SchoolContent> = {
     },
 
     factsBar: [
-      { label: "Pending", labelHy: null, sub: "Founding Year", subHy: null },
+      { label: "1925", labelHy: null, sub: "Founded (Jabal al-Nahr)", subHy: null },
       { label: "1976", labelHy: null, sub: "Established in Aleppo", subHy: null },
       { label: "KG – Grade 6", labelHy: null, sub: "Kindergarten & Elementary", subHy: null },
       { label: "Aleppo, Syria", labelHy: null, sub: "Location", subHy: null },
@@ -2654,7 +2654,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "Emmanuel, Known Today as Al Ressaleh",
       headingHy: null,
       paragraphs: [
-        "The Armenian Evangelical Emmanuel School — known today by its licensed name, Al Ressaleh School — has served the Armenian community of Aleppo for close to a century. It began its work in Jabal al-Nahr and, in 1976, moved to the Aleppo College compound, where it has remained ever since.",
+        "The Armenian Evangelical Emmanuel School — known today by its licensed name, Al Ressaleh School — has served the Armenian community of Aleppo since 1925. It began its work in Jabal al-Nahr and, in 1976, moved to the Aleppo College compound, where it has remained ever since.",
         "Today the school teaches children from kindergarten through the sixth grade — a small, close school giving its pupils a grounded and caring start to their education.",
       ],
       paragraphsHy: null,
@@ -2777,7 +2777,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "Emmanuel, Known Today as Al Ressaleh",
       headingHy: null,
       paragraphs: [
-        "The Armenian Evangelical Emmanuel School — known today by its licensed name, Al Ressaleh School — has served the Armenian community of Aleppo for close to a century. It began its work in Jabal al-Nahr and, in 1976, moved to the Aleppo College compound, where it has remained ever since.",
+        "The Armenian Evangelical Emmanuel School — known today by its licensed name, Al Ressaleh School — has served the Armenian community of Aleppo since 1925. It began its work in Jabal al-Nahr and, in 1976, moved to the Aleppo College compound, where it has remained ever since.",
         "Today the school teaches children from kindergarten through the sixth grade — a small, close school giving its pupils a grounded and caring start to their education.",
       ],
       paragraphsHy: null,
@@ -2805,7 +2805,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "From Jabal al-Nahr to Aleppo",
       headingHy: null,
       leadParagraph:
-        "Emmanuel School began its mission in Jabal al-Nahr, under its first principal, Mr. Matteos Matteosian. In 1976 it moved to the Aleppo College compound in Aleppo and settled there; its principal in those years was Hermine Abajian, followed by four more principals in the decades that came after.",
+        "Emmanuel School began its mission in Jabal al-Nahr, under its first principal, Mr. Mateos Mateosian. In 1976 it moved to the Aleppo College compound in Aleppo and settled there; its principal in those years was Hermine Abajian, followed by four more principals in the decades that came after.",
       leadParagraphHy: null,
       photo: {
         src: "/school-emmanuel-al-ressaleh-grounds.jpg",
@@ -3035,7 +3035,7 @@ export const schoolContent: Record<string, SchoolContent> = {
     slug: "damascus-kenats-al-hayat-school",
 
     masthead: {
-      locationLine: "Old Damascus, Syria",
+      locationLine: "Damascus, Syria",
       locationLineHy: null,
       established: "1923",
       establishedHy: null,
@@ -3069,7 +3069,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "The School of Life in Damascus",
       headingHy: null,
       paragraphs: [
-        "The Damascus Armenian Evangelical School — known in Armenian as the Kenats, or “Life,” School, and licensed today as Al-Hayat Private School — has taught the children of Damascus for close to a century. It grew from a single crowded room in 1923 into a settled home for learning in the old city, and has been part of the life of the Armenian Evangelical community of Damascus ever since.",
+        "The Damascus Armenian Evangelical School — known in Armenian as the Kenats, or “Life,” School, and licensed today as Al-Hayat Private School — has taught the children of Damascus since 1923. It grew from a single crowded room in 1923 into a settled home for learning in Damascus, and has been part of the life of the Armenian Evangelical community of Damascus ever since.",
         "Today, under Principal Mrs. Maysa Talab, it teaches children through the kindergarten and elementary years, in the same spirit of faith and learning on which it was founded.",
       ],
       paragraphsHy: null,
@@ -3080,7 +3080,7 @@ export const schoolContent: Record<string, SchoolContent> = {
     principalCard: null,
 
     location: {
-      addressLines: ["Old Damascus, Syria", "P.O. Box 718"],
+      addressLines: ["Damascus, Syria", "P.O. Box 718"],
       addressLinesHy: null,
     },
 
@@ -3140,7 +3140,7 @@ export const schoolContent: Record<string, SchoolContent> = {
     cta: {
       heading: "Teaching the Children of Damascus Since 1923",
       headingHy: null,
-      body: "The Damascus Armenian Evangelical — Kenats — School continues its unbroken work in the old city, under the care of the Armenian Evangelical Community of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
+      body: "The Damascus Armenian Evangelical — Kenats — School continues its work in Damascus, under the care of the Armenian Evangelical Community of Syria, within the Union of the Armenian Evangelical Churches in the Near East.",
       bodyHy: null,
     },
 
@@ -3155,7 +3155,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "The School of Life in Damascus",
       headingHy: null,
       paragraphs: [
-        "The Damascus Armenian Evangelical School — known in Armenian as the Kenats, or “Life,” School, and licensed today as Al-Hayat Private School — has taught the children of Damascus for close to a century. It grew from a single crowded room in 1923 into a settled home for learning in the old city, and has been part of the life of the Armenian Evangelical community of Damascus ever since.",
+        "The Damascus Armenian Evangelical School — known in Armenian as the Kenats, or “Life,” School, and licensed today as Al-Hayat Private School — has taught the children of Damascus since 1923. It grew from a single crowded room in 1923 into a settled home for learning in Damascus, and has been part of the life of the Armenian Evangelical community of Damascus ever since.",
         "Today, under Principal Mrs. Maysa Talab, it teaches children through the kindergarten and elementary years, in the same spirit of faith and learning on which it was founded.",
       ],
       paragraphsHy: null,
@@ -3183,7 +3183,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       heading: "From One Room, in 1923",
       headingHy: null,
       leadParagraph:
-        "The school opened in 1923 under Rev. Karapet Hasessian — a single large room where forty or fifty children crowded onto a few benches, some sitting, some kneeling to use them as desks. A year later, in 1924, the Evangelical community rented a large house in the Abbara quarter of the old city, and the school moved there with two hundred and fifty pupils; Rev. Sarian taught the Bible, and Mr. Dikran Mesropian served as its director.",
+        "The school opened in 1923 under Rev. Karapet Hasessian — a single large room where forty or fifty children crowded onto a few benches, some sitting, some kneeling to use them as desks. A year later, in 1924, the Evangelical community rented a large house in the Abbara quarter, and the school moved there with two hundred and fifty pupils; Rev. Sarian taught the Bible, and Mr. Dikran Mesropian served as its director.",
       leadParagraphHy: null,
       photo: {
         src: "/school-damascus-kenats-al-hayat-lesson.jpg",

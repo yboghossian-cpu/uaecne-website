@@ -66,22 +66,21 @@ export const headquartersOffices: HqOffice[] = [
       { name: "Mrs. Maral Ishkhanian", title: "Secretary", photo: "/headquarters-maral-ishkhanian.jpg", email: "Secretary@uaecne.org" },
       { name: "Mrs. Juliette Zoulikian", title: "Accountant", photo: "/headquarters-juliette-zoulikian.jpg", email: null },
       { name: "Mr. Nishan Nalbandian", title: "Office Assistant", photo: "/headquarters-nishan-nalbandian.jpg", email: null },
-      { name: "Mr. Dikran Arzoian", title: "Janitor", photo: null, email: null },
     ],
   },
   {
     office: "Church Relations",
     phone: null,
     members: [
-      { name: "Rev. Nishan Bakalian", title: "Relations & Coordinator", photo: null, email: null },
+      { name: "Rev. Nishan Bakalian", title: "Relations & Coordinator", photo: "/headquarters-nishan-bakalian.jpg", email: null },
     ],
   },
   {
     office: "Publication Office",
     phone: "01-565931",
     members: [
-      { name: "Dr. Yervant Kassouny", title: "Editor Emeritus, UAECNE Publications", photo: null, email: null },
-      { name: "Mrs. Rozette Alemian", title: "Publications Office Manager", photo: null, email: null },
+      { name: "Dr. Yervant Kassouny", title: "Editor Emeritus, UAECNE Publications", photo: "/headquarters-yervant-kassouny.jpg", email: null },
+      { name: "Mrs. Rozette Alemian", title: "Publications Office Manager", photo: "/headquarters-rozette-alemian.jpg", email: null },
       { name: "Mrs. Ani Basset", title: "Typographer", photo: null, email: null },
       { name: "Mrs. Helen Topeian", title: "Secretary & Typesetter", photo: null, email: null },
     ],
@@ -90,21 +89,21 @@ export const headquartersOffices: HqOffice[] = [
     office: "Educational Council Office",
     phone: null,
     members: [
-      { name: "Ms. Vartoug Balekjian", title: "Council Coordinator", photo: null, email: null },
+      { name: "Ms. Vartoug Balekjian", title: "Council Coordinator", photo: "/headquarters-vartoug-balekjian.jpg", email: null },
     ],
   },
   {
     office: "Court Office",
     phone: null,
     members: [
-      { name: "Rev. Hrayr Cholakian", title: "Court Chair", photo: null, email: null },
+      { name: "Rev. Hrayr Cholakian", title: "Court Chair", photo: "/headquarters-hrayr-cholakian.jpg", email: null },
     ],
   },
   {
     office: "Christian Endeavor Office",
     phone: "01-565930",
     members: [
-      { name: "Pastor Datev Basmajian", title: "Youth Worker", photo: null, email: null },
+      { name: "Pastor Datev Basmajian", title: "Youth Worker", photo: "/headquarters-datev-basmajian.jpg", email: null },
       { name: "Mrs. Nayri Agishian", title: "Secretary", photo: null, email: null },
       { name: "Ms. Aline Tahazian", title: "Children & Media Coordinator", photo: null, email: null },
     ],

@@ -32,7 +32,6 @@ const countryDisplayLabel: Record<string, string> = {
   Syria: "Syria",
   "Syria (Kessab)": "Syria",
   Turkey: "Turkey",
-  Iran: "Iran",
   Greece: "Greece",
   Australia: "Australia",
 };
@@ -60,7 +59,7 @@ export default function ChurchesIndexPage() {
           <h1 className={styles.heroHeading}>Churches</h1>
           <p className={styles.heroSub}>
             The UAECNE oversees Armenian and Syriac Evangelical churches
-            across Lebanon, Syria, and seven other nations. Explore the
+            across Lebanon, Syria, Turkey, Greece, and Australia. Explore the
             churches below to learn about their history, leadership, and
             worship life.
           </p>

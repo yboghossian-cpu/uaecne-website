@@ -61,9 +61,14 @@ export default function ChurchContactSection({
   // uses for its own Google Maps button. Exact per-unit Maps links (a
   // curated place link, not a generic address search) are pending from
   // Yeghia in a single later sweep — see OPEN_QUESTIONS.
-  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    `${church.name} ${addressLines[0] ?? ""}`,
-  )}`;
+  const mapsUrl =
+    contactOverride?.mapsUrl ??
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+      `${church.name} ${addressLines[0] ?? ""}`,
+    )}`;
+  const otherServices = contactOverride?.otherServices ?? [];
+  const emailLabels = contactOverride?.emailLabels ?? [];
+  const fax = contactOverride?.fax;
 
   return (
     <section className={styles.contact}>
@@ -104,6 +109,21 @@ export default function ChurchContactSection({
               {serviceTime ?? <span className={styles.pending}>Pending</span>}
             </span>
           </div>
+          {otherServices.length > 0 && (
+            <div className={styles.row}>
+              <svg className={styles.rowIco}>
+                <use href="#ic-dot" />
+              </svg>
+              <span>
+                <span className={styles.key}>Other Services</span>
+                {otherServices.map((line) => (
+                  <span key={line} className={styles.addressLine}>
+                    {line}
+                  </span>
+                ))}
+              </span>
+            </div>
+          )}
           <div className={styles.spacer} />
           <a href={mapsUrl} target="_blank" rel="noopener noreferrer" className={styles.mapBtn}>
             <svg className={styles.mapBtnIcon}>
@@ -146,6 +166,17 @@ export default function ChurchContactSection({
               </div>
             )
           )}
+          {fax && (
+            <div className={styles.row}>
+              <svg className={styles.rowIco}>
+                <use href="#ic-phone" />
+              </svg>
+              <span>
+                <span className={styles.key}>Fax</span>
+                {fax}
+              </span>
+            </div>
+          )}
           {emailPending ? (
             <div className={styles.row}>
               <svg className={styles.rowIco}>
@@ -164,7 +195,11 @@ export default function ChurchContactSection({
                 </svg>
                 <span>
                   <span className={styles.key}>
-                    {emails.length > 1 ? `Email ${i + 1}` : "Email"}
+                    {emailLabels[i]
+                      ? `Email · ${emailLabels[i]}`
+                      : emails.length > 1
+                        ? `Email ${i + 1}`
+                        : "Email"}
                   </span>
                   <a href={`mailto:${email}`} className={styles.link}>
                     {email}
