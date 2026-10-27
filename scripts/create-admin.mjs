@@ -38,7 +38,9 @@ if (!process.env.UAECNE_ADMIN_PASSWORD) {
   }
 }
 if (password.length < 12) {
-  console.error("Use at least 12 characters.");
+  console.error(
+    `That was ${password.length} characters — use at least 12. (Pasting may not work in the web console; type it.)`,
+  );
   process.exit(1);
 }
 
