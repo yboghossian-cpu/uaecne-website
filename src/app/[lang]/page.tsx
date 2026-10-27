@@ -55,6 +55,10 @@ export default async function Home() {
         subtitle: tx("The Union of the Armenian Evangelical Churches in the Near East"),
         photo: { src: "/hero-general-assembly.jpg", alt: tx("UAECNE General Assembly gathering") },
         yearsLabel: tx("Armenian Evangelical Church 180th Anniversary, 1846–2026"),
+        actions: [
+          { href: "/resource-center/history", label: tx("Our History") },
+          { href: "/churches", label: tx("Our Churches") },
+        ],
       }}
       ticker={[
         tx("ROOTED IN FAITH SINCE 1846"),

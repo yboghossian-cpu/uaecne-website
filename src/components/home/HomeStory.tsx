@@ -9,7 +9,15 @@ import styles from "./HomeStory.module.css";
 type Pic = { src: string; alt: string };
 
 export type HomeStoryProps = {
-  hero: { eyebrow: string; titleA: string; titleB: string; subtitle: string; photo: Pic; yearsLabel: string };
+  hero: {
+    eyebrow: string;
+    titleA: string;
+    titleB: string;
+    subtitle: string;
+    photo: Pic;
+    yearsLabel: string;
+    actions: { href: string; label: string }[];
+  };
   ticker: string[];
   legacy: { heading: string; body: string; quote: string; quoteRef: string; photo: Pic; links: { href: string; label: string }[]; navLabel: string };
   numbers: { value: number; suffix: string; label: string; photo: string }[];
@@ -219,6 +227,15 @@ export default function HomeStory(props: HomeStoryProps) {
       {/* ================= HERO — 1846 → 2026 through the arch ================= */}
       <section ref={heroRef} className={styles.hero} data-scrub="sticky" aria-labelledby="home-title">
         <div className={styles.heroStage} onPointerMove={trackPointer}>
+          <span className={styles.heroGlow} aria-hidden="true" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.svg" alt="" className={styles.heroWatermark} aria-hidden="true" />
+          <span className={styles.heroFrame} aria-hidden="true" />
+          <span className={styles.dust} aria-hidden="true">
+            {Array.from({ length: 14 }, (_, i) => (
+              <i key={i} style={{ "--i": i, "--s": i % 3, "--d": i % 4 } as CSSProperties} />
+            ))}
+          </span>
           <div className={styles.heroYear} aria-hidden="true">
             <span ref={yearRef}>1846</span>
           </div>
@@ -237,6 +254,13 @@ export default function HomeStory(props: HomeStoryProps) {
               <span className={styles.heroLine}>{hero.titleB}</span>
             </h1>
             <p className={styles.heroSub}>{hero.subtitle}</p>
+            <div className={styles.heroActions}>
+              {hero.actions.map((a, i) => (
+                <Link key={a.href} href={a.href} className={i === 0 ? styles.heroBtn : styles.heroBtnGhost}>
+                  {a.label}
+                </Link>
+              ))}
+            </div>
           </div>
           <p className={styles.heroYears} aria-hidden="true">
             {hero.yearsLabel}
