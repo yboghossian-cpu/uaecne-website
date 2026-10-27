@@ -177,7 +177,8 @@ function WordLight({ text }: { text: string }) {
     <>
       {words.map((w, i) => (
         <span key={i} className={styles.word} style={{ "--i": i / words.length } as CSSProperties}>
-          {w}{" "}
+          {w}
+          {i < words.length - 1 ? " " : ""}
         </span>
       ))}
     </>
