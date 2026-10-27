@@ -101,6 +101,9 @@ export default function Footer() {
 
         <p className={styles.copyright}>
           © {year} UAECNE. All Rights Reserved.
+          <a href="/admin" className={styles.adminLink} rel="nofollow">
+            Admin login
+          </a>
         </p>
       </div>
     </footer>

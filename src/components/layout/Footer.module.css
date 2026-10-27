@@ -116,11 +116,25 @@
 }
 
 .copyright {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
   font-family: var(--font-body);
   font-size: 0.8125rem;
   opacity: 0.8;
   border-top: 1px solid var(--color-gold);
   padding-top: 1.5rem;
+}
+
+.adminLink {
+  color: var(--color-brown);
+  text-decoration: none;
+}
+
+.adminLink:hover,
+.adminLink:focus-visible {
+  text-decoration: underline;
 }
 
 @media (min-width: 768px) {
