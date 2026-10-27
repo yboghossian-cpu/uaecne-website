@@ -49,6 +49,12 @@ const cards = [
     name: "Social Action Committee — Syria",
     photo: null,
   },
+  {
+    id: "zvartnots",
+    href: "/outreach/zvartnots",
+    name: "Zvartnots",
+    photo: null,
+  },
 ];
 
 export default function OutreachIndexPage() {

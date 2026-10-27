@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        // Zvartnots moved from Health Care to Outreach (Yeghia, 2026-10-27).
+        source: "/ministries/health-care/zvartnots",
+        destination: "/outreach/zvartnots",
+        permanent: true,
+      },
+      {
         source: "/higher-education/educational-council",
         destination: "/schools/education-council-lebanon",
         permanent: true,

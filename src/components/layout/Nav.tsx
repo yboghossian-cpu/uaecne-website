@@ -28,7 +28,18 @@ const navItems: NavItem[] = [
       { label: "Churches", href: "/churches" },
       { label: "Schools", href: "/schools" },
       { label: "Higher Education", href: "/higher-education" },
-      { label: "Outreach", href: "/outreach" },
+      {
+        label: "Outreach",
+        children: [
+          { label: "All Outreach", href: "/outreach" },
+          { label: "Camps — KCHAG", href: "/outreach/camps" },
+          { label: "Youth Work", href: "/outreach/youth-work" },
+          { label: "Social Action Committee", href: "/outreach/social-action-committee" },
+          { label: "Social Action Committee — Syria", href: "/ministries/syria/social-action-committee" },
+          { label: "Boarding Home of Anjar", href: "/outreach/boarding-home-anjar" },
+          { label: "Zvartnots", href: "/outreach/zvartnots" },
+        ],
+      },
       {
         label: "Health Care",
         children: [
@@ -43,10 +54,6 @@ const navItems: NavItem[] = [
           {
             label: "Special Care Centers",
             href: "/ministries/health-care/special-care-centers",
-          },
-          {
-            label: "Zvartnots",
-            href: "/ministries/health-care/zvartnots",
           },
           {
             label: "Karageusian Foundation — Lebanon, Syria",
