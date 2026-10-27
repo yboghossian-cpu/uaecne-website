@@ -108,6 +108,11 @@ export default async function OutreachDetailPage({
         <RedLabelBlock label={y.ceUnion.label} paragraphs={y.ceUnion.paragraphs} wash />
         <StatSection cards={y.stats} wash />
         <ProgramPills programs={y.programs} />
+        <ScrollGallery
+          eyebrow={y.gallery.eyebrow}
+          heading={y.gallery.heading}
+          photos={y.gallery.photos}
+        />
         <OutreachCTA cta={y.cta} />
       </>
     );

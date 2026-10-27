@@ -134,14 +134,24 @@ export const campsContent: CampsContent = {
     bodyHy: null,
   },
 
-  // No real gallery photos exist yet — all 6 slots render "photo pending",
-  // matching the mockup exactly (never invented).
+  // Real photos from the CE Union Drive folders (CE/KCHAG, CE/Camps).
   gallery: {
     eyebrow: "Life at KCHAG",
     eyebrowHy: null,
     heading: "Gallery",
     headingHy: null,
-    photos: [],
+    photos: [
+      { src: "/outreach-camps-gallery-1.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-2.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-3.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-4.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-5.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-6.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-7.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-8.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-9.jpg", alt: "Life at KCHAG" },
+      { src: "/outreach-camps-gallery-10.jpg", alt: "Life at KCHAG" },
+    ],
   },
 
   kessab: {
@@ -180,6 +190,13 @@ export type YouthWorkContent = {
   subtitlePlain: string;
   subtitleBold: string;
   heroPhoto: Photo | null;
+  gallery: {
+    eyebrow: string;
+    eyebrowHy: string | null;
+    heading: string;
+    headingHy: string | null;
+    photos: Photo[];
+  };
   about: {
     eyebrow: string;
     eyebrowHy: string | null;
@@ -214,8 +231,27 @@ export const youthWorkContent: YouthWorkContent = {
   subtitlePlain: "The Christian Endeavour Union · ",
   subtitleBold: "Armenian Evangelical Youth",
 
-  // No real group photo exists yet — photo-pending fallback.
-  heroPhoto: null,
+  // Real photo from the CE Union Drive folder (CE/Trainings).
+  heroPhoto: { src: "/outreach-youth-work-hero.jpg", alt: "Christian Endeavour Union youth" },
+
+  gallery: {
+    eyebrow: "CE in Action",
+    eyebrowHy: null,
+    heading: "Gallery",
+    headingHy: null,
+    photos: [
+      { src: "/outreach-youth-work-gallery-1.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-2.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-3.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-4.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-5.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-6.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-7.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-8.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-9.jpg", alt: "Christian Endeavour Union activities" },
+      { src: "/outreach-youth-work-gallery-10.jpg", alt: "Christian Endeavour Union activities" },
+    ],
+  },
 
   about: {
     eyebrow: "The Ministry",
