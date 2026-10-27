@@ -10,8 +10,14 @@ import { baselineDoc, baselineSamples, isBuiltIn, type Collection } from "@/lib/
 import { saveSettings as storeSettings, type SiteSettings } from "@/lib/server/settings";
 import { blankFor, checkShape, inferShape } from "@/lib/admin/shape";
 import { mailConfigured, notifyRecipients, sendMail } from "@/lib/server/mail";
+import { LANGS } from "@/lib/i18n/config";
 
 export type ActionResult = { ok: boolean; message: string };
+
+/** Public pages exist once per language (/en/…, /hy/…) behind the proxy. */
+function revalidatePublic(path: string) {
+  for (const lang of LANGS) revalidatePath(path === "/" ? `/${lang}` : `/${lang}${path}`);
+}
 
 // ---------------- auth ----------------
 
@@ -120,8 +126,8 @@ const pageOf = (k: Kind): Collection => (k === "church" ? "church-page" : "schoo
 const base = (k: Kind) => (k === "church" ? "/churches" : "/schools");
 
 function revalidateEntry(kind: Kind, slug: string) {
-  revalidatePath(`${base(kind)}/${slug}`);
-  revalidatePath(base(kind));
+  revalidatePublic(`${base(kind)}/${slug}`);
+  revalidatePublic(base(kind));
   revalidatePath("/sitemap.xml");
 }
 
@@ -287,9 +293,9 @@ function slugify(s: string) {
 }
 
 function revalidatePosts(slug?: string) {
-  revalidatePath("/");
-  revalidatePath("/news");
-  if (slug) revalidatePath(`/news/${slug}`);
+  revalidatePublic("/");
+  revalidatePublic("/news");
+  if (slug) revalidatePublic(`/news/${slug}`);
   revalidatePath("/sitemap.xml");
 }
 
@@ -346,7 +352,7 @@ export async function savePost(_prev: ActionResult, fd: FormData): Promise<Actio
         .run(row).lastInsertRowid,
     );
   }
-  if (old && old.slug !== slug) revalidatePath(`/news/${old.slug}`);
+  if (old && old.slug !== slug) revalidatePublic(`/news/${old.slug}`);
   revalidatePosts(slug);
   if (!id) redirect(`/admin/news/${newId}?saved=1`);
   return { ok: true, message: row.published ? "Saved and published." : "Saved as a draft (not on the website)." };

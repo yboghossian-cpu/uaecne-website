@@ -23,11 +23,19 @@
   --shadow-elevated: 0 18px 40px -24px rgba(74, 0, 0, 0.45); /* arch/portrait frames, from approved mockup */
 
   /* Typography */
-  --font-heading: var(--font-cormorant-garamond), "Cormorant Garamond", serif;
-  --font-body: var(--font-ibm-plex-sans), "IBM Plex Sans", system-ui,
+  --font-heading: var(--font-cormorant-garamond), "Cormorant Garamond", var(--font-noto-serif-armenian), serif;
+  --font-body: var(--font-ibm-plex-sans), "IBM Plex Sans", var(--font-noto-sans-armenian), system-ui,
     -apple-system, "Segoe UI", sans-serif;
   /* For verified Armenian-script content (e.g. Anjar's succession list) —
      matches the reference files' own Noto Serif Armenian loading. */
   --font-armenian: var(--font-noto-serif-armenian), "Noto Serif Armenian",
     serif;
+}
+
+/* Armenian pages: Armenian faces first (they only cover Armenian script,
+   so Latin text, numbers and names still use the brand fonts). */
+html[data-lang="hy"] {
+  --font-heading: var(--font-noto-serif-armenian), var(--font-cormorant-garamond), "Cormorant Garamond", serif;
+  --font-body: var(--font-noto-sans-armenian), var(--font-ibm-plex-sans), "IBM Plex Sans", system-ui, -apple-system,
+    "Segoe UI", sans-serif;
 }
