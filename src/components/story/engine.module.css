@@ -1,0 +1,49 @@
+/* ---------------------------------------------------------------- cursor */
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 90;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: #f2c879;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  display: grid;
+  place-items: center;
+  transition:
+    width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    margin 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+    opacity 0.3s,
+    background-color 0.3s;
+}
+.cursor[data-state="hidden"] {
+  opacity: 0;
+}
+.cursor[data-state="link"] {
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+}
+.cursor[data-state="label"] {
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  mix-blend-mode: normal;
+  background: rgba(242, 200, 121, 0.94);
+}
+.cursorLabel {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #2a1608;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.cursor[data-state="label"] .cursorLabel {
+  opacity: 1;
+}
+
