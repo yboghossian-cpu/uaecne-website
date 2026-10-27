@@ -9,8 +9,6 @@ import {
 } from "@/data/outreachContent";
 import OutreachTopBlock from "@/components/outreach/OutreachTopBlock";
 import RedLabelBlock from "@/components/outreach/RedLabelBlock";
-import CampsHistory from "@/components/outreach/CampsHistory";
-import PullNote from "@/components/outreach/PullNote";
 import ScrollGallery from "@/components/outreach/ScrollGallery";
 import OutreachCTA from "@/components/outreach/OutreachCTA";
 import YouthWorkAbout from "@/components/outreach/YouthWorkAbout";
@@ -28,7 +26,8 @@ import BoardingHomeLeadership from "@/components/outreach/BoardingHomeLeadership
 import BoardingHomeMission from "@/components/outreach/BoardingHomeMission";
 import BoardingHomeClosing from "@/components/outreach/BoardingHomeClosing";
 import BoardingHomeContact from "@/components/outreach/BoardingHomeContact";
-import FollowBand from "@/components/shared/FollowBand";
+import KchagStory from "@/components/kchag/KchagStory";
+import { SOCIAL_ORDER } from "@/lib/social";
 
 const SLUGS = [
   campsContent__en.slug,
@@ -79,29 +78,32 @@ export default async function OutreachDetailPage({
 
   if (slug === campsContent.slug) {
     const c = campsContent;
+    const social = SOCIAL_ORDER.filter((o) => c.social?.[o.key]).map((o) => ({
+      href: c.social![o.key]!,
+      label: tx(o.label),
+    }));
     return (
-      <>
-        <OutreachTopBlock
-          crumbLabel={c.title}
-          title={c.title}
-          subtitlePlain={c.subtitlePlain}
-          subtitleBold={c.subtitleBold}
-          heroPhoto={c.heroPhoto}
-          heroVariant="wide"
-          heroIcon="ic-edu"
-        />
-        <RedLabelBlock label={c.campsites.label} paragraphs={c.campsites.paragraphs} />
-        <CampsHistory history={c.history} />
-        <PullNote eyebrow={c.purpose.eyebrow} body={c.purpose.body} />
-        {c.kessab && <BoardingHomeHistory history={c.kessab} />}
-        <ScrollGallery
-          eyebrow={c.gallery.eyebrow}
-          heading={c.gallery.heading}
-          photos={c.gallery.photos}
-        />
-        <FollowBand social={c.social} name={tx("KCHAG")} />
-        <OutreachCTA cta={c.cta} />
-      </>
+      <KchagStory
+        story={c.story}
+        campsites={c.campsites.paragraphs}
+        kessab={
+          c.kessab
+            ? { eyebrow: c.kessab.eyebrow, heading: c.kessab.heading, intro: c.kessab.intro ?? "", eras: c.kessab.eras }
+            : null
+        }
+        life={{ eyebrow: c.gallery.eyebrow, photos: c.gallery.photos }}
+        cta={{ heading: c.cta.heading, body: c.cta.body }}
+        social={social}
+        labels={{
+          crumbSection: tx("Outreach"),
+          crumbPage: c.title,
+          open: tx("Open"),
+          close: tx("Close"),
+          previous: tx("Previous"),
+          next: tx("Next"),
+          photoOf: tx("{n} of {total}"),
+        }}
+      />
     );
   }
 

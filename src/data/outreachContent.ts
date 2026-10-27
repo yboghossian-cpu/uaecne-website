@@ -44,7 +44,44 @@ export type OutreachCTA = {
 
 // ===================== CAMPS (KCHAG) =====================
 
+export type KchagPhoto = { src: string; alt: string; w: number; h: number };
+
+/** The KCHAG page's scroll story — one chapter per period, using the
+ *  Union's own photo folders (Historic, Church Bell, Dining Hall Old, WAR,
+ *  Renovation After War, and the 2026 shoot). All text below is taken from
+ *  the KCHAG history the Union supplied; nothing is added to it. */
+export type KchagStory = {
+  wordmark: string;
+  heroLine: string;
+  heroPlaces: string;
+  heroPhoto: KchagPhoto;
+  scrollHint: string;
+  founding: {
+    year: string;
+    title: string;
+    body: string;
+    caption: string;
+    photos: KchagPhoto[];
+  };
+  bell: { title: string; photos: KchagPhoto[] };
+  growth: { year: string; title: string; body: string; stat: string; statLabel: string; photos: KchagPhoto[] };
+  war: { year: string; title: string; body: string; hint: string; photos: KchagPhoto[] };
+  rebuild: {
+    year: string;
+    title: string;
+    body: string;
+    before: KchagPhoto;
+    after: KchagPhoto;
+    beforeLabel: string;
+    afterLabel: string;
+    sliderLabel: string;
+    photos: KchagPhoto[];
+  };
+  today: { title: string; body: string; hero: KchagPhoto; arch: KchagPhoto; aerial: KchagPhoto; photos: KchagPhoto[] };
+};
+
 export type CampsContent = {
+  story: KchagStory;
   // Official website / social accounts ("Follow Us" band).
   social?: SocialLinks;
   slug: string;
@@ -93,8 +130,110 @@ export type CampsContent = {
   cta: OutreachCTA;
 };
 
+const k = (name: string, w: number, h: number, alt: string): KchagPhoto => ({ src: `/kchag/${name}.jpg`, alt, w, h });
+
 export const campsContent: CampsContent = {
   slug: "camps",
+  story: {
+    wordmark: "KCHAG",
+    heroLine: "The Christian Endeavour Summer Center",
+    heroPlaces: "Monteverdi, Lebanon and Kessab, Syria",
+    heroPhoto: k("hero-aerial", 2400, 1800, "KCHAG from above — the campsite among the pines"),
+    scrollHint: "Scroll to begin",
+    founding: {
+      year: "1949",
+      title: "A long-awaited dream",
+      body: "In 1949, several young visionaries carried out a long-awaited dream by purchasing five beautiful hillside acres just outside Beirut and hosting the first youth conference at the Christian Endeavor Summer Center (KCHAG). Over 100 young men and women enthusiastically attended, pitching tents until buildings were constructed.",
+      caption: "“Christian Endeavour’s First Conference — KCHAG 1949”, as written on the original photograph",
+      photos: [
+        k("1949-first-conference", 2000, 1454, "The first Christian Endeavour conference at KCHAG, 1949 — group photograph"),
+        k("1949-tents-group", 1130, 773, "Campers gathered in front of the tents"),
+        k("early-rock", 1364, 965, "A rock painted with the name KCHAG"),
+        k("early-cross-sepia", 908, 1269, "A wooden cross on the hillside at sunset"),
+        k("1949-tents-group-2", 944, 599, "A group of campers beside the tents"),
+        k("early-portrait", 723, 1068, "A man standing on a path among the young trees"),
+        k("early-hillside-gathering", 645, 695, "Campers walking down the hillside"),
+      ],
+    },
+    bell: {
+      title: "The chapel bell",
+      photos: [
+        k("bell-close", 1567, 1600, "The KCHAG bell hanging in its wooden frame"),
+        k("bell-group", 452, 700, "Three men holding the bell"),
+        k("bell-pines", 1091, 752, "Two men beside the bell among the pines"),
+        k("early-cross-hill", 1600, 1531, "The wooden cross among the pines"),
+      ],
+    },
+    growth: {
+      year: "1960",
+      title: "The heartbeat of the community",
+      body: "By 1960, KCHAG boasted over 30 buildings, including a chapel, dining hall, snack shop, sports field, and a vibrant life that became the heartbeat of the Armenian Evangelical community. Dozens of children's and youth camps, women's conferences, church retreats, and educational programs were planned annually by Armenian and non-Armenian evangelical churches and sister organizations alike.",
+      stat: "30+",
+      statLabel: "buildings by 1960",
+      photos: [
+        k("dining-2", 1500, 1002, "Children at a meal in the dining hall"),
+        k("dining-1", 1261, 626, "Campers around the dining hall tables"),
+        k("dining-3", 988, 687, "Girls smiling around a dining table"),
+        k("dining-counter", 1269, 854, "The serving counter of the old dining hall"),
+      ],
+    },
+    war: {
+      year: "1975",
+      title: "Interrupted",
+      body: "The 1975 civil war and the three decades that followed interrupted and damaged KCHAG in a major way.",
+      hint: "Move across the photographs to light them",
+      photos: [
+        k("war-chapel", 1472, 903, "The chapel during the war years"),
+        k("war-building", 1800, 1200, "A damaged two-storey building among the pines"),
+        k("war-hall-interior", 1600, 1070, "The empty interior of a damaged hall"),
+        k("war-beds", 1600, 1254, "Bare bed frames in a ruined dormitory"),
+        k("war-arcade", 1600, 1070, "A long arcaded building, abandoned"),
+        k("war-graffiti", 1600, 1200, "A damaged cabin covered in graffiti"),
+        k("war-room", 1417, 949, "A ruined room with broken furniture"),
+        k("war-foundation", 1800, 1200, "The rubble of a building's foundations"),
+        k("war-house", 1134, 759, "A damaged house with broken windows"),
+        k("war-porch", 1600, 1070, "A cabin porch overlooking the valley"),
+      ],
+    },
+    rebuild: {
+      year: "2002",
+      title: "Rebuilding",
+      body: "Since 2002, cleanup and renovation has started at a slow pace.",
+      before: k("war-chapel", 1472, 903, "The chapel during the war years"),
+      after: k("today-chapel-front", 1800, 1200, "The chapel today"),
+      beforeLabel: "The war years",
+      afterLabel: "Today",
+      sliderLabel: "Move over the photograph to see the chapel today",
+      photos: [
+        k("reno-volunteers", 1600, 1202, "Volunteers in front of a cabin under renovation"),
+        k("reno-hall-works", 1600, 1067, "Renovation works inside the hall"),
+        k("reno-chapel-works", 1600, 1067, "Works around the chapel"),
+        k("reno-cross", 841, 1260, "Fixing the cross on the chapel facade"),
+        k("reno-hall-floor", 1600, 1200, "The hall with its new floor"),
+        k("reno-cabin-2", 1600, 1067, "A rebuilt cabin with a tiled roof"),
+        k("reno-interior", 1600, 1067, "A renovated room"),
+        k("reno-cabin-3", 1600, 1067, "A rebuilt cabin among the pines"),
+        k("reno-hall", 1600, 1067, "The renovated hall"),
+        k("reno-entrance", 1600, 1067, "A renovated entrance"),
+        k("reno-terrace", 1800, 1200, "The terrace overlooking the coast"),
+        k("reno-chapel-crowd", 1618, 1080, "A crowd gathered at the renovated chapel"),
+        k("reno-bell-arches", 1800, 1200, "The bell beneath the chapel arches"),
+        k("reno-chapel-group", 1800, 1362, "A group in front of the renovated chapel"),
+      ],
+    },
+    today: {
+      title: "A great future",
+      body: "It is time to dedicate more time, resources and efforts. KCHAG has had a rich past. By faith and work, it can also have a great future for ministry and community development.",
+      hero: k("today-lamps-sunset", 2400, 1600, "Lamps along the KCHAG path at sunset, above the coast"),
+      arch: k("today-arch-view", 1800, 1200, "The pines and the valley seen through the chapel arch"),
+      aerial: k("today-aerial", 2400, 1800, "The chapel and the camp tent from above"),
+      photos: [
+        k("today-chapel-side", 1800, 1200, "The chapel in the evening light"),
+        k("today-grounds", 1800, 1200, "The camp grounds among the pines"),
+        k("today-chapel-front", 1800, 1200, "The chapel facade"),
+      ],
+    },
+  },
   // KCHAG's official site and accounts (linked from kchag.org).
   social: {
     facebook: "https://www.facebook.com/KCHAGLebanon",
