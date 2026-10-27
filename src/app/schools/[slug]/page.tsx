@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { schools } from "@/data/schools";
 import { schoolContent } from "@/data/schoolContent";
 import { pageMetadata, summarize } from "@/lib/site";
-import Medallion from "@/components/shared/Medallion";
+import { buildSchoolView } from "@/lib/schoolTemplate";
 import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
 import ChurchCTA from "@/components/church/ChurchCTA";
 import SchoolTopBlock from "@/components/school/SchoolTopBlock";
@@ -16,7 +16,6 @@ import SchoolAcademics from "@/components/school/SchoolAcademics";
 import SchoolSupportServices from "@/components/school/SchoolSupportServices";
 import SchoolSignaturePrograms from "@/components/school/SchoolSignaturePrograms";
 import SchoolFaithCommunity from "@/components/school/SchoolFaithCommunity";
-import SchoolInquiry from "@/components/school/SchoolInquiry";
 import SchoolPullQuoteBand from "@/components/school/SchoolPullQuoteBand";
 import SchoolVintageBand from "@/components/school/SchoolVintageBand";
 import SchoolLanguages from "@/components/school/SchoolLanguages";
@@ -26,19 +25,11 @@ import SchoolVisionMission from "@/components/school/SchoolVisionMission";
 import SuccessionList from "@/components/church/SuccessionList";
 import WhiteChurchFeature from "@/components/church/WhiteChurchFeature";
 import ChurchGalleryLightbox from "@/components/church/ChurchGalleryLightbox";
-import styles from "./page.module.css";
 
 type PageParams = { slug: string };
 
 export function generateStaticParams() {
-  // Shamlian-Tatikian now has its own static route at
-  // /schools/armenian-evangelical-shamlian-tatikian-secondary-school
-  // (rendering the approved mockup verbatim) which overrides this dynamic
-  // segment for that exact path — excluded here so this route no longer
-  // also generates a page for it.
-  return schools
-    .filter((school) => school.slug !== "armenian-evangelical-shamlian-tatikian-secondary-school")
-    .map((school) => ({ slug: school.slug }));
+  return schools.filter((school) => schoolContent[school.slug]).map((school) => ({ slug: school.slug }));
 }
 
 export async function generateMetadata({
@@ -66,77 +57,20 @@ export default async function SchoolDetailPage({
 }) {
   const { slug } = await params;
   const school = schools.find((s) => s.slug === slug);
+  const content = schoolContent[slug];
+  if (!school || !content) notFound();
 
-  // Should never actually trigger — every slug reaching this route was
-  // generated from schools.ts's own 4 entries.
-  if (!school) notFound();
+  // Locked school template — same spine as the churches. Structure and
+  // template wording come from buildSchoolView, never per-school branching.
+  const view = buildSchoolView(school, content);
 
-  const content = schoolContent[slug] ?? null;
-
-  // "Syria (Kessab)" is a display-grouping value, not real crumb text (see
-  // schools/page.tsx's own `countryDisplayLabel` for the same split, and
-  // churches/[slug]/page.tsx for the identical pattern already established
-  // there) — the Kessab church mockups show a 4th crumb segment
-  // ("Ministries › Churches › Syria › Kessab"), not a combined 3rd
-  // segment; Kessab Martyrs School's own mockup does the same
-  // ("Ministries › Schools › Syria › Kessab"). First used by this school —
-  // `breadcrumbSubregion` is null for every other school, unaffected.
+  // "Syria (Kessab)" is a display-grouping value — Kessab schools show a
+  // 4th crumb segment ("Ministries › Schools › Syria › Kessab").
   const breadcrumbCountry = school.country === "Syria (Kessab)" ? "Syria" : school.country;
   const breadcrumbSubregion = school.country === "Syria (Kessab)" ? "Kessab" : null;
 
-  if (!content) {
-    // 1 of 4 schools doesn't have a SchoolContent entry yet (Central High).
-    // schools.ts carries no contact/address fields at all — render the
-    // school name only, never invented prose, never a 404.
-    return (
-      <>
-        <ChurchBreadcrumb
-          country={breadcrumbCountry}
-          subregion={breadcrumbSubregion}
-          section="Schools"
-        />
-        <section className={styles.minimalTop}>
-          <h1 className={styles.minimalHeading}>{school.name}</h1>
-          <div className={styles.minimalMeta}>{school.country}</div>
-        </section>
-        <section className={styles.pending}>
-          <Medallion size={64} className={styles.pendingGlyph} />
-          <h2 className={styles.pendingHeading}>Full Page Content Coming Soon</h2>
-          <p className={styles.pendingBody}>
-            We&rsquo;re preparing a full profile for this school, including its
-            history, leadership, and programs.
-          </p>
-        </section>
-      </>
-    );
-  }
-
-  // ACG's mockup weaves photo/text "magazine" rows and moves Contact down
-  // near the Gallery rather than right after About — a different section
-  // order than the other 3 schools' own designs use. Rather than reorder
-  // the shared JSX below (which would move Contact for every school),
-  // `hasMagazineSections` renders Contact in one of two fixed slots: its
-  // original spot (existing schools) or the later spot (ACG-style
-  // schools). Every other new call below (`introFeature`, `pullQuoteBand`,
-  // `vintageBand`, `splitRows`, `languages`, `events`, `gallery`) is a
-  // no-op for the other 3 schools since those fields are unset for them,
-  // so it's safe to insert them at fixed positions without any per-school
-  // branching.
-  // Every magazine-style Syria school (ACG, Bethel, Emmanuel al-Ressaleh,
-  // Damascus Kenats/Al-Hayat) sets `introFeature` in place of `about`
-  // (see the conditional just above) — using that single field as the
-  // late-Contact trigger, rather than checking `splitRows`/`academicsRows`
-  // specifically, means a school with NO other split rows besides
-  // About/Intro (Damascus has none — no Events/Gallery either) still gets
-  // the correct late Contact position, matching its own mockup's order
-  // (About → Pull-quote → History → Leadership → Contact → CTA).
-  const hasMagazineSections = Boolean(content.introFeature);
-
-  // Bethel Secondary School's, Emmanuel al-Ressaleh's, Damascus
-  // Kenats/Al-Hayat's, and Syriac Evangelical School's vintage-band photos
-  // have no sepia treatment in their own mockup CSS, unlike ACG's (see
-  // `SchoolVintageBand`'s own comment) — a real per-mockup difference,
-  // not an oversight.
+  // Archival history photos keep the sepia treatment; modern photos used in
+  // a history band don't (a property of the photo, not a layout choice).
   const NO_SEPIA_SLUGS = [
     "bethel-secondary-school",
     "emmanuel-al-ressaleh-school",
@@ -144,151 +78,55 @@ export default async function SchoolDetailPage({
     "syriac-evangelical-school",
     "kessab-martyrs-school",
   ];
-  const vintageSepia = !NO_SEPIA_SLUGS.includes(slug);
 
   return (
     <>
-      <ChurchBreadcrumb
-        country={breadcrumbCountry}
-        subregion={breadcrumbSubregion}
-        section="Schools"
-      />
+      <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} section="Schools" />
       <SchoolTopBlock
         school={school}
-        masthead={content.masthead}
-        logo={content.logo}
-        heroPhoto={content.heroPhoto}
-        factsBar={content.factsBar}
+        masthead={view.masthead}
+        logo={view.logo}
+        heroPhoto={view.heroPhoto}
+        factsBar={view.factsBar}
       />
-      {content.introFeature ? (
-        // reverse: the mockup's own About/Intro row is authored text-first,
-        // photo-second in the DOM with no `.rev` class — unlike the 4
-        // Student Life rows below (which use `.rev` to CSS-reorder back to
-        // photo-left, see `splitRows`' own comment), so this row alone
-        // renders text-left/photo-right, opposite WhiteChurchFeature's
-        // photo-left default.
-        <WhiteChurchFeature
-          feature={content.introFeature}
-          photoWidth={content.introFeature.photo.width}
-          photoHeight={content.introFeature.photo.height}
-          reverse
-          dropcapFirst
-        />
-      ) : (
-        <SchoolAbout about={content.about} principalCard={content.principalCard} />
-      )}
-      {!hasMagazineSections && (
-        <SchoolContactSection
-          location={content.location}
-          contactRows={content.contactRows}
-          schoolName={school.name}
-          note={content.contactNote}
-        />
-      )}
-      <SchoolPullQuoteBand pullQuoteBand={content.pullQuoteBand} />
-      <SchoolVintageBand vintageBand={content.vintageBand} sepia={vintageSepia} />
+      <SchoolAbout about={view.about} principalCard={view.principalCard} />
+      <SchoolContactSection
+        location={view.location}
+        contactRows={view.contactRows}
+        schoolName={school.name}
+        note={view.contactNote}
+      />
+      <SchoolLeadershipGrid leaders={view.leadership} />
+
+      {/* The school's own content blocks — fixed order, each renders only
+          when the school has that real content. */}
+      <SchoolPullQuoteBand pullQuoteBand={view.quoteBand} />
+      <SchoolVintageBand vintageBand={content.vintageBand ?? null} sepia={!NO_SEPIA_SLUGS.includes(slug)} />
       <SchoolMissionValues missionValues={content.missionValues} />
-      <SchoolLeadershipGrid leaders={content.leadership} />
       <SchoolMission mission={content.mission} />
-      <SchoolAcademics
-        academicHeritage={content.academicHeritage}
-        sideArt={
-          slug === "armenian-evangelical-secondary-school-anjar" ||
-          slug === "armenian-evangelical-shamlian-tatikian-secondary-school"
-        }
-        artVariant={
-          slug === "armenian-evangelical-shamlian-tatikian-secondary-school"
-            ? "scripture"
-            : "medallion"
-        }
-      />
+      <SchoolVisionMission visionMission={content.visionMission ?? null} />
+      <SchoolAcademics academicHeritage={content.academicHeritage} sideArt artVariant="medallion" />
       <SchoolSupportServices supportServices={content.supportServices} />
       <SchoolSignaturePrograms signaturePrograms={content.signaturePrograms} />
       <SchoolFaithCommunity faithCommunity={content.faithCommunity} />
-      {content.splitRows?.map((row, i) => (
+      {view.photoRows.map((row, i) => (
         <WhiteChurchFeature
-          key={`split-${i}`}
+          key={`row-${i}`}
           feature={row}
           photoWidth={row.photo.width}
           photoHeight={row.photo.height}
           reverse={row.reverse}
-          dropcapFirst={row.dropcapFirst}
+          dropcapFirst={false}
         />
       ))}
-      {/* Bethel Secondary School's section-scoped row groups — see the
-          `SchoolSplitRow`/`academicsRows` etc. comments in schoolContent.ts.
-          Each field is null for every other school, so these blocks are
-          no-ops there. */}
-      {content.academicsRows?.map((row, i) => (
-        <WhiteChurchFeature
-          key={`academics-${i}`}
-          feature={row}
-          photoWidth={row.photo.width}
-          photoHeight={row.photo.height}
-          reverse={row.reverse}
-          dropcapFirst={row.dropcapFirst}
-        />
-      ))}
-      <SchoolLanguages languages={content.languages} />
-      <SchoolProgramChips programChips={content.programChips} />
-      {content.curriculumRows?.map((row, i) => (
-        <WhiteChurchFeature
-          key={`curriculum-${i}`}
-          feature={row}
-          photoWidth={row.photo.width}
-          photoHeight={row.photo.height}
-          reverse={row.reverse}
-          dropcapFirst={row.dropcapFirst}
-        />
-      ))}
-      {content.worshipRows?.map((row, i) => (
-        <WhiteChurchFeature
-          key={`worship-${i}`}
-          feature={row}
-          photoWidth={row.photo.width}
-          photoHeight={row.photo.height}
-          reverse={row.reverse}
-          dropcapFirst={row.dropcapFirst}
-        />
-      ))}
-      <SchoolPullQuoteBand pullQuoteBand={content.pullQuoteBand2} />
-      {content.faithRows?.map((row, i) => (
-        <WhiteChurchFeature
-          key={`faith-${i}`}
-          feature={row}
-          photoWidth={row.photo.width}
-          photoHeight={row.photo.height}
-          reverse={row.reverse}
-          dropcapFirst={row.dropcapFirst}
-        />
-      ))}
-      {content.heritageRows?.map((row, i) => (
-        <WhiteChurchFeature
-          key={`heritage-${i}`}
-          feature={row}
-          photoWidth={row.photo.width}
-          photoHeight={row.photo.height}
-          reverse={row.reverse}
-          dropcapFirst={row.dropcapFirst}
-        />
-      ))}
-      <SchoolVisionMission visionMission={content.visionMission} />
-      <SchoolEvents events={content.events} />
-      {hasMagazineSections && (
-        <SchoolContactSection
-          location={content.location}
-          contactRows={content.contactRows}
-          schoolName={school.name}
-        />
-      )}
-      <SuccessionList succession={content.directorsArchive} variant="panel" />
-      <SchoolInquiry
-        inquiry={content.inquiry}
-        heroPhoto={content.heroPhoto}
-        schoolName={school.name}
-      />
-      <ChurchGalleryLightbox gallery={content.gallery ?? null} />
-      <ChurchCTA cta={content.cta} />
+      <SchoolLanguages languages={content.languages ?? null} />
+      <SchoolProgramChips programChips={content.programChips ?? null} />
+      <SchoolPullQuoteBand pullQuoteBand={view.quoteBand2} />
+      <SchoolEvents events={content.events ?? null} />
+
+      <SuccessionList succession={view.directorsArchive} variant="panel" />
+      <ChurchGalleryLightbox gallery={view.gallery} />
+      <ChurchCTA cta={view.cta} />
     </>
   );
 }

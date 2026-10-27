@@ -324,6 +324,13 @@ Living log of content/asset gaps and unresolved items, per PROJECT_BRIEF.md rule
     - **Removed from public view:** Syriac Aleppo's leadership note "English spelling pending your confirmation" (internal note). Its spellings remain pending here (item 79).
     - **Still content gaps:** succession lists for Emmanuel Aleppo, Martyrs', Holy Trinity Kessab, the 3 villages and Syriac Bouchriyeh; service times for all Syria churches; Vice-Chairman/Secretary names for 14 churches; hero photos and profiles for the 9 directory-only churches.
 
+121. **Unified school template (2026-10-27, Yeghia's decisions).** All 10 school pages render through `src/lib/schoolTemplate.ts` with the same spine as the churches: Top (facts Founded · Grades · Location) → About + principal card → Contact → Leadership (Principal · Chair of Council · Secretary, "Name pending" slots) → the school's own content blocks in one fixed order → Principals archive → Gallery → closing band ("Visit the School" / "All are welcome at the {school}."). The hand-coded Shamlian-Tatikian page was retired; it now renders from its data entry. Follow-ups:
+    - **Removed as unsourced editorial copy:** the 5 quote bands attributed to the schools (CHS, ACG, Bethel, Emmanuel, Damascus), the About pull quotes (AEC, CHS, AESSA), Shamlian's tagline, and all custom closing headlines/bodies. Kept: scripture/motto bands (Syriac Ephesians 5:8, Kessab 2 Timothy 3:16, Bethel Proverbs 22:6). If any removed quote is a verified translation from an Armenian source document, it can be restored.
+    - **"Make an Inquiry" blocks (AEC, CHS) removed**: the Contact cards carry the same emails.
+    - **Syria intro photos** (ACG, Bethel, Emmanuel, Damascus, Syriac, Kessab) moved into each school's gallery, since the intro text repeated About. Damascus now has a 1-photo gallery.
+    - **Facts dropped from the red bar** (still in page text): ACG "3 Languages" and "1923 Girls' Section"; Bethel "Baccalaureate"; Damascus "1950 Present Building"; Syriac "1981 Rebuilt"; Kessab "1980 Unified"; Shamlian "250 Students"; AEC/AESSA "Armenian Evangelical Tradition"; CHS "1932 Present Building".
+    - **Still content gaps:** Central High grade levels (bar shows "Pending"); Chair of Council for 7 schools; Secretary for Damascus and Kessab; email for Kessab and AEC phone; Shamlian full street address. Shamlian principal surname conflict remains item 48.
+
 ## Resolved
 
 - **HQ contact info (address, phone, email)** — confirmed real by Yeghia directly, 2026-08-18. Not sourced from any audit document (none was available to trace) — Yeghia confirmed firsthand that the staging site's footer contact details are correct as pulled via WebFetch. See `Footer.tsx`.

@@ -16,7 +16,7 @@ export default function SchoolLeadershipGrid({ leaders }: SchoolLeadershipGridPr
 
   return (
     <section className={styles.lead}>
-      <div className={styles.eyebrow}>The Team</div>
+      <div className={styles.eyebrow}>Administration</div>
       <h2 className={styles.heading}>Leadership</h2>
       <div className={styles.grid}>
         {leaders.map((leader, i) => (

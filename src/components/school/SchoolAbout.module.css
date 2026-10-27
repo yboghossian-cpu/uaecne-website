@@ -12,10 +12,6 @@
   align-items: start;
 }
 
-.solo {
-  max-width: 820px;
-}
-
 .eyebrow {
   font-family: var(--font-body);
   font-size: 0.625rem;

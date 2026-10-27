@@ -52,18 +52,13 @@ export default function SchoolTopBlock({
           <Image
             src={logo.src}
             alt={logo.alt}
-            width={80}
-            height={80}
+            width={96}
+            height={96}
             className={styles.logo}
           />
         )}
         <div>
           <h1 className={styles.heading}>{school.name}</h1>
-          {/* Opt-in: only a school whose own mockup carries a tagline sets
-              this. Absent for every other school, which render unchanged. */}
-          {masthead.tagline && (
-            <div className={styles.tagline}>{masthead.tagline}</div>
-          )}
           <div className={styles.meta}>
             {masthead.locationLine}
             {masthead.established && (

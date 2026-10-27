@@ -974,15 +974,23 @@ export const schoolContent: Record<string, SchoolContent> = {
       addressLinesHy: null,
     },
 
-    // Neither a phone number nor an email was supplied — rendered in the
-    // reference's italic "pending" style, never invented.
+    // Phone and email as published on the live page since commit 453b93c
+    // (2026-09-01), ported here when the hand-coded page was retired.
     contactRows: [
-      { key: "Phone", keyHy: null, value: "pending", valueHy: null, href: null, pending: true },
-      { key: "Email", keyHy: null, value: "pending", valueHy: null, href: null, pending: true },
+      { key: "Phone", keyHy: null, value: "01 261749", valueHy: null, href: null },
+      {
+        key: "Email",
+        keyHy: null,
+        value: "shamliantatikian@gmail.com",
+        valueHy: null,
+        href: "mailto:shamliantatikian@gmail.com",
+      },
     ],
 
-    contactNote:
-      "Current principal's surname appears as “Tunberian” in the school's history document and as “Messerian” on the supplied photo — shown here as the document gives it, pending Union confirmation. Phone, email, and full street address were not supplied. Principal-succession spellings pending confirmation.",
+    // Public note only. The principal's surname conflict (document
+    // "Tunberian" vs photo filename "Messerian") stays tracked in
+    // OPEN_QUESTIONS #48, not on the page.
+    contactNote: "Full street address pending.",
     contactNoteHy: null,
 
     // The mockup's Leadership section carries exactly these two people — no

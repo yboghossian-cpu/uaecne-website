@@ -37,12 +37,13 @@ type SchoolAboutProps = {
 // photo still renders honestly, as an arched placeholder, rather than
 // falling back to no card at all).
 export default function SchoolAbout({ about, principalCard }: SchoolAboutProps) {
-  const hasCard = principalCard && principalCard.name;
-
+  // Locked template: the principal card always shows beside About —
+  // "Name pending" / photo placeholder when not yet supplied — so every
+  // school has the same About layout.
   return (
     <section className={styles.about}>
-      <div className={hasCard ? styles.grid : `${styles.grid} ${styles.solo}`}>
-        {hasCard && (
+      <div className={styles.grid}>
+        {principalCard && (
           <div className={styles.principalCard}>
             {principalCard.photo ? (
               <div className={styles.picWrap}>
@@ -63,7 +64,7 @@ export default function SchoolAbout({ about, principalCard }: SchoolAboutProps) 
               </div>
             )}
             <div className={styles.principalInfo}>
-              <b className={styles.principalName}>{principalCard.name}</b>
+              <b className={styles.principalName}>{principalCard.name ?? "Name pending"}</b>
               <span className={styles.principalRole}>{principalCard.role}</span>
             </div>
           </div>

@@ -36,14 +36,18 @@
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.125rem;
-  max-width: 320px;
+  /* Same card sizes and wrapping as the church LeadershipGrid. */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.875rem;
+  max-width: 940px;
   margin: 0 auto;
 }
 
 .person {
+  width: 160px;
+  flex: 0 0 auto;
   border-radius: 14px;
   overflow: hidden;
   box-shadow: var(--shadow-soft);
@@ -127,8 +131,7 @@
     font-size: 2rem;
   }
 
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 780px;
+  .person {
+    width: 200px;
   }
 }
