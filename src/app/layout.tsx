@@ -3,6 +3,7 @@ import { Cormorant_Garamond, IBM_Plex_Sans, Noto_Serif_Armenian } from "next/fon
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import IconSymbols from "@/components/shared/IconSymbols";
+import { DEFAULT_SHARE_IMAGE, SITE_NAME, SITE_URL, shareImage } from "@/lib/site";
 import "./globals.css";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -32,7 +33,19 @@ const notoSerifArmenian = Noto_Serif_Armenian({
 });
 
 export const metadata: Metadata = {
-  title: "Union of the Armenian Evangelical Churches in the Near East",
+  metadataBase: new URL(SITE_URL),
+  title: SITE_NAME,
+  // Homepage hero copy, verbatim ("Est. 1846" + the hero subline).
+  description: `The ${SITE_NAME} — est. 1846.`,
+  // Pages without their own openGraph block inherit this; og:title and
+  // og:description then fall back to each page's own <title>/description.
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_US",
+    images: [{ url: shareImage(DEFAULT_SHARE_IMAGE), width: 1200 }],
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export default function RootLayout({

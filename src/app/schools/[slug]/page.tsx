@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { schools } from "@/data/schools";
 import { schoolContent } from "@/data/schoolContent";
+import { pageMetadata, summarize } from "@/lib/site";
 import Medallion from "@/components/shared/Medallion";
 import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
 import ChurchCTA from "@/components/church/ChurchCTA";
@@ -47,7 +48,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const school = schools.find((s) => s.slug === slug);
-  return { title: school ? `${school.name} — UAECNE` : "School — UAECNE" };
+  if (!school) return { title: "School — UAECNE" };
+  const content = schoolContent[slug];
+  return pageMetadata({
+    title: `${school.name} — UAECNE`,
+    // Verbatim from the page's own About text — no new copy.
+    description: content?.about.paragraphs[0] ? summarize(content.about.paragraphs[0]) : undefined,
+    image: content?.heroPhoto?.src ?? school.photo,
+    path: `/schools/${slug}`,
+  });
 }
 
 export default async function SchoolDetailPage({

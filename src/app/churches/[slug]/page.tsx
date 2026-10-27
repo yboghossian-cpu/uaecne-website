@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { churches } from "@/data/churches";
 import { churchContent } from "@/data/churchContent";
+import { pageMetadata, summarize } from "@/lib/site";
 import Medallion from "@/components/shared/Medallion";
 import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
 import ChurchTopBlock from "@/components/church/ChurchTopBlock";
@@ -54,7 +55,23 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const church = churches.find((c) => c.slug === slug);
-  return { title: church ? `${church.name} — UAECNE` : "Church — UAECNE" };
+  if (!church) return { title: "Church — UAECNE" };
+  const content = churchContent[slug];
+  // Description reuses text already on the page: the About paragraph for
+  // churches with a full profile, otherwise the directory's own facts.
+  const description = content?.about.paragraphs[0]
+    ? summarize(content.about.paragraphs[0])
+    : summarize(
+        [church.name, church.address.split("\n")[0], church.estYear && `Established ${church.estYear}.`]
+          .filter(Boolean)
+          .join(" — "),
+      );
+  return pageMetadata({
+    title: `${church.name} — UAECNE`,
+    description,
+    image: content?.heroPhoto?.src ?? church.photo,
+    path: `/churches/${slug}`,
+  });
 }
 
 export default async function ChurchDetailPage({
