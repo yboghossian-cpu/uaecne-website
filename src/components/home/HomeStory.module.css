@@ -244,14 +244,16 @@ a.magnet:focus-visible {
 }
 
 .arch {
-  --w0: min(40vw, 520px);
+  /* landscape window shaped like the group photo (1840 × 1040) */
+  --w0: min(42vw, 780px);
+  --h0: calc(var(--w0) * 1040 / 1840);
   position: absolute;
   z-index: 2;
-  left: calc(50% + (1 - var(--e)) * var(--shift, 22vw));
-  bottom: calc((1 - var(--e)) * 9svh);
+  left: calc(50% + (1 - var(--e)) * var(--shift, 24vw));
+  top: calc(50% + (1 - var(--e)) * var(--drop, 3svh));
   width: calc(var(--w0) + (100vw - var(--w0)) * var(--e));
-  height: calc(66svh + 34svh * var(--e));
-  transform: translateX(-50%) perspective(1200px) rotateY(calc((1 - var(--e)) * var(--nx, 0) * -6deg))
+  height: calc(var(--h0) + (100svh - var(--h0)) * var(--e));
+  transform: translate(-50%, -50%) perspective(1200px) rotateY(calc((1 - var(--e)) * var(--nx, 0) * -6deg))
     rotateX(calc((1 - var(--e)) * var(--ny, 0) * 4deg));
   overflow: hidden;
   border-radius: calc((1 - var(--e)) * var(--radius));
@@ -264,8 +266,8 @@ a.magnet:focus-visible {
 
 .archImg {
   position: absolute;
-  inset: -4%;
-  transform: translate(calc(var(--nx, 0) * -22px), calc(var(--ny, 0) * -14px)) scale(calc(1.12 - var(--e) * 0.06));
+  inset: 0;
+  transform: translate(calc(var(--nx, 0) * -5px), calc(var(--ny, 0) * -3px)) scale(1.02);
   transition: transform 0.6s var(--ease);
 }
 
@@ -1158,9 +1160,11 @@ span.donateBtn {
 /* ------------------------------------------------------------ responsive */
 @media (max-width: 860px) {
   .arch {
-    --w0: 78vw;
+    --w0: 90vw;
     --shift: 0vw;
-    height: calc(38svh + 62svh * var(--e));
+    --drop: 24svh;
+    /* on phones it opens to full width but stays landscape — nobody is cut off */
+    height: calc(var(--h0) + (100vw * 1040 / 1840 - var(--h0)) * var(--e));
   }
   .heroText {
     top: clamp(3rem, 9vh, 5rem);
@@ -1176,7 +1180,8 @@ span.donateBtn {
     bottom: -40vw;
   }
   .heroYear {
-    top: 58%;
+    top: 28%;
+    font-size: 34vw;
   }
 
   .legacy,
