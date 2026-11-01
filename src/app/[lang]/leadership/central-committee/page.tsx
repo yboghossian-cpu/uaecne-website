@@ -27,7 +27,7 @@ const members = [
   {
     name: "Mrs. Takouhi Sarkisian",
     role: "Clerk",
-    photo: "/central-committee-takouhi-sarkisian.jpg",
+    photo: "/central-committee-takouhi-sarkisian-v2.jpg",
   },
   {
     name: "Mr. Garbis Deyirmenjian",
@@ -87,7 +87,7 @@ const members = [
   {
     name: "Rev. L. Nishan Bakalian",
     role: "Ex Officio",
-    photo: "/central-committee-nishan-bakalian.jpg",
+    photo: "/central-committee-nishan-bakalian-v2.jpg",
   },
 ];
 

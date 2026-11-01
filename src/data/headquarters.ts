@@ -72,7 +72,7 @@ export const headquartersOffices: HqOffice[] = [
     office: "Church Relations",
     phone: null,
     members: [
-      { name: "Rev. Nishan Bakalian", title: "Relations & Coordinator", photo: "/headquarters-nishan-bakalian.jpg", email: null },
+      { name: "Rev. Nishan Bakalian", title: "Relations & Coordinator", photo: "/headquarters-nishan-bakalian-v2.jpg", email: null },
     ],
   },
   {
