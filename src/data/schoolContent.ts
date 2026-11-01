@@ -798,7 +798,7 @@ export const schoolContent: Record<string, SchoolContent> = {
         role: "Principal",
         roleHy: null,
         photo: {
-          src: "/school-central-high-school-principal.jpg",
+          src: "/school-central-high-school-principal-v2.jpg",
           alt: "Mrs. Maral Deyirmenjian",
         },
       },
