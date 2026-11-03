@@ -96,6 +96,15 @@ export async function submitForm(_prev: FormState, fd: FormData): Promise<FormSt
     lastInsertRowid,
   );
 
+  // The church or school only receives the email, so a failed send must not
+  // be reported as delivered.
+  if (target && !res.ok) {
+    return {
+      status: "error",
+      message: "Sorry, your message could not be sent right now. Please try again later or use the email address on this page.",
+    };
+  }
+
   return {
     status: "ok",
     message:

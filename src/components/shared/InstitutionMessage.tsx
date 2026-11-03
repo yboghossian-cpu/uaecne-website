@@ -5,7 +5,8 @@ import styles from "./InstitutionMessage.module.css";
 
 // "Send a Message" section on every church and school page. The message is
 // emailed to the address(es) on the page's own contact card; pages with no
-// email on file show nothing (no form that can't be delivered).
+// email on file show nothing. If the email can't be sent, the visitor is
+// told so (see formActions) — never that it reached the church or school.
 export default async function InstitutionMessage({ kind, slug }: { kind: InstitutionKind; slug: string }) {
   const target = institution(kind, slug);
   if (!target?.emails.length) return null;
