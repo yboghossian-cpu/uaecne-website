@@ -22,6 +22,9 @@ type WhiteChurchFeatureProps = {
   photoHeight?: number;
   reverse?: boolean;
   dropcapFirst?: boolean;
+  // Opt-in (school pages): a portrait photo gets a narrower column so a
+  // single person's photo doesn't dominate the row.
+  compactPortrait?: boolean;
 };
 
 // Standalone 2-column "then and now" feature — own eyebrow + full h2 +
@@ -39,12 +42,17 @@ export default function WhiteChurchFeature({
   photoHeight = 3275,
   reverse = false,
   dropcapFirst = false,
+  compactPortrait = false,
 }: WhiteChurchFeatureProps) {
   if (!feature) return null;
 
   return (
     <section className={styles.wrap}>
-      <div className={reverse ? `${styles.grid} ${styles.reverse}` : styles.grid}>
+      <div
+        className={[styles.grid, reverse && styles.reverse, compactPortrait && styles.compact]
+          .filter(Boolean)
+          .join(" ")}
+      >
         <div className={styles.photoFrame}>
           <Image
             src={feature.photo.src}

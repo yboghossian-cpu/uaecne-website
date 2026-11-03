@@ -83,4 +83,18 @@
   .reverse > .photoFrame {
     order: 2;
   }
+
+  .compact {
+    grid-template-columns: 340px minmax(0, 1fr);
+    align-items: start;
+    gap: 3.5rem;
+  }
+
+  .compact.reverse {
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+}
+
+.compact .photoFrame {
+  max-width: 340px;
 }

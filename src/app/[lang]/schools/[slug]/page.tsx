@@ -117,7 +117,7 @@ export default async function SchoolDetailPage({
       <SchoolMissionValues missionValues={content.missionValues} />
       <SchoolMission mission={content.mission} />
       <SchoolVisionMission visionMission={content.visionMission ?? null} />
-      <SchoolAcademics academicHeritage={content.academicHeritage} sideArt artVariant="medallion" />
+      <SchoolAcademics academicHeritage={content.academicHeritage} />
       <SchoolSupportServices supportServices={content.supportServices} />
       <SchoolSignaturePrograms signaturePrograms={content.signaturePrograms} />
       <SchoolFaithCommunity faithCommunity={content.faithCommunity} />
@@ -128,6 +128,7 @@ export default async function SchoolDetailPage({
           photoWidth={row.photo.width}
           photoHeight={row.photo.height}
           reverse={row.reverse}
+          compactPortrait={row.photo.height > row.photo.width}
           dropcapFirst={false}
         />
       ))}
