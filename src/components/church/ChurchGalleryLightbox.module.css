@@ -217,6 +217,11 @@
   line-height: 1;
 }
 
+.lbClose svg {
+  width: 20px;
+  height: 20px;
+}
+
 .lbNav {
   position: absolute;
   top: 50%;
