@@ -377,9 +377,27 @@
     font-size: 3rem;
   }
 
+  /* keep the four figures within the page's content width, with thin
+     gold dividers between them, like the homepage numbers band */
   .facts {
     grid-template-columns: repeat(4, 1fr);
-    padding: 2.25rem 2.5rem;
+    gap: 0;
+    padding: 2.25rem max(2.125rem, calc((100% - 960px) / 2));
+  }
+
+  .fact {
+    position: relative;
+    padding: 0 1rem;
+  }
+
+  .fact + .fact::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(197, 160, 89, 0.5), transparent);
   }
 
   .factValue {
