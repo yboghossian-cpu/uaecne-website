@@ -35,6 +35,19 @@ function cardEmblem(schoolContent: Record<string, SchoolContent>, slug: string, 
   return fallback ? { src: fallback, alt: "" } : null;
 }
 
+// A card with no photo shows its emblem large on a warm crest panel
+// (faint medallion behind) instead of a "photo pending" box.
+function CrestPic({ src, square = false }: { src: string; square?: boolean }) {
+  return (
+    <div className={`${styles.pic} ${styles.crestPic}`}>
+      <Medallion size={260} className={styles.crestWatermark} />
+      <span className={square ? `${styles.crestRing} ${styles.crestRingSquare}` : styles.crestRing}>
+        <Image src={src} alt="" fill sizes="160px" className={styles.crestImg} />
+      </span>
+    </div>
+  );
+}
+
 // Display grouping only — the underlying data keeps each school's real
 // `country` value ("Syria" vs "Syria (Kessab)") untouched. Mirrors
 // churches/page.tsx's own `countryDisplayLabel` exactly (same rationale:
@@ -84,14 +97,8 @@ export default async function SchoolsIndexPage() {
         </div>
         <div className={styles.grid}>
           <Link href="/schools/education-council-lebanon" className={styles.school}>
-            <div className={`${styles.pic} ${styles.picPending}`}>
-              <span className={styles.glyph}>
-                <svg className={styles.glyphIcon}>
-                  <use href="#ic-edu" />
-                </svg>
-                <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
-              </span>
-            </div>
+            {/* No council logo exists — the Union's own seal stands in. */}
+            <CrestPic src="/logo.svg" />
             <div className={styles.label}>
               <svg className={styles.labelSeal}>
                 <use href="#seal-light" />
@@ -100,14 +107,7 @@ export default async function SchoolsIndexPage() {
             </div>
           </Link>
           <Link href="/schools/education-council-syria" className={styles.school}>
-            <div className={`${styles.pic} ${styles.picPending}`}>
-              <span className={styles.glyph}>
-                <svg className={styles.glyphIcon}>
-                  <use href="#ic-edu" />
-                </svg>
-                <span className={styles.glyphCaption}>{tx("Photo pending")}</span>
-              </span>
-            </div>
+            <CrestPic src="/higher-ed-syria-council-emblem.png" />
             <div className={styles.label}>
               <Image
                 src="/higher-ed-syria-council-emblem.png"
@@ -146,19 +146,19 @@ export default async function SchoolsIndexPage() {
                   href={`/schools/${school.slug}`}
                   className={styles.school}
                 >
-                  <div
-                    className={
-                      photo ? styles.pic : `${styles.pic} ${styles.picPending}`
-                    }
-                  >
-                    {photo ? (
+                  {photo ? (
+                    <div className={styles.pic}>
                       <Image
                         src={photo.src}
                         alt={photo.alt || school.name}
                         fill
                         className={styles.photo}
                       />
-                    ) : (
+                    </div>
+                  ) : emblem ? (
+                    <CrestPic src={emblem.src} square={isSquareEmblem(emblem.src)} />
+                  ) : (
+                    <div className={`${styles.pic} ${styles.picPending}`}>
                       <span className={styles.glyph}>
                         <svg className={styles.glyphIcon}>
                           <use href="#ic-edu" />
@@ -167,8 +167,8 @@ export default async function SchoolsIndexPage() {
                           {tx("Photo pending")}
                         </span>
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <div className={styles.label}>
                     {emblem ? (
                       <Image
