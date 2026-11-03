@@ -88,6 +88,7 @@ export type SchoolContent = {
     accreditedThrough: string;
     grades: string;
     verifyUrl: string;
+    logo?: { src: string; alt: string } | null;
   } | null;
   slug: string; // FK -> schools.ts School.slug
 
@@ -753,6 +754,8 @@ export const schoolContent: Record<string, SchoolContent> = {
       accreditedThrough: "January 1, 2032",
       grades: "KG – Grade 12",
       verifyUrl: "https://www.msa-cess.org/",
+      // msa-cess.org site logo.
+      logo: { src: "/accreditor-msa-cess-logo.png", alt: "Middle States Association" },
     },
     heroPhoto: {
       src: "/school-central-high-school-hero.jpg",
@@ -878,7 +881,53 @@ export const schoolContent: Record<string, SchoolContent> = {
       ],
     },
     supportServices: null,
-    signaturePrograms: null,
+    // Programs stated by the school (Nov 2026).
+    signaturePrograms: {
+      heading: "Signature Programs",
+      headingHy: null,
+      items: [
+        {
+          name: "VEX Robotics",
+          nameHy: null,
+          note: null,
+          noteHy: null,
+          description: "Students design, build and program robots in the school's VEX Robotics program.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-robot",
+        },
+        {
+          name: "AI Literacy",
+          nameHy: null,
+          note: null,
+          noteHy: null,
+          description: "A dedicated AI Literacy course teaches students about artificial intelligence.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-chip",
+        },
+        {
+          name: "Special Education Department",
+          nameHy: null,
+          note: "(KG – Grade 9)",
+          noteHy: null,
+          description: "A dedicated Special Education Department serves students from Kindergarten through Grade 9.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-care",
+        },
+        {
+          name: "American Program",
+          nameHy: null,
+          note: null,
+          noteHy: null,
+          description: "A curriculum for students with Armenian citizenship, taught in parallel with the Lebanese curriculum.",
+          descriptionHy: null,
+          logo: null,
+          icon: "ic-globe",
+        },
+      ],
+    },
     faithCommunity: null,
     directorsArchive: {
       eyebrow: "Archive",

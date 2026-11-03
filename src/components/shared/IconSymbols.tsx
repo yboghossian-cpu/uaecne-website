@@ -554,6 +554,23 @@ export default function IconSymbols() {
             design-reference/syria-educational-council.html's own
             #gear/#coins/#growth symbols (#book already existed, reused
             as-is for Academic Oversight). */}
+        <symbol id="ic-robot" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="5" y="8" width="14" height="11" rx="2.5" />
+            <path d="M12 8V5" />
+            <circle cx="12" cy="4" r="1.2" />
+            <circle cx="9.3" cy="12.6" r="1.3" />
+            <circle cx="14.7" cy="12.6" r="1.3" />
+            <path d="M9.5 16h5M3 12.5v3M21 12.5v3" />
+          </g>
+        </symbol>
+        <symbol id="ic-chip" viewBox="0 0 24 24">
+          <g fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="6" y="6" width="12" height="12" rx="2" />
+            <path d="M9 3v3M12 3v3M15 3v3M9 18v3M12 18v3M15 18v3M3 9h3M3 12h3M3 15h3M18 9h3M18 12h3M18 15h3" />
+            <path d="M9.2 14.6l1.5-5.2h.6l1.5 5.2M9.7 12.9h2.6M14.6 9.4v5.2" />
+          </g>
+        </symbol>
         <symbol id="ic-gear" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.6" />
           <path
