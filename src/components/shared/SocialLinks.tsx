@@ -19,7 +19,7 @@ export default async function SocialLinks({ social, name }: { social: Links | nu
               target="_blank"
               rel="noopener noreferrer"
               className={styles.pill}
-              aria-label={`${name} · ${o.label}`}
+              aria-label={`${name} · ${tx(o.label)}`}
             >
               <svg className={styles.icon} aria-hidden="true">
                 <use href={o.icon} />
