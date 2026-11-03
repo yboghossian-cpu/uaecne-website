@@ -88,7 +88,7 @@ export default async function SchoolDetailPage({
   ];
 
   return (
-    <>
+    <div className="school-page">
       <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} section={tx("Schools")} />
       <SchoolTopBlock
         school={school}
@@ -97,7 +97,9 @@ export default async function SchoolDetailPage({
         heroPhoto={view.heroPhoto}
         factsBar={view.factsBar}
       />
-      <SchoolAbout about={view.about} principalCard={view.principalCard} />
+      {/* The principal already leads the Leadership grid below — About is
+          text-only so the same portrait isn't shown twice. */}
+      <SchoolAbout about={view.about} principalCard={null} />
       <SchoolContactSection
         location={view.location}
         contactRows={view.contactRows}
@@ -137,6 +139,6 @@ export default async function SchoolDetailPage({
       <SuccessionList succession={view.directorsArchive} variant="panel" />
       <ChurchGalleryLightbox gallery={view.gallery} />
       <ChurchCTA cta={view.cta} />
-    </>
+    </div>
   );
 }

@@ -16,7 +16,7 @@ type SchoolFactsBarProps = {
 // 3 per uaecne-school-aec-reference.html's .facts.
 export default function SchoolFactsBar({ facts }: SchoolFactsBarProps) {
   return (
-    <div className={styles.facts}>
+    <div className={styles.facts} style={{ "--n": facts.length } as React.CSSProperties}>
       {facts.map((fact, i) => (
         <div className={styles.fact} key={i}>
           <div className={styles.label}>{fact.label}</div>

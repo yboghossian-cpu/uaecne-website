@@ -1,56 +1,53 @@
 .mission {
   background: var(--color-ivory-wash);
-  border-top: 2px solid var(--color-red);
-  border-bottom: 2px solid var(--color-red);
   padding: 2.5rem 1.25rem;
 }
 
-/* Contained framed panel — verbatim from
-   design-reference/uaecne-school-anjar-template.html's .mission rule (the
-   reference's own class name collides with our outer section wrapper
-   above, so it's named .panel here). The outer .mission section supplies
-   the wash band + side padding that insets this panel from the viewport
-   edges; it is NOT itself the bordered panel. */
 .panel {
   max-width: 1080px;
   margin: 0 auto;
-  border: 1px solid rgba(139, 0, 0, 0.35);
-  border-radius: 18px;
-  padding: 2.25rem 1.625rem;
-  background: linear-gradient(180deg, var(--color-ivory), #fbf5ea);
 }
 
 .centerHead {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto 1.5rem;
+  margin: 0 0 1.25rem;
 }
 
 .eb {
   font-family: var(--font-body);
-  font-size: 0.6875rem;
-  letter-spacing: 0.36em;
+  font-size: 0.625rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--color-gold);
-  margin-bottom: 0.625rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.eb::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
 }
 
 .heading {
   font-family: var(--font-heading);
   font-weight: 600;
   color: var(--color-red);
-  font-size: 1.75rem;
-  letter-spacing: 0.02em;
   margin: 0;
 }
 
 .quote {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 auto 1.5rem;
-  color: var(--color-brown);
-  font-size: 0.9375rem;
-  line-height: 1.6;
+  max-width: 820px;
+  margin: 0 0 2.25rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-gold);
+  color: var(--color-text);
+  font-size: 1.0625rem;
+  line-height: 1.75;
 }
 
 .quoteBold {
@@ -58,50 +55,50 @@
   font-family: var(--font-heading);
   font-style: italic;
   font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.55;
 }
 
 .grid {
-  max-width: 1080px;
-  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
 
 .card {
-  background: linear-gradient(160deg, var(--color-red), var(--color-red-deep));
+  background: linear-gradient(160deg, var(--color-red), #6e0000);
   color: var(--color-ivory);
-  border-radius: 10px;
-  padding: 1.25rem 1.125rem;
-  box-shadow: 0 12px 26px -18px var(--color-red-dark);
+  border-radius: 16px;
+  padding: 1.625rem 1.5rem 1.75rem;
+  box-shadow: 0 22px 44px -28px rgba(139, 0, 0, 0.8);
   position: relative;
   overflow: hidden;
 }
 
 .card::before {
   content: "";
-  position: absolute;
-  right: -20px;
-  top: -20px;
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.35), transparent 70%);
+  display: block;
+  width: 36px;
+  height: 2px;
+  background: var(--color-gold-decorative);
+  margin-bottom: 1.125rem;
 }
 
 .cardTitle {
   font-family: var(--font-heading);
+  font-weight: 600;
   color: var(--color-gold-decorative);
-  font-size: 1.1875rem;
+  font-size: 1.4375rem;
+  line-height: 1.2;
   display: block;
-  margin: 0 0 0.5625rem;
+  margin: 0 0 0.75rem;
 }
 
 .cardBody {
   margin: 0;
-  font-size: 0.8rem;
-  line-height: 1.5;
-  color: rgba(255, 253, 247, 0.9);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255, 253, 247, 0.92);
 }
 
 @media (min-width: 720px) {
@@ -109,15 +106,20 @@
     padding: 3.25rem 2.125rem;
   }
 
-  .panel {
-    padding: 3rem 2.75rem;
+  .centerHead {
+    margin-bottom: 1.5rem;
   }
 
-  .heading {
-    font-size: 2.25rem;
+  .quoteBold {
+    font-size: 1.375rem;
   }
 
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .card {
+    padding: 2rem 1.875rem 2.125rem;
   }
 }

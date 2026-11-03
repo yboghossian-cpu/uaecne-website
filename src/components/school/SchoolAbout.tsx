@@ -37,74 +37,97 @@ type SchoolAboutProps = {
 // photo still renders honestly, as an arched placeholder, rather than
 // falling back to no card at all).
 export default function SchoolAbout({ about, principalCard }: SchoolAboutProps) {
-  // Locked template: the principal card always shows beside About —
-  // "Name pending" / photo placeholder when not yet supplied — so every
-  // school has the same About layout.
+  const text = (
+    <>
+      {about.paragraphs.map((paragraph, i) =>
+        i === 0 ? (
+          <p className={`${styles.paragraph} ${styles.lead}`} key={i}>
+            <span className={styles.dropcap}>{paragraph.charAt(0)}</span>
+            {paragraph.slice(1)}
+          </p>
+        ) : (
+          <p className={styles.paragraph} key={i}>
+            {paragraph}
+          </p>
+        ),
+      )}
+      {about.pullQuote && (
+        <div className={styles.pullquote}>
+          <p className={styles.pullquoteText}>
+            <span className={styles.q}>&ldquo;</span>
+            {about.pullQuote}
+            <span className={styles.q}>&rdquo;</span>
+          </p>
+        </div>
+      )}
+      {/* Opt-in sub-headed prose blocks (Shamlian-Tatikian's "A Brief
+          History"). Absent for every other school. */}
+      {about.subsections?.map((sub, i) => (
+        <div className={styles.subsection} key={i}>
+          <h3 className={styles.subheading}>{sub.heading}</h3>
+          {sub.paragraphs.map((paragraph, j) => (
+            <p className={styles.paragraph} key={j}>
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      ))}
+    </>
+  );
+
+  const head = (
+    <>
+      <div className={styles.eyebrow}>{about.eyebrow}</div>
+      <h2 className={styles.heading}>{about.heading}</h2>
+    </>
+  );
+
+  // Editorial split: heading column on the left, the text on the right —
+  // both edges on the page's one container.
+  if (!principalCard) {
+    return (
+      <section className={styles.about}>
+        <div className={styles.split}>
+          <div className={styles.splitHead}>
+            {head}
+            <span className={styles.rule} aria-hidden="true" />
+          </div>
+          <div className={styles.splitBody}>{text}</div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className={styles.about}>
       <div className={styles.grid}>
-        {principalCard && (
-          <div className={styles.principalCard}>
-            {principalCard.photo ? (
-              <div className={styles.picWrap}>
-                <Image
-                  src={principalCard.photo.src}
-                  alt={principalCard.photo.alt}
-                  fill
-                  className={styles.pic}
-                />
-              </div>
-            ) : (
-              <div className={styles.picPending}>
-                <span className={styles.picPendingArch}>
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="#ic-user" />
-                  </svg>
-                </span>
-              </div>
-            )}
-            <div className={styles.principalInfo}>
-              <b className={styles.principalName}>{principalCard.name ?? "Name pending"}</b>
-              <span className={styles.principalRole}>{principalCard.role}</span>
+        <div className={styles.principalCard}>
+          {principalCard.photo ? (
+            <div className={styles.picWrap}>
+              <Image
+                src={principalCard.photo.src}
+                alt={principalCard.photo.alt}
+                fill
+                className={styles.pic}
+              />
             </div>
+          ) : (
+            <div className={styles.picPending}>
+              <span className={styles.picPendingArch}>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <use href="#ic-user" />
+                </svg>
+              </span>
+            </div>
+          )}
+          <div className={styles.principalInfo}>
+            <b className={styles.principalName}>{principalCard.name ?? "Name pending"}</b>
+            <span className={styles.principalRole}>{principalCard.role}</span>
           </div>
-        )}
+        </div>
         <div>
-          <div className={styles.eyebrow}>{about.eyebrow}</div>
-          <h2 className={styles.heading}>{about.heading}</h2>
-          {about.paragraphs.map((paragraph, i) =>
-            i === 0 ? (
-              <p className={styles.paragraph} key={i}>
-                <span className={styles.dropcap}>{paragraph.charAt(0)}</span>
-                {paragraph.slice(1)}
-              </p>
-            ) : (
-              <p className={styles.paragraph} key={i}>
-                {paragraph}
-              </p>
-            ),
-          )}
-          {about.pullQuote && (
-            <div className={styles.pullquote}>
-              <p className={styles.pullquoteText}>
-                <span className={styles.q}>&ldquo;</span>
-                {about.pullQuote}
-                <span className={styles.q}>&rdquo;</span>
-              </p>
-            </div>
-          )}
-          {/* Opt-in sub-headed prose blocks (Shamlian-Tatikian's "A Brief
-              History"). Absent for every other school. */}
-          {about.subsections?.map((sub, i) => (
-            <div className={styles.subsection} key={i}>
-              <h3 className={styles.subheading}>{sub.heading}</h3>
-              {sub.paragraphs.map((paragraph, j) => (
-                <p className={styles.paragraph} key={j}>
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          ))}
+          {head}
+          {text}
         </div>
       </div>
     </section>

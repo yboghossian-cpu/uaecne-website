@@ -18,8 +18,10 @@ export default async function SchoolLeadershipGrid({ leaders }: SchoolLeadership
 
   return (
     <section className={styles.lead}>
-      <div className={styles.eyebrow}>{tx("Administration")}</div>
-      <h2 className={styles.heading}>{tx("Leadership")}</h2>
+      <div className={styles.head}>
+        <div className={styles.eyebrow}>{tx("Administration")}</div>
+        <h2 className={styles.heading}>{tx("Leadership")}</h2>
+      </div>
       <div className={styles.grid}>
         {leaders.map((leader, i) => (
           <div className={styles.person} key={i}>
@@ -29,6 +31,7 @@ export default async function SchoolLeadershipGrid({ leaders }: SchoolLeadership
                   src={leader.photo.src}
                   alt={leader.photo.alt}
                   fill
+                  sizes="(max-width: 720px) 92px, 360px"
                   className={styles.photo}
                 />
               </div>

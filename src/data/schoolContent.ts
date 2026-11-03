@@ -740,6 +740,7 @@ export const schoolContent: Record<string, SchoolContent> = {
     },
     factsBar: [
       { label: "1922", labelHy: null, sub: "Established", subHy: null },
+      { label: "KG – Grade 12", labelHy: null, sub: "Grade Levels", subHy: null },
       { label: "Ashrafieh, Beirut", labelHy: null, sub: "Location", subHy: null },
       { label: "1932", labelHy: null, sub: "Present Building", subHy: null },
     ],
@@ -817,7 +818,10 @@ export const schoolContent: Record<string, SchoolContent> = {
         nameHy: null,
         role: "Secretary",
         roleHy: null,
-        photo: null,
+        photo: {
+          src: "/school-central-high-school-secretary.jpg",
+          alt: "Mrs. Lara Karghayan",
+        },
       },
     ],
     mission: null,

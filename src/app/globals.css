@@ -63,3 +63,44 @@ img {
 .wash-band + .wash-band {
   border-top: none;
 }
+
+/* School detail template — one rhythm on every school page, however many
+   optional blocks a school has: no thin red seams between sections, ivory
+   and wash bands alternating automatically, the same vertical spacing and
+   the same section-heading size throughout. The closing CTA band (last
+   section) keeps its own red. */
+.school-page > section {
+  border-top: none;
+  border-bottom: none;
+}
+
+.school-page > section:nth-of-type(2n + 2):not(:last-of-type) {
+  background: var(--color-ivory);
+}
+
+.school-page > section:nth-of-type(2n + 3):not(:last-of-type) {
+  background: var(--color-ivory-wash);
+}
+
+.school-page > section:not(:first-of-type):not(:last-of-type) {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.school-page > section:not(:last-of-type) h2 {
+  font-size: 1.875rem;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+}
+
+@media (min-width: 720px) {
+  .school-page > section:not(:first-of-type):not(:last-of-type) {
+    padding-top: 5.25rem;
+    padding-bottom: 5.25rem;
+  }
+
+  .school-page > section:not(:last-of-type) h2 {
+    font-size: 2.5rem;
+  }
+}

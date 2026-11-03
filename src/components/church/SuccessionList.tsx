@@ -15,7 +15,10 @@ type SuccessionListProps = {
 // null, falls back to `nameHy` (verified Armenian, rendered in the Armenian
 // typeface) — a real, source-accurate name shown in its original script,
 // not a placeholder.
-export default function SuccessionList({ succession, variant }: SuccessionListProps) {
+export default function SuccessionList({
+  succession,
+  variant,
+}: SuccessionListProps) {
   if (!succession) return null;
 
   return (
@@ -38,22 +41,30 @@ export default function SuccessionList({ succession, variant }: SuccessionListPr
             {succession.note ?? succession.noteHy}
           </p>
         )}
-        {succession.entries.map((entry, i) => (
-          <div
-            className={
-              entry.isCurrent ? `${styles.entry} ${styles.current}` : styles.entry
-            }
-            key={i}
-          >
-            <span
-              className={entry.name ? styles.name : `${styles.name} ${styles.nameHy}`}
+        <div className={styles.list}>
+          {succession.entries.map((entry, i) => (
+            <div
+              className={
+                entry.isCurrent
+                  ? `${styles.entry} ${styles.current}`
+                  : styles.entry
+              }
+              key={i}
             >
-              {entry.name ?? entry.nameHy}
-              {entry.note && <em className={styles.entryNote}> {entry.note}</em>}
-            </span>
-            <span className={styles.years}>{entry.years}</span>
-          </div>
-        ))}
+              <span
+                className={
+                  entry.name ? styles.name : `${styles.name} ${styles.nameHy}`
+                }
+              >
+                {entry.name ?? entry.nameHy}
+                {entry.note && (
+                  <em className={styles.entryNote}> {entry.note}</em>
+                )}
+              </span>
+              <span className={styles.years}>{entry.years}</span>
+            </div>
+          ))}
+        </div>
         {(succession.footNote || succession.footNoteHy) && (
           <p
             className={

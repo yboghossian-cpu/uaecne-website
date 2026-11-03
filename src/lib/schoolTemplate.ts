@@ -55,7 +55,9 @@ function buildFacts(content: SchoolContent): Fact[] {
   const place = content.masthead.locationLine.split(",").map((p) => p.trim());
   const location = locationCell ?? fact(place.slice(-2).join(", "), "Location");
 
-  return [founded, grades, location];
+  // A fact that isn't known yet is left out of the strip rather than shown
+  // as "Pending" — the strip carries only real values.
+  return [founded, grades, location].filter((f) => !isPending(f.label));
 }
 
 const isPrincipalRole = (r: string) => /principal|director/i.test(r);

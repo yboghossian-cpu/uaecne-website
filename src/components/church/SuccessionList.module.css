@@ -11,8 +11,26 @@
    the school pages. */
 .panel {
   background: var(--color-ivory);
-  border-top: 2px solid var(--color-red);
-  border-bottom: 2px solid var(--color-red);
+}
+
+.panel .wrap {
+  max-width: 1080px;
+}
+
+.panel .note {
+  margin-bottom: 2rem;
+}
+
+.panel .entry {
+  break-inside: avoid;
+  padding: 0.8125rem 0.25rem;
+}
+
+@media (min-width: 720px) {
+  .panel .list {
+    columns: 2;
+    column-gap: 4rem;
+  }
 }
 
 .wrap {
