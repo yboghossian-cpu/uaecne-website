@@ -221,6 +221,7 @@
   background: linear-gradient(120deg, var(--color-red), var(--color-red-dark));
   color: var(--color-ivory);
   padding: 0.75rem 1rem;
+  min-height: calc(42px + 1.5rem);
 }
 
 .labelSeal,

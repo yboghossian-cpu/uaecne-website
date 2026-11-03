@@ -100,22 +100,12 @@ export default async function SchoolsIndexPage() {
             {/* No council logo exists — the Union's own seal stands in. */}
             <CrestPic src="/logo.svg" />
             <div className={styles.label}>
-              <svg className={styles.labelSeal}>
-                <use href="#seal-light" />
-              </svg>
               <b className={styles.schoolName}>{tx("Education Council - Lebanon")}</b>
             </div>
           </Link>
           <Link href="/schools/education-council-syria" className={styles.school}>
             <CrestPic src="/higher-ed-syria-council-emblem-v2.png" />
             <div className={styles.label}>
-              <Image
-                src="/higher-ed-syria-council-emblem-v2.png"
-                alt=""
-                width={42}
-                height={42}
-                className={styles.labelEmblem}
-              />
               <b className={styles.schoolName}>{tx("Education Council - Syria")}</b>
             </div>
           </Link>
