@@ -12,7 +12,7 @@ export default function MilestoneBand({ milestone }: MilestoneBandProps) {
   if (!milestone) return null;
 
   return (
-    <section className={styles.milestone}>
+    <section className={styles.milestone} data-tone="dark">
       <div className={styles.year}>{milestone.year}</div>
       <h2 className={styles.heading}>{milestone.heading}</h2>
       <p className={styles.body}>{milestone.body}</p>

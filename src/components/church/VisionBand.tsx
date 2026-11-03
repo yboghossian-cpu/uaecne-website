@@ -15,7 +15,7 @@ export default function VisionBand({ vision }: VisionBandProps) {
   if (!vision) return null;
 
   return (
-    <section className={styles.vision}>
+    <section className={styles.vision} data-tone="dark">
       <div className={styles.eyebrow}>{vision.eyebrow}</div>
       <p className={styles.body}>{vision.body}</p>
     </section>

@@ -6,8 +6,8 @@
 }
 
 .centerHead {
-  text-align: center;
-  margin-bottom: 1.5rem;
+  max-width: 1080px;
+  margin: 0 auto 2rem;
 }
 
 .eyebrow {
@@ -19,9 +19,8 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 0.625rem;
+  margin-bottom: 0.75rem;
 }
 
 .eyebrow::before {
@@ -40,7 +39,7 @@
 }
 
 .eras {
-  max-width: 56.25rem;
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

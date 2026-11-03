@@ -65,7 +65,7 @@ export default async function HigherEducationDetailPage({
   if (slug === haigazianContent.slug) {
     const h = haigazianContent;
     return (
-      <div className="school-page">
+      <div className="page-rhythm">
         <HigherEdBreadcrumb />
         <InstitutionTopBlock
           heading={h.masthead.heading}
@@ -89,7 +89,7 @@ export default async function HigherEducationDetailPage({
   if (slug === nestContent.slug) {
     const n = nestContent;
     return (
-      <div className="school-page">
+      <div className="page-rhythm">
         <HigherEdBreadcrumb />
         <InstitutionTopBlock
           heading={n.masthead.heading}

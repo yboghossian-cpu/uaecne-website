@@ -1,12 +1,11 @@
 .lead {
   background: var(--color-ivory);
   padding: 2.5rem 1.25rem;
-  text-align: center;
 }
 
 .eyebrow {
   max-width: 1080px;
-  margin: 0 auto 0.25rem;
+  margin: 0 auto 0.75rem;
   font-family: var(--font-body);
   font-size: 0.625rem;
   letter-spacing: 0.24em;
@@ -14,7 +13,6 @@
   color: var(--color-gold);
   font-weight: 600;
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
@@ -29,29 +27,30 @@
 
 .heading {
   max-width: 1080px;
-  margin: 0 auto 1.625rem;
+  margin: 0 auto 2rem;
   font-family: var(--font-heading);
   color: var(--color-red);
-  font-size: 1.625rem;
 }
 
+/* Phones: compact rows (portrait left, name right). Desktop: portrait
+   cards filling the full container width. */
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.875rem;
-  max-width: 940px;
+  max-width: 1080px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.875rem;
 }
 
 .person {
-  width: 160px;
-  flex: 0 0 auto;
-  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: var(--shadow-soft);
-  border: 1px solid rgba(197, 160, 89, 0.22);
-  background: var(--color-ivory);
+  background: #fff;
+  border: 1px solid rgba(197, 160, 89, 0.26);
+  box-shadow: 0 18px 40px -28px rgba(139, 0, 0, 0.55);
 }
 
 .pic {
@@ -97,32 +96,32 @@
 }
 
 .info {
-  padding: 0.75rem;
-  text-align: center;
-  background: linear-gradient(180deg, var(--color-ivory), var(--color-ivory-wash));
+  padding: 0.875rem 1.125rem;
 }
 
 .name {
   display: block;
   font-family: var(--font-heading);
+  font-weight: 600;
   color: var(--color-red);
-  font-size: 0.9375rem;
-  line-height: 1.15;
+  font-size: 1.1875rem;
+  line-height: 1.2;
 }
 
 .role {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.5rem;
-  letter-spacing: 0.14em;
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-gold);
-  margin-top: 0.3125rem;
+  margin-top: 0.375rem;
 }
 
 .note {
-  max-width: 760px;
-  margin: 1rem auto 0;
+  max-width: 1080px;
+  margin: 1.25rem auto 0;
   font-size: 0.78125rem;
   color: var(--color-brown);
   font-style: italic;
@@ -135,10 +134,29 @@
   }
 
   .heading {
-    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.75rem;
   }
 
   .person {
-    width: 200px;
+    display: block;
+  }
+
+  .info {
+    padding: 1.25rem 1.375rem 1.375rem;
+    text-align: center;
+    border-top: 2px solid var(--color-gold);
+  }
+
+  .name {
+    font-size: 1.375rem;
+  }
+
+  .role {
+    font-size: 0.6875rem;
   }
 }

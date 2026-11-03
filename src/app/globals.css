@@ -64,30 +64,30 @@ img {
   border-top: none;
 }
 
-/* School detail template — one rhythm on every school page, however many
-   optional blocks a school has: no thin red seams between sections, ivory
+/* School, church and institution detail pages — one rhythm on every page,
+   however many optional blocks it has (dark red bands keep their colour): no thin red seams between sections, ivory
    and wash bands alternating automatically, the same vertical spacing and
    the same section-heading size throughout. The closing CTA band (last
    section) keeps its own red. */
-.school-page > section {
+.page-rhythm > section {
   border-top: none;
   border-bottom: none;
 }
 
-.school-page > section:nth-of-type(2n + 2):not(:last-of-type) {
+.page-rhythm > section:nth-of-type(2n + 2):not(:last-of-type):not([data-tone="dark"]) {
   background: var(--color-ivory);
 }
 
-.school-page > section:nth-of-type(2n + 3):not(:last-of-type) {
+.page-rhythm > section:nth-of-type(2n + 3):not(:last-of-type):not([data-tone="dark"]) {
   background: var(--color-ivory-wash);
 }
 
-.school-page > section:not(:first-of-type):not(:last-of-type) {
+.page-rhythm > section:not(:first-of-type):not(:last-of-type) {
   padding-top: 3.5rem;
   padding-bottom: 3.5rem;
 }
 
-.school-page > section:not(:last-of-type) h2 {
+.page-rhythm > section:not(:last-of-type) h2 {
   font-size: 1.875rem;
   line-height: 1.15;
   font-weight: 600;
@@ -95,12 +95,12 @@ img {
 }
 
 @media (min-width: 720px) {
-  .school-page > section:not(:first-of-type):not(:last-of-type) {
+  .page-rhythm > section:not(:first-of-type):not(:last-of-type) {
     padding-top: 5.25rem;
     padding-bottom: 5.25rem;
   }
 
-  .school-page > section:not(:last-of-type) h2 {
+  .page-rhythm > section:not(:last-of-type) h2 {
     font-size: 2.5rem;
   }
 }

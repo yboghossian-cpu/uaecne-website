@@ -46,22 +46,27 @@ export default function ChurchHistory({ history }: ChurchHistoryProps) {
               </figure>
             </div>
           ) : (
-            <div key={i}>
+            <div
+              key={i}
+              className={section.heading ? styles.tsplit : undefined}
+            >
               {section.heading && (
                 <h3 className={styles.subheading}>{section.heading}</h3>
               )}
-              {section.paragraphs.map((paragraph, j) => (
-                <p
-                  className={
-                    history.dropcapFirstParagraph && i === 0 && j === 0
-                      ? `${styles.paragraph} ${styles.dropcap}`
-                      : styles.paragraph
-                  }
-                  key={j}
-                >
-                  {paragraph}
-                </p>
-              ))}
+              <div>
+                {section.paragraphs.map((paragraph, j) => (
+                  <p
+                    className={
+                      history.dropcapFirstParagraph && i === 0 && j === 0
+                        ? `${styles.paragraph} ${styles.dropcap}`
+                        : styles.paragraph
+                    }
+                    key={j}
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
           ),
         )}

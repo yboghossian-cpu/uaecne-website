@@ -17,7 +17,7 @@ export default function SpecialProjectBand({
   if (!specialProject) return null;
 
   return (
-    <section className={styles.project}>
+    <section className={styles.project} data-tone="dark">
       <Medallion size={200} className={styles.med} />
       <div className={styles.wrap}>
         <div className={styles.head}>

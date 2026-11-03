@@ -13,28 +13,23 @@
   background: var(--color-ivory);
 }
 
-.panel .wrap {
-  max-width: 1080px;
-}
-
-.panel .note {
+.note {
   margin-bottom: 2rem;
 }
 
-.panel .entry {
+.entry {
   break-inside: avoid;
-  padding: 0.8125rem 0.25rem;
 }
 
 @media (min-width: 720px) {
-  .panel .list {
+  .list {
     columns: 2;
     column-gap: 4rem;
   }
 }
 
 .wrap {
-  max-width: 760px;
+  max-width: 1080px;
   margin: 0 auto;
 }
 
@@ -81,7 +76,7 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.6875rem 0.25rem;
+  padding: 0.8125rem 0.25rem;
   border-bottom: 1px solid var(--color-line);
 }
 

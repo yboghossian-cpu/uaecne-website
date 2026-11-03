@@ -86,7 +86,7 @@ export default async function ChurchDetailPage({
   const breadcrumbSubregion = church.country === "Syria (Kessab)" ? "Kessab" : null;
 
   return (
-    <>
+    <div className="page-rhythm">
       <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} />
       <ChurchTopBlock
         church={churchL}
@@ -116,6 +116,6 @@ export default async function ChurchDetailPage({
       <VisionBand vision={content?.vision ?? null} />
       <ChurchGalleryLightbox gallery={view.gallery} />
       <ChurchCTA cta={view.cta} />
-    </>
+    </div>
   );
 }

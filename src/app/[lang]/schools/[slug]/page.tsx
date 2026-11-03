@@ -89,7 +89,7 @@ export default async function SchoolDetailPage({
   ];
 
   return (
-    <div className="school-page">
+    <div className="page-rhythm">
       <ChurchBreadcrumb country={breadcrumbCountry} subregion={breadcrumbSubregion} section={tx("Schools")} />
       <SchoolTopBlock
         school={school}
