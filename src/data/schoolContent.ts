@@ -763,7 +763,7 @@ export const schoolContent: Record<string, SchoolContent> = {
       src: "/school-central-high-school-hero.jpg",
       alt: "The Central High School building in Ashrafieh, Beirut",
       // Frame the two floors, not the bell tower.
-      position: "center 68%",
+      position: "center 57%",
     },
     factsBar: [
       { label: "1922", labelHy: null, sub: "Established", subHy: null },
