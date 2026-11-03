@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,9 +8,11 @@ import type { SchoolContent } from "@/data/schoolContent";
 import { getAllSchoolContent, getSchools } from "@/lib/server/content";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Schools — UAECNE",
-};
+});
+}
 
 // Single source of truth: when a school has a SchoolContent detail-page
 // entry, the index card derives its photo/emblem from that same content

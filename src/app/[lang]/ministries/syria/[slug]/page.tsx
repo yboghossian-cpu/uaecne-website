@@ -1,4 +1,4 @@
-import { getL } from "@/lib/i18n/server";
+import { getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { syriaMinistries as syriaMinistries__en } from "@/data/syriaMinistries";
@@ -30,13 +30,13 @@ export async function generateMetadata({
   const syriaMinistries = L(syriaMinistries__en);
   const { slug } = await params;
   const page = syriaMinistries.find((m) => m.slug === slug);
-  if (!page) return { title: "Syria — UAECNE" };
-  return pageMetadata({
+  if (!page) return tMeta({ title: "Syria — UAECNE" });
+  return tMeta(pageMetadata({
     title: `${page.title} — UAECNE`,
     description: summarize(page.intro.paragraphs[0]),
     image: page.heroPhoto?.src,
     path: `/ministries/syria/${slug}`,
-  });
+  }));
 }
 
 // One shared shape for the Community's ministries in Syria: top block,

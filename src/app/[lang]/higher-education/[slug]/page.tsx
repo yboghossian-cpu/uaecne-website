@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { haigazianContent as haigazianContent__en, nestContent as nestContent__en } from "@/data/higherEdContent";
@@ -40,12 +40,12 @@ export async function generateMetadata({
   const nestContent = L(nestContent__en);
   const { slug } = await params;
   if (slug === haigazianContent.slug) {
-    return { title: `${haigazianContent.masthead.heading} — UAECNE` };
+    return tMeta({ title: `${haigazianContent.masthead.heading} — UAECNE` });
   }
   if (slug === nestContent.slug) {
-    return { title: `${nestContent.masthead.heading} — UAECNE` };
+    return tMeta({ title: `${nestContent.masthead.heading} — UAECNE` });
   }
-  return { title: "Higher Education — UAECNE" };
+  return tMeta({ title: "Higher Education — UAECNE" });
 }
 
 // Two academic institutions, each with its own distinctive sections —

@@ -1,12 +1,14 @@
-import { getT } from "@/lib/i18n/server";
+import { getT, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import GaStory from "./GaStory";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "The 79th General Assembly — UAECNE",
   description:
     "The Union of the Armenian Evangelical Churches in the Near East gathered in Beirut, 21–22 June 2026, for its 79th General Assembly, marking the 180th anniversary of the Armenian Evangelical Church.",
-};
+});
+}
 
 // Intrinsic sizes of the gallery photos (public/ga79-gallery-N.jpg).
 const SIZES: [number, number][] = [

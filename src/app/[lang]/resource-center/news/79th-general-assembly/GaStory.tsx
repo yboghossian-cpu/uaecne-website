@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { Cursor, trackPointer, useStoryEngine } from "@/components/story/engine";
+import { useLang } from "@/lib/i18n/client";
 import styles from "./GaStory.module.css";
 
 type Pic = { src: string; alt: string; w: number; h: number };
@@ -79,6 +80,7 @@ function Strip({ photos, onOpen, label, k = 0 }: { photos: Pic[]; onOpen: (i: nu
 export default function GaStory(props: GaStoryProps) {
   const { hero, lead, worship, theme, plenary, remembrance, communion, closing, official, gallery, labels } = props;
   const root = useRef<HTMLDivElement>(null);
+  const quotes = useLang() === "hy" ? ["«", "»"] : ["“", "”"];
   useStoryEngine(root);
   const [box, setBox] = useState<Box>(null);
   const open = useCallback((photos: Pic[], index: number) => setBox({ photos, index }), []);
@@ -165,9 +167,9 @@ export default function GaStory(props: GaStoryProps) {
         <section className={styles.theme} data-scrub="pass">
           <p className={styles.themeLabel}>{theme.label}</p>
           <p className={styles.themeQuote}>
-            <span className={styles.qm}>“</span>
+            <span className={styles.qm}>{quotes[0]}</span>
             <WordLight text={theme.quote} />
-            <span className={styles.qm}>”</span>
+            <span className={styles.qm}>{quotes[1]}</span>
           </p>
           <p className={styles.themeAttr}>{theme.attr}</p>
         </section>

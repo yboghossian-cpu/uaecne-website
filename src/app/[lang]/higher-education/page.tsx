@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,9 +6,11 @@ import Medallion from "@/components/shared/Medallion";
 import { haigazianContent as haigazianContent__en, nestContent as nestContent__en } from "@/data/higherEdContent";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Higher Education — UAECNE",
-};
+});
+}
 
 // Only 2 institutions now — the Lebanon and Syria Educational Councils
 // moved to the Schools index (see /schools/education-council-lebanon and

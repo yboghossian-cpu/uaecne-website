@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getSchool, getSchoolContent, getSchools } from "@/lib/server/content";
@@ -42,15 +42,15 @@ export async function generateMetadata({
   const { slug } = await params;
   const L = await getL();
   const school = L(getSchool(slug));
-  if (!school) return { title: "School — UAECNE" };
+  if (!school) return tMeta({ title: "School — UAECNE" });
   const content = L(getSchoolContent(slug));
-  return pageMetadata({
+  return tMeta(pageMetadata({
     title: `${school.name} — UAECNE`,
     // Verbatim from the page's own About text — no new copy.
     description: content?.about.paragraphs[0] ? summarize(content.about.paragraphs[0]) : undefined,
     image: content?.heroPhoto?.src ?? school.photo,
     path: `/schools/${slug}`,
-  });
+  }));
 }
 
 export default async function SchoolDetailPage({

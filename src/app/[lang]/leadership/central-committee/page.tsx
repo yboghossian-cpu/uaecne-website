@@ -1,12 +1,14 @@
-import { getT } from "@/lib/i18n/server";
+import { getT, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Medallion from "@/components/shared/Medallion";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Central Committee — UAECNE",
-};
+});
+}
 
 const members = [
   {

@@ -1,4 +1,4 @@
-import { getL } from "@/lib/i18n/server";
+import { getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { syriaEducationalCouncilContent as syriaEducationalCouncilContent__en } from "@/data/higherEdContent";
 import SyriaCouncilHero from "@/components/highered/SyriaCouncilHero";
@@ -10,9 +10,11 @@ import SchoolVisionMission from "@/components/school/SchoolVisionMission";
 import SchoolContactSection from "@/components/school/SchoolContactSection";
 import HigherEdCTA from "@/components/highered/HigherEdCTA";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: `${syriaEducationalCouncilContent__en.heading} — UAECNE`,
-};
+});
+}
 
 export default async function EducationCouncilSyriaPage() {
   const L = await getL();

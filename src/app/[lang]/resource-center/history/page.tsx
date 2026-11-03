@@ -1,3 +1,4 @@
+import { tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import HistoryHero from "@/components/history/HistoryHero";
 import HistoryOpening from "@/components/history/HistoryOpening";
@@ -8,9 +9,11 @@ import HistoryPartners from "@/components/history/HistoryPartners";
 import HistoryGovernance from "@/components/history/HistoryGovernance";
 import HistoryClose from "@/components/history/HistoryClose";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "History of the UAECNE — UAECNE",
-};
+});
+}
 
 export default function HistoryPage() {
   return (

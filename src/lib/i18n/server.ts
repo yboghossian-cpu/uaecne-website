@@ -1,4 +1,5 @@
 import "server-only";
+import type { Metadata } from "next";
 import { lang as rootLang } from "next/root-params";
 import { DEFAULT_LANG, isLang, isProtected, isTranslatable, type Lang } from "./config";
 import { getDictionary } from "./dictionary";
@@ -65,6 +66,29 @@ function localizeWith<V>(value: V, t: T, lang: Lang): V {
     return out as V;
   }
   return value;
+}
+
+/** Translates a page's metadata (browser-tab title, description, share
+ *  texts). Titles are "Page — UAECNE": each part is translated on its own. */
+export async function tMeta<M extends Metadata>(meta: M): Promise<M> {
+  const lang = await getLang();
+  if (lang === "en") return meta;
+  const t = makeT(lang);
+  const title = (v: unknown) =>
+    typeof v === "string" ? v.split(" — ").map((p) => (isTranslatable(p) ? t(p) : p)).join(" — ") : v;
+  const text = (v: unknown) => (typeof v === "string" && isTranslatable(v) ? t(v) : v);
+  const out = { ...meta } as Metadata;
+  out.title = title(meta.title) as Metadata["title"];
+  out.description = text(meta.description) as Metadata["description"];
+  if (meta.openGraph) {
+    const og = { ...meta.openGraph } as Record<string, unknown>;
+    og.title = title(og.title);
+    og.description = text(og.description);
+    og.siteName = text(og.siteName);
+    og.locale = "hy_AM";
+    out.openGraph = og as Metadata["openGraph"];
+  }
+  return out as M;
 }
 
 /** Deep-translates page data for the current language. */

@@ -1,4 +1,4 @@
-import { getT, getLang } from "@/lib/i18n/server";
+import { getT, getLang, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/shared/PageHero";
 import PublicForm from "@/components/forms/PublicForm";
@@ -6,11 +6,13 @@ import { getSettings, telHref } from "@/lib/server/settings";
 import { pageMetadata } from "@/lib/site";
 import styles from "../formPage.module.css";
 
-export const metadata: Metadata = pageMetadata({
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta(pageMetadata({
   title: "Contact — UAECNE",
   description: "Contact the head office of the Union of the Armenian Evangelical Churches in the Near East.",
   path: "/contact",
-});
+}));
+}
 
 export default async function ContactPage() {
   const tx = await getT();

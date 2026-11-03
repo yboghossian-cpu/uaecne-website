@@ -1,4 +1,4 @@
-import { getT, getL, getLang } from "@/lib/i18n/server";
+import { getT, getL, getLang, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,13 +18,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const L = await getL();
   const post = L(getPostBySlug((await params).slug));
-  if (!post) return { title: "News — UAECNE" };
-  return pageMetadata({
+  if (!post) return tMeta({ title: "News — UAECNE" });
+  return tMeta(pageMetadata({
     title: `${post.title} — UAECNE`,
     description: post.excerpt ? summarize(post.excerpt) : undefined,
     image: post.cover,
     path: `/news/${post.slug}`,
-  });
+  }));
 }
 
 // Body text: a blank line starts a new paragraph; a line starting with

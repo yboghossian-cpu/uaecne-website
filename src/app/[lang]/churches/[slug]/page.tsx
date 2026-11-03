@@ -1,4 +1,4 @@
-import { getL } from "@/lib/i18n/server";
+import { getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getChurch, getChurchContent, getChurches } from "@/lib/server/content";
@@ -36,7 +36,7 @@ export async function generateMetadata({
   const { slug } = await params;
   const L = await getL();
   const church = L(getChurch(slug));
-  if (!church) return { title: "Church — UAECNE" };
+  if (!church) return tMeta({ title: "Church — UAECNE" });
   const content = L(getChurchContent(slug));
   // Description reuses text already on the page: the About paragraph for
   // churches with a full profile, otherwise the directory's own facts.
@@ -47,12 +47,12 @@ export async function generateMetadata({
           .filter(Boolean)
           .join(" — "),
       );
-  return pageMetadata({
+  return tMeta(pageMetadata({
     title: `${church.name} — UAECNE`,
     description,
     image: content?.heroPhoto?.src ?? church.photo,
     path: `/churches/${slug}`,
-  });
+  }));
 }
 
 export default async function ChurchDetailPage({

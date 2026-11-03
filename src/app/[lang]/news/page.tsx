@@ -1,4 +1,4 @@
-import { getT, getL, getLang } from "@/lib/i18n/server";
+import { getT, getL, getLang, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,11 +7,13 @@ import { formatDate, getPublishedPosts, postHref, type Post } from "@/lib/server
 import { pageMetadata } from "@/lib/site";
 import styles from "./news.module.css";
 
-export const metadata: Metadata = pageMetadata({
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta(pageMetadata({
   title: "News & Events — UAECNE",
   description: "News and upcoming events from the Union of the Armenian Evangelical Churches in the Near East.",
   path: "/news",
-});
+}));
+}
 
 async function Card({ post }: { post: Post }) {
   const tx = await getT();

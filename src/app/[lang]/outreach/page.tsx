@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,9 +11,11 @@ import {
 } from "@/data/outreachContent";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Outreach — UAECNE",
-};
+});
+}
 
 // 4 sections, each genuinely different — a small hardcoded array, same
 // reasoning as the Higher Education index. Boarding Home added 2026-08-21,

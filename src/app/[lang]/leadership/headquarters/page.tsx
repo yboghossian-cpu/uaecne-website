@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Medallion from "@/components/shared/Medallion";
@@ -11,11 +11,13 @@ import {
   headquartersContact as headquartersContact__en,
 } from "@/data/headquarters";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Headquarters — UAECNE",
   description:
     "The UAECNE Head Office in the Geitawi section of Beirut — the administrative and spiritual centre of the Union of the Armenian Evangelical Churches in the Near East.",
-};
+});
+}
 
 export default async function HeadquartersPage() {
   const L = await getL();

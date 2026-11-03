@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
@@ -53,11 +53,11 @@ export async function generateMetadata({
   const socialActionContent = L(socialActionContent__en);
   const boardingHomeContent = L(boardingHomeContent__en);
   const { slug } = await params;
-  if (slug === campsContent.slug) return { title: `${campsContent.title} — UAECNE` };
-  if (slug === youthWorkContent.slug) return { title: `${youthWorkContent.title} — UAECNE` };
-  if (slug === socialActionContent.slug) return { title: `${socialActionContent.title} — UAECNE` };
-  if (slug === boardingHomeContent.slug) return { title: `${boardingHomeContent.title} — UAECNE` };
-  return { title: "Outreach — UAECNE" };
+  if (slug === campsContent.slug) return tMeta({ title: `${campsContent.title} — UAECNE` });
+  if (slug === youthWorkContent.slug) return tMeta({ title: `${youthWorkContent.title} — UAECNE` });
+  if (slug === socialActionContent.slug) return tMeta({ title: `${socialActionContent.title} — UAECNE` });
+  if (slug === boardingHomeContent.slug) return tMeta({ title: `${boardingHomeContent.title} — UAECNE` });
+  return tMeta({ title: "Outreach — UAECNE" });
 }
 
 // Three fundamentally different page shapes — branched by slug rather

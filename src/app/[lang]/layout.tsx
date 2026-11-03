@@ -1,3 +1,4 @@
+import { tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { lang as rootLang } from "next/root-params";
 import Header from "@/components/layout/Header";
@@ -19,8 +20,8 @@ export function generateStaticParams() {
   return LANGS.map((lang) => ({ lang }));
 }
 
-export function generateMetadata(): Metadata {
-  return {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
     metadataBase: new URL(SITE_URL),
     title: SITE_NAME,
     // Default: the homepage hero copy ("Est. 1846" + the hero subline);
@@ -35,7 +36,7 @@ export function generateMetadata(): Metadata {
       images: [{ url: shareImage(DEFAULT_SHARE_IMAGE), width: 1200 }],
     },
     twitter: { card: "summary_large_image" },
-  };
+  });
 }
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

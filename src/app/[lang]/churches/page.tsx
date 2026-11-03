@@ -1,4 +1,4 @@
-import { getT, getL } from "@/lib/i18n/server";
+import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,9 +21,11 @@ function cardEmblem(churchContent: Record<string, ChurchContent>, slug: string, 
   return churchContent[slug]?.logo ?? (fallback ? { src: fallback, alt: "" } : null);
 }
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Churches — UAECNE",
-};
+});
+}
 
 // Display grouping only — the underlying data keeps each church's real
 // country value ("Syria" vs "Syria (Kessab)") untouched. Yeghia's decision,

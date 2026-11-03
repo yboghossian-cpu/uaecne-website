@@ -1,14 +1,16 @@
-import { getT } from "@/lib/i18n/server";
+import { getT, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Medallion from "@/components/shared/Medallion";
 import styles from "./page.module.css";
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  return tMeta({
   title: "Supreme Council of Evangelical Community in Syria and Lebanon — UAECNE",
   description:
     "The Supreme Council includes all the Evangelical churches in Lebanon and Syria. It was established in 1937 and is mainly concerned with the civil rights of Evangelical church members and their representation in public life.",
-};
+});
+}
 
 // Source: UNION/3. Partnerships/1. Ecumenical Partners/1. Supreme Council/Content of page.txt
 const MEMBERS = [
