@@ -195,6 +195,7 @@ type InstitutionCore = {
     nameHy: string | null;
     role: string;
     roleHy: string | null;
+    detail?: string | null;
     photo: Photo | null;
   };
   history: {
@@ -487,6 +488,7 @@ export const nestContent: NestContent = {
     nameHy: null,
     role: "President",
     roleHy: null,
+    detail: "Professor of Islam and Christian-Muslim Relations",
     photo: { src: "/higher-ed-nest-president.webp", alt: "Dr. Martin Accad" },
   },
 

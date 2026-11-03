@@ -4,8 +4,8 @@
 }
 
 .centerHead {
-  text-align: center;
-  margin: 0 auto 1.625rem;
+  max-width: 1080px;
+  margin: 0 auto 2rem;
 }
 
 .eyebrow {
@@ -17,9 +17,8 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .eyebrow::before {
@@ -33,69 +32,56 @@
 .heading {
   font-family: var(--font-heading);
   color: var(--color-red);
-  font-size: 1.75rem;
   margin: 0;
 }
 
-.flourish {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
-}
-
-.ln {
-  width: 44px;
-  height: 1px;
-  background: var(--color-gold);
-  opacity: 0.6;
-}
-
-.dia {
-  width: 6px;
-  height: 6px;
-  background: var(--color-gold);
-  transform: rotate(45deg);
-}
-
 .list {
-  max-width: 900px;
+  max-width: 1080px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .item {
   display: flex;
-  gap: 0.75rem;
-  align-items: baseline;
-  padding: 0.6875rem 0;
-  border-bottom: 1px solid var(--color-line);
+  gap: 1rem;
+  align-items: center;
+  background: #fff;
+  border: 1px solid rgba(197, 160, 89, 0.26);
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 16px 34px -26px rgba(139, 0, 0, 0.5);
 }
 
 .abbr {
   flex: none;
+  min-width: 88px;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--color-red), #6e0000);
   font-family: var(--font-heading);
-  color: var(--color-gold);
+  color: var(--color-gold-decorative);
   font-weight: 600;
   font-size: 1.0625rem;
-  min-width: 88px;
+  letter-spacing: 0.02em;
 }
 
 .name {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1.1875rem;
+  line-height: 1.25;
   color: var(--color-text);
 }
 
 .footnote {
-  max-width: 900px;
-  margin: 1rem auto 0;
-  font-size: 0.8125rem;
+  max-width: 1080px;
+  margin: 1.75rem auto 0;
+  font-size: 0.9375rem;
   color: var(--color-brown);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .footnote b {
@@ -107,11 +93,8 @@
     padding: 3.25rem 2.125rem;
   }
 
-  .heading {
-    font-size: 2.25rem;
-  }
-
   .list {
     grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1.5rem;
   }
 }

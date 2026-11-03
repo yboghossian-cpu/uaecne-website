@@ -10,15 +10,10 @@ type NestDegreesProps = {
 // degree-pill strip.
 export default function NestDegrees({ degrees }: NestDegreesProps) {
   return (
-    <section className={`${styles.wrap} wash-band`}>
+    <section className={styles.wrap}>
       <div className={styles.centerHead}>
         <div className={styles.eyebrow}>{degrees.eyebrow}</div>
         <h2 className={styles.heading}>{degrees.heading}</h2>
-        <div className={styles.flourish}>
-          <span className={styles.ln} />
-          <span className={styles.dia} />
-          <span className={styles.ln} />
-        </div>
       </div>
       <div className={styles.list}>
         {degrees.items.map((item, i) => (

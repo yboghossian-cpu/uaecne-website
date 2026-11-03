@@ -13,7 +13,6 @@ import HaigazianFaculties from "@/components/highered/HaigazianFaculties";
 import HaigazianClassBand from "@/components/highered/HaigazianClassBand";
 import NestSponsors from "@/components/highered/NestSponsors";
 import NestDegrees from "@/components/highered/NestDegrees";
-import NestLeadershipPair from "@/components/highered/NestLeadershipPair";
 
 // The Lebanon and Syria Educational Councils moved to /schools (see
 // /schools/education-council-lebanon and /schools/education-council-syria)
@@ -103,7 +102,6 @@ export default async function HigherEducationDetailPage({
         <InstitutionHistory history={n.history} />
         <NestSponsors sponsors={n.sponsors} />
         <NestDegrees degrees={n.degrees} />
-        <NestLeadershipPair leadership={n.leadership} />
         <FollowBand social={n.social} name={tx("Near East School of Theology")} />
         <HigherEdCTA cta={n.cta} />
       </div>

@@ -13,6 +13,8 @@ type InstitutionAboutProps = {
   president: {
     name: string;
     role: string;
+    // Optional second line under the role (e.g. an academic chair).
+    detail?: string | null;
     photo: Photo | null;
   };
 };
@@ -45,6 +47,7 @@ export default function InstitutionAbout({ about, president }: InstitutionAboutP
           <div className={styles.cardInfo}>
             <b className={styles.cardName}>{president.name}</b>
             <span className={styles.cardRole}>{president.role}</span>
+            {president.detail && <span className={styles.cardDetail}>{president.detail}</span>}
           </div>
         </div>
         <div>
