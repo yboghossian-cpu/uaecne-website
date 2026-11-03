@@ -228,6 +228,8 @@ export type ChurchContent = {
   // Shape UNVERIFIED — neither FAEC nor Syriac uses this; not built this
   // unit (no SpecialProjectBand.tsx component exists).
   specialProject: {
+    /** The initiative's own logo, shown beside the heading. */
+    logo?: { src: string; alt: string } | null;
     eyebrow: string;
     eyebrowHy: string | null;
     heading: string;
@@ -1476,6 +1478,7 @@ export const churchContent: Record<string, ChurchContent> = {
 
     // Figures verbatim from the reference — not rounded or estimated.
     specialProject: {
+      logo: { src: "/church-armenian-evangelical-church-anjar-hamegh-logo.jpg", alt: "Hamegh logo" },
       eyebrow: "Special Initiative",
       eyebrowHy: null,
       heading: "The “Hamegh” Project",
