@@ -9,6 +9,7 @@ type Row = {
   email: string;
   subject: string;
   message: string;
+  extra: string;
   status: string;
   created_at: string;
 };
@@ -18,15 +19,24 @@ const FILTERS = [
   { key: "new", label: "Unread", where: "status = 'new'" },
   { key: "contact", label: "Contact", where: "form = 'contact' AND status != 'archived'" },
   { key: "prayer", label: "Prayer requests", where: "form = 'prayer' AND status != 'archived'" },
+  { key: "pages", label: "Churches & schools", where: "form IN ('church', 'school') AND status != 'archived'" },
   { key: "archived", label: "Archived", where: "status = 'archived'" },
 ];
+
+function institutionOf(extra: string): string {
+  try {
+    return (JSON.parse(extra) as { institution?: string }).institution ?? "Church / school";
+  } catch {
+    return "Church / school";
+  }
+}
 
 export default async function Inbox({ searchParams }: { searchParams: Promise<{ f?: string }> }) {
   const { f = "inbox" } = await searchParams;
   const filter = FILTERS.find((x) => x.key === f) ?? FILTERS[0];
   const rows = requireDb()
     .prepare(
-      `SELECT id, form, name, email, subject, message, status, created_at FROM submissions WHERE ${filter.where} ORDER BY id DESC LIMIT 500`,
+      `SELECT id, form, name, email, subject, message, extra, status, created_at FROM submissions WHERE ${filter.where} ORDER BY id DESC LIMIT 500`,
     )
     .all() as Row[];
   return (
@@ -34,7 +44,10 @@ export default async function Inbox({ searchParams }: { searchParams: Promise<{ 
       <div className={styles.pageHead}>
         <div>
           <h1 className={styles.title}>Inbox</h1>
-          <p className={styles.subtitle}>Messages sent from the Contact and Prayer Request forms.</p>
+          <p className={styles.subtitle}>
+            Messages sent from the Contact and Prayer Request forms, and from the church and school pages (those are
+            emailed to the church or school itself; a copy is kept here).
+          </p>
         </div>
       </div>
       <div className={styles.tabs}>
@@ -71,6 +84,9 @@ export default async function Inbox({ searchParams }: { searchParams: Promise<{ 
                     <td>
                       {r.status === "new" && <span className={styles.pill}>New</span>}{" "}
                       {r.form === "prayer" && <span className={styles.pillGold}>Prayer</span>}{" "}
+                      {(r.form === "church" || r.form === "school") && (
+                        <span className={styles.pillGold}>{institutionOf(r.extra)}</span>
+                      )}{" "}
                       <strong>{r.subject}</strong>
                       <div className={styles.muted}>
                         {r.message.slice(0, 140)}

@@ -25,7 +25,7 @@ export default async function Message({ params }: { params: Promise<{ id: string
   const row = db.prepare("SELECT * FROM submissions WHERE id = ?").get(id) as Row | undefined;
   if (!row) notFound();
   if (row.status === "new") db.prepare("UPDATE submissions SET status = 'read' WHERE id = ?").run(id);
-  let extra: { confidential?: boolean } = {};
+  let extra: { confidential?: boolean; institution?: string; to?: string[] } = {};
   try {
     extra = JSON.parse(row.extra);
   } catch {}
@@ -68,6 +68,15 @@ export default async function Message({ params }: { params: Promise<{ id: string
             <>
               <dt>Confidential</dt>
               <dd>{extra.confidential ? "Yes — please keep private" : "No"}</dd>
+            </>
+          )}
+          {extra.institution && (
+            <>
+              <dt>Sent to</dt>
+              <dd>
+                {extra.institution}
+                {extra.to?.length ? <span className={styles.muted}> ({extra.to.join(", ")})</span> : null}
+              </dd>
             </>
           )}
           <dt>Email alert</dt>

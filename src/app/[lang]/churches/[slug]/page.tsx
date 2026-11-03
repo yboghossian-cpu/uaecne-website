@@ -1,3 +1,4 @@
+import InstitutionMessage from "@/components/shared/InstitutionMessage";
 import { getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -115,6 +116,7 @@ export default async function ChurchDetailPage({
       <MilestoneBand milestone={content?.milestone ?? null} />
       <VisionBand vision={content?.vision ?? null} />
       <ChurchGalleryLightbox gallery={view.gallery} />
+      <InstitutionMessage kind="church" slug={slug} />
       <ChurchCTA cta={view.cta} />
     </div>
   );

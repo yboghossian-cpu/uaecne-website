@@ -1,3 +1,4 @@
+import InstitutionMessage from "@/components/shared/InstitutionMessage";
 import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -142,6 +143,7 @@ export default async function SchoolDetailPage({
 
       <SuccessionList succession={view.directorsArchive} variant="panel" />
       <ChurchGalleryLightbox gallery={view.gallery} />
+      <InstitutionMessage kind="school" slug={slug} />
       <ChurchCTA cta={view.cta} />
     </div>
   );

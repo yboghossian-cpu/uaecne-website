@@ -3,6 +3,7 @@
 import { getDb, rateLimit } from "./db";
 import { clientIp, ipHash } from "./auth";
 import { sendMail } from "./mail";
+import { institution } from "./institutionEmail";
 
 export type FormState = { status: "idle" | "ok" | "error"; message: string };
 
@@ -14,7 +15,14 @@ const str = (fd: FormData, k: string, max: number) =>
     .slice(0, max);
 
 export async function submitForm(_prev: FormState, fd: FormData): Promise<FormState> {
-  const form = fd.get("form") === "prayer" ? "prayer" : "contact";
+  const raw = fd.get("form");
+  const form = raw === "prayer" || raw === "church" || raw === "school" ? raw : "contact";
+  // Church and school pages: the recipient is looked up from the page's own
+  // contact card on the server — never taken from the browser.
+  const target = form === "church" || form === "school" ? institution(form, str(fd, "slug", 160)) : null;
+  if ((form === "church" || form === "school") && !target?.emails.length) {
+    return { status: "error", message: "This form is not available on this page." };
+  }
   const db = getDb();
   if (!db) {
     return {
@@ -43,11 +51,16 @@ export async function submitForm(_prev: FormState, fd: FormData): Promise<FormSt
   const confidential = form === "prayer" && fd.get("confidential") === "on";
 
   if (!name) return { status: "error", message: "Please enter your name." };
-  if (form === "contact" && !email) return { status: "error", message: "Please enter your email address." };
+  if (form !== "prayer" && !email) return { status: "error", message: "Please enter your email address." };
   if (email && !EMAIL_RE.test(email)) return { status: "error", message: "Please check your email address." };
   if (message.length < 5) return { status: "error", message: "Please write your message." };
 
-  const extra = form === "prayer" ? { confidential } : {};
+  const extra =
+    form === "prayer"
+      ? { confidential }
+      : target
+        ? { institution: target.name, slug: str(fd, "slug", 160), to: target.emails }
+        : {};
   const { lastInsertRowid } = db
     .prepare(
       `INSERT INTO submissions (form, name, email, phone, subject, message, extra, ip_hash)
@@ -57,20 +70,25 @@ export async function submitForm(_prev: FormState, fd: FormData): Promise<FormSt
 
   const label = form === "prayer" ? "Prayer request" : "Contact form";
   const res = await sendMail({
-    subject: `[UAECNE website] ${label}: ${subject || name}`,
+    subject: target
+      ? `[UAECNE website] Message for ${target.name}: ${subject || name}`
+      : `[UAECNE website] ${label}: ${subject || name}`,
     replyTo: email || undefined,
+    to: target?.emails,
     text: [
-      `${label} received on the UAECNE website.`,
+      target
+        ? `A visitor sent this message from the ${target.name} page on the UAECNE website (uaecne.org). Reply to this email to answer them directly.`
+        : `${label} received on the UAECNE website.`,
       "",
       `Name: ${name}`,
       ...(email ? [`Email: ${email}`] : []),
       ...(phone ? [`Phone: ${phone}`] : []),
-      ...(form === "contact" && subject ? [`Subject: ${subject}`] : []),
+      ...(form !== "prayer" && subject ? [`Subject: ${subject}`] : []),
       ...(form === "prayer" ? [`Keep confidential: ${confidential ? "Yes" : "No"}`] : []),
       "",
       message,
       "",
-      "— Also saved in Admin › Inbox.",
+      target ? "— Sent through the UAECNE website." : "— Also saved in Admin › Inbox.",
     ].join("\n"),
   });
   db.prepare("UPDATE submissions SET email_status = ? WHERE id = ?").run(

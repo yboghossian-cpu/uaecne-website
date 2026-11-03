@@ -1,0 +1,76 @@
+.section {
+  background: var(--color-ivory);
+  padding: 2.5rem 1.25rem;
+}
+
+.split {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-red);
+}
+
+.heading {
+  font-family: var(--font-heading);
+  color: var(--color-red);
+  font-size: 1.625rem;
+  margin: 0;
+}
+
+.rule {
+  display: block;
+  width: 56px;
+  height: 2px;
+  margin: 1.25rem 0;
+  background: var(--color-gold);
+}
+
+.note {
+  margin: 0;
+  color: var(--color-brown);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid rgba(197, 160, 89, 0.22);
+  box-shadow: 0 10px 30px rgba(139, 0, 0, 0.07);
+  padding: 1.5rem 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    gap: 4rem;
+  }
+
+  .card {
+    padding: 2rem 2rem;
+  }
+}

@@ -9,7 +9,14 @@ import styles from "./PublicForm.module.css";
 
 const initial: FormState = { status: "idle", message: "" };
 
-export default function PublicForm({ form }: { form: "contact" | "prayer" }) {
+export default function PublicForm({
+  form,
+  slug,
+}: {
+  form: "contact" | "prayer" | "church" | "school";
+  // Church/school pages: which page's contact card receives the message.
+  slug?: string;
+}) {
   const tx = useT();
   const [state, onSubmit, pending] = useKeepForm(submitForm, initial);
   const started = useRef<HTMLInputElement>(null);
@@ -30,6 +37,7 @@ export default function PublicForm({ form }: { form: "contact" | "prayer" }) {
   return (
     <form ref={formRef} onSubmit={onSubmit} className={styles.form} noValidate={false}>
       <input type="hidden" name="form" value={form} />
+      {slug && <input type="hidden" name="slug" value={slug} />}
       <input type="hidden" name="started" ref={started} defaultValue="0" />
       <div className={styles.trap} aria-hidden="true">
         <label>
@@ -44,11 +52,11 @@ export default function PublicForm({ form }: { form: "contact" | "prayer" }) {
           <input name="name" required maxLength={120} autoComplete="name" className={styles.input} />
         </label>
         <label className={styles.field}>
-          <span className={styles.label}>{tx("Email")}{form === "contact" ? " *" : ""}</span>
+          <span className={styles.label}>{tx("Email")}{form !== "prayer" ? " *" : ""}</span>
           <input
             name="email"
             type="email"
-            required={form === "contact"}
+            required={form !== "prayer"}
             maxLength={200}
             autoComplete="email"
             className={styles.input}
@@ -61,7 +69,7 @@ export default function PublicForm({ form }: { form: "contact" | "prayer" }) {
           <span className={styles.label}>{tx("Phone")}</span>
           <input name="phone" type="tel" maxLength={40} autoComplete="tel" className={styles.input} />
         </label>
-        {form === "contact" && (
+        {form !== "prayer" && (
           <label className={styles.field}>
             <span className={styles.label}>{tx("Subject")}</span>
             <input name="subject" maxLength={160} className={styles.input} />
