@@ -36,7 +36,7 @@ export const DEFAULT_SETTINGS: SiteSettings = {
     x: "",
   },
   donateUrl: "",
-  armenianLive: false,
+  armenianLive: true,
   announcement: { enabled: false, text: "", linkLabel: "", linkUrl: "" },
   seo: {
     defaultDescription: "The Union of the Armenian Evangelical Churches in the Near East — est. 1846.",
