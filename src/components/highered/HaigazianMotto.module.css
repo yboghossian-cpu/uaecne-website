@@ -28,22 +28,73 @@
 
 .words {
   font-family: var(--font-heading);
-  font-size: 1.75rem;
+  font-size: 2.375rem;
+  line-height: 1.15;
   color: var(--color-red);
   font-weight: 600;
   letter-spacing: 0.02em;
 }
 
+/* Reflective sheen: each word carries its own colour with a bright band
+   that sweeps across it; the words are staggered so the light travels
+   left to right, then rests until the next pass (every 5s). */
+.word {
+  --c: var(--color-red);
+  white-space: pre;
+  color: var(--c);
+  background-image: linear-gradient(
+    105deg,
+    var(--c) 0%,
+    var(--c) 42%,
+    #fff3cf 50%,
+    var(--c) 58%,
+    var(--c) 100%
+  );
+  background-size: 260% 100%;
+  background-position: 100% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sheen 5s ease-in-out infinite;
+}
+
 .highlight {
-  color: var(--color-gold);
+  --c: var(--color-gold);
+}
+
+.w2 {
+  animation-delay: 0.22s;
+}
+
+.w3 {
+  animation-delay: 0.44s;
+}
+
+@keyframes sheen {
+  0% {
+    background-position: 100% 0;
+  }
+  22% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    animation: none;
+    background-position: 0% 0;
+  }
 }
 
 .sub {
   font-family: var(--font-heading);
   font-style: italic;
-  font-size: 0.8125rem;
+  font-size: 1rem;
   color: var(--color-brown);
-  margin-top: 0.625rem;
+  margin-top: 0.875rem;
 }
 
 @media (min-width: 720px) {
@@ -52,6 +103,10 @@
   }
 
   .words {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
+  }
+
+  .sub {
+    font-size: 1.125rem;
   }
 }

@@ -11,10 +11,11 @@ export default function HaigazianMotto({ motto }: HaigazianMottoProps) {
   return (
     <section className={styles.motto}>
       <div className={styles.eyebrow}>{motto.eyebrow}</div>
+      {/* A soft light sweeps across the three words every few seconds. */}
       <div className={styles.words}>
-        {motto.plain1}
-        <span className={styles.highlight}>{motto.highlighted}</span>
-        {motto.plain2}
+        <span className={`${styles.word} ${styles.w1}`}>{motto.plain1}</span>
+        <span className={`${styles.word} ${styles.highlight} ${styles.w2}`}>{motto.highlighted}</span>
+        <span className={`${styles.word} ${styles.w3}`}>{motto.plain2}</span>
       </div>
       <div className={styles.sub}>{motto.sub}</div>
     </section>
