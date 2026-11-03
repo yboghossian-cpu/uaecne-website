@@ -229,6 +229,7 @@ export type HaigazianContent = InstitutionCore & {
   };
   classBand: {
     kicker: string;
+    kickerHy?: string | null;
     heading: string;
     headingHy: string | null;
     photo: Photo;
@@ -361,6 +362,8 @@ export const haigazianContent: HaigazianContent = {
   // stage banners.
   classBand: {
     kicker: "Student Life",
+    // University students: Ուսանողական, not the school-pupil Աշակերտական.
+    kickerHy: "Ուսանողական Կեանք",
     heading: "Class of 2026",
     headingHy: null,
     photo: {
