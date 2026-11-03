@@ -114,7 +114,9 @@ export type SchoolContent = {
   // to an arched "photo pending" treatment in SchoolTopBlock, the same
   // visual language as the index card's placeholder and the leadership
   // grid's photo-pending frame, rather than a decorative crest graphic.
-  heroPhoto: Photo | null;
+  // `position` optionally sets which part of a tall photo the wide hero
+  // shows (CSS object-position, e.g. "center 68%").
+  heroPhoto: (Photo & { position?: string }) | null;
   factsBar: { label: string; labelHy: string | null; sub: string; subHy: string | null }[]; // 4 cells, per uaecne-school-aec-reference.html's .facts
 
   about: {
@@ -760,6 +762,8 @@ export const schoolContent: Record<string, SchoolContent> = {
     heroPhoto: {
       src: "/school-central-high-school-hero.jpg",
       alt: "The Central High School building in Ashrafieh, Beirut",
+      // Frame the two floors, not the bell tower.
+      position: "center 68%",
     },
     factsBar: [
       { label: "1922", labelHy: null, sub: "Established", subHy: null },

@@ -5,7 +5,7 @@ import type { School } from "@/data/schools";
 import SchoolFactsBar from "./SchoolFactsBar";
 import styles from "./SchoolTopBlock.module.css";
 
-type Photo = { src: string; alt: string };
+type Photo = { src: string; alt: string; position?: string };
 type Fact = { label: string; labelHy: string | null; sub: string; subHy: string | null };
 type Masthead = {
   locationLine: string;
@@ -90,7 +90,14 @@ export default async function SchoolTopBlock({
 
       {heroPhoto ? (
         <div className={styles.hero}>
-          <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} priority />
+          <Image
+            src={heroPhoto.src}
+            alt={heroPhoto.alt}
+            fill
+            className={styles.heroImg}
+            style={heroPhoto.position ? { objectPosition: heroPhoto.position } : undefined}
+            priority
+          />
         </div>
       ) : crest && logo ? (
         // No building photo yet: a crest panel built only from the school's
