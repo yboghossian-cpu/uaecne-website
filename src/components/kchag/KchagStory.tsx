@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import type { KchagPhoto, KchagStory as Story } from "@/data/outreachContent";
 import { Cursor, trackPointer, useStoryEngine } from "@/components/story/engine";
+import { useT } from "@/lib/i18n/client";
 import styles from "./KchagStory.module.css";
 
 type Era = { title: string; range: string; description: string };
@@ -129,6 +130,7 @@ const SCATTER = [
 
 /* ------------------------------------------------------------------ */
 export default function KchagStory({ story, campsites, kessab, life, cta, social, labels }: Props) {
+  const tx = useT();
   const root = useRef<HTMLDivElement>(null);
   useStoryEngine(root);
   const [box, setBox] = useState<Lightbox>(null);
@@ -181,7 +183,7 @@ export default function KchagStory({ story, campsites, kessab, life, cta, social
             <Photo photo={{ src: s.heroPhoto.src, alt: "" }} sizes="100vw" className={styles.cover} />
           </div>
 
-          <nav className={styles.crumb} aria-label="Breadcrumb">
+          <nav className={styles.crumb} aria-label={tx("Breadcrumb")}>
             <Link href="/outreach">{labels.crumbSection}</Link>
             <span aria-hidden="true">/</span>
             <span>{labels.crumbPage}</span>
