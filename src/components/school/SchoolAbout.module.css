@@ -229,6 +229,18 @@
     gap: 4rem;
   }
 
+  /* Long About texts: the heading stays in view beside the text. */
+  .splitHead {
+    position: sticky;
+    top: 110px;
+    align-self: start;
+  }
+
+  .splitBody .subheading {
+    font-size: 1.625rem;
+    margin-bottom: 1rem;
+  }
+
   .pullquoteText {
     font-size: 1.375rem;
   }

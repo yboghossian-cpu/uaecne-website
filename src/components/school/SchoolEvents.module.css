@@ -3,8 +3,9 @@
 }
 
 .centerHead {
-  text-align: center;
-  margin-bottom: 1.625rem;
+  /* Left-aligned like every other section head on the school page. */
+  max-width: 1080px;
+  margin: 0 auto 1.75rem;
 }
 
 .eyebrow {
@@ -16,7 +17,6 @@
   font-weight: 600;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 0.5rem;
   margin-bottom: 0.625rem;
 }

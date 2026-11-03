@@ -4,16 +4,13 @@
 }
 
 .centerHead {
-  text-align: center;
-  margin: 0 auto 1.5rem;
+  /* Left-aligned like every other section head on the school page. */
+  max-width: 1080px;
+  margin: 0 auto 1.75rem;
 }
 
 .icon {
-  width: 30px;
-  height: 30px;
-  color: var(--color-red);
-  margin: 0 auto 0.75rem;
-  display: block;
+  display: none;
 }
 
 .heading {
@@ -26,7 +23,7 @@
 }
 
 .list {
-  max-width: 920px;
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

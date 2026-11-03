@@ -61,7 +61,9 @@ export default function SuccessionList({
                   <em className={styles.entryNote}> {entry.note}</em>
                 )}
               </span>
-              <span className={styles.years}>{entry.years}</span>
+              {entry.years && !/^[\s—–-]*$/.test(entry.years) && (
+                <span className={styles.years}>{entry.years}</span>
+              )}
             </div>
           ))}
         </div>

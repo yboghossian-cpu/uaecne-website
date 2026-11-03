@@ -29,9 +29,25 @@ const scriptureArt = (
     preserveAspectRatio="xMidYMid meet"
     aria-hidden="true"
   >
-    <path d="M46 372 V148 a104 104 0 0 1 208 0 V372" fill="none" stroke="#C5A059" strokeWidth="3" />
-    <path d="M58 366 V150 a92 92 0 0 1 184 0 V366" fill="none" stroke="#C5A059" strokeWidth="1" opacity=".55" />
-    <g transform="translate(150,58)" fill="none" stroke="#C5A059" strokeWidth="2">
+    <path
+      d="M46 372 V148 a104 104 0 0 1 208 0 V372"
+      fill="none"
+      stroke="#C5A059"
+      strokeWidth="3"
+    />
+    <path
+      d="M58 366 V150 a92 92 0 0 1 184 0 V366"
+      fill="none"
+      stroke="#C5A059"
+      strokeWidth="1"
+      opacity=".55"
+    />
+    <g
+      transform="translate(150,58)"
+      fill="none"
+      stroke="#C5A059"
+      strokeWidth="2"
+    >
       <circle cx="0" cy="-6" r="6" />
       <circle cx="0" cy="6" r="6" />
       <circle cx="-6" cy="0" r="6" />
@@ -49,8 +65,20 @@ const scriptureArt = (
       <rect x="118" y="182" width="64" height="12" rx="2" />
     </g>
     <g>
-      <path d="M150 300 C122 288 92 292 68 304 L68 344 C92 332 122 328 150 340 Z" fill="#fffdf6" stroke="#C5A059" strokeWidth="2.6" strokeLinejoin="round" />
-      <path d="M150 300 C178 288 208 292 232 304 L232 344 C208 332 178 328 150 340 Z" fill="#fffdf6" stroke="#C5A059" strokeWidth="2.6" strokeLinejoin="round" />
+      <path
+        d="M150 300 C122 288 92 292 68 304 L68 344 C92 332 122 328 150 340 Z"
+        fill="#fffdf6"
+        stroke="#C5A059"
+        strokeWidth="2.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M150 300 C178 288 208 292 232 304 L232 344 C208 332 178 328 150 340 Z"
+        fill="#fffdf6"
+        stroke="#C5A059"
+        strokeWidth="2.6"
+        strokeLinejoin="round"
+      />
       <g stroke="#C5A059" strokeWidth="1.1" opacity=".45">
         <path d="M82 308 C104 300 126 300 142 308" />
         <path d="M82 320 C104 312 126 312 142 320" />
@@ -61,16 +89,31 @@ const scriptureArt = (
   </svg>
 );
 
-const list = (academicHeritage: NonNullable<SchoolContent["academicHeritage"]>, listClassName: string) => (
-  <div className={listClassName}>
-    {academicHeritage.eras.map((era, i) => (
-      <div className={styles.row} key={i}>
-        <span className={styles.pill}>{era.period}</span>
-        <p className={styles.rowBody}>{era.description}</p>
-      </div>
-    ))}
-  </div>
-);
+const list = (
+  academicHeritage: NonNullable<SchoolContent["academicHeritage"]>,
+  listClassName: string,
+) =>
+  // Eras that start with a year read as a timeline; named items
+  // ("Lebanese National Curriculum", "Trilingual Environment") read as cards.
+  academicHeritage.eras.every((era) => /^\s*\d{4}/.test(era.period)) ? (
+    <div className={listClassName}>
+      {academicHeritage.eras.map((era, i) => (
+        <div className={styles.row} key={i}>
+          <span className={styles.pill}>{era.period}</span>
+          <p className={styles.rowBody}>{era.description}</p>
+        </div>
+      ))}
+    </div>
+  ) : (
+    <div className={styles.cards}>
+      {academicHeritage.eras.map((era, i) => (
+        <div className={styles.card} key={i}>
+          <h3 className={styles.cardTitle}>{era.period}</h3>
+          <p className={styles.cardBody}>{era.description}</p>
+        </div>
+      ))}
+    </div>
+  );
 
 // School-specific: pill (period) + description rows — NOT a flat bullet
 // list like ChurchPrograms, no church equivalent. Null for schools with no
@@ -103,8 +146,18 @@ export default function SchoolAcademics({
                   preserveAspectRatio="xMidYMid slice"
                   aria-hidden="true"
                 >
-                  <use href="#med" x="10" y="25" width="80" height="80" style={{ color: "var(--color-gold)", opacity: 0.16 }} />
-                  <g transform="translate(50 65)" style={{ color: "var(--color-gold)" }}>
+                  <use
+                    href="#med"
+                    x="10"
+                    y="25"
+                    width="80"
+                    height="80"
+                    style={{ color: "var(--color-gold)", opacity: 0.16 }}
+                  />
+                  <g
+                    transform="translate(50 65)"
+                    style={{ color: "var(--color-gold)" }}
+                  >
                     <g stroke="currentColor" strokeWidth="1.4" opacity="0.5">
                       <line x1="0" y1="0" x2="0" y2="-40" />
                       <line x1="0" y1="0" x2="30" y2="-30" />
@@ -112,7 +165,12 @@ export default function SchoolAcademics({
                       <line x1="0" y1="0" x2="40" y2="0" />
                       <line x1="0" y1="0" x2="-40" y2="0" />
                     </g>
-                    <path d="M0 -20 V22 M-14 -4 H14" stroke="var(--color-red)" strokeWidth="5" strokeLinecap="round" />
+                    <path
+                      d="M0 -20 V22 M-14 -4 H14"
+                      stroke="var(--color-red)"
+                      strokeWidth="5"
+                      strokeLinecap="round"
+                    />
                   </g>
                 </svg>
               )}
