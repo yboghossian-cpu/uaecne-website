@@ -58,3 +58,20 @@ export function isProtected(key: string, value: unknown): boolean {
   if (value === null || typeof value !== "object") return true;
   return Array.isArray(value) && value.every((x) => typeof x !== "object" || x === null);
 }
+
+/** A woman's name as written on the site ("Mrs. …", "Ms. …", "Miss …"). */
+export function isWomansName(name: unknown): boolean {
+  return typeof name === "string" && /^(Mrs|Ms|Miss)\.?\s/.test(name.trim());
+}
+
+/** Armenian role titles have feminine forms (Տնօրէնուհի, Քարտուղարուհի…).
+ *  The dictionary stores them as "<English role> (f)"; this picks that form
+ *  for women and falls back to the plain one. */
+export function genderedRole(t: (s: string) => string, role: string, name: unknown): string {
+  if (isWomansName(name)) {
+    const key = `${role} (f)`;
+    const hit = t(key);
+    if (hit !== key) return hit;
+  }
+  return t(role);
+}

@@ -1,3 +1,4 @@
+import { genderedRole } from "@/lib/i18n/config";
 import { getT, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -129,7 +130,7 @@ export default async function CentralCommitteePage() {
               </div>
               <div className={styles.info}>
                 <span className={styles.name}>{tx(member.name)}</span>
-                <div className={styles.role}>{tx(member.role)}</div>
+                <div className={styles.role}>{genderedRole(tx, member.role, member.name)}</div>
               </div>
             </article>
           ))}

@@ -1,7 +1,7 @@
 import "server-only";
 import type { Metadata } from "next";
 import { lang as rootLang } from "next/root-params";
-import { DEFAULT_LANG, isLang, isProtected, isTranslatable, type Lang } from "./config";
+import { DEFAULT_LANG, genderedRole, isLang, isProtected, isTranslatable, isWomansName, type Lang } from "./config";
 import { getDictionary } from "./dictionary";
 
 export type T = (s: string) => string;
@@ -50,6 +50,8 @@ function localizeWith<V>(value: V, t: T, lang: Lang): V {
   if (typeof value === "object") {
     const src = value as Record<string, unknown>;
     const out: Record<string, unknown> = {};
+    // A person's role takes the feminine form when the person is a woman.
+    const woman = isWomansName(src.name);
     for (const [k, v] of Object.entries(src)) {
       if (k.endsWith("Hy")) {
         out[k] = v;
@@ -59,6 +61,10 @@ function localizeWith<V>(value: V, t: T, lang: Lang): V {
       const human = src[`${k}Hy`];
       if (human !== undefined && human !== null && (typeof human !== "string" || human.trim())) {
         out[k] = human;
+        continue;
+      }
+      if (woman && (k === "role" || k === "title") && typeof v === "string" && isTranslatable(v)) {
+        out[k] = genderedRole(t, v, src.name);
         continue;
       }
       out[k] = isProtected(k, v) ? v : localizeWith(v, t, lang);
