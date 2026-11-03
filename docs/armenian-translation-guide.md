@@ -60,7 +60,7 @@ Men: Տնօրէն, Ատենապետ.
 ## 4. Names of people
 
 Transliterate by **Western Armenian pronunciation** (բ=p, պ=b, գ=k, կ=g, դ=t, տ=d, ճ=j, ջ=ch,
-ծ=dz, ձ=ts) and classical spelling: Karagoezian → Գարագէօզեան, Sabounji → Սապունճի,
+ծ=dz, ձ=ts) and classical spelling: Karagoezian → Գարակէօզեան, Sabounji → Սապունճի,
 Haidostian → Հայտօսթեան, Cholakian → Չոլաքեան. When a person already appears in the
 dictionary, always reuse that exact spelling. If a spelling is uncertain, list it in the review
 notes for a person to confirm.
