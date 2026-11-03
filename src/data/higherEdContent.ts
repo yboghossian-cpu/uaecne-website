@@ -224,7 +224,9 @@ export type HaigazianContent = InstitutionCore & {
     eyebrowHy: string | null;
     heading: string;
     headingHy: string | null;
-    schools: { name: string; items: string[] }[];
+    // `icons[i]` is the official faculty icon from haigazian.edu.lb for
+    // `items[i]` (null when none).
+    schools: { name: string; items: string[]; icons?: (string | null)[] }[];
     degrees: string[];
   };
   classBand: {
@@ -348,10 +350,17 @@ export const haigazianContent: HaigazianContent = {
           "Faculty of Social & Behavioral Sciences",
           "Faculty of Humanities",
         ],
+        // Official faculty icons from haigazian.edu.lb ("Explore Haigazian").
+        icons: [
+          "/haigazian-faculty-sciences.webp",
+          "/haigazian-faculty-social-sciences.webp",
+          "/haigazian-faculty-humanities.webp",
+        ],
       },
       {
         name: "School of Business",
         items: ["Faculty of Business Administration & Economics"],
+        icons: ["/haigazian-faculty-business.webp"],
       },
     ],
     degrees: ["BA", "BBA", "BS", "MA", "MBA", "Teaching Diplomas"],

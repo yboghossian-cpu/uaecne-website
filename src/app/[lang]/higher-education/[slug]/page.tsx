@@ -65,7 +65,7 @@ export default async function HigherEducationDetailPage({
   if (slug === haigazianContent.slug) {
     const h = haigazianContent;
     return (
-      <>
+      <div className="school-page">
         <HigherEdBreadcrumb />
         <InstitutionTopBlock
           heading={h.masthead.heading}
@@ -82,14 +82,14 @@ export default async function HigherEducationDetailPage({
         <HaigazianClassBand classBand={h.classBand} />
         <FollowBand social={h.social} name={tx("Haigazian University")} />
         <HigherEdCTA cta={h.cta} />
-      </>
+      </div>
     );
   }
 
   if (slug === nestContent.slug) {
     const n = nestContent;
     return (
-      <>
+      <div className="school-page">
         <HigherEdBreadcrumb />
         <InstitutionTopBlock
           heading={n.masthead.heading}
@@ -106,7 +106,7 @@ export default async function HigherEducationDetailPage({
         <NestLeadershipPair leadership={n.leadership} />
         <FollowBand social={n.social} name={tx("Near East School of Theology")} />
         <HigherEdCTA cta={n.cta} />
-      </>
+      </div>
     );
   }
 
