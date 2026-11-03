@@ -49,7 +49,7 @@ export default function SpiritualHeritage() {
             {tx("Our Spiritual ")}<em className={styles.em}>{tx("Heritage")}</em>
           </h2>
           <p className={styles.paragraph}>
-            {tx("Born in the Ottoman era as a movement of reform and renewal, the Union of the Armenian Evangelical Churches has been carried through generations of exile, endurance, and rebuilding — and lives today as a communion of faith across nine nations of the Near East.")}
+            {tx("Born in the Ottoman era as a movement of reform and renewal, the Union of the Armenian Evangelical Churches has been carried through generations of exile, endurance, and rebuilding — and lives today as a communion of faith across seven nations of the Near East.")}
           </p>
           <p className={styles.invite}>{tx("Nearly two centuries of that story await.")}</p>
           <Link href="/resource-center/history" className={styles.cta}>

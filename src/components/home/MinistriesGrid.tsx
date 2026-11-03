@@ -18,7 +18,7 @@ import styles from "./MinistriesGrid.module.css";
 const ministries = [
   {
     title: "Churches",
-    description: "30+ congregations of worship across nine nations.",
+    description: "30+ congregations of worship across seven nations.",
     photo: "/ministry-churches.jpeg",
     icon: "ic-hp-church",
     href: "/churches",
@@ -76,7 +76,7 @@ export default function MinistriesGrid() {
             <span className={styles.fln} />
           </div>
           <p className={styles.intro}>
-            {tx("From congregations of worship to schools, universities, and works of compassion — the Union serves communities across nine nations. Explore the ministries that carry its mission forward.")}
+            {tx("From congregations of worship to schools, universities, and works of compassion — the Union serves communities across seven nations. Explore the ministries that carry its mission forward.")}
           </p>
         </div>
         <div className={styles.grid}>

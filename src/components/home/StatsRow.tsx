@@ -8,7 +8,7 @@ import styles from "./StatsRow.module.css";
 const stats = [
   { number: "180", label: "Years of Heritage" },
   { number: "30+", label: "Churches" },
-  { number: "9", label: "Countries Served" },
+  { number: "7", label: "Countries Served" },
   { number: "12+", label: "Institutions" },
 ];
 
