@@ -1374,7 +1374,7 @@ export const churchContent: Record<string, ChurchContent> = {
         role: "Pastor",
         roleHy: null,
         photo: {
-          src: "/church-armenian-evangelical-church-anjar-leader-1.jpg",
+          src: "/church-armenian-evangelical-church-anjar-leader-1-v2.jpg",
           alt: "Rev. Hagop Akbasharian",
         },
       },
@@ -1384,7 +1384,7 @@ export const churchContent: Record<string, ChurchContent> = {
         role: "Assistant Pastor",
         roleHy: null,
         photo: {
-          src: "/church-armenian-evangelical-church-anjar-leader-2.jpg",
+          src: "/church-armenian-evangelical-church-anjar-leader-2-v2.jpg",
           alt: "Pastor Asadour Mencherian",
         },
       },
@@ -1394,7 +1394,7 @@ export const churchContent: Record<string, ChurchContent> = {
         role: "Vice-Chairman",
         roleHy: null,
         photo: {
-          src: "/church-armenian-evangelical-church-anjar-leader-3.jpg",
+          src: "/church-armenian-evangelical-church-anjar-leader-3-v2.jpg",
           alt: "Mr. Kevork Kerkezian",
         },
       },
@@ -1404,7 +1404,7 @@ export const churchContent: Record<string, ChurchContent> = {
         role: "Secretary",
         roleHy: null,
         photo: {
-          src: "/church-armenian-evangelical-church-anjar-leader-4.jpg",
+          src: "/church-armenian-evangelical-church-anjar-leader-4-v2.jpg",
           alt: "Ms. Sevan Apelian",
         },
       },
