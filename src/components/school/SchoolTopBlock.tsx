@@ -1,3 +1,4 @@
+import { isSquareEmblem } from "@/lib/emblem";
 import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { School } from "@/data/schools";
@@ -56,7 +57,7 @@ export default async function SchoolTopBlock({
             alt={logo.alt}
             width={96}
             height={96}
-            className={styles.logo}
+            className={isSquareEmblem(logo.src) ? `${styles.logo} ${styles.squareLogo}` : styles.logo}
           />
         )}
         <div>

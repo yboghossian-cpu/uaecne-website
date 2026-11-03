@@ -188,6 +188,14 @@
   object-fit: cover;
 }
 
+/* square official logos: whole logo, rounded-square badge */
+.squareEmblem {
+  border-radius: 8px;
+  object-fit: contain;
+  background: #fff;
+  padding: 2px;
+}
+
 .schoolName {
   font-family: var(--font-heading);
   font-weight: 600;

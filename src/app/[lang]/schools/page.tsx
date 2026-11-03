@@ -1,3 +1,4 @@
+import { isSquareEmblem } from "@/lib/emblem";
 import { getT, getL, tMeta } from "@/lib/i18n/server";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -175,7 +176,7 @@ export default async function SchoolsIndexPage() {
                         alt=""
                         width={42}
                         height={42}
-                        className={styles.labelEmblem}
+                        className={isSquareEmblem(emblem.src) ? `${styles.labelEmblem} ${styles.squareEmblem}` : styles.labelEmblem}
                       />
                     ) : (
                       <svg className={styles.labelSeal}>
