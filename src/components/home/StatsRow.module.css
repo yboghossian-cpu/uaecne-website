@@ -1,8 +1,8 @@
 .stats {
   position: relative;
   background:
-    radial-gradient(140% 120% at 50% -20%, rgba(197, 160, 89, 0.22), transparent 60%),
-    linear-gradient(180deg, var(--color-red), var(--color-red-dark));
+    radial-gradient(140% 120% at 50% -20%, rgba(197, 160, 89, 0.1), transparent 60%),
+    linear-gradient(180deg, var(--color-red), var(--color-red-deep));
   color: var(--color-ivory);
   padding: 2.125rem 1.25rem;
 }
@@ -27,8 +27,8 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem 1rem;
   max-width: 1000px;
   margin: 0 auto;
 }

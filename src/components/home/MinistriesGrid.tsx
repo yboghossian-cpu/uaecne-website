@@ -82,7 +82,7 @@ export default function MinistriesGrid() {
         <div className={styles.grid}>
           {ministries.map((ministry) => (
             <Link key={ministry.title} href={ministry.href} className={styles.card}>
-              <ArchFrame aspectRatio="3 / 4" photoSrc={ministry.photo} photoAlt={tx(ministry.title)}>
+              <ArchFrame aspectRatio="3 / 4" className={styles.frame} photoSrc={ministry.photo} photoAlt={tx(ministry.title)}>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <use href={`#${ministry.icon}`} />
                 </svg>

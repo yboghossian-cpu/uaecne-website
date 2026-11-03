@@ -21,6 +21,7 @@ export default function SacredLegacy() {
         <div className={styles.art}>
           <ArchFrame
             aspectRatio="3 / 4"
+            className={styles.frame}
             photoSrc="/sacred-legacy-faec-approved.jpeg"
             photoAlt={tx("First Armenian Evangelical Church, Beirut")}
           />

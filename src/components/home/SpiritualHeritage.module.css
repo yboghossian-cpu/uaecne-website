@@ -45,6 +45,34 @@
   justify-self: center;
   width: 100%;
   max-width: 400px;
+  /* photo and verse read as one card, lifted by a soft red glow */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(139, 0, 0, 0.06), 0 0 34px rgba(139, 0, 0, 0.16), 0 24px 50px -24px rgba(139, 0, 0, 0.42);
+  transition: box-shadow 0.4s ease;
+}
+
+.glass:hover {
+  box-shadow: 0 0 0 1px rgba(139, 0, 0, 0.1), 0 0 46px rgba(139, 0, 0, 0.24), 0 32px 64px -24px rgba(139, 0, 0, 0.5);
+}
+
+.glass .frame {
+  border-radius: 16px 16px 0 0;
+  box-shadow: none;
+}
+
+.glass .frame img {
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass:hover .frame img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass .frame img {
+    transition: none;
+  }
 }
 
 .verse {
@@ -52,7 +80,7 @@
   background: linear-gradient(135deg, var(--color-red), var(--color-red-dark));
   color: var(--color-ivory);
   padding: 16px 20px;
-  border-radius: 0 0 12px 12px;
+  border-radius: 0;
   font-family: var(--font-heading);
   font-style: italic;
   font-size: 15px;

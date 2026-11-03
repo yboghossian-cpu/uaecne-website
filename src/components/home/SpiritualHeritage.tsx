@@ -31,6 +31,7 @@ export default function SpiritualHeritage() {
         <div className={styles.glass}>
           <ArchFrame
             aspectRatio="3 / 4"
+            className={styles.frame}
             photoSrc="/spiritual-heritage-sanctuary.jpg"
             photoAlt={tx("Sanctuary interior during a General Assembly session")}
           />

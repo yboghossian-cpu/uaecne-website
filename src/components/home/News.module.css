@@ -70,7 +70,8 @@
   border: 1px solid rgba(197, 160, 89, 0.28);
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: var(--shadow-elevated);
+  box-shadow: 0 0 0 1px rgba(139, 0, 0, 0.06), 0 0 34px rgba(139, 0, 0, 0.16), 0 24px 50px -24px rgba(139, 0, 0, 0.42);
+  transition: box-shadow 0.4s ease;
   display: grid;
   grid-template-columns: 1fr;
 }
@@ -85,6 +86,21 @@
 
 .photo {
   object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.feature:hover {
+  box-shadow: 0 0 0 1px rgba(139, 0, 0, 0.1), 0 0 46px rgba(139, 0, 0, 0.24), 0 32px 64px -24px rgba(139, 0, 0, 0.5);
+}
+
+.feature:hover .photo {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo {
+    transition: none;
+  }
 }
 
 .tag {
