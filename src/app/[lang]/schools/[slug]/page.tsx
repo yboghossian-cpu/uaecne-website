@@ -8,6 +8,7 @@ import ChurchBreadcrumb from "@/components/church/ChurchBreadcrumb";
 import ChurchCTA from "@/components/church/ChurchCTA";
 import SchoolTopBlock from "@/components/school/SchoolTopBlock";
 import SchoolAbout from "@/components/school/SchoolAbout";
+import SchoolAccreditation from "@/components/school/SchoolAccreditation";
 import SchoolContactSection from "@/components/school/SchoolContactSection";
 import SchoolLeadershipGrid from "@/components/school/SchoolLeadershipGrid";
 import SchoolMission from "@/components/school/SchoolMission";
@@ -96,10 +97,12 @@ export default async function SchoolDetailPage({
         logo={view.logo}
         heroPhoto={view.heroPhoto}
         factsBar={view.factsBar}
+        accreditedBy={view.accreditation?.short ?? null}
       />
       {/* The principal already leads the Leadership grid below — About is
           text-only so the same portrait isn't shown twice. */}
       <SchoolAbout about={view.about} principalCard={null} />
+      <SchoolAccreditation accreditation={view.accreditation} schoolName={school.name} />
       <SchoolContactSection
         location={view.location}
         contactRows={view.contactRows}

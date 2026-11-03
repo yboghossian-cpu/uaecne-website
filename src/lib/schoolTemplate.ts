@@ -161,6 +161,7 @@ export function buildSchoolView(school: School, content: SchoolContent) {
       mottoHy: content.about.pullQuoteHy ?? null,
     },
     logo: content.logo,
+    accreditation: content.accreditation ?? null,
     heroPhoto: content.heroPhoto,
     factsBar: buildFacts(content),
     about: {

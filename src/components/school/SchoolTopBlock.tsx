@@ -30,6 +30,7 @@ type SchoolTopBlockProps = {
   logo: Photo | null;
   heroPhoto: Photo | null;
   factsBar: Fact[];
+  accreditedBy?: string | null;
 };
 
 // Masthead: circular seal, h1 school name, meta line (location · founded
@@ -48,6 +49,7 @@ export default async function SchoolTopBlock({
   logo,
   heroPhoto,
   factsBar,
+  accreditedBy = null,
 }: SchoolTopBlockProps) {
   const tx = await getT();
   const crest = !heroPhoto && !!logo && !!(masthead.tagline || masthead.motto);
@@ -74,6 +76,15 @@ export default async function SchoolTopBlock({
               </>
             )}
           </div>
+          {accreditedBy && (
+            <div className={styles.accredited}>
+              <svg viewBox="0 0 24 24" className={styles.accreditedIcon} aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="currentColor" />
+                <path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              {tx("Accredited")} · {tx(accreditedBy)}
+            </div>
+          )}
         </div>
       </div>
 

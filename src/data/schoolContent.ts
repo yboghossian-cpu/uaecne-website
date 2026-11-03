@@ -79,6 +79,16 @@ export type SchoolContactRow = {
 export type SchoolContent = {
   // Curated Google Maps place link (from the school's web form).
   mapsUrl?: string;
+  // Formal accreditation, verbatim from the accreditor's own directory
+  // entry. Shown as a badge in the masthead and a dedicated band.
+  accreditation?: {
+    body: string; // accrediting body, full name
+    short: string; // short name for the masthead badge
+    firstAccredited: string;
+    accreditedThrough: string;
+    grades: string;
+    verifyUrl: string;
+  } | null;
   slug: string; // FK -> schools.ts School.slug
 
   masthead: {
@@ -733,6 +743,16 @@ export const schoolContent: Record<string, SchoolContent> = {
     logo: {
       src: "/school-central-high-school-emblem.jpeg",
       alt: "Armenian Evangelical Central High School crest",
+    },
+    // From the Middle States Association's Accreditation Directory entry
+    // (screenshot supplied by the school, Nov 2026).
+    accreditation: {
+      body: "Middle States Association Commissions on Elementary and Secondary Schools",
+      short: "Middle States Association",
+      firstAccredited: "November 15, 2024",
+      accreditedThrough: "January 1, 2032",
+      grades: "KG – Grade 12",
+      verifyUrl: "https://www.msa-cess.org/",
     },
     heroPhoto: {
       src: "/school-central-high-school-hero.jpg",

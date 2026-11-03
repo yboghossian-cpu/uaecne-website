@@ -49,6 +49,30 @@
   color: var(--color-gold);
 }
 
+.accredited {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.4375rem 0.875rem 0.4375rem 0.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-red), #6e0000);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.5), 0 10px 22px -14px rgba(139, 0, 0, 0.9);
+}
+
+.accreditedIcon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--color-gold-decorative);
+}
+
 .hero {
   max-width: 1080px;
   margin: 1rem auto 0;
