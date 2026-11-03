@@ -142,10 +142,9 @@ a.magnet:focus-visible {
   overflow: hidden;
   isolation: isolate;
   color: var(--ivory);
+  /* the brand red itself, only deepened toward the edges — no orange highlights */
   background:
-    radial-gradient(ellipse at 85% 0%, rgba(196, 30, 30, 0.55) 0%, rgba(196, 30, 30, 0) 55%),
-    radial-gradient(ellipse at 0% 100%, rgba(74, 0, 0, 0.7) 0%, rgba(74, 0, 0, 0) 60%),
-    linear-gradient(135deg, #9b0a0a 0%, #8b0000 45%, #6e0000 100%);
+    radial-gradient(ellipse 120% 90% at 40% 45%, #8b0000 0%, #8b0000 45%, #7a0000 75%, #6e0000 100%);
 }
 
 /* warm gold light that follows the mouse */
@@ -156,11 +155,10 @@ a.magnet:focus-visible {
   pointer-events: none;
   background: radial-gradient(
     circle at var(--mx, 30%) var(--my, 40%),
-    rgba(240, 200, 110, 0.32) 0%,
-    rgba(240, 200, 110, 0.1) 18%,
-    rgba(240, 200, 110, 0) 40%
+    rgba(255, 246, 225, 0.07) 0%,
+    rgba(255, 246, 225, 0.025) 20%,
+    rgba(255, 246, 225, 0) 42%
   );
-  mix-blend-mode: screen;
   transition: background-position 0.2s;
 }
 
@@ -171,7 +169,7 @@ a.magnet:focus-visible {
   bottom: -22vw;
   width: 62vw;
   max-width: 900px;
-  opacity: 0.16;
+  opacity: 0.09;
   mix-blend-mode: soft-light;
   filter: grayscale(1) contrast(1.4);
   transform: rotate(calc(var(--p) * 90deg));
@@ -185,62 +183,6 @@ a.magnet:focus-visible {
   border: 1px solid rgba(212, 175, 55, calc(0.55 - var(--e) * 0.55));
   border-radius: 6px;
   pointer-events: none;
-}
-
-.dust {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: calc(1 - var(--e));
-}
-.dust i {
-  position: absolute;
-  left: calc(4% + var(--i) * 6.9%);
-  bottom: -10px;
-  width: calc(2px + var(--s) * 1.5px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: #f3d48b;
-  box-shadow: 0 0 8px rgba(243, 212, 139, 0.9);
-  opacity: 0;
-  animation: float calc(9s + var(--d) * 2.5s) linear calc(var(--i) * -1.3s) infinite;
-}
-@keyframes float {
-  0% {
-    transform: translate(0, 0);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.85;
-  }
-  90% {
-    opacity: 0.6;
-  }
-  100% {
-    transform: translate(40px, -105svh);
-    opacity: 0;
-  }
-}
-
-.heroYear {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  top: 46%;
-  transform: translate(-50%, -50%) translateY(calc(var(--p) * -8vh));
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-size: clamp(9rem, 30vw, 30rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  font-variant-numeric: lining-nums tabular-nums;
-  color: rgba(255, 246, 225, calc(var(--e) * 0.95));
-  -webkit-text-stroke: 1.5px rgba(243, 212, 139, 0.85);
-  opacity: clamp(0, (var(--p) - 0.1) * 5, 1);
-  pointer-events: none;
-  white-space: nowrap;
-  text-shadow: 0 10px 60px rgba(0, 0, 0, calc(var(--e) * 0.4));
 }
 
 .arch {
@@ -259,7 +201,7 @@ a.magnet:focus-visible {
   border-radius: calc((1 - var(--e)) * var(--radius));
   box-shadow:
     0 0 0 1px rgba(243, 212, 139, calc((1 - var(--e)) * 0.7)),
-    0 0 70px rgba(240, 190, 90, calc((1 - var(--e)) * 0.35)),
+    0 0 60px rgba(0, 0, 0, calc((1 - var(--e)) * 0.18)),
     0 40px 80px -30px rgba(30, 0, 0, calc((1 - var(--e)) * 0.6));
   transition: transform 0.6s var(--ease);
 }
@@ -1179,11 +1121,6 @@ span.donateBtn {
     width: 120vw;
     bottom: -40vw;
   }
-  .heroYear {
-    top: 28%;
-    font-size: 34vw;
-  }
-
   .legacy,
   .heritage {
     grid-template-columns: 1fr;

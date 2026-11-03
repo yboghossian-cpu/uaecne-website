@@ -42,36 +42,6 @@ export type HomeStoryProps = {
   donate: { heading: string; body: string; label: string; url: string };
 };
 
-/* Years tick from 1846 to 2026 while the hero is scrolled. */
-function useYearCounter(section: React.RefObject<HTMLElement | null>, out: React.RefObject<HTMLSpanElement | null>) {
-  useEffect(() => {
-    const s = section.current;
-    const o = out.current;
-    if (!s || !o) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      o.replaceChildren("1846");
-      return;
-    }
-    let raf = 0;
-    const tick = () => {
-      raf = 0;
-      const r = s.getBoundingClientRect();
-      const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - window.innerHeight)));
-      const eased = 1 - Math.pow(1 - Math.min(1, p / 0.8), 3);
-      o.replaceChildren(String(1846 + Math.round(eased * 180)));
-    };
-    const on = () => {
-      if (!raf) raf = requestAnimationFrame(tick);
-    };
-    tick();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => {
-      window.removeEventListener("scroll", on);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, [section, out]);
-}
-
 /* Two rows of phrases whose speed follows the scroll speed. */
 function Ticker({ phrases }: { phrases: string[] }) {
   const rows = useRef<(HTMLDivElement | null)[]>([]);
@@ -215,9 +185,7 @@ export default function HomeStory(props: HomeStoryProps) {
   const { hero, ticker, legacy, numbers, doors, lands, film, news, heritage, donate } = props;
   const root = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const yearRef = useRef<HTMLSpanElement>(null);
   useStoryEngine(root);
-  useYearCounter(heroRef, yearRef);
   const [land, setLand] = useState<number | null>(null);
   const landPhoto = land !== null ? lands.countries[land]?.photo : null;
 
@@ -225,21 +193,13 @@ export default function HomeStory(props: HomeStoryProps) {
     <div ref={root} className={styles.root} >
       <Cursor root={root} />
 
-      {/* ================= HERO — 1846 → 2026 through the arch ================= */}
+      {/* ================= HERO — the Union in brand red; the photo opens to full screen ================= */}
       <section ref={heroRef} className={styles.hero} data-scrub="sticky" aria-labelledby="home-title">
         <div className={styles.heroStage} onPointerMove={trackPointer}>
           <span className={styles.heroGlow} aria-hidden="true" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/logo.svg" alt="" className={styles.heroWatermark} aria-hidden="true" />
           <span className={styles.heroFrame} aria-hidden="true" />
-          <span className={styles.dust} aria-hidden="true">
-            {Array.from({ length: 14 }, (_, i) => (
-              <i key={i} style={{ "--i": i, "--s": i % 3, "--d": i % 4 } as CSSProperties} />
-            ))}
-          </span>
-          <div className={styles.heroYear} aria-hidden="true">
-            <span ref={yearRef}>1846</span>
-          </div>
           <div className={styles.arch}>
             <div className={styles.archImg}>
               <Image src={hero.photo.src} alt={hero.photo.alt} fill priority sizes="100vw" className={styles.cover} />
