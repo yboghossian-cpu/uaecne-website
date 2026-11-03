@@ -683,7 +683,7 @@ export const syriaEducationalCouncilContent: SyriaEducationalCouncilContent = {
   // glossy-3D tell as every Syria school logo this unit), used as-supplied
   // per Yeghia's standing "use the emblems as is" ruling — flagged, not
   // withheld.
-  logo: { src: "/higher-ed-syria-council-emblem.png", alt: "Educational Council crest" },
+  logo: { src: "/higher-ed-syria-council-emblem-v2.png", alt: "Educational Council crest" },
 
   factsBar: [
     { label: "6", labelHy: null, sub: "Schools", subHy: null },
