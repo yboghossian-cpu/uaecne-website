@@ -40,13 +40,14 @@ export default function SchoolAbout({ about, principalCard }: SchoolAboutProps) 
   const text = (
     <>
       {about.paragraphs.map((paragraph, i) =>
-        i === 0 ? (
+        // A drop cap on an opening quotation mark looks broken — skip it.
+        i === 0 && !/^[“"«‘']/.test(paragraph) ? (
           <p className={`${styles.paragraph} ${styles.lead}`} key={i}>
             <span className={styles.dropcap}>{paragraph.charAt(0)}</span>
             {paragraph.slice(1)}
           </p>
         ) : (
-          <p className={styles.paragraph} key={i}>
+          <p className={i === 0 ? `${styles.paragraph} ${styles.lead}` : styles.paragraph} key={i}>
             {paragraph}
           </p>
         ),

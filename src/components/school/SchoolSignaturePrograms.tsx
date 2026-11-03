@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SchoolContent } from "@/data/schoolContent";
 import styles from "./SchoolSignaturePrograms.module.css";
@@ -10,14 +11,16 @@ type SchoolSignatureProgramsProps = {
 // rows, no pill badge (unlike SchoolAcademics' date-range pills). Real
 // program logo shown where one exists (WeNEEDle); generic icon otherwise
 // (Seeds of Hope, Student Life & Clubs). Null for AEC and Shamlian.
-export default function SchoolSignaturePrograms({
+export default async function SchoolSignaturePrograms({
   signaturePrograms,
 }: SchoolSignatureProgramsProps) {
+  const tx = await getT();
   if (!signaturePrograms) return null;
 
   return (
     <section className={styles.programs}>
       <div className={styles.centerHead}>
+        <div className={styles.eyebrow}>{tx("Programs")}</div>
         <svg className={styles.icon} aria-hidden="true">
           <use href="#ic-leaf" />
         </svg>

@@ -20,6 +20,8 @@ type Masthead = {
   // mockup). Absent for every other school.
   tagline?: string | null;
   taglineHy?: string | null;
+  motto?: string | null;
+  mottoHy?: string | null;
 };
 
 type SchoolTopBlockProps = {
@@ -48,10 +50,11 @@ export default async function SchoolTopBlock({
   factsBar,
 }: SchoolTopBlockProps) {
   const tx = await getT();
+  const crest = !heroPhoto && !!logo && !!(masthead.tagline || masthead.motto);
   return (
     <section className={styles.top}>
       <div className={styles.titleRow}>
-        {logo && (
+        {logo && !crest && (
           <Image
             src={logo.src}
             alt={logo.alt}
@@ -74,18 +77,40 @@ export default async function SchoolTopBlock({
         </div>
       </div>
 
-      <div className={heroPhoto ? styles.hero : `${styles.hero} ${styles.heroPending}`}>
-        {heroPhoto ? (
-          <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} />
-        ) : (
+      {heroPhoto ? (
+        <div className={styles.hero}>
+          <Image src={heroPhoto.src} alt={heroPhoto.alt} fill className={styles.heroImg} priority />
+        </div>
+      ) : crest && logo ? (
+        // No building photo yet: a crest panel built only from the school's
+        // own emblem, tagline and motto — no stand-in imagery.
+        <div className={styles.crestHero}>
+          <svg className={styles.crestWatermark} aria-hidden="true">
+            <use href="#med" />
+          </svg>
+          <div className={styles.crestEmblem}>
+            <Image src={logo.src} alt="" width={220} height={220} className={styles.crestEmblemImg} />
+          </div>
+          <div className={styles.crestText}>
+            {masthead.tagline && <p className={styles.crestTagline}>{masthead.tagline}</p>}
+            {masthead.motto && (
+              <div className={styles.crestMotto}>
+                <span className={styles.crestMottoLabel}>{tx("Motto")}</span>
+                <p className={styles.crestMottoText}>{masthead.motto}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className={`${styles.hero} ${styles.heroPending}`}>
           <span className={styles.heroGlyph}>
             <svg className={styles.heroGlyphIcon} aria-hidden="true">
               <use href="#ic-edu" />
             </svg>
             <span className={styles.heroGlyphCaption}>{tx("Photo pending")}</span>
           </span>
-        )}
-      </div>
+        </div>
+      )}
 
       <SchoolFactsBar facts={factsBar} />
     </section>

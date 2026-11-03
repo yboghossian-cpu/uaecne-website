@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SchoolContent } from "@/data/schoolContent";
 import styles from "./SchoolFaithCommunity.module.css";
@@ -12,11 +13,13 @@ type SchoolFaithCommunityProps = {
 // every other unverified photo slot on the site. Null for AEC and
 // Shamlian.
 export default async function SchoolFaithCommunity({ faithCommunity }: SchoolFaithCommunityProps) {
+  const tx = await getT();
   if (!faithCommunity) return null;
 
   return (
     <section className={`${styles.faith} wash-band`}>
       <div className={styles.centerHead}>
+        <div className={styles.eyebrow}>{tx("Community")}</div>
         <h2 className={styles.heading}>{faithCommunity.heading}</h2>
       </div>
       <div className={styles.grid}>

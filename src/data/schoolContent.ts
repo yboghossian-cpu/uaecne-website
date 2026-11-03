@@ -1204,6 +1204,9 @@ export const schoolContent: Record<string, SchoolContent> = {
     masthead: {
       locationLine: "Anjar, Bekaa Valley, Lebanon",
       locationLineHy: null,
+      // Verbatim "Tagline" from the school's own source document.
+      tagline: "The School Where Education Meets Innovation and Inclusion",
+      taglineHy: null,
       established: "1942",
       establishedHy: null,
     },
@@ -1517,14 +1520,14 @@ export const schoolContent: Record<string, SchoolContent> = {
           icon: "ic-book",
         },
         {
-          title: "Healing Harbour",
+          title: "Healing Harbor",
           titleHy: null,
           description:
             "A dedicated mental health center focusing on the psychological well-being of our community.",
           descriptionHy: null,
           logo: {
             src: "/school-aessa-healing-harbour-logo.jpeg",
-            alt: "Healing Harbour logo",
+            alt: "Healing Harbor logo",
           },
           icon: null,
         },
@@ -1572,7 +1575,7 @@ export const schoolContent: Record<string, SchoolContent> = {
             "We foster talent through our student band, sound group, and various clubs, including sports, environment, and chess.",
           descriptionHy: null,
           logo: null,
-          icon: "ic-leaf",
+          icon: "ic-people",
         },
       ],
     },

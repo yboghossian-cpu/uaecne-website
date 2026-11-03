@@ -154,6 +154,11 @@ export function buildSchoolView(school: School, content: SchoolContent) {
       locationLineHy: content.masthead.locationLineHy,
       established: content.masthead.established,
       establishedHy: content.masthead.establishedHy,
+      tagline: content.masthead.tagline ?? null,
+      taglineHy: content.masthead.taglineHy ?? null,
+      // The school's motto (source copy), shown in the photo-less hero.
+      motto: content.about.pullQuote ?? null,
+      mottoHy: content.about.pullQuoteHy ?? null,
     },
     logo: content.logo,
     heroPhoto: content.heroPhoto,

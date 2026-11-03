@@ -1,3 +1,4 @@
+import { getT } from "@/lib/i18n/server";
 import Image from "next/image";
 import type { SchoolContent } from "@/data/schoolContent";
 import styles from "./SchoolSupportServices.module.css";
@@ -10,14 +11,16 @@ type SchoolSupportServicesProps = {
 // equivalent. Each item uses its real program logo when one exists
 // (Healing Harbour); otherwise a generic IconSymbols icon (Boarding
 // Shelter, PEP) — never a fabricated logo. Null for AEC and Shamlian.
-export default function SchoolSupportServices({
+export default async function SchoolSupportServices({
   supportServices,
 }: SchoolSupportServicesProps) {
+  const tx = await getT();
   if (!supportServices) return null;
 
   return (
     <section className={`${styles.support} wash-band`}>
       <div className={styles.centerHead}>
+        <div className={styles.eyebrow}>{tx("Support")}</div>
         <h2 className={styles.heading}>{supportServices.heading}</h2>
         <div className={styles.flourish}>
           <span className={styles.ln} />
